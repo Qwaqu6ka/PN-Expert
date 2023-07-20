@@ -63,57 +63,12 @@ class PnExpertColors{
         val GradientBlue: Brush,
     )
 }
-//PN_Expert tokens
-//data class PnExpertColors(
-//
-//    val AppDarkColor: Color,
-//    val AppBlueColor: Color,
-//    val AppPinkLightColors: Color,
-//    val AppGreyLightColor: Color,
-//    val AppGreyDarkColor: Color,
-//    val AppBlueLightColor: Color,
-//    val AppWhiteColor: Color,
-//    val AppPinkDarkColor: Color,
-//
-//    //ButtonsColors
-//    val ButtonNormalBlueColor: Color,
-//    val ButtonNormalRedColor: Color,
-//
-//    val ButtonHoverBlueColor: Color,
-//    val ButtonHoverRedColor: Color,
-//    val ButtonHoverLightColor: Color,
-//
-//    val ButtonPressedBlueColor: Color,
-//    val ButtonPressedRedColor: Color,
-//    val ButtonPressedLightColor: Color,
-//
-//    val ButtonInactiveColor: Color,
-//
-//    //FontColors
-//    val FontDarkColor: Color,
-//    val FontBlueColor: Color,
-//    val FontGreyColor: Color,
-//    val FontWhiteColor: Color,
-//
-//    //IconColors
-//    val IconBlueColor: Color,
-//    val IconBlueLightColor: Color,
-//    val IconRedColor: Color,
-//    val IconPinkColor: Color,
-//    val IconGreenColor: Color,
-//    val IconOrangeColor: Color,
-//
-//    //Gradients
-//    val GradientPink: Brush,
-//    val GradientBlue: Brush,
-//)
 
 data class PnExpertTypography(
     val heading: TextStyle,
     val body: TextStyle,
     val toolbar: TextStyle,
 )
-
 
 
 object PnExpertTheme{
