@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier
                         .fillMaxSize(),
-                    color = PnExpertTheme.colors.AppBlueLightColor
+                    color = PnExpertTheme.colors.mainAppColors.AppBlueColor
                 ) {
 
                 }
