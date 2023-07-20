@@ -10,6 +10,8 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
@@ -77,6 +79,18 @@ data class PnExpertColors(
     val IconPinkColor:Color = Color(0xFFF25F8E),
     val IconGreenColor:Color = Color(0xFF149D17),
     val IconOrangeColor:Color = Color(0xFFFA8E10),
+
+    //Gradients
+    val GradientPink:Brush = Brush.linearGradient(
+        listOf(Color(0xFF5668E8), Color(0xFFF9C9DC)),
+        start = Offset(0.5f, 0f),
+        end = Offset(0.5f, 1f)
+    ),
+    val GradientBlue:Brush = Brush.linearGradient(
+        listOf(Color(0xFF5668E8), Color(0xFF6AEBEB)),
+        start = Offset(0f, 0.5f),
+        end = Offset(1f, 0.5f)
+    )
 )
 
 @Composable
