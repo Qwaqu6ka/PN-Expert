@@ -24,18 +24,76 @@ val typographyPalette = PnExpertTypography().apply {
         PnExpertTypography.Title(
             bold_32 = TextStyle(
                 fontSize = 32.sp,
-
+                fontFamily = SfProDisplay,
                 fontWeight = FontWeight(600),
             ),
             medium_32 = TextStyle(
                 fontSize = 32.sp,
-                lineHeight = 43.2.sp,
-
+                fontFamily = SfProDisplay,
                 fontWeight = FontWeight(500),
-                color = Color(0xFF393939),
             )
         )
 
+    this.subtitle =
+        PnExpertTypography.Subtitle(
+            medium_24 = TextStyle(
+                fontSize = 24.sp,
+                fontFamily = SfProDisplay,
+                fontWeight = FontWeight(500),
+            ),
+            bold_20 = TextStyle(
+                fontSize = 20.sp,
+                fontFamily = SfProDisplay,
+                fontWeight = FontWeight(600),
+            ),
+            bold_18 = TextStyle(
+                fontSize = 18.sp,
+                fontFamily = SfProDisplay,
+                fontWeight = FontWeight(600),
+            ),
+            medium_18 = TextStyle(
+                fontSize = 18.sp,
+                fontFamily = SfProDisplay,
+                fontWeight = FontWeight(500),
+            ),
+        )
 
-
+    this.text =
+        PnExpertTypography.Text(
+            medium_16 = TextStyle(
+                fontSize = 16.sp,
+                fontFamily = SfProDisplay,
+                fontWeight = FontWeight(500),
+            ),
+            regular_16 = TextStyle(
+                fontSize = 16.sp,
+                fontFamily = SfProDisplay,
+                fontWeight = FontWeight(400),
+            ),
+            medium_14 = TextStyle(
+                fontSize = 14.sp,
+                fontFamily = SfProDisplay,
+                fontWeight = FontWeight(500),
+            ),
+            regular_14 = TextStyle(
+                fontSize = 16.sp,
+                fontFamily = SfProDisplay,
+                fontWeight = FontWeight(400),
+            ),
+            medium_12 = TextStyle(
+                fontSize = 12.sp,
+                fontFamily = SfProDisplay,
+                fontWeight = FontWeight(500),
+            ),
+            regular_12 = TextStyle(
+                fontSize = 12.sp,
+                fontFamily = SfProDisplay,
+                fontWeight = FontWeight(400),
+            ),
+            medium_11 = TextStyle(
+                fontSize = 11.sp,
+                fontFamily = SfProDisplay,
+                fontWeight = FontWeight(500),
+            ),
+        )
 }
