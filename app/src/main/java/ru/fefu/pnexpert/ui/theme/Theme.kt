@@ -43,50 +43,94 @@ private val LightColorScheme = lightColorScheme(
 //PN_Expert tokens
 data class PnExpertColors(
     //MainAppColors
-    val AppDarkColor: Color = Color(0xFF393939),
-    val AppBlueColor: Color = Color(0xFF5668E8),
-    val AppPinkLightColors: Color = Color(0xFFF9C9DC),
-    val AppGreyLightColor: Color = Color(0xFFF4F4F4),
-    val AppGreyDarkColor: Color = Color(0xFF8B8B8B),
-    val AppBlueLightColor:Color = Color(0xFF6AEBEB),
-    val AppWhiteColor:Color = Color(0xFFFFFFFF),
-    val AppPinkDarkColor:Color = Color(0xFFF25F8E),
+    val AppDarkColor: Color,
+    val AppBlueColor: Color,
+    val AppPinkLightColors: Color,
+    val AppGreyLightColor: Color ,
+    val AppGreyDarkColor: Color,
+    val AppBlueLightColor:Color,
+    val AppWhiteColor:Color,
+    val AppPinkDarkColor:Color,
 
     //ButtonsColors
-    val ButtonNormalBlueColor:Color = Color(0xFF5668E8),
-    val ButtonNormalRedColor:Color = Color(0xFFF25F8E),
+    val ButtonNormalBlueColor:Color,
+    val ButtonNormalRedColor:Color,
 
-    val ButtonHoverBlueColor:Color = Color(0xFF3E50CE),
-    val ButtonHoverRedColor:Color = Color(0xFFEB4E80),
-    val ButtonHoverLightColor:Color = Color(0xFFE5E9FF),
+    val ButtonHoverBlueColor:Color,
+    val ButtonHoverRedColor:Color,
+    val ButtonHoverLightColor:Color,
 
-    val ButtonPressedBlueColor:Color = Color(0xFF2C3CAC),
-    val ButtonPressedRedColor:Color = Color(0xFFD6376A),
-    val ButtonPressedLightColor: Color = Color(0xFFC7CEFF),
+    val ButtonPressedBlueColor:Color,
+    val ButtonPressedRedColor:Color,
+    val ButtonPressedLightColor: Color,
 
-    val ButtonInactiveColor:Color = Color(0xFF929FFF),
+    val ButtonInactiveColor:Color,
 
     //FontColors
-    val FontDarkColor:Color = Color(0xFF393939),
-    val FontBlueColor: Color = Color(0xFF5668E8),
-    val FontGreyColor: Color = Color(0xFF8B8B8B),
-    val FontWhiteColor:Color = Color(0xFFFFFFFF),
+    val FontDarkColor:Color,
+    val FontBlueColor: Color,
+    val FontGreyColor: Color,
+    val FontWhiteColor:Color,
 
     //IconColors
-    val IconBlueColor: Color = Color(0xFF5668E8),
-    val IconBlueLightColor: Color = Color(0xFF5FABF2),
-    val IconRedColor:Color = Color(0xFFF24726),
-    val IconPinkColor:Color = Color(0xFFF25F8E),
-    val IconGreenColor:Color = Color(0xFF149D17),
-    val IconOrangeColor:Color = Color(0xFFFA8E10),
+    val IconBlueColor: Color,
+    val IconBlueLightColor: Color,
+    val IconRedColor:Color,
+    val IconPinkColor:Color,
+    val IconGreenColor:Color,
+    val IconOrangeColor:Color,
 
     //Gradients
-    val GradientPink:Brush = Brush.linearGradient(
+    val GradientPink:Brush,
+    val GradientBlue:Brush,
+)
+
+val baseAppPalette = PnExpertColors(
+    //MainAppColors
+    AppDarkColor= Color(0xFF393939),
+    AppBlueColor= Color(0xFF5668E8),
+    AppPinkLightColors = Color(0xFFF9C9DC),
+    AppGreyLightColor= Color(0xFFF4F4F4),
+    AppGreyDarkColor= Color(0xFF8B8B8B),
+    AppBlueLightColor= Color(0xFF6AEBEB),
+    AppWhiteColor = Color(0xFFFFFFFF),
+    AppPinkDarkColor = Color(0xFFF25F8E),
+
+    //ButtonsColors
+    ButtonNormalBlueColor = Color(0xFF5668E8),
+    ButtonNormalRedColor = Color(0xFFF25F8E),
+
+    ButtonHoverBlueColor = Color(0xFF3E50CE),
+    ButtonHoverRedColor = Color(0xFFEB4E80),
+    ButtonHoverLightColor = Color(0xFFE5E9FF),
+
+    ButtonPressedBlueColor = Color(0xFF2C3CAC),
+    ButtonPressedRedColor= Color(0xFFD6376A),
+    ButtonPressedLightColor = Color(0xFFC7CEFF),
+
+    ButtonInactiveColor = Color(0xFF929FFF),
+
+    //FontColors
+    FontDarkColor= Color(0xFF393939),
+    FontBlueColor = Color(0xFF5668E8),
+    FontGreyColor = Color(0xFF8B8B8B),
+    FontWhiteColor = Color(0xFFFFFFFF),
+
+    //IconColors
+    IconBlueColor = Color(0xFF5668E8),
+    IconBlueLightColor = Color(0xFF5FABF2),
+    IconRedColor = Color(0xFFF24726),
+    IconPinkColor = Color(0xFFF25F8E),
+    IconGreenColor = Color(0xFF149D17),
+    IconOrangeColor = Color(0xFFFA8E10),
+
+    //Gradients
+    GradientPink = Brush.linearGradient(
         listOf(Color(0xFF5668E8), Color(0xFFF9C9DC)),
         start = Offset(0.5f, 0f),
         end = Offset(0.5f, 1f)
     ),
-    val GradientBlue:Brush = Brush.linearGradient(
+    GradientBlue = Brush.linearGradient(
         listOf(Color(0xFF5668E8), Color(0xFF6AEBEB)),
         start = Offset(0f, 0.5f),
         end = Offset(1f, 0.5f)
