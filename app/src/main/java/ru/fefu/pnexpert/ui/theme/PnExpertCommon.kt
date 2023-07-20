@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import java.time.format.TextStyle
+import androidx.compose.ui.text.TextStyle
 
 
 class PnExpertColors{
@@ -64,11 +64,34 @@ class PnExpertColors{
     )
 }
 
-data class PnExpertTypography(
-    val heading: TextStyle,
-    val body: TextStyle,
-    val toolbar: TextStyle,
-)
+
+class PnExpertTypography{
+    lateinit var title: Title
+    lateinit var subtitle: Subtitle
+    lateinit var text: Text
+
+    data class Title(
+        val bold_32: TextStyle,
+        val medium_32:TextStyle
+    )
+
+    data class Subtitle(
+        val medium_24: TextStyle,
+        val bold_20:TextStyle,
+        val bold_18:TextStyle,
+        val medium_18: TextStyle
+    )
+
+    data class Text(
+        val medium_16: TextStyle,
+        val regular_16:TextStyle,
+        val medium_14: TextStyle,
+        val regular_14:TextStyle,
+        val medium_12: TextStyle,
+        val regular_12:TextStyle,
+        val medium_11: TextStyle,
+    )
+}
 
 
 object PnExpertTheme{
