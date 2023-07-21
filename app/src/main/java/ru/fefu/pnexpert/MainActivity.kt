@@ -3,6 +3,8 @@ package ru.fefu.pnexpert
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -19,7 +21,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.fefu.pnexpert.ui.theme.PNExpertTheme
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import ru.fefu.pnexpert.ui.theme.PnExpertTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,31 +45,26 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            PNExpertTheme {
+            PnExpertTheme() {
                 // A surface container using the 'background' color from the theme
+
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    color = PnExpertTheme.colors.mainAppColors.AppBlueColor
                 ) {
-                    Greeting("Android")
+                    Column() {
+                        Text(
+                            text = "Дарова",
+                            style = PnExpertTheme.typography.title.medium_32
+                        )
+                        Text(
+                            text = "Дарова",
+                            style = PnExpertTheme.typography.title.bold_32
+                        )
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    PNExpertTheme {
-        Greeting("Android")
     }
 }
