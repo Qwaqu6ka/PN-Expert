@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.ui.theme
+package ru.fefu.pnexpert.presentation.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -8,11 +8,11 @@ import androidx.compose.ui.text.TextStyle
 
 
 class PnExpertColors{
-    lateinit var mainAppColors:MainAppColors
-    lateinit var buttonColors:ButtonColors
-    lateinit var textColors:TextColors
-    lateinit var iconColors:IconColors
-    lateinit var gradients:Gradients
+    lateinit var mainAppColors: MainAppColors
+    lateinit var buttonColors: ButtonColors
+    lateinit var textColors: TextColors
+    lateinit var iconColors: IconColors
+    lateinit var gradients: Gradients
 
     //MainAppColors
     data class MainAppColors(
@@ -95,11 +95,11 @@ class PnExpertTypography{
 
 
 object PnExpertTheme{
-    val colors:PnExpertColors
+    val colors: PnExpertColors
         @Composable
         get() = LocalPnExpertColors.current
 
-    val typography:PnExpertTypography
+    val typography: PnExpertTypography
         @Composable
         get() = LocalPnExpertTypography.current
 

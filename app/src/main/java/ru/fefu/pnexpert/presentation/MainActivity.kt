@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert
+package ru.fefu.pnexpert.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -17,7 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.fefu.pnexpert.ui.theme.PnExpertTheme
+import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 
 class MainActivity : ComponentActivity() {
