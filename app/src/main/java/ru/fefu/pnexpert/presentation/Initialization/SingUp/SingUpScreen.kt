@@ -26,6 +26,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -65,12 +66,44 @@ fun SingUpScreen() {
             SingUpInputFields()
             Spacer(modifier = Modifier.height(120.dp))
             AlternativeSingUp()
+            Spacer(modifier = Modifier.height(60.dp))
+            SingInText()
+            Spacer(modifier = Modifier.height(60.dp))
         }
     }
 }
 
 @Composable
-fun AlternativeSingUp(){
+private fun RegistrationButton(){
+
+}
+
+@Composable
+private fun SingInText(){
+    Row(
+        Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "Уже есть акаунт?",
+            style = PnExpertTheme.typography.text.regular_16,
+            color = PnExpertTheme.colors.textColors.FontGreyColor,
+        )
+        TextButton(
+            onClick = {}
+        ) {
+            Text(
+                text = "Войти",
+                style = PnExpertTheme.typography.text.regular_16,
+                color = PnExpertTheme.colors.textColors.FontBlueColor,
+            )
+        }
+    }
+}
+
+@Composable
+private fun AlternativeSingUp(){
 
     val buttonShadow = 4.dp
 
@@ -130,7 +163,7 @@ fun AlternativeSingUp(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SingUpInputFields() {
+private fun SingUpInputFields() {
     //All fields variables
     val fieldBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
     val fieldShadow = 4.dp
