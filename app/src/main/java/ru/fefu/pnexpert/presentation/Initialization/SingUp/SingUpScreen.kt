@@ -19,6 +19,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -30,8 +31,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
@@ -62,9 +66,25 @@ fun SingUpScreen() {
 @Composable
 fun SingUpInputFields() {
 
+    //Phone fields variables
     var statusDropDown by remember { mutableStateOf(false) }
     val listCountryCode = listOf("+7", "+1", "+4", "+5")
     var selectedCountryCodeItem by remember { mutableStateOf(listCountryCode[0]) }
+
+    //Password fields variables
+    var passwordVisibility by remember { mutableStateOf(false) }
+    val iconPassword = if(passwordVisibility){
+        painterResource(id = R.drawable.baseline_visibility_off_24)
+    }else{
+        painterResource(id = R.drawable.baseline_visibility_24)
+    }
+
+    var passwordRepeatVisibility by remember { mutableStateOf(false) }
+    val iconPasswordRepeat = if(passwordRepeatVisibility){
+        painterResource(id = R.drawable.baseline_visibility_off_24)
+    }else{
+        painterResource(id = R.drawable.baseline_visibility_24)
+    }
 
     Column(
         modifier = Modifier
@@ -102,7 +122,7 @@ fun SingUpInputFields() {
                     singleLine = true,
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                        textColor = PnExpertTheme.colors.textColors.FontGreyColor
+                        textColor = PnExpertTheme.colors.textColors.FontDarkColor
                     )
                 )
                 DropdownMenu(
@@ -139,10 +159,15 @@ fun SingUpInputFields() {
                 modifier = Modifier
                     .weight(5f),
                 shape = PnExpertTheme.shapes.mainShapes.appDefault10,
-                value = "(000)000-00-00",
-                onValueChange = {
-//            viewModel.inputDataEvent(SingInFormEvent.EmailChanged(it))
+                value = "",
+                placeholder = {
+                    Text(
+                        text = "(000)000-00-00",
+                        style = PnExpertTheme.typography.text.regular_16,
+                        color = PnExpertTheme.colors.textColors.FontGreyColor
+                    )
                 },
+                onValueChange = {},
                 trailingIcon = {
                     Icon(
                         painter = painterResource(id = R.drawable.error_mark_icon),
@@ -155,10 +180,81 @@ fun SingUpInputFields() {
                 singleLine = true,
                 textStyle = TextStyle(fontSize = 16.sp),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor
+                    focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
+                    textColor = PnExpertTheme.colors.textColors.FontDarkColor
                 )
             )
 
         }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth(),
+            shape = PnExpertTheme.shapes.mainShapes.appDefault10,
+            value = "adwdawd",
+            placeholder = {
+                Text(
+                    text = "Пароль",
+                    style = PnExpertTheme.typography.text.regular_16,
+                    color = PnExpertTheme.colors.textColors.FontGreyColor
+                )
+            },
+            trailingIcon = {
+                IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                    Icon(
+                        painter = iconPassword,
+                        contentDescription = null
+                    )
+                }
+            },
+            onValueChange = {},
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password
+            ),
+            visualTransformation = if(passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            singleLine = true,
+            textStyle = TextStyle(fontSize = 16.sp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
+                textColor = PnExpertTheme.colors.textColors.FontDarkColor
+            )
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth(),
+            shape = PnExpertTheme.shapes.mainShapes.appDefault10,
+            value = "adwdawd",
+            placeholder = {
+                Text(
+                    text = "Повторите пароль",
+                    style = PnExpertTheme.typography.text.regular_16,
+                    color = PnExpertTheme.colors.textColors.FontGreyColor
+                )
+            },
+            trailingIcon = {
+                IconButton(onClick = { passwordRepeatVisibility = !passwordRepeatVisibility }) {
+                    Icon(
+                        painter = iconPasswordRepeat,
+                        contentDescription = null
+                    )
+                }
+            },
+            onValueChange = {},
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password
+            ),
+            visualTransformation = if(passwordRepeatVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            singleLine = true,
+            textStyle = TextStyle(fontSize = 16.sp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
+                textColor = PnExpertTheme.colors.textColors.FontDarkColor
+            )
+        )
     }
 }
