@@ -30,6 +30,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.TextStyle
@@ -65,8 +66,9 @@ fun SingUpScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SingUpInputFields() {
-
+    //All fields variables
     val fieldBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+    val fieldShadow = 4.dp
 
     //Phone fields variables
     var statusDropDown by remember { mutableStateOf(false) }
@@ -111,7 +113,8 @@ fun SingUpInputFields() {
             ) {
                 OutlinedTextField(
                     modifier = Modifier
-                        .menuAnchor(),
+                        .menuAnchor()
+                        .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10),
                     readOnly = true,
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(
@@ -160,7 +163,8 @@ fun SingUpInputFields() {
 
             OutlinedTextField(
                 modifier = Modifier
-                    .weight(5f),
+                    .weight(5f)
+                    .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10),
                 shape = PnExpertTheme.shapes.mainShapes.appDefault10,
                 value = "",
                 placeholder = {
@@ -195,7 +199,8 @@ fun SingUpInputFields() {
 
         OutlinedTextField(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10),
             shape = PnExpertTheme.shapes.mainShapes.appDefault10,
             value = "adwdawd",
             placeholder = {
@@ -231,7 +236,8 @@ fun SingUpInputFields() {
 
         OutlinedTextField(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10),
             shape = PnExpertTheme.shapes.mainShapes.appDefault10,
             value = "adwdawd",
             placeholder = {
