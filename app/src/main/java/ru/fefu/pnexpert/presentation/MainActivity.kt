@@ -3,10 +3,8 @@ package ru.fefu.pnexpert.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,8 +17,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.fefu.pnexpert.presentation.Initialization.Greeting.GreetingScreen
-import ru.fefu.pnexpert.presentation.Initialization.SingUp.SingUpScreen
+import ru.fefu.pnexpert.presentation.Initialization.Registration.RegistrationScreens
+import ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp.SingUpScreen
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 
@@ -58,8 +56,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-//                    GreetingScreen()
-                    SingUpScreen()
+                    RegistrationScreens()
                 }
             }
         }

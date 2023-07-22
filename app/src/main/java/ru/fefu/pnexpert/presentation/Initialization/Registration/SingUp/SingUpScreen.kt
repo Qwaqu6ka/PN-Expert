@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.SingUp
+package ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -11,11 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -25,7 +22,6 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
@@ -39,7 +35,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -53,28 +48,22 @@ import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable
 fun SingUpScreen() {
-    Surface(
+    Column(
         modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
-        color = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+            .padding(horizontal = 16.dp),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp),
-        ) {
-            Spacer(modifier = Modifier.height(80.dp))
-            SingUpInputFields()
-            Spacer(modifier = Modifier.height(30.dp))
-            AlternativeSingUp()
-            Spacer(modifier = Modifier.height(60.dp))
-            SingInText()
-            Spacer(modifier = Modifier.height(30.dp))
-            RegistrationButton()
-        }
+        Spacer(modifier = Modifier.height(40.dp))
+        SingUpInputFields()
+        Spacer(modifier = Modifier.height(40.dp))
+        AlternativeSingUp()
+        Spacer(modifier = Modifier.height(50.dp))
+        SingInText()
+        Spacer(modifier = Modifier.height(20.dp))
+        RegistrationButton()
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
+
 
 @Composable
 private fun RegistrationButton(){
@@ -213,7 +202,7 @@ private fun SingUpInputFields() {
             text = "Введите номер телефона и пин код чтобы зарегестироваться.",
             style = PnExpertTheme.typography.text.regular_16,
             color = PnExpertTheme.colors.textColors.FontGreyColor,
-            textAlign = TextAlign.Center
+//            textAlign = TextAlign.Center
         )
 
         Spacer(modifier = Modifier.height(24.dp))
