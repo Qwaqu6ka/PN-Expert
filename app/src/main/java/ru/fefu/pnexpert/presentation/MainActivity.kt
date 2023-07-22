@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -15,9 +16,11 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.fefu.pnexpert.presentation.Initialization.Greeting.GreetingScreen
+import ru.fefu.pnexpert.presentation.Initialization.SingUp.SingUpScreen
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 
@@ -41,10 +44,22 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             PnExpertTheme() {
+
+                //painted system controllers
+                val systemUiController = rememberSystemUiController()
+                val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+
+                //painted system upp & bottom panels
+                SideEffect {
+                    systemUiController.setStatusBarColor(color = barBackground)
+                    systemUiController.setNavigationBarColor(color = barBackground)
+                }
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    GreetingScreen()
+//                    GreetingScreen()
+                    SingUpScreen()
                 }
             }
         }
