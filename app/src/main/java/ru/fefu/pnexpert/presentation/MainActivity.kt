@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert
+package ru.fefu.pnexpert.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
