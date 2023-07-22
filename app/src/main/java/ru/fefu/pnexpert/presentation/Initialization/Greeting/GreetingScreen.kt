@@ -22,11 +22,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import ru.fefu.pnexpert.presentation.Initialization.Navigation.InitializationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable
-fun GreetingScreen() {
+fun GreetingScreen(navController:NavController) {
 
     //painted system controllers
     val systemUiController = rememberSystemUiController()
@@ -89,7 +91,7 @@ fun GreetingScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
-                onClick = {},
+                onClick = {navController.navigate(InitializationNavigationRoute.RegistrationScreen.route)},
                 shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
                 colors = ButtonDefaults.textButtonColors(
                     containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,

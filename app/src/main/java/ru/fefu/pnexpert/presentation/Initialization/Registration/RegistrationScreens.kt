@@ -12,11 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp.SingUpScreen
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable
-fun RegistrationScreens() {
+fun RegistrationScreens(navController: NavController) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
