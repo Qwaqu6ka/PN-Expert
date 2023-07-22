@@ -88,9 +88,9 @@ fun GreetingScreen() {
             TextButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(55.dp),
+                    .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
                 onClick = {},
-                shape = RoundedCornerShape(10.dp),
+                shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
                 colors = ButtonDefaults.textButtonColors(
                     containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
                 )
