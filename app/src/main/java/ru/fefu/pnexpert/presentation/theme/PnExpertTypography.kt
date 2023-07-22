@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.ui.theme
+package ru.fefu.pnexpert.presentation.theme
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
