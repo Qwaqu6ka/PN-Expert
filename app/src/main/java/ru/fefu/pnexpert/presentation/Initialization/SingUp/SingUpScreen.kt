@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -64,18 +65,34 @@ fun SingUpScreen() {
         ) {
             Spacer(modifier = Modifier.height(80.dp))
             SingUpInputFields()
-            Spacer(modifier = Modifier.height(120.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             AlternativeSingUp()
-            Spacer(modifier = Modifier.height(60.dp))
+            Spacer(modifier = Modifier.height(80.dp))
             SingInText()
-            Spacer(modifier = Modifier.height(60.dp))
+            Spacer(modifier = Modifier.height(30.dp))
+            RegistrationButton()
         }
     }
 }
 
 @Composable
 private fun RegistrationButton(){
-
+    TextButton(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
+        onClick = {},
+        shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
+        colors = ButtonDefaults.textButtonColors(
+            containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
+        )
+    ) {
+        Text(
+            text = "регистрация",
+            style = PnExpertTheme.typography.subtitle.medium_18,
+            color = PnExpertTheme.colors.textColors.FontWhiteColor
+        )
+    }
 }
 
 @Composable
