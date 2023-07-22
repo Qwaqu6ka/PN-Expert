@@ -17,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import ru.fefu.pnexpert.presentation.Initialization.Greeting.GreetingScreen
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 
@@ -40,23 +41,10 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             PnExpertTheme() {
-                // A surface container using the 'background' color from the theme
-
                 Surface(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    color = PnExpertTheme.colors.mainAppColors.AppBlueColor
+                    modifier = Modifier.fillMaxSize(),
                 ) {
-                    Column() {
-                        Text(
-                            text = "Дарова",
-                            style = PnExpertTheme.typography.title.medium_32
-                        )
-                        Text(
-                            text = "Дарова",
-                            style = PnExpertTheme.typography.title.bold_32
-                        )
-                    }
+                    GreetingScreen()
                 }
             }
         }

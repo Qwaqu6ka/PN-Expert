@@ -80,6 +80,9 @@ dependencies {
 
     //splash screen
     implementation 'androidx.core:core-splashscreen:1.0.0-alpha01'
+
+    //accompanist (for set system bar color)
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
 }
 
 // Allow references to generated code
