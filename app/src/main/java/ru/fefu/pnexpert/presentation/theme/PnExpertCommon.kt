@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.Dp
 
 
 class PnExpertColors{
@@ -90,6 +92,20 @@ class PnExpertTypography{
         val medium_12: TextStyle,
         val regular_12:TextStyle,
         val medium_11: TextStyle,
+    )
+}
+
+class PnExpertSizes{
+
+    data class ButtonSize(
+        val buttonClassic55: Dp
+    )
+}
+
+class PnExpertShapes{
+
+    data class ButtonShapes(
+        val buttonClassic10: Shape
     )
 }
 
