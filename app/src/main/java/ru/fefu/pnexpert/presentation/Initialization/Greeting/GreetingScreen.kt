@@ -2,13 +2,20 @@ package ru.fefu.pnexpert.presentation.Initialization.Greeting
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
@@ -36,12 +43,16 @@ fun GreetingScreen() {
             .fillMaxSize(),
         color = PnExpertTheme.colors.mainAppColors.AppBlueColor
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+                .padding(bottom = 71.dp),
+            contentAlignment = Alignment.Center
         ) {
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
                     .padding(horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
@@ -67,5 +78,31 @@ fun GreetingScreen() {
                 )
             }
         }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+                .padding(bottom = 16.dp),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            TextButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(55.dp),
+                onClick = {},
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.textButtonColors(
+                    containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
+                )
+            ) {
+                Text(
+                    text = "Приступить",
+                    style = PnExpertTheme.typography.subtitle.medium_18,
+                    color = PnExpertTheme.colors.textColors.FontBlueColor
+                )
+            }
+        }
     }
 }
+
+
