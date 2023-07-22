@@ -8,13 +8,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -25,9 +29,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import ru.fefu.pnexpert.R
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable
@@ -57,7 +66,9 @@ fun SingUpInputFields() {
     val listCountryCode = listOf("+7", "+1", "+4", "+5")
     var selectedCountryCodeItem by remember { mutableStateOf(listCountryCode[0]) }
 
-    Column() {
+    Column(
+        modifier = Modifier
+    ) {
         Text(
             text = "Введите номер телефона и пин код чтобы зарегестироваться.",
             style = PnExpertTheme.typography.text.regular_16,
@@ -65,17 +76,19 @@ fun SingUpInputFields() {
             textAlign = TextAlign.Center
         )
 
+        Spacer(modifier = Modifier.height(24.dp))
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
             ExposedDropdownMenuBox(
+                modifier = Modifier.weight(2f),
                 expanded = statusDropDown,
                 onExpandedChange = {statusDropDown = !statusDropDown}
             ) {
                 OutlinedTextField(
                     modifier = Modifier
-                        .fillMaxWidth()
                         .menuAnchor(),
                     readOnly = true,
                     trailingIcon = {
@@ -118,6 +131,34 @@ fun SingUpInputFields() {
                     }
                 }
             }
+
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            OutlinedTextField(
+                modifier = Modifier
+                    .weight(5f),
+                shape = PnExpertTheme.shapes.mainShapes.appDefault10,
+                value = "(000)000-00-00",
+                onValueChange = {
+//            viewModel.inputDataEvent(SingInFormEvent.EmailChanged(it))
+                },
+                trailingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.error_mark_icon),
+                        contentDescription = "calendar icon",
+                    )
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Phone
+                ),
+                singleLine = true,
+                textStyle = TextStyle(fontSize = 16.sp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor
+                )
+            )
+
         }
     }
 }
