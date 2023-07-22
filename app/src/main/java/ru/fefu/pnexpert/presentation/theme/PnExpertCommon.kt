@@ -121,6 +121,14 @@ object PnExpertTheme{
         @Composable
         get() = LocalPnExpertTypography.current
 
+    val shapes: PnExpertShapes
+        @Composable
+        get() = LocalPnExpertShapes.current
+
+    val sizes: PnExpertSizes
+        @Composable
+        get() = LocalPnExpertSizes.current
+
 
 
     val LocalPnExpertColors = staticCompositionLocalOf<PnExpertColors> {
@@ -129,5 +137,13 @@ object PnExpertTheme{
 
     val LocalPnExpertTypography = staticCompositionLocalOf<PnExpertTypography> {
         error("No typography provided")
+    }
+
+    val LocalPnExpertShapes = staticCompositionLocalOf<PnExpertShapes> {
+        error("No shapes provided")
+    }
+
+    val LocalPnExpertSizes = staticCompositionLocalOf<PnExpertSizes> {
+        error("No sizes provided")
     }
 }
