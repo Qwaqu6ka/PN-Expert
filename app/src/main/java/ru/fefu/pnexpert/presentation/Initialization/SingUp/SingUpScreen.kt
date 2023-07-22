@@ -49,7 +49,7 @@ fun SingUpScreen() {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState()),
-        color = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+        color = PnExpertTheme.colors.mainAppColors.AppGreyLightColor
     ) {
         Column(
             modifier = Modifier
@@ -65,6 +65,8 @@ fun SingUpScreen() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SingUpInputFields() {
+
+    val fieldBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
 
     //Phone fields variables
     var statusDropDown by remember { mutableStateOf(false) }
@@ -122,7 +124,8 @@ fun SingUpInputFields() {
                     singleLine = true,
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                        textColor = PnExpertTheme.colors.textColors.FontDarkColor
+                        textColor = PnExpertTheme.colors.textColors.FontDarkColor,
+                        containerColor = fieldBackground
                     )
                 )
                 DropdownMenu(
@@ -181,7 +184,8 @@ fun SingUpInputFields() {
                 textStyle = TextStyle(fontSize = 16.sp),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                    textColor = PnExpertTheme.colors.textColors.FontDarkColor
+                    textColor = PnExpertTheme.colors.textColors.FontDarkColor,
+                    containerColor = fieldBackground
                 )
             )
 
@@ -218,7 +222,8 @@ fun SingUpInputFields() {
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                textColor = PnExpertTheme.colors.textColors.FontDarkColor
+                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
+                containerColor = fieldBackground
             )
         )
 
@@ -253,7 +258,8 @@ fun SingUpInputFields() {
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                textColor = PnExpertTheme.colors.textColors.FontDarkColor
+                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
+                containerColor = fieldBackground
             )
         )
     }

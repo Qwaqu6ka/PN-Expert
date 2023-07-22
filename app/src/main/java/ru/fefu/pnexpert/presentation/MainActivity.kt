@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
 
                 //painted system controllers
                 val systemUiController = rememberSystemUiController()
-                val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+                val barBackground = PnExpertTheme.colors.mainAppColors.AppGreyLightColor
 
                 //painted system upp & bottom panels
                 SideEffect {
