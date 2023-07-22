@@ -96,6 +96,7 @@ class PnExpertTypography{
 }
 
 class PnExpertSizes{
+    lateinit var buttonSize: ButtonSize
 
     data class ButtonSize(
         val buttonClassic55: Dp
@@ -103,6 +104,7 @@ class PnExpertSizes{
 }
 
 class PnExpertShapes{
+    lateinit var buttonShapes: ButtonShapes
 
     data class ButtonShapes(
         val buttonClassic10: Shape
