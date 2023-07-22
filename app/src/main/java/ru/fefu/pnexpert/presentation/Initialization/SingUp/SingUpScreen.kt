@@ -1,5 +1,6 @@
 package ru.fefu.pnexpert.presentation.Initialization.SingUp
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,12 +10,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
@@ -49,6 +54,8 @@ fun SingUpScreen() {
 fun SingUpInputFields() {
 
     var statusDropDown by remember { mutableStateOf(false) }
+    val listCountryCode = listOf("+7", "+1", "+4", "+5")
+    var selectedCountryCodeItem by remember { mutableStateOf(listCountryCode[0]) }
 
     Column() {
         Text(
@@ -68,67 +75,43 @@ fun SingUpInputFields() {
             ) {
                 OutlinedTextField(
                     modifier = Modifier
-                        .fillMaxWidth(0.90f)
+                        .fillMaxWidth()
                         .menuAnchor(),
                     readOnly = true,
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(
-                            expanded = genderDropDown
+                            expanded = statusDropDown
                         )
                     },
-                    shape = RoundedCornerShape(13.dp),
-                    value = when(inputDataState.status){
-                        "student"->"Студент"
-                        "guest"->"Гость"
-                        "employee"->"Сотрудник"
-                        else->""
-                    },
-                    onValueChange = {
-                    },
-                    isError = inputDataState.statusError != null,
-                    placeholder = {
-                        Text(
-                            text = "Не выбрано",
-                            fontSize = 18.sp,
-                            lineHeight = 22.sp,
-                            fontWeight = FontWeight(200),
-                            color = FefuFitTheme.color.textColor.mainTextColor,
-                        )
-                    },
+                    shape = PnExpertTheme.shapes.mainShapes.appDefault10,
+                    value = selectedCountryCodeItem,
+                    onValueChange = {},
                     singleLine = true,
-                    textStyle = TextStyle(fontSize = 16.sp),
                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                        cursorColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                        focusedBorderColor = FefuFitTheme.color.mainAppColors.appBlueColor,
-                        textColor = FefuFitTheme.color.textColor.mainTextColor
+                        focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
+                        textColor = PnExpertTheme.colors.textColors.FontGreyColor
                     )
                 )
                 DropdownMenu(
                     modifier = Modifier
                         .exposedDropdownSize()
-                        .background(FefuFitTheme.color.mainAppColors.appCardColor),
+                        .background(PnExpertTheme.colors.mainAppColors.AppWhiteColor),
                     offset = DpOffset(0.dp, 6.dp),
                     expanded = statusDropDown,
                     onDismissRequest = { statusDropDown = false }
                 ) {
-                    listStatus.forEach { selectStatus ->
+                    listCountryCode.forEach { selectStatus ->
                         DropdownMenuItem(
                             modifier = Modifier
-                                .background(FefuFitTheme.color.mainAppColors.appCardColor),
+                                .background(PnExpertTheme.colors.mainAppColors.AppWhiteColor),
                             text = {
                                 Text(
                                     text = selectStatus,
-                                    color = FefuFitTheme.color.textColor.mainTextColor
+                                    color = PnExpertTheme.colors.textColors.FontGreyColor
                                 )
                             },
                             onClick = {
-                                selectedStatusItem = selectStatus
-                                val shortStatus = when(selectedStatusItem){
-                                    "Студент"-> "student"
-                                    "Гость"-> "guest"
-                                    else -> "employee"
-                                }
-                                viewModel.inputDataEvent(SingUpFirstFormEvent.StatusChanged(shortStatus))
+                                selectedCountryCodeItem = selectStatus
                                 statusDropDown = false
                             },
                         )
