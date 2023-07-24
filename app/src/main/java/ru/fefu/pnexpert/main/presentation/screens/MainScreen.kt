@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.screens
+package ru.fefu.pnexpert.main.presentation.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import ru.fefu.pnexpert.presentation.navigation.BottomNavBar
-import ru.fefu.pnexpert.presentation.navigation.MainScreenNavGraph
-import ru.fefu.pnexpert.presentation.navigation.bottomNavTabItems
+import ru.fefu.pnexpert.main.presentation.navigation.BottomNavBar
+import ru.fefu.pnexpert.main.presentation.navigation.MainScreenNavGraph
+import ru.fefu.pnexpert.main.presentation.navigation.bottomNavTabItems
 
 @Composable
 fun MainScreen() {

@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.navigation
+package ru.fefu.pnexpert.main.presentation.navigation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding

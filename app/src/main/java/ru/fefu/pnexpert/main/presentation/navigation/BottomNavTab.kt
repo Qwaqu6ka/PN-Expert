@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.navigation
+package ru.fefu.pnexpert.main.presentation.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
