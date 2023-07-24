@@ -1,6 +1,8 @@
 package ru.fefu.pnexpert.main.presentation.navigation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -9,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -17,12 +20,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+import ru.fefu.pnexpert.theme.BadgeColor
+import ru.fefu.pnexpert.theme.PnExpertTheme
 
 @Composable
 fun BottomNavBar(navController: NavController, tabItems: List<BottomNavTab>) {
     BottomNavigation(
-        modifier = Modifier.background(PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor)
+        backgroundColor = PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
@@ -30,15 +34,26 @@ fun BottomNavBar(navController: NavController, tabItems: List<BottomNavTab>) {
 
             val isTabSelected = currentDestination?.hierarchy?.any { it.route == tab.route } == true
             val tabButtonContentColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+            val isTabMarked = tab is MarkedBottomNabTab && tab.isMarked
 
             BottomNavigationItem(
                 icon = {
-                    Icon(
-                        painter = painterResource(id = tab.iconRes),
-                        contentDescription = stringResource(tab.titleRes),
-                        tint = tabButtonContentColor,
-                        modifier = Modifier.padding(bottom = 4.dp)
-                    )
+                    Row {
+                        Icon(
+                            painter = painterResource(id = tab.iconRes),
+                            contentDescription = stringResource(tab.titleRes),
+                            tint = tabButtonContentColor,
+                            modifier = Modifier.padding(bottom = 3.dp, end = 0.dp)
+                        )
+                        if (isTabMarked) {
+                            Spacer(
+                                modifier = Modifier
+                                    .drawBehind {
+                                        drawCircle(BadgeColor, 8f)
+                                    }
+                            )
+                        }
+                    }
                 },
                 label = {
                     Text(
@@ -64,10 +79,10 @@ fun BottomNavBar(navController: NavController, tabItems: List<BottomNavTab>) {
                     }
                 },
                 modifier = Modifier.background(
-                    if (isTabSelected)
-                        PnExpertTheme.colors.buttonColors.ButtonPressedBlueColor
+                    if (isTabSelected) PnExpertTheme.colors.buttonColors.ButtonPressedBlueColor
                     else PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor
-                )
+                ),
+                selectedContentColor = PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor  // color of ripple
             )
         }
     }

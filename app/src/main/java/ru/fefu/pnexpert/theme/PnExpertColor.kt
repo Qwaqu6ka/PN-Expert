@@ -1,7 +1,9 @@
-package ru.fefu.pnexpert.presentation.theme
+package ru.fefu.pnexpert.theme
 
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+
+val BadgeColor = Color(0xFFF25F8E)
 
 val baseAppPalette = PnExpertColors().apply {
     this.mainAppColors =
