@@ -60,16 +60,6 @@ import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 @SuppressLint("RememberReturnType")
 @Composable
 fun SingUpScreen(viewModel: RegistrationViewModel) {
-    //painted system controllers
-    val systemUiController = rememberSystemUiController()
-    val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
-
-    //painted system upp & bottom panels
-    SideEffect {
-        systemUiController.setStatusBarColor(color = barBackground)
-        systemUiController.setNavigationBarColor(color = barBackground)
-    }
-
     // Creating a values and variables to remember
     // focus requester, manager and state
     val focusRequester = remember { FocusRequester() }
