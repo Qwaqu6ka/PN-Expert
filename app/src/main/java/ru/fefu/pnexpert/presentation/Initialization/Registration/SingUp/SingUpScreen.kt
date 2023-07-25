@@ -3,7 +3,9 @@ package ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -355,14 +357,31 @@ private fun SingUpInputFields(
 
         }
         if (inputDataState.phoneNumberError != null) {
-            Text(
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                text = inputDataState.phoneNumberError,
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.error,
-                textAlign = TextAlign.End
-            )
+                    .fillMaxWidth()
+                    .height(PnExpertTheme.sizes.buttonSize.buttonClassic55)
+                    .background(
+                        PnExpertTheme.colors.mainAppColors.AppPinkLightColors,
+                        shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
+                    )
+                    .border(
+                        width = 1.dp,
+                        color = PnExpertTheme.colors.buttonColors.ButtonPressedRedColor,
+                        shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = inputDataState.phoneNumberError,
+                    color = PnExpertTheme.colors.buttonColors.ButtonPressedRedColor,
+                    style = PnExpertTheme.typography.text.regular_16,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(8.dp))
