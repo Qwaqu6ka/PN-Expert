@@ -10,18 +10,24 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.fefu.pnexpert.presentation.Initialization.Registration.RegistrationViewModel
+import ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp.SingUpFormEvent
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable
@@ -32,7 +38,67 @@ fun ConformNumberPage() {
     ) {
         Spacer(modifier = Modifier.height(30.dp))
         InputCodeFields()
+        Spacer(modifier = Modifier.height(80.dp))
+        MessageTimer()
+        Spacer(modifier = Modifier.height(80.dp))
+        TextRepeatCode()
+        Spacer(modifier = Modifier.height(50.dp))
+        ConformButton()
     }
+}
+
+@Composable
+fun ConformButton() {
+    TextButton(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
+        onClick = {},
+        shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
+        colors = ButtonDefaults.textButtonColors(
+            containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
+        )
+    ) {
+        Text(
+            text = "Подтвердить",
+            style = PnExpertTheme.typography.subtitle.medium_18,
+            color = PnExpertTheme.colors.textColors.FontWhiteColor
+        )
+    }
+}
+
+@Composable
+fun TextRepeatCode() {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Eсли в течении 30 секунд вам не пришел код",
+            textAlign = TextAlign.Center,
+            style = PnExpertTheme.typography.text.regular_16,
+            color = PnExpertTheme.colors.textColors.FontGreyColor
+        )
+        TextButton(onClick = {}) {
+            Text(
+                text = "Отправить код повторно",
+                textAlign = TextAlign.Center,
+                style = PnExpertTheme.typography.text.regular_16,
+                color = PnExpertTheme.colors.textColors.FontBlueColor
+            )
+        }
+    }
+}
+
+@Composable
+private fun MessageTimer() {
+    Text(
+        modifier = Modifier.fillMaxWidth(),
+        text = "00:30",
+        textAlign = TextAlign.Center,
+        style = PnExpertTheme.typography.title.medium_32,
+        color = PnExpertTheme.colors.mainAppColors.AppPinkDarkColor
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

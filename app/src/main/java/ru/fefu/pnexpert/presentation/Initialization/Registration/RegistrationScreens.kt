@@ -59,6 +59,7 @@ fun RegistrationScreens(
             Spacer(modifier = Modifier.height(30.dp))
 //            SingUpScreen(viewModel)
             ConformNumberPage()
+
         }
     }
 }
