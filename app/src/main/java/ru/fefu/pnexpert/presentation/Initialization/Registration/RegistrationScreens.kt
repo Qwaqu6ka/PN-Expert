@@ -12,12 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp.SingUpScreen
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable
-fun RegistrationScreens(navController: NavController) {
+fun RegistrationScreens(
+    navController: NavController,
+    viewModel: RegistrationViewModel = viewModel()
+) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -40,7 +44,7 @@ fun RegistrationScreens(navController: NavController) {
                 color = PnExpertTheme.colors.textColors.FontDarkColor
             )
             Spacer(modifier = Modifier.height(30.dp))
-            SingUpScreen()
+            SingUpScreen(viewModel)
         }
     }
 }

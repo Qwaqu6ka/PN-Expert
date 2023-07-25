@@ -22,6 +22,7 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -51,19 +52,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.pnexpert.R
+import ru.fefu.pnexpert.presentation.Initialization.Registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @SuppressLint("RememberReturnType")
 @Composable
-fun SingUpScreen() {
+fun SingUpScreen(viewModel: RegistrationViewModel) {
     //painted system controllers
     val systemUiController = rememberSystemUiController()
     val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
-
-    // Creating a values and variables to remember
-    // focus requester, manager and state
-    val focusRequester = remember { FocusRequester() }
-    val focusManager = LocalFocusManager.current
 
     //painted system upp & bottom panels
     SideEffect {
@@ -71,30 +68,42 @@ fun SingUpScreen() {
         systemUiController.setNavigationBarColor(color = barBackground)
     }
 
+    // Creating a values and variables to remember
+    // focus requester, manager and state
+    val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
+
+
     Column(
         modifier = Modifier
             .padding(horizontal = 16.dp),
     ) {
         Spacer(modifier = Modifier.height(40.dp))
-        SingUpInputFields(focusRequester)
+        SingUpInputFields(focusRequester, viewModel)
         Spacer(modifier = Modifier.height(40.dp))
         AlternativeSingUp()
         Spacer(modifier = Modifier.height(50.dp))
         SingInText()
         Spacer(modifier = Modifier.height(20.dp))
-        RegistrationButton(focusManager)
+        RegistrationButton(focusManager, viewModel)
         Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
 
 @Composable
-private fun RegistrationButton(focusManager: FocusManager){
+private fun RegistrationButton(
+    focusManager: FocusManager,
+    viewModel: RegistrationViewModel
+){
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
-        onClick = {focusManager.clearFocus()},
+        onClick = {
+            focusManager.clearFocus()
+            viewModel.inputDataEvent(SingUpFormEvent.Submit)
+        },
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
             containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
@@ -193,12 +202,22 @@ private fun AlternativeSingUp(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SingUpInputFields(focusRequester:FocusRequester) {
+private fun SingUpInputFields(
+    focusRequester:FocusRequester,
+    viewModel: RegistrationViewModel
+) {
+
+    //input data variables
+    val inputDataState = viewModel.inputDataState
+
+    println(inputDataState.phoneNumber)
+
     //All fields variables
     val fieldBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
     val fieldShadow = 6.dp
 
     //Phone fields variables
+    var phoneNumber by remember { mutableStateOf("") }
     var statusDropDown by remember { mutableStateOf(false) }
     val listCountryCode = listOf("+7", "+1", "+4", "+5")
     var selectedCountryCodeItem by remember { mutableStateOf(listCountryCode[0]) }
@@ -281,6 +300,9 @@ private fun SingUpInputFields(focusRequester:FocusRequester) {
                             },
                             onClick = {
                                 selectedCountryCodeItem = selectStatus
+                                viewModel.inputDataEvent(SingUpFormEvent.PhoneNumberChanged(
+                                    selectedCountryCodeItem + phoneNumber
+                                ))
                                 statusDropDown = false
                             },
                         )
@@ -297,7 +319,7 @@ private fun SingUpInputFields(focusRequester:FocusRequester) {
                     .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10)
                     .focusRequester(focusRequester),
                 shape = PnExpertTheme.shapes.mainShapes.appDefault10,
-                value = "",
+                value = phoneNumber,
                 placeholder = {
                     Text(
                         text = "(000)000-00-00",
@@ -305,7 +327,13 @@ private fun SingUpInputFields(focusRequester:FocusRequester) {
                         color = PnExpertTheme.colors.textColors.FontGreyColor
                     )
                 },
-                onValueChange = {},
+                onValueChange = {
+                    phoneNumber = it
+                    viewModel.inputDataEvent(SingUpFormEvent.PhoneNumberChanged(
+                        selectedCountryCodeItem+it
+                    ))
+                },
+                isError = inputDataState.phoneNumberError != null,
                 trailingIcon = {
                     Icon(
                         painter = painterResource(id = R.drawable.error_mark_icon),
@@ -325,6 +353,16 @@ private fun SingUpInputFields(focusRequester:FocusRequester) {
                 )
             )
 
+        }
+        if (inputDataState.phoneNumberError != null) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                text = inputDataState.phoneNumberError,
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.error,
+                textAlign = TextAlign.End
+            )
         }
 
         Spacer(modifier = Modifier.height(8.dp))

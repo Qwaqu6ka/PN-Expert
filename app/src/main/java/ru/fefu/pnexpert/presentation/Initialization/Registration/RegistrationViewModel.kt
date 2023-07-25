@@ -13,9 +13,9 @@ import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidatePhoneNumber
 import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidateRepeatPassword
 
 class RegistrationViewModel(
-    private val validatePhoneNumber: ValidatePhoneNumber,
-    private val validatePassword: ValidatePassword,
-    private val validateRepeatPassword: ValidateRepeatPassword
+    private val validatePhoneNumber: ValidatePhoneNumber = ValidatePhoneNumber(),
+    private val validatePassword: ValidatePassword = ValidatePassword(),
+    private val validateRepeatPassword: ValidateRepeatPassword = ValidateRepeatPassword()
 ):ViewModel() {
     var inputDataState by mutableStateOf(SingUpFormState())
     var errorData by mutableStateOf("")

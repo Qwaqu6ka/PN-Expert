@@ -11,10 +11,10 @@ class ValidatePhoneNumber {
                 errorMessage = "Поле не должно быть пустым"
             )
         }
-        if(!(phoneNumber.length == 12 && phoneNumber[0] == '+')&&(phoneNumber.length != 11)){
+        if(phoneNumber.length != 12){
             return ValidationResult(
                 success = false,
-                errorMessage = "Номер телефона должен состоять из 11 символов, не учитывая символ '+'"
+                errorMessage = "Номер телефона должен состоять из 10  символов и кода страны"
             )
         }
         return ValidationResult(
