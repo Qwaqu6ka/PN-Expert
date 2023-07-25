@@ -1,5 +1,6 @@
 package ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -34,7 +35,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -48,11 +53,17 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.pnexpert.R
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
+@SuppressLint("RememberReturnType")
 @Composable
 fun SingUpScreen() {
     //painted system controllers
     val systemUiController = rememberSystemUiController()
     val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+
+    // Creating a values and variables to remember
+    // focus requester, manager and state
+    val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
 
     //painted system upp & bottom panels
     SideEffect {
@@ -65,32 +76,32 @@ fun SingUpScreen() {
             .padding(horizontal = 16.dp),
     ) {
         Spacer(modifier = Modifier.height(40.dp))
-        SingUpInputFields()
+        SingUpInputFields(focusRequester)
         Spacer(modifier = Modifier.height(40.dp))
         AlternativeSingUp()
         Spacer(modifier = Modifier.height(50.dp))
         SingInText()
         Spacer(modifier = Modifier.height(20.dp))
-        RegistrationButton()
+        RegistrationButton(focusManager)
         Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
 
 @Composable
-private fun RegistrationButton(){
+private fun RegistrationButton(focusManager: FocusManager){
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
-        onClick = {},
+        onClick = {focusManager.clearFocus()},
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
             containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
         )
     ) {
         Text(
-            text = "регистрация",
+            text = "Регистрация",
             style = PnExpertTheme.typography.subtitle.medium_18,
             color = PnExpertTheme.colors.textColors.FontWhiteColor
         )
@@ -182,7 +193,7 @@ private fun AlternativeSingUp(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SingUpInputFields() {
+private fun SingUpInputFields(focusRequester:FocusRequester) {
     //All fields variables
     val fieldBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
     val fieldShadow = 6.dp
@@ -231,7 +242,8 @@ private fun SingUpInputFields() {
                 OutlinedTextField(
                     modifier = Modifier
                         .menuAnchor()
-                        .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10),
+                        .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10)
+                        .focusRequester(focusRequester),
                     readOnly = true,
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(
@@ -282,7 +294,8 @@ private fun SingUpInputFields() {
             OutlinedTextField(
                 modifier = Modifier
                     .weight(5f)
-                    .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10),
+                    .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10)
+                    .focusRequester(focusRequester),
                 shape = PnExpertTheme.shapes.mainShapes.appDefault10,
                 value = "",
                 placeholder = {
@@ -319,7 +332,8 @@ private fun SingUpInputFields() {
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10),
+                .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10)
+                .focusRequester(focusRequester),
             shape = PnExpertTheme.shapes.mainShapes.appDefault10,
             value = "adwdawd",
             placeholder = {
@@ -357,7 +371,8 @@ private fun SingUpInputFields() {
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10),
+                .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10)
+                .focusRequester(focusRequester),
             shape = PnExpertTheme.shapes.mainShapes.appDefault10,
             value = "adwdawd",
             placeholder = {
