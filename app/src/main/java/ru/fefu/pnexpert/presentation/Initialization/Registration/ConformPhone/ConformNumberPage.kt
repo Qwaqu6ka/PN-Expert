@@ -19,15 +19,12 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.fefu.pnexpert.presentation.Initialization.Registration.RegistrationViewModel
-import ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp.SingUpFormEvent
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable
