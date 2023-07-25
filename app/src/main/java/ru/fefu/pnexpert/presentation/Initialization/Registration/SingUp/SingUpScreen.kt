@@ -202,6 +202,34 @@ private fun AlternativeSingUp(){
     
 }
 
+@Composable
+private fun errorField(error:String){
+    Spacer(modifier = Modifier.height(8.dp))
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(PnExpertTheme.sizes.buttonSize.buttonClassic55)
+            .background(
+                PnExpertTheme.colors.mainAppColors.AppPinkLightColors,
+                shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
+            )
+            .border(
+                width = 1.dp,
+                color = PnExpertTheme.colors.buttonColors.ButtonPressedRedColor,
+                shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
+            ),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = error,
+            color = PnExpertTheme.colors.buttonColors.ButtonPressedRedColor,
+            style = PnExpertTheme.typography.text.regular_16,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SingUpInputFields(
@@ -357,31 +385,7 @@ private fun SingUpInputFields(
 
         }
         if (inputDataState.phoneNumberError != null) {
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(PnExpertTheme.sizes.buttonSize.buttonClassic55)
-                    .background(
-                        PnExpertTheme.colors.mainAppColors.AppPinkLightColors,
-                        shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
-                    )
-                    .border(
-                        width = 1.dp,
-                        color = PnExpertTheme.colors.buttonColors.ButtonPressedRedColor,
-                        shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = inputDataState.phoneNumberError,
-                    color = PnExpertTheme.colors.buttonColors.ButtonPressedRedColor,
-                    style = PnExpertTheme.typography.text.regular_16,
-                    textAlign = TextAlign.Center
-                )
-            }
+            errorField(error = inputDataState.phoneNumberError)
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -392,7 +396,7 @@ private fun SingUpInputFields(
                 .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10)
                 .focusRequester(focusRequester),
             shape = PnExpertTheme.shapes.mainShapes.appDefault10,
-            value = "adwdawd",
+            value = inputDataState.password,
             placeholder = {
                 Text(
                     text = "Пароль",
@@ -408,7 +412,10 @@ private fun SingUpInputFields(
                     )
                 }
             },
-            onValueChange = {},
+            onValueChange = {
+                viewModel.inputDataEvent(SingUpFormEvent.PasswordChanged(it))
+            },
+            isError = inputDataState.passwordError != null,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password
             ),
@@ -422,6 +429,10 @@ private fun SingUpInputFields(
                 containerColor = fieldBackground
             )
         )
+        
+        if (inputDataState.passwordError != null){
+            errorField(error = inputDataState.passwordError)
+        }
 
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -431,7 +442,7 @@ private fun SingUpInputFields(
                 .shadow(fieldShadow, PnExpertTheme.shapes.mainShapes.appDefault10)
                 .focusRequester(focusRequester),
             shape = PnExpertTheme.shapes.mainShapes.appDefault10,
-            value = "adwdawd",
+            value = inputDataState.repeatPassword,
             placeholder = {
                 Text(
                     text = "Повторите пароль",
@@ -447,7 +458,10 @@ private fun SingUpInputFields(
                     )
                 }
             },
-            onValueChange = {},
+            onValueChange = {
+                viewModel.inputDataEvent(SingUpFormEvent.RepeatPasswordChanged(it))
+            },
+            isError = inputDataState.repeatPasswordError != null,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password
             ),
@@ -461,5 +475,9 @@ private fun SingUpInputFields(
                 containerColor = fieldBackground
             )
         )
+        
+        if (inputDataState.repeatPasswordError != null){
+            errorField(error = inputDataState.repeatPasswordError)
+        }
     }
 }
