@@ -365,10 +365,19 @@ private fun SingUpInputFields(
                 },
                 isError = inputDataState.phoneNumberError != null,
                 trailingIcon = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.error_mark_icon),
-                        contentDescription = "calendar icon",
-                    )
+                    IconButton(
+                        onClick = {
+                            phoneNumber = ""
+                            viewModel.inputDataEvent(SingUpFormEvent.PhoneNumberChanged(
+                                selectedCountryCodeItem+phoneNumber
+                            ))
+                        }
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.error_mark_icon),
+                            contentDescription = "calendar icon",
+                        )
+                    }
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Phone
