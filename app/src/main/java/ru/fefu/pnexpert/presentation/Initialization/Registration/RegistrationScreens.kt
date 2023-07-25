@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import ru.fefu.pnexpert.presentation.Initialization.Registration.ConformPhone.ConformNumberPage
+import ru.fefu.pnexpert.presentation.Initialization.Registration.Navigation.RegistrationNavigation
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable
@@ -56,9 +56,7 @@ fun RegistrationScreens(
                 color = PnExpertTheme.colors.textColors.FontDarkColor
             )
             Spacer(modifier = Modifier.height(30.dp))
-//            SingUpScreen(viewModel)
-            ConformNumberPage()
-
+            RegistrationNavigation(viewModel)
         }
     }
 }

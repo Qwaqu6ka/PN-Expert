@@ -49,13 +49,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import ru.fefu.pnexpert.R
+import ru.fefu.pnexpert.presentation.Initialization.Registration.Navigation.RegistrationNavigation
+import ru.fefu.pnexpert.presentation.Initialization.Registration.Navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.Initialization.Registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @SuppressLint("RememberReturnType")
 @Composable
-fun SingUpScreen(viewModel: RegistrationViewModel) {
+fun SingUpScreen(
+    viewModel: RegistrationViewModel,
+    navController: NavController
+) {
     // Creating a values and variables to remember
     // focus requester, manager and state
     val focusRequester = remember { FocusRequester() }
@@ -73,7 +79,7 @@ fun SingUpScreen(viewModel: RegistrationViewModel) {
         Spacer(modifier = Modifier.height(50.dp))
         SingInText()
         Spacer(modifier = Modifier.height(20.dp))
-        RegistrationButton(focusManager, viewModel)
+        RegistrationButton(focusManager, viewModel, navController)
         Spacer(modifier = Modifier.height(16.dp))
     }
 }
@@ -82,7 +88,8 @@ fun SingUpScreen(viewModel: RegistrationViewModel) {
 @Composable
 private fun RegistrationButton(
     focusManager: FocusManager,
-    viewModel: RegistrationViewModel
+    viewModel: RegistrationViewModel,
+    navController: NavController
 ){
     TextButton(
         modifier = Modifier
@@ -91,6 +98,7 @@ private fun RegistrationButton(
         onClick = {
             focusManager.clearFocus()
             viewModel.inputDataEvent(SingUpFormEvent.Submit)
+            navController.navigate(RegistrationNavigationRoute.ConformPhoneScreen.route)
         },
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
