@@ -1,0 +1,35 @@
+[versions]
+activityComposeVersion = "1.7.2"
+androidApplicationPluginVersion = "8.1.0"
+composeBomVersion = "2023.06.01"
+coreKtxVersion = "1.10.1"
+coreSplashscreenVersion = "1.0.1"
+hiltVersion = "2.47"
+kotlinAndroidPluginVersion = "1.8.10"
+kotlinBomVersion = "1.9.0"
+lifecycleRuntimeKtxVersion = "2.6.1"
+materialVersion = "1.4.3"
+navigationComposeVersion = "2.6.0"
+retrofitVersion = "2.9.0"
+
+[libraries]
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBomVersion" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+compose-ui = { group = "androidx.compose.ui", name = "ui" }
+compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
+core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreenVersion" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltVersion" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltVersion" }
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlinBomVersion" }
+lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
+material = { module = "androidx.compose.material:material", version.ref = "materialVersion" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationComposeVersion" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidApplicationPluginVersion" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAndroidPluginVersion" }
