@@ -11,6 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -31,6 +35,12 @@ fun RegistrationScreens(
     val systemUiController = rememberSystemUiController()
     val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
 
+    //painted system upp & bottom panels
+    SideEffect {
+        systemUiController.setStatusBarColor(color = barBackground)
+        systemUiController.setNavigationBarColor(color = barBackground)
+    }
+
     val context = LocalContext.current
     LaunchedEffect(context){
         viewModel.validationEvents.collect{event->
@@ -46,10 +56,20 @@ fun RegistrationScreens(
         }
     }
 
-    //painted system upp & bottom panels
-    SideEffect {
-        systemUiController.setStatusBarColor(color = barBackground)
-        systemUiController.setNavigationBarColor(color = barBackground)
+    //Text variables
+    var titleText by remember { mutableStateOf("Регистрация") }
+    var pageNumber by remember { mutableStateOf(1) }
+
+    when(viewModel.currentRegistrationPage){
+        is RegistrationNavigationRoute.SingUpScreen->{
+            titleText = "Регистрация"
+            pageNumber = 1
+        }
+
+        is RegistrationNavigationRoute.ConformPhoneScreen ->{
+            titleText = "Код из СМС"
+            pageNumber = 2
+        }
     }
 
     Surface(
@@ -63,13 +83,13 @@ fun RegistrationScreens(
         ) {
             Spacer(modifier = Modifier.height(30.dp))
             Text(
-                text = "Регистрация",
+                text = titleText,
                 style = PnExpertTheme.typography.subtitle.bold_20,
                 color = PnExpertTheme.colors.textColors.FontDarkColor
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "1/6",
+                text = "$pageNumber/6",
                 style = PnExpertTheme.typography.subtitle.bold_20,
                 color = PnExpertTheme.colors.textColors.FontDarkColor
             )

@@ -25,8 +25,9 @@ class RegistrationViewModel(
     private var _pagesNavController: NavController? = null
     val pagesNavController get() = _pagesNavController
 
-    private var _currentRegistrationPage: RegistrationNavigationRoute =
+    private var _currentRegistrationPage by mutableStateOf<RegistrationNavigationRoute>(
         RegistrationNavigationRoute.SingUpScreen
+    )
     val currentRegistrationPage get() = _currentRegistrationPage
 
 
