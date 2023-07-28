@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import ru.fefu.pnexpert.presentation.Initialization.registration.sing_up.SingUpFormEvent
@@ -17,12 +18,24 @@ class RegistrationViewModel(
     private val validatePassword: ValidatePassword = ValidatePassword(),
     private val validateRepeatPassword: ValidateRepeatPassword = ValidateRepeatPassword()
 ):ViewModel() {
+    //registration pages variables
+    private var _pagesNavController: NavController? = null
+    val pagesNavController get() = _pagesNavController
+
     var inputDataState by mutableStateOf(SingUpFormState())
     var errorData by mutableStateOf("")
 
     //a thread for sending notifications to the UI thread
     private val validationEventChannel = Channel<ValidationEvent>()
     val validationEvents = validationEventChannel.receiveAsFlow()
+
+    //init pages nav controller
+    fun initPagesNavController(navController: NavController){
+        if (_pagesNavController == null)
+            _pagesNavController = navController
+        else
+            throw Exception("It is forbidden to redefine pages Nav Controller after initialization")
+    }
 
     //listener ui input events
     fun inputDataEvent(event: SingUpFormEvent){
