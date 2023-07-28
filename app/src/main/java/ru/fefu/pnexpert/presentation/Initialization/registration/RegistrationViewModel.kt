@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
+import ru.fefu.pnexpert.presentation.Initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.Initialization.registration.sing_up.SingUpFormEvent
 import ru.fefu.pnexpert.utils.validation.models.SingUpFormState
 import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidatePassword
@@ -22,6 +23,12 @@ class RegistrationViewModel(
     private var _pagesNavController: NavController? = null
     val pagesNavController get() = _pagesNavController
 
+    private var _currentRegistrationPage: RegistrationNavigationRoute =
+        RegistrationNavigationRoute.SingUpScreen
+    val currentRegistrationPage get() = _currentRegistrationPage
+
+
+    //input data variables
     var inputDataState by mutableStateOf(SingUpFormState())
     var errorData by mutableStateOf("")
 
@@ -35,6 +42,10 @@ class RegistrationViewModel(
             _pagesNavController = navController
         else
             throw Exception("It is forbidden to redefine pages Nav Controller after initialization")
+    }
+
+    fun changeRegistrationPage(currentPage: RegistrationNavigationRoute){
+        _currentRegistrationPage = currentPage
     }
 
     //listener ui input events
