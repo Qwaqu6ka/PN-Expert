@@ -26,6 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
@@ -157,7 +159,8 @@ private fun MessageTimer(
 @Composable
 private fun InputCodeFields() {
     val fieldBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
-    var fieldsValue =mutableListOf<MutableState<String>>()
+    val fieldsValue = mutableListOf<MutableState<String>>()
+    val fieldsFocus = mutableListOf<MutableState<FocusRequester>>()
 
     Row(
         modifier = Modifier
@@ -166,10 +169,13 @@ private fun InputCodeFields() {
     ) {
         for (i in 0..3){
             fieldsValue.add(remember { mutableStateOf("") })
+            fieldsFocus.add(remember { mutableStateOf(FocusRequester())})
+
 
             OutlinedTextField(
                 modifier = Modifier
                     .size(64.dp, 90.dp)
+                    .focusRequester(fieldsFocus[i].value)
                     .border(
                         1.dp,
                         PnExpertTheme.colors.mainAppColors.AppGreyDarkColor,
@@ -178,7 +184,14 @@ private fun InputCodeFields() {
                 shape = PnExpertTheme.shapes.mainShapes.appDefault10,
                 value = fieldsValue[i].value,
                 onValueChange = {
-                    if (fieldsValue[i].value.isEmpty() || it.isEmpty()) fieldsValue[i].value = it
+                    if (fieldsValue[i].value.isEmpty()) {
+                        fieldsValue[i].value = it
+                        if (i != fieldsFocus.size-1)
+                            fieldsFocus[i+1].value.requestFocus()
+                    }
+                    if(it.isEmpty()){
+                        fieldsValue[i].value = it
+                    }
                 },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number
@@ -208,3 +221,5 @@ private fun InputCodeFields() {
         textAlign = TextAlign.Center
     )
 }
+
+
