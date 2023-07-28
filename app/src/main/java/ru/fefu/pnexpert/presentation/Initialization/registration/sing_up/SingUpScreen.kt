@@ -55,17 +55,19 @@ import ru.fefu.pnexpert.presentation.Initialization.registration.navigation.Regi
 import ru.fefu.pnexpert.presentation.Initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
+private val CURRENT_PAGE = RegistrationNavigationRoute.SingUpScreen
+
 @SuppressLint("RememberReturnType")
 @Composable
 fun SingUpScreen(
-    viewModel: RegistrationViewModel,
-    navController: NavController
+    viewModel: RegistrationViewModel
 ) {
+    viewModel.changeRegistrationPage(CURRENT_PAGE)
+
     // Creating a values and variables to remember
     // focus requester, manager and state
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
-
 
     Column(
         modifier = Modifier
@@ -78,7 +80,7 @@ fun SingUpScreen(
         Spacer(modifier = Modifier.height(50.dp))
         SingInText()
         Spacer(modifier = Modifier.height(20.dp))
-        RegistrationButton(focusManager, viewModel, navController)
+        RegistrationButton(focusManager, viewModel)
         Spacer(modifier = Modifier.height(16.dp))
     }
 }
@@ -88,7 +90,6 @@ fun SingUpScreen(
 private fun RegistrationButton(
     focusManager: FocusManager,
     viewModel: RegistrationViewModel,
-    navController: NavController
 ){
     TextButton(
         modifier = Modifier
@@ -97,7 +98,6 @@ private fun RegistrationButton(
         onClick = {
             focusManager.clearFocus()
             viewModel.inputDataEvent(SingUpFormEvent.Submit)
-            navController.navigate(RegistrationNavigationRoute.ConformPhoneScreen.route)
         },
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(

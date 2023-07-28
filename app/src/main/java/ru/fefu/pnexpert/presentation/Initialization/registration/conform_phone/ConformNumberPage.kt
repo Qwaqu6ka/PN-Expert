@@ -25,10 +25,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ru.fefu.pnexpert.presentation.Initialization.registration.RegistrationViewModel
+import ru.fefu.pnexpert.presentation.Initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
+private val CURRENT_PAGE = RegistrationNavigationRoute.ConformPhoneScreen
+
 @Composable
-fun ConformNumberPage() {
+fun ConformNumberPage(viewModel: RegistrationViewModel) {
+
+    viewModel.changeRegistrationPage(CURRENT_PAGE)
+
     Column(
         modifier = Modifier
         .padding(horizontal = 16.dp),
