@@ -1,12 +1,12 @@
-package ru.fefu.pnexpert.presentation.Initialization
+package ru.fefu.pnexpert.presentation.initialization
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import ru.fefu.pnexpert.presentation.Initialization.greeting.GreetingScreen
-import ru.fefu.pnexpert.presentation.Initialization.navigation.InitializationNavigationRoute
-import ru.fefu.pnexpert.presentation.Initialization.registration.RegistrationScreens
+import ru.fefu.pnexpert.presentation.initialization.greeting.GreetingScreen
+import ru.fefu.pnexpert.presentation.initialization.navigation.InitializationNavigationRoute
+import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationScreens
 
 @Composable
 fun InitializationScreens() {

@@ -17,7 +17,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.fefu.pnexpert.presentation.Initialization.InitializationScreens
+import ru.fefu.pnexpert.presentation.initialization.InitializationScreens
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 

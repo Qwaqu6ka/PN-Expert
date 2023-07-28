@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.registration.sing_up
+package ru.fefu.pnexpert.presentation.initialization.registration.sing_up
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -49,10 +49,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import ru.fefu.pnexpert.R
-import ru.fefu.pnexpert.presentation.Initialization.registration.navigation.RegistrationNavigationRoute
-import ru.fefu.pnexpert.presentation.Initialization.registration.RegistrationViewModel
+import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
+import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 private val CURRENT_PAGE = RegistrationNavigationRoute.SingUpScreen

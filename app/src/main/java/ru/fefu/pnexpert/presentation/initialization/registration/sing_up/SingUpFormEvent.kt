@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.registration.sing_up
+package ru.fefu.pnexpert.presentation.initialization.registration.sing_up
 
 sealed class SingUpFormEvent{
     data class PhoneNumberChanged(val phoneNumber:String):SingUpFormEvent()

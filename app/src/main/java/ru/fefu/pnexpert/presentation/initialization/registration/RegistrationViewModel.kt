@@ -1,14 +1,16 @@
-package ru.fefu.pnexpert.presentation.Initialization.registration
+package ru.fefu.pnexpert.presentation.initialization.registration
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
-import ru.fefu.pnexpert.presentation.Initialization.registration.navigation.RegistrationNavigationRoute
-import ru.fefu.pnexpert.presentation.Initialization.registration.sing_up.SingUpFormEvent
+import kotlinx.coroutines.launch
+import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
+import ru.fefu.pnexpert.presentation.initialization.registration.sing_up.SingUpFormEvent
 import ru.fefu.pnexpert.utils.validation.models.SingUpFormState
 import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidatePassword
 import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidatePhoneNumber
@@ -38,10 +40,7 @@ class RegistrationViewModel(
 
     //init pages nav controller
     fun initPagesNavController(navController: NavController){
-        if (_pagesNavController == null)
-            _pagesNavController = navController
-        else
-            throw Exception("It is forbidden to redefine pages Nav Controller after initialization")
+        _pagesNavController = navController
     }
 
     fun changeRegistrationPage(currentPage: RegistrationNavigationRoute){
@@ -96,7 +95,9 @@ class RegistrationViewModel(
             repeatPasswordError = null
         )
 
-//        singInData(inputDataState.email, inputDataState.password)
+        viewModelScope.launch {
+            validationEventChannel.send(ValidationEvent.Success)
+        }
     }
 
 

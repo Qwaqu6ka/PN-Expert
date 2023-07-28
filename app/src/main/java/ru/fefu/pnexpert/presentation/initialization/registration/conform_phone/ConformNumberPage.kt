@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.registration.conform_phone
+package ru.fefu.pnexpert.presentation.initialization.registration.conform_phone
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -25,8 +25,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.fefu.pnexpert.presentation.Initialization.registration.RegistrationViewModel
-import ru.fefu.pnexpert.presentation.Initialization.registration.navigation.RegistrationNavigationRoute
+import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
+import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 private val CURRENT_PAGE = RegistrationNavigationRoute.ConformPhoneScreen

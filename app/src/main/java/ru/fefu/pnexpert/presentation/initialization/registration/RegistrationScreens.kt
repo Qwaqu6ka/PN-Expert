@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.registration
+package ru.fefu.pnexpert.presentation.initialization.registration
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,14 +9,17 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import ru.fefu.pnexpert.presentation.Initialization.registration.navigation.RegistrationNavigation
+import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigation
+import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable
@@ -27,6 +30,21 @@ fun RegistrationScreens(
     //painted system controllers
     val systemUiController = rememberSystemUiController()
     val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+
+    val context = LocalContext.current
+    LaunchedEffect(context){
+        viewModel.validationEvents.collect{event->
+            when(event){
+                is RegistrationViewModel.ValidationEvent.Success -> {
+                    viewModel.pagesNavController!!.navigate(RegistrationNavigationRoute.ConformPhoneScreen.route)
+                }
+
+                is RegistrationViewModel.ValidationEvent.Error ->{
+
+                }
+            }
+        }
+    }
 
     //painted system upp & bottom panels
     SideEffect {

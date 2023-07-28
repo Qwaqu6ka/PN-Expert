@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.navigation
+package ru.fefu.pnexpert.presentation.initialization.navigation
 
 sealed class InitializationNavigationRoute(val route:String) {
     object GreetingScreen: InitializationNavigationRoute("greetingScreen")
