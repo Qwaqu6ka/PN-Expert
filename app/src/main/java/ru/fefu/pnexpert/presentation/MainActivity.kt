@@ -3,10 +3,9 @@ package ru.fefu.pnexpert.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -15,8 +14,10 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import ru.fefu.pnexpert.presentation.initialization.InitializationScreens
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 
@@ -40,23 +41,21 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             PnExpertTheme() {
-                // A surface container using the 'background' color from the theme
+
+                //painted system controllers
+                val systemUiController = rememberSystemUiController()
+                val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+
+                //painted system upp & bottom panels
+                SideEffect {
+                    systemUiController.setStatusBarColor(color = barBackground)
+                    systemUiController.setNavigationBarColor(color = barBackground)
+                }
 
                 Surface(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    color = PnExpertTheme.colors.mainAppColors.AppBlueColor
+                    modifier = Modifier.fillMaxSize(),
                 ) {
-                    Column() {
-                        Text(
-                            text = "Дарова",
-                            style = PnExpertTheme.typography.title.medium_32
-                        )
-                        Text(
-                            text = "Дарова",
-                            style = PnExpertTheme.typography.title.bold_32
-                        )
-                    }
+                    InitializationScreens()
                 }
             }
         }
