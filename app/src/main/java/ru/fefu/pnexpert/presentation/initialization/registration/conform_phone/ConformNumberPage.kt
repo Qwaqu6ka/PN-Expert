@@ -1,5 +1,6 @@
 package ru.fefu.pnexpert.presentation.initialization.registration.conform_phone
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,8 +27,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.OffsetMapping
+import androidx.compose.ui.text.input.TransformedText
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,6 +40,7 @@ import kotlinx.coroutines.delay
 import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+import java.util.EnumSet.range
 
 private val CURRENT_PAGE = RegistrationNavigationRoute.ConformPhoneScreen
 
@@ -146,127 +152,52 @@ private fun MessageTimer(
     )
 }
 
+@SuppressLint("MutableCollectionMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun InputCodeFields() {
     val fieldBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+    var fieldsValue =mutableListOf<MutableState<String>>()
 
     Row(
         modifier = Modifier
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        OutlinedTextField(
-            modifier = Modifier
-                .size(64.dp, 90.dp)
-                .border(
-                    1.dp,
-                    PnExpertTheme.colors.mainAppColors.AppGreyDarkColor,
-                    PnExpertTheme.shapes.buttonShapes.buttonClassic10
-                ),
-            shape = PnExpertTheme.shapes.mainShapes.appDefault10,
-            value = "",
-            onValueChange = {},
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            ),
-            singleLine = true,
-            textStyle = TextStyle(
-                color = PnExpertTheme.colors.textColors.FontGreyColor,
-                fontSize = 40.sp,
-                textAlign = TextAlign.Center
-            ),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
-                unfocusedBorderColor = Color.Transparent,
-                containerColor = fieldBackground
-            )
-        )
+        for (i in 0..3){
+            fieldsValue.add(remember { mutableStateOf("") })
 
-        OutlinedTextField(
-            modifier = Modifier
-                .size(64.dp, 90.dp)
-                .border(
-                    1.dp,
-                    PnExpertTheme.colors.mainAppColors.AppGreyDarkColor,
-                    PnExpertTheme.shapes.buttonShapes.buttonClassic10
+            OutlinedTextField(
+                modifier = Modifier
+                    .size(64.dp, 90.dp)
+                    .border(
+                        1.dp,
+                        PnExpertTheme.colors.mainAppColors.AppGreyDarkColor,
+                        PnExpertTheme.shapes.buttonShapes.buttonClassic10
+                    ),
+                shape = PnExpertTheme.shapes.mainShapes.appDefault10,
+                value = fieldsValue[i].value,
+                onValueChange = {
+                    if (fieldsValue[i].value.isEmpty() || it.isEmpty()) fieldsValue[i].value = it
+                },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number
                 ),
-            shape = PnExpertTheme.shapes.mainShapes.appDefault10,
-            value = "",
-            onValueChange = {},
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            ),
-            singleLine = true,
-            textStyle = TextStyle(
-                color = PnExpertTheme.colors.textColors.FontGreyColor,
-                fontSize = 40.sp,
-                textAlign = TextAlign.Center
-            ),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
-                unfocusedBorderColor = Color.Transparent,
-                containerColor = fieldBackground
-            )
-        )
-
-        OutlinedTextField(
-            modifier = Modifier
-                .size(64.dp, 90.dp)
-                .border(
-                    1.dp,
-                    PnExpertTheme.colors.mainAppColors.AppGreyDarkColor,
-                    PnExpertTheme.shapes.buttonShapes.buttonClassic10
+                singleLine = true,
+                textStyle = TextStyle(
+                    color = PnExpertTheme.colors.textColors.FontGreyColor,
+                    fontSize = 40.sp,
+                    textAlign = TextAlign.Center
                 ),
-            shape = PnExpertTheme.shapes.mainShapes.appDefault10,
-            value = "",
-            onValueChange = {},
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            ),
-            singleLine = true,
-            textStyle = TextStyle(
-                color = PnExpertTheme.colors.textColors.FontGreyColor,
-                fontSize = 40.sp,
-                textAlign = TextAlign.Center
-            ),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
-                unfocusedBorderColor = Color.Transparent,
-                containerColor = fieldBackground
-            )
-        )
-
-        OutlinedTextField(
-            modifier = Modifier
-                .size(64.dp, 90.dp)
-                .border(
-                    1.dp,
-                    PnExpertTheme.colors.mainAppColors.AppGreyDarkColor,
-                    PnExpertTheme.shapes.buttonShapes.buttonClassic10
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
+                    textColor = PnExpertTheme.colors.textColors.FontDarkColor,
+                    unfocusedBorderColor = Color.Transparent,
+                    containerColor = fieldBackground
                 ),
-            shape = PnExpertTheme.shapes.mainShapes.appDefault10,
-            value = "",
-            onValueChange = {},
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            ),
-            singleLine = true,
-            textStyle = TextStyle(
-                color = PnExpertTheme.colors.textColors.FontGreyColor,
-                fontSize = 40.sp,
-                textAlign = TextAlign.Center
-            ),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
-                unfocusedBorderColor = Color.Transparent,
-                containerColor = fieldBackground
+                maxLines = 1,
             )
-        )
+        }
     }
     Spacer(modifier = Modifier.height(24.dp))
     Text(
