@@ -1,10 +1,7 @@
 package ru.fefu.pnexpert.presentation.initialization.registration.conform_phone
 
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -22,37 +18,23 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PaintingStyle.Companion.Stroke
-import androidx.compose.ui.graphics.PointMode
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
-import java.lang.Math.PI
-import java.lang.Math.cos
-import java.lang.Math.sin
-import kotlin.math.cos
-import kotlin.math.sin
 
 private val CURRENT_PAGE = RegistrationNavigationRoute.ConformPhoneScreen
 
@@ -60,6 +42,10 @@ private val CURRENT_PAGE = RegistrationNavigationRoute.ConformPhoneScreen
 fun ConformNumberPage(viewModel: RegistrationViewModel) {
 
     viewModel.changeRegistrationPage(CURRENT_PAGE)
+
+    val timerValue = remember {
+        mutableStateOf(100L * 310L)
+    }
 
     Column(
         modifier = Modifier
@@ -69,21 +55,22 @@ fun ConformNumberPage(viewModel: RegistrationViewModel) {
         Spacer(modifier = Modifier.height(30.dp))
         InputCodeFields()
         Spacer(modifier = Modifier.height(80.dp))
-        MessageTimer(totalTime = 100L * 310L,)
+        MessageTimer(totalTime = timerValue,)
         Spacer(modifier = Modifier.height(80.dp))
-        TextRepeatCode()
+        TextRepeatCode(timerValue)
         Spacer(modifier = Modifier.height(50.dp))
         ConformButton()
     }
 }
 
 @Composable
-fun ConformButton() {
+fun ConformButton(){
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
-        onClick = {},
+        onClick = {
+        },
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
             containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
@@ -98,7 +85,14 @@ fun ConformButton() {
 }
 
 @Composable
-fun TextRepeatCode() {
+fun TextRepeatCode(totalTime: MutableState<Long>) {
+
+    var enabledButton by remember {
+        mutableStateOf(false)
+    }
+
+    enabledButton = totalTime.value == 0L
+
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -109,12 +103,21 @@ fun TextRepeatCode() {
             style = PnExpertTheme.typography.text.regular_16,
             color = PnExpertTheme.colors.textColors.FontGreyColor
         )
-        TextButton(onClick = {}) {
+        TextButton(
+            enabled = enabledButton,
+            onClick = {
+                totalTime.value = 100L * 300L
+            },
+        ) {
             Text(
                 text = "Отправить код повторно",
                 textAlign = TextAlign.Center,
                 style = PnExpertTheme.typography.text.regular_16,
-                color = PnExpertTheme.colors.textColors.FontBlueColor
+                color = if(enabledButton)
+                            PnExpertTheme.colors.textColors.FontBlueColor
+                        else
+                            PnExpertTheme.colors.textColors.FontGreyColor
+
             )
         }
     }
@@ -122,34 +125,21 @@ fun TextRepeatCode() {
 
 @Composable
 private fun MessageTimer(
-    totalTime: Long,
-    initialValue: Float = 1f,
+    totalTime: MutableState<Long>,
 ) {
-    var size by remember {
-        mutableStateOf(IntSize.Zero)
-    }
-    var value by remember {
-        mutableStateOf(initialValue)
-    }
-    var currentTime by remember {
-        mutableStateOf(totalTime)
-    }
-    var isTimerRunning by remember {
-        mutableStateOf(true)
-    }
-    LaunchedEffect(key1 = currentTime, key2 = isTimerRunning) {
-        if(currentTime > 0 && isTimerRunning) {
+
+    LaunchedEffect(key1 = totalTime.value) {
+        if(totalTime.value > 0) {
             delay(100L)
-            currentTime -= 100L
-            value = currentTime / totalTime.toFloat()
+            totalTime.value -= 100L
         }
     }
     Text(
         modifier = Modifier.fillMaxWidth(),
-        text = if ((currentTime / 1000L) >= 10)
-                    "00:${currentTime / 1000L}"
+        text = if ((totalTime.value / 1000L) >= 10)
+                    "00:${totalTime.value / 1000L}"
                else
-                    "00:0${currentTime / 1000L}",
+                    "00:0${totalTime.value / 1000L}",
         textAlign = TextAlign.Center,
         style = PnExpertTheme.typography.title.medium_32,
         color = PnExpertTheme.colors.mainAppColors.AppPinkDarkColor
