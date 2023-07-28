@@ -4,10 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import ru.fefu.pnexpert.presentation.Initialization.Greeting.GreetingScreen
-import ru.fefu.pnexpert.presentation.Initialization.Navigation.InitializationNavigationRoute
-import ru.fefu.pnexpert.presentation.Initialization.Registration.RegistrationScreens
-import ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp.SingUpScreen
+import ru.fefu.pnexpert.presentation.Initialization.greeting.GreetingScreen
+import ru.fefu.pnexpert.presentation.Initialization.navigation.InitializationNavigationRoute
+import ru.fefu.pnexpert.presentation.Initialization.registration.RegistrationScreens
 
 @Composable
 fun InitializationScreens() {

@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.Greeting
+package ru.fefu.pnexpert.presentation.Initialization.greeting
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import ru.fefu.pnexpert.presentation.Initialization.Navigation.InitializationNavigationRoute
+import ru.fefu.pnexpert.presentation.Initialization.navigation.InitializationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable

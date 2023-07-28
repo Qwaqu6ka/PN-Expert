@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.Registration
+package ru.fefu.pnexpert.presentation.Initialization.registration
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
-import ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp.SingUpFormEvent
+import ru.fefu.pnexpert.presentation.Initialization.registration.sing_up.SingUpFormEvent
 import ru.fefu.pnexpert.utils.validation.models.SingUpFormState
 import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidatePassword
 import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidatePhoneNumber

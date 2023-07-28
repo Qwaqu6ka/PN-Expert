@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.Registration.Navigation
+package ru.fefu.pnexpert.presentation.Initialization.registration.navigation
 
 
 sealed class RegistrationNavigationRoute(val route:String) {

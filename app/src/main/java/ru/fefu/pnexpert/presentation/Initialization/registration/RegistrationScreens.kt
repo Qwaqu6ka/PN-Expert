@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.Registration
+package ru.fefu.pnexpert.presentation.Initialization.registration
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import ru.fefu.pnexpert.presentation.Initialization.Registration.Navigation.RegistrationNavigation
+import ru.fefu.pnexpert.presentation.Initialization.registration.navigation.RegistrationNavigation
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable

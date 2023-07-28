@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp
+package ru.fefu.pnexpert.presentation.Initialization.registration.sing_up
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -51,9 +51,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import ru.fefu.pnexpert.R
-import ru.fefu.pnexpert.presentation.Initialization.Registration.Navigation.RegistrationNavigation
-import ru.fefu.pnexpert.presentation.Initialization.Registration.Navigation.RegistrationNavigationRoute
-import ru.fefu.pnexpert.presentation.Initialization.Registration.RegistrationViewModel
+import ru.fefu.pnexpert.presentation.Initialization.registration.navigation.RegistrationNavigationRoute
+import ru.fefu.pnexpert.presentation.Initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @SuppressLint("RememberReturnType")

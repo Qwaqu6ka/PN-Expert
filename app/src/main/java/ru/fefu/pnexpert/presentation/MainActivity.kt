@@ -18,8 +18,6 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.fefu.pnexpert.presentation.Initialization.InitializationScreens
-import ru.fefu.pnexpert.presentation.Initialization.Registration.RegistrationScreens
-import ru.fefu.pnexpert.presentation.Initialization.Registration.SingUp.SingUpScreen
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 

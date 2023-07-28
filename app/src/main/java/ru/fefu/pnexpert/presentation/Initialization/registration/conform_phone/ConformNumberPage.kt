@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.Initialization.Registration.ConformPhone
+package ru.fefu.pnexpert.presentation.Initialization.registration.conform_phone
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
