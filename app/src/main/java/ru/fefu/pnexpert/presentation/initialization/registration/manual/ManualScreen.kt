@@ -2,6 +2,7 @@ package ru.fefu.pnexpert.presentation.initialization.registration.manual
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -15,6 +16,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -22,27 +24,40 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.HorizontalPagerIndicator
+import com.google.accompanist.pager.PagerState
+import com.google.accompanist.pager.rememberPagerState
 import ru.fefu.pnexpert.R
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ManualScreen(){
+
+    val pagerState = rememberPagerState()
+
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
-        ManualCard()
+        ManualCardHolder(pagerState)
         Spacer(modifier = Modifier.height(100.dp))
         NextButton()
     }
 }
 
 @Composable
-fun NextButton() {
+private fun NextButton() {
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55)
-            .border(1.dp, PnExpertTheme.colors.textColors.FontBlueColor, PnExpertTheme.shapes.buttonShapes.buttonClassic10 )
+            .border(
+                1.dp,
+                PnExpertTheme.colors.textColors.FontBlueColor,
+                PnExpertTheme.shapes.buttonShapes.buttonClassic10
+            )
         ,
         onClick = {
 
@@ -58,6 +73,28 @@ fun NextButton() {
             style = PnExpertTheme.typography.subtitle.medium_18,
             color = PnExpertTheme.colors.textColors.FontBlueColor
         )
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+private fun ManualCardHolder(
+    pagerState: PagerState
+){
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        HorizontalPager(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(380.dp),
+            count = 4,
+            state = pagerState
+        ) {id->
+            ManualCard()
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        HorizontalPagerIndicator(pagerState = pagerState)
     }
 }
 
