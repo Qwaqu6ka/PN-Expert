@@ -6,4 +6,5 @@ sealed class RegistrationNavigationRoute(val route:String) {
     object ConformPhoneScreen: RegistrationNavigationRoute("conformPhoneScreen")
     object SelectRoleScreen: RegistrationNavigationRoute("selectRoleScreen")
     object UsersAgreementScreen: RegistrationNavigationRoute("usersAgreementScreen")
+    object ManualScreen: RegistrationNavigationRoute("manualScreen")
 }

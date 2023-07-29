@@ -30,11 +30,19 @@ import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
 import ru.fefu.pnexpert.R
+import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
+import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+
+private val CURRENT_PAGE = RegistrationNavigationRoute.ManualScreen
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun ManualScreen(){
+fun ManualScreen(
+    viewModel: RegistrationViewModel
+){
+
+    viewModel.changeRegistrationPage(CURRENT_PAGE)
 
     val pagerState = rememberPagerState()
 
@@ -106,6 +114,7 @@ private fun ManualCard() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(horizontal = 8.dp)
             .shadow(fieldShadow, PnExpertTheme.shapes.imageShapes.imageClassic15),
         shape = PnExpertTheme.shapes.mainShapes.appDefault10,
         colors = CardDefaults.cardColors(

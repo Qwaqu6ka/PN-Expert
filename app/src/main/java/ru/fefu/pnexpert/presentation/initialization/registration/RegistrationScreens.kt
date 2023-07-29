@@ -81,6 +81,11 @@ fun RegistrationScreens(
             titleText = "Поользовательское соглашение"
             pageNumber = 4
         }
+
+        is RegistrationNavigationRoute.ManualScreen ->{
+            titleText = "Инструкция"
+            pageNumber = 5
+        }
     }
 
     Surface(

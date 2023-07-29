@@ -51,12 +51,13 @@ fun UsersAgreementScreen(viewModel: RegistrationViewModel) {
         Spacer(modifier = Modifier.height(14.dp))
         UserTerms(acceptedTerms)
         Spacer(modifier = Modifier.height(120.dp))
-        NextButton(acceptedTerms)
+        NextButton(viewModel, acceptedTerms)
     }
 }
 
 @Composable
 private fun NextButton(
+    viewModel: RegistrationViewModel,
     acceptedTerms:MutableState<Boolean>
 ) {
 
@@ -67,7 +68,7 @@ private fun NextButton(
         enabled = acceptedTerms.value,
         onClick = {
             if (acceptedTerms.value){
-
+                viewModel.pagesNavController!!.navigate(RegistrationNavigationRoute.ManualScreen.route)
             }
         },
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,

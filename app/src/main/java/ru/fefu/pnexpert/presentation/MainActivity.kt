@@ -57,8 +57,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-//                    InitializationScreens()
-                    ManualScreen()
+                    InitializationScreens()
                 }
             }
         }
