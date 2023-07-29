@@ -76,6 +76,11 @@ fun RegistrationScreens(
             titleText = "Выберите роль"
             pageNumber = 3
         }
+
+        is RegistrationNavigationRoute.UsersAgreementScreen ->{
+            titleText = "Поользовательское соглашение"
+            pageNumber = 4
+        }
     }
 
     Surface(

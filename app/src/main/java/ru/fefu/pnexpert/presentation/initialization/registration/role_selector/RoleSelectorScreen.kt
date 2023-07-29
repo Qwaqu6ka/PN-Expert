@@ -1,5 +1,6 @@
 package ru.fefu.pnexpert.presentation.initialization.registration.role_selector
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -38,6 +39,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import ru.fefu.pnexpert.R
@@ -59,6 +61,8 @@ fun RoleSelectorScreen(
 
     viewModel.changeRegistrationPage(CURRENT_PAGE)
 
+    val selectedRole = remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -66,21 +70,30 @@ fun RoleSelectorScreen(
     ) {
         RoleImage()
         Spacer(modifier = Modifier.height(24.dp))
-        RoleSelectors()
-        Spacer(modifier = Modifier.height(70.dp))
-        NextButton()
+        RoleSelectors(selectedRole)
+        Spacer(modifier = Modifier.height(50.dp))
+        NextButton(viewModel, selectedRole)
     }
 }
 
 @Composable
-private fun NextButton() {
+private fun NextButton(
+    viewModel: RegistrationViewModel,
+    selectedRole: MutableState<String>
+) {
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
-        onClick = {},
+        onClick = {
+              if (selectedRole.value.isNotEmpty()){
+                       viewModel.pagesNavController!!.navigate(RegistrationNavigationRoute.UsersAgreementScreen.route)
+              }
+        },
+        enabled = selectedRole.value.isNotEmpty(),
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
+            disabledContainerColor = PnExpertTheme.colors.buttonColors.ButtonInactiveColor,
             containerColor = PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor
         )
     ) {
@@ -190,7 +203,9 @@ private fun RoleCard(
 
 
 @Composable
-private fun RoleSelectors() {
+private fun RoleSelectors(
+    selectedRole: MutableState<String>
+) {
 
     val roles = listOf(
         Role("Пациент", "Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут"),
@@ -198,8 +213,6 @@ private fun RoleSelectors() {
         Role("Специалист", "Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут"),
         Role("Администратор / Менеджер", "Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут")
     )
-
-    val selectedRole = remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxWidth()

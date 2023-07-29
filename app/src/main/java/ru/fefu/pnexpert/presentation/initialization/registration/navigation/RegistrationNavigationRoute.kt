@@ -5,4 +5,5 @@ sealed class RegistrationNavigationRoute(val route:String) {
     object SingUpScreen: RegistrationNavigationRoute("singUpScreen")
     object ConformPhoneScreen: RegistrationNavigationRoute("conformPhoneScreen")
     object SelectRoleScreen: RegistrationNavigationRoute("selectRoleScreen")
+    object UsersAgreementScreen: RegistrationNavigationRoute("usersAgreementScreen")
 }

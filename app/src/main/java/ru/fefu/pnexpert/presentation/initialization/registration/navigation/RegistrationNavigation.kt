@@ -8,6 +8,7 @@ import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationVie
 import ru.fefu.pnexpert.presentation.initialization.registration.conform_phone.ConformNumberPage
 import ru.fefu.pnexpert.presentation.initialization.registration.role_selector.RoleSelectorScreen
 import ru.fefu.pnexpert.presentation.initialization.registration.sing_up.SingUpScreen
+import ru.fefu.pnexpert.presentation.initialization.registration.users_greement.UsersAgreementScreen
 
 @Composable
 fun RegistrationNavigation(viewModel: RegistrationViewModel) {
@@ -22,6 +23,9 @@ fun RegistrationNavigation(viewModel: RegistrationViewModel) {
         }
         composable(RegistrationNavigationRoute.SelectRoleScreen.route){
             RoleSelectorScreen(viewModel)
+        }
+        composable(RegistrationNavigationRoute.UsersAgreementScreen.route){
+            UsersAgreementScreen(viewModel)
         }
     }
 }

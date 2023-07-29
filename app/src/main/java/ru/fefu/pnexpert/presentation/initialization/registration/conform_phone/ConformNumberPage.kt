@@ -72,9 +72,6 @@ fun ConformButton(
     viewModel:RegistrationViewModel,
     fieldsIsFool: MutableState<Boolean>,
 ){
-
-    val context = LocalContext.current
-
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
@@ -83,16 +80,11 @@ fun ConformButton(
             if (fieldsIsFool.value){
                 viewModel.pagesNavController!!.navigate(RegistrationNavigationRoute.SelectRoleScreen.route)
             }
-            else{
-                Toast.makeText(
-                    context,
-                    "Введите код из смс",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
         },
+        enabled = fieldsIsFool.value,
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
+            disabledContainerColor = PnExpertTheme.colors.buttonColors.ButtonInactiveColor,
             containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
         )
     ) {

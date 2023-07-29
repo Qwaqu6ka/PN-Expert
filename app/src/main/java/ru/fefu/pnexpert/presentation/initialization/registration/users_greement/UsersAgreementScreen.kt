@@ -1,7 +1,7 @@
 package ru.fefu.pnexpert.presentation.initialization.registration.users_greement
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -22,22 +21,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import ru.fefu.pnexpert.R
+import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
+import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
+private val CURRENT_PAGE = RegistrationNavigationRoute.UsersAgreementScreen
+
 @Composable
-fun UsersAgreement() {
+fun UsersAgreementScreen(viewModel: RegistrationViewModel) {
 
     val acceptedTerms = remember { mutableStateOf(false) }
+
+    viewModel.changeRegistrationPage(CURRENT_PAGE)
 
     Column(
         modifier = Modifier
@@ -57,12 +61,17 @@ fun UsersAgreement() {
 private fun NextButton(
     acceptedTerms:MutableState<Boolean>
 ) {
+
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
         enabled = acceptedTerms.value,
-        onClick = {},
+        onClick = {
+            if (acceptedTerms.value){
+
+            }
+        },
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
             disabledContainerColor = PnExpertTheme.colors.buttonColors.ButtonInactiveColor,
