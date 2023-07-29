@@ -1,26 +1,33 @@
 package ru.fefu.pnexpert.presentation.initialization.registration.role_selector
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -38,6 +45,28 @@ fun RoleSelectorPage() {
         RoleImage()
         Spacer(modifier = Modifier.height(24.dp))
         RoleSelectors()
+        Spacer(modifier = Modifier.height(70.dp))
+        NextButton()
+    }
+}
+
+@Composable
+private fun NextButton() {
+    TextButton(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
+        onClick = {},
+        shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
+        colors = ButtonDefaults.textButtonColors(
+            containerColor = PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor
+        )
+    ) {
+        Text(
+            text = "Подтвердить",
+            style = PnExpertTheme.typography.subtitle.medium_18,
+            color = PnExpertTheme.colors.textColors.FontWhiteColor
+        )
     }
 }
 
@@ -56,6 +85,7 @@ private fun RoleCard() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(PnExpertTheme.sizes.buttonSize.buttonClassic55)
                 .padding(horizontal = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
