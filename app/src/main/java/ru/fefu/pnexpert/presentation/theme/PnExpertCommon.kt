@@ -106,6 +106,7 @@ class PnExpertSizes{
 class PnExpertShapes{
     lateinit var buttonShapes: ButtonShapes
     lateinit var mainShapes: MainShapes
+    lateinit var imageShapes: ImageShapes
 
     data class MainShapes(
         val appDefault10:Shape
@@ -113,6 +114,10 @@ class PnExpertShapes{
 
     data class ButtonShapes(
         val buttonClassic10: Shape
+    )
+
+    data class ImageShapes(
+        val imageClassic15: Shape
     )
 }
 

@@ -13,4 +13,9 @@ val shapesPalette = PnExpertShapes().apply {
         PnExpertShapes.ButtonShapes(
             buttonClassic10 = RoundedCornerShape(10.dp)
         )
+
+    this.imageShapes =
+        PnExpertShapes.ImageShapes(
+            imageClassic15 = RoundedCornerShape(15.dp)
+        )
 }
