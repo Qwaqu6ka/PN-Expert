@@ -19,7 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigation
@@ -28,9 +28,10 @@ import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable
 fun RegistrationScreens(
-    navController: NavController,
-    viewModel: RegistrationViewModel = viewModel()
+    navController: NavController
 ) {
+    val viewModel = hiltViewModel<RegistrationViewModel>()
+
     //painted system controllers
     val systemUiController = rememberSystemUiController()
     val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor

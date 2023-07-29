@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -15,11 +16,13 @@ import ru.fefu.pnexpert.utils.validation.models.SingUpFormState
 import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidatePassword
 import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidatePhoneNumber
 import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidateRepeatPassword
+import javax.inject.Inject
 
-class RegistrationViewModel(
-    private val validatePhoneNumber: ValidatePhoneNumber = ValidatePhoneNumber(),
-    private val validatePassword: ValidatePassword = ValidatePassword(),
-    private val validateRepeatPassword: ValidateRepeatPassword = ValidateRepeatPassword()
+@HiltViewModel
+class RegistrationViewModel @Inject constructor(
+    private val validatePhoneNumber: ValidatePhoneNumber,
+    private val validatePassword: ValidatePassword,
+    private val validateRepeatPassword: ValidateRepeatPassword,
 ):ViewModel() {
     //registration pages variables
     private var _pagesNavController: NavController? = null
