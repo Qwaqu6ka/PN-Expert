@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.fefu.pnexpert.main.presentation.screens.InDevPlug
+import ru.fefu.pnexpert.main.presentation.screens.MainTab
 
 @Composable
 fun MainScreenNavGraph(navController: NavHostController, navHostPadding: PaddingValues) {
@@ -16,7 +17,7 @@ fun MainScreenNavGraph(navController: NavHostController, navHostPadding: Padding
         startDestination = BottomNavTab.Main.route,
         modifier = Modifier.padding(navHostPadding)
     ) {
-        composable(BottomNavTab.Main.route) { InDevPlug("0") }
+        composable(BottomNavTab.Main.route) { MainTab() }
         composable(BottomNavTab.Profile.route) { InDevPlug("1") }
         composable(BottomNavTab.Services.route) { InDevPlug("2") }
         composable(BottomNavTab.History.route) { InDevPlug("3") }

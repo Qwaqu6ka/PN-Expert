@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.main.presentation.navigation
+package ru.fefu.pnexpert.main.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -20,6 +20,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
+import ru.fefu.pnexpert.main.presentation.navigation.BottomNavTab
+import ru.fefu.pnexpert.main.presentation.navigation.MarkedBottomNabTab
 import ru.fefu.pnexpert.theme.BadgeColor
 import ru.fefu.pnexpert.theme.PnExpertTheme
 
@@ -59,7 +61,7 @@ fun BottomNavBar(navController: NavController, tabItems: List<BottomNavTab>) {
                     Text(
                         text = stringResource(tab.titleRes),
                         color = tabButtonContentColor,
-                        fontSize = 11.sp
+                        fontSize = 9.sp
                     )
                 },
                 selected = isTabSelected,

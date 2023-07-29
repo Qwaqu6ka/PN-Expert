@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import ru.fefu.pnexpert.main.presentation.navigation.BottomNavBar
 import ru.fefu.pnexpert.main.presentation.navigation.MainScreenNavGraph
 import ru.fefu.pnexpert.main.presentation.navigation.bottomNavTabItems
 
