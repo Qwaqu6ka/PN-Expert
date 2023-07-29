@@ -42,7 +42,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import ru.fefu.pnexpert.R
 import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
+import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+
+private val CURRENT_PAGE = RegistrationNavigationRoute.SelectRoleScreen
 
 data class Role(
     val roleName:String,
@@ -53,9 +56,11 @@ data class Role(
 fun RoleSelectorScreen(
     viewModel: RegistrationViewModel
 ) {
+
+    viewModel.changeRegistrationPage(CURRENT_PAGE)
+
     Column(
         modifier = Modifier
-            .verticalScroll(rememberScrollState())
             .fillMaxWidth()
             .padding(16.dp)
     ) {

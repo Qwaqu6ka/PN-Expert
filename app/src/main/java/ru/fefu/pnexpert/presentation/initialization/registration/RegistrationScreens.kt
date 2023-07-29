@@ -71,6 +71,11 @@ fun RegistrationScreens(
             titleText = "Код из СМС"
             pageNumber = 2
         }
+
+        is RegistrationNavigationRoute.SelectRoleScreen ->{
+            titleText = "Выберите роль"
+            pageNumber = 3
+        }
     }
 
     Surface(

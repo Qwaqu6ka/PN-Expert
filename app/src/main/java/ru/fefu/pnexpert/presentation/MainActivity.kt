@@ -19,7 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.fefu.pnexpert.presentation.initialization.InitializationScreens
-import ru.fefu.pnexpert.presentation.initialization.registration.role_selector.RoleSelectorPage
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @AndroidEntryPoint
@@ -57,8 +56,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-//                    InitializationScreens()
-                    RoleSelectorPage()
+                    InitializationScreens()
                 }
             }
         }

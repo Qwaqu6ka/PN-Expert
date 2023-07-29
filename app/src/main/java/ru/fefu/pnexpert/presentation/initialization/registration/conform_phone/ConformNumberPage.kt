@@ -63,21 +63,33 @@ fun ConformNumberPage(viewModel: RegistrationViewModel) {
         Spacer(modifier = Modifier.height(80.dp))
         TextRepeatCode(timerValue)
         Spacer(modifier = Modifier.height(50.dp))
-        ConformButton(fieldsIsFool)
+        ConformButton(viewModel,fieldsIsFool)
     }
 }
 
 @Composable
 fun ConformButton(
+    viewModel:RegistrationViewModel,
     fieldsIsFool: MutableState<Boolean>,
 ){
+
+    val context = LocalContext.current
 
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
         onClick = {
-
+            if (fieldsIsFool.value){
+                viewModel.pagesNavController!!.navigate(RegistrationNavigationRoute.SelectRoleScreen.route)
+            }
+            else{
+                Toast.makeText(
+                    context,
+                    "Введите код из смс",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         },
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
