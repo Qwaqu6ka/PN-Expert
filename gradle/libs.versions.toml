@@ -1,6 +1,7 @@
 [versions]
 activityComposeVersion = "1.7.2"
 androidApplicationPluginVersion = "8.1.0"
+accompanistSystemuicontrollerVersion = "0.30.1"
 composeBomVersion = "2023.06.01"
 coreKtxVersion = "1.10.1"
 coreSplashscreenVersion = "1.0.1"
@@ -14,6 +15,7 @@ retrofitVersion = "2.9.0"
 
 [libraries]
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
+accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanistSystemuicontrollerVersion" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBomVersion" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }

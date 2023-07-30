@@ -80,6 +80,7 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
     implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.accompanist.systemuicontroller)
 
     debugImplementation(libs.compose.ui.tooling)
 }

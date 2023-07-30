@@ -41,10 +41,10 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+import ru.fefu.pnexpert.theme.PnExpertTheme
 import java.util.EnumSet.range
 
-private val CURRENT_PAGE = RegistrationNavigationRoute.ConformPhoneScreen
+private const val CURRENT_PAGE = RegistrationNavigationRoute.ConformPhoneScreen
 
 @Composable
 fun ConformNumberPage(viewModel: RegistrationViewModel) {

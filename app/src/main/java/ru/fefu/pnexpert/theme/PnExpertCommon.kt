@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.Dp
 
 
 class PnExpertColors{
@@ -93,6 +95,27 @@ class PnExpertTypography{
     )
 }
 
+class PnExpertSizes{
+    lateinit var buttonSize: ButtonSize
+
+    data class ButtonSize(
+        val buttonClassic55: Dp
+    )
+}
+
+class PnExpertShapes{
+    lateinit var buttonShapes: ButtonShapes
+    lateinit var mainShapes: MainShapes
+
+    data class MainShapes(
+        val appDefault10:Shape
+    )
+
+    data class ButtonShapes(
+        val buttonClassic10: Shape
+    )
+}
+
 
 object PnExpertTheme{
     val colors: PnExpertColors
@@ -103,6 +126,14 @@ object PnExpertTheme{
         @Composable
         get() = LocalPnExpertTypography.current
 
+    val shapes: PnExpertShapes
+        @Composable
+        get() = LocalPnExpertShapes.current
+
+    val sizes: PnExpertSizes
+        @Composable
+        get() = LocalPnExpertSizes.current
+
 
 
     val LocalPnExpertColors = staticCompositionLocalOf<PnExpertColors> {
@@ -111,5 +142,13 @@ object PnExpertTheme{
 
     val LocalPnExpertTypography = staticCompositionLocalOf<PnExpertTypography> {
         error("No typography provided")
+    }
+
+    val LocalPnExpertShapes = staticCompositionLocalOf<PnExpertShapes> {
+        error("No shapes provided")
+    }
+
+    val LocalPnExpertSizes = staticCompositionLocalOf<PnExpertSizes> {
+        error("No sizes provided")
     }
 }

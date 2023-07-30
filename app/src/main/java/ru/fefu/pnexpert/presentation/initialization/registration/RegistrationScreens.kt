@@ -24,7 +24,7 @@ import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigation
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+import ru.fefu.pnexpert.theme.PnExpertTheme
 
 @Composable
 fun RegistrationScreens(
