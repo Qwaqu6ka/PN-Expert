@@ -26,6 +26,7 @@ import ru.fefu.pnexpert.presentation.initialization.registration.navigation.Regi
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
+
 @Composable
 fun RegistrationScreens(
     navController: NavController

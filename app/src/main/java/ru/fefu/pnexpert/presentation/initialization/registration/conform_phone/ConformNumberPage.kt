@@ -81,12 +81,15 @@ fun ConformButton(
                 viewModel.pagesNavController!!.navigate(RegistrationNavigationRoute.SelectRoleScreen.route)
             }
         },
+
         enabled = fieldsIsFool.value,
+
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
             disabledContainerColor = PnExpertTheme.colors.buttonColors.ButtonInactiveColor,
             containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-        )
+        ),
+        enabled = fieldsIsFool.value,
     ) {
         Text(
             text = "Подтвердить",

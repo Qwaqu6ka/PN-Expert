@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PN Expert</string>
+    <string name="main_page">Главная</string>
+    <string name="history">История</string>
+    <string name="profile">Профиль</string>
+    <string name="services">Сервисы</string>
+    <string name="note">Запись</string>
+    <string name="events">Мероприятия</string>
+    <string name="back_button">Кнопка назад</string>
 </resources>

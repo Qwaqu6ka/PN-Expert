@@ -18,6 +18,7 @@ import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidatePhoneNumber
 import ru.fefu.pnexpert.utils.validation.singUpValidation.ValidateRepeatPassword
 import javax.inject.Inject
 
+
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
     private val validatePhoneNumber: ValidatePhoneNumber,
