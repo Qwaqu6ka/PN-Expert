@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -26,9 +27,9 @@ import ru.fefu.pnexpert.presentation.theme.BadgeColor
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @Composable
-fun BottomNavBar(navController: NavController, tabItems: List<BottomNavTab>) {
+fun BottomNavBar(navController: NavController, tabItems: List<BottomNavTab>, backgroundColor: Color) {
     BottomNavigation(
-        backgroundColor = PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor
+        backgroundColor = backgroundColor
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
