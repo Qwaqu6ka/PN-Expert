@@ -89,7 +89,6 @@ fun ConformButton(
             disabledContainerColor = PnExpertTheme.colors.buttonColors.ButtonInactiveColor,
             containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
         ),
-        enabled = fieldsIsFool.value,
     ) {
         Text(
             text = "Подтвердить",
