@@ -1,8 +1,9 @@
 package ru.fefu.pnexpert.utils.validation.singUpValidation
 
 import ru.fefu.pnexpert.utils.validation.models.ValidationResult
+import javax.inject.Inject
 
-class ValidateRepeatPassword {
+class ValidateRepeatPassword @Inject constructor(){
     operator fun invoke(password: String, repeatPassword: String): ValidationResult {
         if (repeatPassword.isBlank()) {
             return ValidationResult(

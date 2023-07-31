@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.fefu.pnexpert.main.presentation.screens.MainScreen
-import ru.fefu.pnexpert.theme.PnExpertTheme
+import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 
 class MainActivity : ComponentActivity() {

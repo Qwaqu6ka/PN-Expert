@@ -19,18 +19,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigation
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
-import ru.fefu.pnexpert.theme.PnExpertTheme
+import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+
 
 @Composable
 fun RegistrationScreens(
-    navController: NavController,
-    viewModel: RegistrationViewModel = viewModel()
+    navController: NavController
 ) {
+    val viewModel = hiltViewModel<RegistrationViewModel>()
+
     //painted system controllers
     val systemUiController = rememberSystemUiController()
     val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
@@ -69,6 +71,21 @@ fun RegistrationScreens(
         is RegistrationNavigationRoute.ConformPhoneScreen ->{
             titleText = "Код из СМС"
             pageNumber = 2
+        }
+
+        is RegistrationNavigationRoute.SelectRoleScreen ->{
+            titleText = "Выберите роль"
+            pageNumber = 3
+        }
+
+        is RegistrationNavigationRoute.UsersAgreementScreen ->{
+            titleText = "Поользовательское соглашение"
+            pageNumber = 4
+        }
+
+        is RegistrationNavigationRoute.ManualScreen ->{
+            titleText = "Инструкция"
+            pageNumber = 5
         }
     }
 

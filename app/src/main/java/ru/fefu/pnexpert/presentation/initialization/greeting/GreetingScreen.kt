@@ -21,7 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.pnexpert.presentation.initialization.navigation.InitializationNavigationRoute
-import ru.fefu.pnexpert.theme.PnExpertTheme
+import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+
 
 @Composable
 fun GreetingScreen(navController:NavController) {
