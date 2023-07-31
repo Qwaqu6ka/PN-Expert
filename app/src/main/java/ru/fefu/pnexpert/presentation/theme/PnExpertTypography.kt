@@ -71,7 +71,7 @@ val typographyPalette = PnExpertTypography().apply {
                 fontWeight = FontWeight(500),
             ),
             regular_14 = TextStyle(
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 fontFamily = SfProDisplay,
                 fontWeight = FontWeight(400),
             ),

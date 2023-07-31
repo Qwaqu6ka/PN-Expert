@@ -1,6 +1,7 @@
 package ru.fefu.pnexpert.presentation.initialization.registration.conform_phone
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,12 +30,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.OffsetMapping
-import androidx.compose.ui.text.input.TransformedText
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,7 +40,6 @@ import kotlinx.coroutines.delay
 import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
-import java.util.EnumSet.range
 
 private val CURRENT_PAGE = RegistrationNavigationRoute.ConformPhoneScreen
 
@@ -51,9 +48,8 @@ fun ConformNumberPage(viewModel: RegistrationViewModel) {
 
     viewModel.changeRegistrationPage(CURRENT_PAGE)
 
-    val timerValue = remember {
-        mutableStateOf(100L * 310L)
-    }
+    val timerValue = remember { mutableStateOf(100L * 310L) }
+    val fieldsIsFool = remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -61,26 +57,34 @@ fun ConformNumberPage(viewModel: RegistrationViewModel) {
 
     ) {
         Spacer(modifier = Modifier.height(30.dp))
-        InputCodeFields()
+        InputCodeFields(fieldsIsFool)
         Spacer(modifier = Modifier.height(80.dp))
-        MessageTimer(totalTime = timerValue,)
+        MessageTimer(totalTime = timerValue)
         Spacer(modifier = Modifier.height(80.dp))
         TextRepeatCode(timerValue)
         Spacer(modifier = Modifier.height(50.dp))
-        ConformButton()
+        ConformButton(viewModel,fieldsIsFool)
     }
 }
 
 @Composable
-fun ConformButton(){
+fun ConformButton(
+    viewModel:RegistrationViewModel,
+    fieldsIsFool: MutableState<Boolean>,
+){
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
         onClick = {
+            if (fieldsIsFool.value){
+                viewModel.pagesNavController!!.navigate(RegistrationNavigationRoute.SelectRoleScreen.route)
+            }
         },
+        enabled = fieldsIsFool.value,
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
+            disabledContainerColor = PnExpertTheme.colors.buttonColors.ButtonInactiveColor,
             containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
         )
     ) {
@@ -133,7 +137,7 @@ fun TextRepeatCode(totalTime: MutableState<Long>) {
 
 @Composable
 private fun MessageTimer(
-    totalTime: MutableState<Long>,
+    totalTime: MutableState<Long>
 ) {
 
     LaunchedEffect(key1 = totalTime.value) {
@@ -157,10 +161,18 @@ private fun MessageTimer(
 @SuppressLint("MutableCollectionMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun InputCodeFields() {
+private fun InputCodeFields(
+    fieldsIsFool: MutableState<Boolean>,
+) {
     val fieldBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
-    val fieldsValue = mutableListOf<MutableState<String>>()
-    val fieldsFocus = mutableListOf<MutableState<FocusRequester>>()
+
+    val fieldsCount = 4
+    val fieldsValue = List(fieldsCount) { remember { mutableStateOf("") } }
+    val fieldsFocus = List(fieldsCount){remember { mutableStateOf(FocusRequester()) }}
+
+    fieldsIsFool.value = fieldsValue.all {
+        it.value.isNotEmpty()
+    }
 
     Row(
         modifier = Modifier
@@ -168,10 +180,6 @@ private fun InputCodeFields() {
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
         for (i in 0..3){
-            fieldsValue.add(remember { mutableStateOf("") })
-            fieldsFocus.add(remember { mutableStateOf(FocusRequester())})
-
-
             OutlinedTextField(
                 modifier = Modifier
                     .size(64.dp, 90.dp)
