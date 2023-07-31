@@ -1,7 +1,6 @@
 package ru.fefu.pnexpert.presentation.initialization.registration.conform_phone
 
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,9 +14,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -30,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -212,11 +210,13 @@ private fun InputCodeFields(
                     fontSize = 40.sp,
                     textAlign = TextAlign.Center
                 ),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = fieldBackground,
+//                    textColor = PnExpertTheme.colors.textColors.FontDarkColor
+                    unfocusedContainerColor = fieldBackground,
+                    disabledContainerColor = fieldBackground,
                     focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                    textColor = PnExpertTheme.colors.textColors.FontDarkColor,
                     unfocusedBorderColor = Color.Transparent,
-                    containerColor = fieldBackground
                 ),
                 maxLines = 1,
             )

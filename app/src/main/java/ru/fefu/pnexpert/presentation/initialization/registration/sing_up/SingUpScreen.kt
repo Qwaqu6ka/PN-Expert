@@ -89,7 +89,7 @@ fun SingUpScreen(
 private fun RegistrationButton(
     focusManager: FocusManager,
     viewModel: RegistrationViewModel,
-){
+) {
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
@@ -112,7 +112,7 @@ private fun RegistrationButton(
 }
 
 @Composable
-private fun SingInText(){
+private fun SingInText() {
     Row(
         Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
@@ -136,7 +136,7 @@ private fun SingInText(){
 }
 
 @Composable
-private fun AlternativeSingUp(){
+private fun AlternativeSingUp() {
 
     val buttonShadow = 4.dp
 
@@ -191,11 +191,11 @@ private fun AlternativeSingUp(){
             }
         }
     }
-    
+
 }
 
 @Composable
-private fun errorField(error:String){
+private fun ErrorField(error: String) {
     Spacer(modifier = Modifier.height(8.dp))
 
     Box(
@@ -225,7 +225,7 @@ private fun errorField(error:String){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SingUpInputFields(
-    focusRequester:FocusRequester,
+    focusRequester: FocusRequester,
     viewModel: RegistrationViewModel
 ) {
 
@@ -246,16 +246,16 @@ private fun SingUpInputFields(
 
     //Password fields variables
     var passwordVisibility by remember { mutableStateOf(false) }
-    val iconPassword = if(passwordVisibility){
+    val iconPassword = if (passwordVisibility) {
         painterResource(id = R.drawable.baseline_visibility_off_24)
-    }else{
+    } else {
         painterResource(id = R.drawable.baseline_visibility_24)
     }
 
     var passwordRepeatVisibility by remember { mutableStateOf(false) }
-    val iconPasswordRepeat = if(passwordRepeatVisibility){
+    val iconPasswordRepeat = if (passwordRepeatVisibility) {
         painterResource(id = R.drawable.baseline_visibility_off_24)
-    }else{
+    } else {
         painterResource(id = R.drawable.baseline_visibility_24)
     }
 
@@ -278,7 +278,7 @@ private fun SingUpInputFields(
             ExposedDropdownMenuBox(
                 modifier = Modifier.weight(2f),
                 expanded = statusDropDown,
-                onExpandedChange = {statusDropDown = !statusDropDown}
+                onExpandedChange = { statusDropDown = !statusDropDown }
             ) {
                 OutlinedTextField(
                     modifier = Modifier
@@ -298,7 +298,7 @@ private fun SingUpInputFields(
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
                         unfocusedBorderColor = Color.Transparent,
-                        textColor = PnExpertTheme.colors.textColors.FontDarkColor,
+//                        textColor = PnExpertTheme.colors.textColors.FontDarkColor,
                         containerColor = fieldBackground
                     )
                 )
@@ -322,9 +322,11 @@ private fun SingUpInputFields(
                             },
                             onClick = {
                                 selectedCountryCodeItem = selectStatus
-                                viewModel.inputDataEvent(SingUpFormEvent.PhoneNumberChanged(
-                                    selectedCountryCodeItem + phoneNumber
-                                ))
+                                viewModel.inputDataEvent(
+                                    SingUpFormEvent.PhoneNumberChanged(
+                                        selectedCountryCodeItem + phoneNumber
+                                    )
+                                )
                                 statusDropDown = false
                             },
                         )
@@ -351,18 +353,22 @@ private fun SingUpInputFields(
                 },
                 onValueChange = {
                     phoneNumber = it
-                    viewModel.inputDataEvent(SingUpFormEvent.PhoneNumberChanged(
-                        selectedCountryCodeItem+it
-                    ))
+                    viewModel.inputDataEvent(
+                        SingUpFormEvent.PhoneNumberChanged(
+                            selectedCountryCodeItem + it
+                        )
+                    )
                 },
                 isError = inputDataState.phoneNumberError != null,
                 trailingIcon = {
                     IconButton(
                         onClick = {
                             phoneNumber = ""
-                            viewModel.inputDataEvent(SingUpFormEvent.PhoneNumberChanged(
-                                selectedCountryCodeItem+phoneNumber
-                            ))
+                            viewModel.inputDataEvent(
+                                SingUpFormEvent.PhoneNumberChanged(
+                                    selectedCountryCodeItem + phoneNumber
+                                )
+                            )
                         }
                     ) {
                         Icon(
@@ -378,7 +384,7 @@ private fun SingUpInputFields(
                 textStyle = TextStyle(fontSize = 16.sp),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                    textColor = PnExpertTheme.colors.textColors.FontDarkColor,
+//                    textColor = PnExpertTheme.colors.textColors.FontDarkColor,
                     unfocusedBorderColor = Color.Transparent,
                     containerColor = fieldBackground
                 )
@@ -386,7 +392,7 @@ private fun SingUpInputFields(
 
         }
         if (inputDataState.phoneNumberError != null) {
-            errorField(error = inputDataState.phoneNumberError)
+            ErrorField(error = inputDataState.phoneNumberError)
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -420,19 +426,19 @@ private fun SingUpInputFields(
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password
             ),
-            visualTransformation = if(passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
+//                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
                 unfocusedBorderColor = Color.Transparent,
                 containerColor = fieldBackground
             )
         )
-        
-        if (inputDataState.passwordError != null){
-            errorField(error = inputDataState.passwordError)
+
+        if (inputDataState.passwordError != null) {
+            ErrorField(error = inputDataState.passwordError)
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -466,19 +472,19 @@ private fun SingUpInputFields(
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password
             ),
-            visualTransformation = if(passwordRepeatVisibility) VisualTransformation.None else PasswordVisualTransformation(),
+            visualTransformation = if (passwordRepeatVisibility) VisualTransformation.None else PasswordVisualTransformation(),
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
+//                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
                 unfocusedBorderColor = Color.Transparent,
                 containerColor = fieldBackground
             )
         )
-        
-        if (inputDataState.repeatPasswordError != null){
-            errorField(error = inputDataState.repeatPasswordError)
+
+        if (inputDataState.repeatPasswordError != null) {
+            ErrorField(error = inputDataState.repeatPasswordError)
         }
     }
 }

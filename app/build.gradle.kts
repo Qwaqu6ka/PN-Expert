@@ -61,14 +61,20 @@ kapt {
 
 
 dependencies {
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
+
     implementation(libs.core.splashscreen)
 
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
 
     implementation(libs.retrofit)
 
     implementation(libs.navigation.compose)
+
     implementation(libs.material) // for BottomNavigation and BottomNavigationItem
 
     implementation(libs.core.ktx)
