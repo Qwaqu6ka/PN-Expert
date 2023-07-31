@@ -2,7 +2,6 @@ package ru.fefu.pnexpert.presentation.initialization.registration.manual
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -32,7 +31,7 @@ import com.google.accompanist.pager.rememberPagerState
 import ru.fefu.pnexpert.R
 import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+import ru.fefu.theme.PnExpertTheme
 
 private val CURRENT_PAGE = RegistrationNavigationRoute.ManualScreen
 

@@ -1,11 +1,11 @@
-package ru.fefu.pnexpert.presentation.theme
+package ru.fefu.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme.LocalPnExpertColors
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme.LocalPnExpertShapes
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme.LocalPnExpertSizes
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme.LocalPnExpertTypography
+import ru.fefu.theme.PnExpertTheme.LocalPnExpertColors
+import ru.fefu.theme.PnExpertTheme.LocalPnExpertShapes
+import ru.fefu.theme.PnExpertTheme.LocalPnExpertSizes
+import ru.fefu.theme.PnExpertTheme.LocalPnExpertTypography
 
 @Composable
 fun PnExpertTheme(

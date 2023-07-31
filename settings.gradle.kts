@@ -15,3 +15,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "PN Expert"
 include(":app")
+include(":features:sign-up")
+include(":features:main-menu")
+include(":core:theme")
+include(":mylibrary")

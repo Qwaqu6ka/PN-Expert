@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.theme
+package ru.fefu.theme
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
