@@ -1,6 +1,7 @@
 package ru.fefu.pnexpert.presentation.initialization.registration.conform_phone
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -39,9 +41,7 @@ import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationVie
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
-
 private val CURRENT_PAGE = RegistrationNavigationRoute.ConformPhoneScreen
-
 
 @Composable
 fun ConformNumberPage(viewModel: RegistrationViewModel) {
@@ -50,7 +50,6 @@ fun ConformNumberPage(viewModel: RegistrationViewModel) {
 
     val timerValue = remember { mutableStateOf(100L * 310L) }
     val fieldsIsFool = remember { mutableStateOf(false) }
-
 
     Column(
         modifier = Modifier
@@ -82,6 +81,9 @@ fun ConformButton(
                 viewModel.pagesNavController!!.navigate(RegistrationNavigationRoute.SelectRoleScreen.route)
             }
         },
+
+        enabled = fieldsIsFool.value,
+
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
             disabledContainerColor = PnExpertTheme.colors.buttonColors.ButtonInactiveColor,
@@ -174,6 +176,7 @@ private fun InputCodeFields(
     fieldsIsFool.value = fieldsValue.all {
         it.value.isNotEmpty()
     }
+
     Row(
         modifier = Modifier
             .fillMaxWidth(),

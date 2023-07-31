@@ -3,7 +3,6 @@ package ru.fefu.pnexpert.utils.validation.singUpValidation
 import ru.fefu.pnexpert.utils.validation.models.ValidationResult
 import javax.inject.Inject
 
-
 class ValidatePassword @Inject constructor(){
     operator fun invoke(password: String): ValidationResult {
         if (password.isBlank()) {

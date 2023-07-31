@@ -23,7 +23,6 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.pnexpert.presentation.initialization.navigation.InitializationNavigationRoute
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
-
 @Composable
 fun GreetingScreen(navController:NavController) {
 

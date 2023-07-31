@@ -3,7 +3,6 @@ package ru.fefu.pnexpert.utils.validation.singUpValidation
 import ru.fefu.pnexpert.utils.validation.models.ValidationResult
 import javax.inject.Inject
 
-
 class ValidatePhoneNumber @Inject constructor(){
     operator fun invoke(phoneNumber: String): ValidationResult {
         if (phoneNumber.isBlank()) {
