@@ -90,12 +90,11 @@ fun RegistrationScreens(
     }
 
     Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
         color = PnExpertTheme.colors.mainAppColors.AppWhiteColor
     ) {
         Column(
+            modifier = Modifier
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(30.dp))

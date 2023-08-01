@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -41,22 +43,27 @@ private val CURRENT_PAGE = RegistrationNavigationRoute.ManualScreen
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ManualScreen(
-    viewModel: RegistrationViewModel
+    viewModel: RegistrationViewModel,
 ){
 
     viewModel.changeRegistrationPage(CURRENT_PAGE)
 
     val pagerState = rememberPagerState()
 
-    Column() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+    ) {
         ManualCardHolder(pagerState)
-        Spacer(modifier = Modifier.height(100.dp))
+        Spacer(modifier = Modifier.weight(1f))
         NextButton()
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
 @Composable
-private fun NextButton() {
+fun NextButton() {
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
@@ -87,7 +94,7 @@ private fun NextButton() {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-private fun ManualCardHolder(
+fun ManualCardHolder(
     pagerState: PagerState
 ){
     Column(

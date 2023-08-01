@@ -12,7 +12,9 @@ import ru.fefu.pnexpert.presentation.initialization.registration.sing_up.SingUpS
 import ru.fefu.pnexpert.presentation.initialization.registration.users_agreement.UsersAgreementScreen
 
 @Composable
-fun RegistrationNavigation(viewModel: RegistrationViewModel) {
+fun RegistrationNavigation(
+    viewModel: RegistrationViewModel
+) {
     val navController = rememberNavController()
     viewModel.initPagesNavController(navController)
     NavHost(navController = navController, startDestination = RegistrationNavigationRoute.SingUpScreen.route){

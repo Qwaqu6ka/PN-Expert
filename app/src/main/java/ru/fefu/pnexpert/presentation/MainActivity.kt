@@ -61,9 +61,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                 ) {
 //                    MainScreen()
-//                    InitializationScreens()
+                    InitializationScreens()
 
-                    ManualScreen(hiltViewModel<RegistrationViewModel>())
+//                    ManualScreen(hiltViewModel<RegistrationViewModel>())
                 }
             }
         }
