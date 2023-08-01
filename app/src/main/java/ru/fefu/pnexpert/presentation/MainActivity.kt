@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -19,6 +20,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.fefu.pnexpert.main.presentation.screens.MainScreen
+import ru.fefu.pnexpert.presentation.initialization.InitializationScreens
+import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
+import ru.fefu.pnexpert.presentation.initialization.registration.manual.ManualScreen
 import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
 
 @AndroidEntryPoint
@@ -56,8 +60,10 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    MainScreen()
+//                    MainScreen()
 //                    InitializationScreens()
+
+                    ManualScreen(hiltViewModel<RegistrationViewModel>())
                 }
             }
         }

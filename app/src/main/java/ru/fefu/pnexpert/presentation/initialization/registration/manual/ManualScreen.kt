@@ -4,8 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -46,9 +48,7 @@ fun ManualScreen(
 
     val pagerState = rememberPagerState()
 
-    Column(
-        modifier = Modifier.padding(16.dp)
-    ) {
+    Column() {
         ManualCardHolder(pagerState)
         Spacer(modifier = Modifier.height(100.dp))
         NextButton()
@@ -60,6 +60,7 @@ private fun NextButton() {
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(horizontal = 16.dp)
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55)
             .border(
                 1.dp,
@@ -93,9 +94,7 @@ private fun ManualCardHolder(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HorizontalPager(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(380.dp),
+            modifier = Modifier.fillMaxWidth(),
             count = 4,
             state = pagerState
         ) {id->
@@ -114,7 +113,7 @@ private fun ManualCard() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp)
+            .padding(horizontal = 16.dp)
             .shadow(fieldShadow, PnExpertTheme.shapes.imageShapes.imageClassic15),
         shape = PnExpertTheme.shapes.mainShapes.appDefault10,
         colors = CardDefaults.cardColors(
