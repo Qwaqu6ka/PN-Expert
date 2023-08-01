@@ -303,8 +303,7 @@ private fun SingUpInputFields(
                     colors = TextFieldDefaults.outlinedTextFieldColors(
                         focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
                         unfocusedBorderColor = Color.Transparent,
-//                        textColor = PnExpertTheme.colors.textColors.FontDarkColor,
-                        containerColor = fieldBackground
+                        containerColor = fieldBackground,
                     )
                 )
                 DropdownMenu(
@@ -389,7 +388,6 @@ private fun SingUpInputFields(
                 textStyle = TextStyle(fontSize = 16.sp),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-//                    textColor = PnExpertTheme.colors.textColors.FontDarkColor,
                     unfocusedBorderColor = Color.Transparent,
                     containerColor = fieldBackground
                 )
@@ -436,7 +434,6 @@ private fun SingUpInputFields(
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-//                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
                 unfocusedBorderColor = Color.Transparent,
                 containerColor = fieldBackground
             )
@@ -482,9 +479,8 @@ private fun SingUpInputFields(
             textStyle = TextStyle(fontSize = 16.sp),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-//                textColor = PnExpertTheme.colors.textColors.FontDarkColor,
                 unfocusedBorderColor = Color.Transparent,
-                containerColor = fieldBackground
+                containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
             )
         )
 
