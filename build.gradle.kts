@@ -3,6 +3,7 @@ buildscript {
     extra.set("targetAndroidSdk", 33)
     extra.set("minAndroidSdk", 26)
     extra.set("jdkVersion", 17)
+    extra.set("compilerExtensionVersion", "1.4.3")
 }
 
 plugins {

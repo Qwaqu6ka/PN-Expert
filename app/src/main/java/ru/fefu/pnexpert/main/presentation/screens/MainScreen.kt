@@ -3,6 +3,7 @@ package ru.fefu.pnexpert.main.presentation.screens
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -26,6 +27,9 @@ fun MainScreen() {
         systemUiController.setNavigationBarColor(color = bottomBarBackgroundColor)
     }
 
+    BottomAppBar {
+
+    }
     Scaffold(
         bottomBar = {
             BottomNavBar(

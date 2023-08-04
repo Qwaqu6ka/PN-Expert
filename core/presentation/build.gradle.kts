@@ -10,7 +10,7 @@ android {
     val jdkVersion: Int by rootProject.extra
     val compilerExtensionVersion: String by rootProject.extra
 
-    namespace = "ru.fefu.features.sign_up"
+    namespace = "ru.fefu.presentation"
     compileSdk = targetAndroidSdk
 
     defaultConfig {
@@ -40,6 +40,12 @@ android {
 }
 
 dependencies {
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.material3)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.tooling.preview)
+    debugImplementation(libs.compose.ui.tooling)
 
-    implementation(libs.core.ktx)
+    api(project(":core:theme"))
 }

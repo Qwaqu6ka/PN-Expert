@@ -2,6 +2,8 @@
 plugins {
     alias(libs.plugins.com.android.library)
     alias(libs.plugins.kotlin.android)
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -10,7 +12,7 @@ android {
     val jdkVersion: Int by rootProject.extra
     val compilerExtensionVersion: String by rootProject.extra
 
-    namespace = "ru.fefu.features.sign_up"
+    namespace = "ru.fefu.navigation"
     compileSdk = targetAndroidSdk
 
     defaultConfig {
@@ -41,5 +43,14 @@ android {
 
 dependencies {
 
-    implementation(libs.core.ktx)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.material3)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.tooling.preview)
+    debugImplementation(libs.compose.ui.tooling)
+
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
 }
