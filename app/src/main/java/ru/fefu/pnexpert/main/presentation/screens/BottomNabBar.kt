@@ -27,7 +27,11 @@ import ru.fefu.theme.BadgeColor
 import ru.fefu.theme.PnExpertTheme
 
 @Composable
-fun BottomNavBar(navController: NavController, tabItems: List<BottomNavTab>, backgroundColor: Color) {
+fun BottomNavBar(
+    navController: NavController,
+    tabItems: List<BottomNavTab>,
+    backgroundColor: Color
+) {
     BottomNavigation(
         backgroundColor = backgroundColor
     ) {
