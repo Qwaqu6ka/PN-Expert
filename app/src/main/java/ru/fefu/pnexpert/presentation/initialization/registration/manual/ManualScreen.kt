@@ -1,7 +1,12 @@
 package ru.fefu.pnexpert.presentation.initialization.registration.manual
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.FiniteAnimationSpec
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Spacer
@@ -118,9 +123,12 @@ fun ManualCardHolder(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         HorizontalPager(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .animateContentSize(),
             count = manualDataList.size,
-            state = pagerState
+            state = pagerState,
+            verticalAlignment = Alignment.Top
         ) {id->
             ManualCard(manualDataList[id])
         }
@@ -138,6 +146,7 @@ private fun ManualCard(manualData:ManualData) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
+            .padding(vertical = 12.dp)
             .shadow(fieldShadow, PnExpertTheme.shapes.imageShapes.imageClassic15),
         shape = PnExpertTheme.shapes.mainShapes.appDefault10,
         colors = CardDefaults.cardColors(
