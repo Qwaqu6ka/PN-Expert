@@ -3,6 +3,7 @@ package ru.fefu.pnexpert.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.SideEffect
@@ -28,26 +29,19 @@ import ru.fefu.theme.PnExpertTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: MainActivityViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        var isUiReady: Boolean by mutableStateOf(false)
-
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                delay(2000)
-                isUiReady = true
-            }
-        }
-
+        //splash screen
         splashScreen.setKeepOnScreenCondition {
-            !isUiReady
+            !viewModel.isUiReady.value
         }
 
         setContent {
             PnExpertTheme {
-
                 //painted system controllers
                 val systemUiController = rememberSystemUiController()
                 val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
