@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.main.presentation.components
+package ru.fefu.pnexpert.presentation.main.components
 
 import androidx.compose.runtime.Composable
 

@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.main.presentation.navigation
+package ru.fefu.pnexpert.presentation.main.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -7,8 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import ru.fefu.pnexpert.main.presentation.screens.InDevPlug
-import ru.fefu.pnexpert.main.presentation.screens.MainTab
+import ru.fefu.pnexpert.presentation.main.screens.InDevPlug
+import ru.fefu.pnexpert.presentation.main.screens.MainTab
 
 @Composable
 fun MainScreenNavGraph(navController: NavHostController, navHostPadding: PaddingValues) {

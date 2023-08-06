@@ -19,5 +19,4 @@ fun InitializationScreens() {
             RegistrationScreens(navController)
         }
     }
-
 }

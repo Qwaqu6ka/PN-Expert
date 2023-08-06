@@ -50,7 +50,7 @@ data class ManualData(
     val imageDescription: String,
 )
 
-@OptIn(ExperimentalPagerApi::class)
+
 @Composable
 fun ManualScreen(
     viewModel: RegistrationViewModel,

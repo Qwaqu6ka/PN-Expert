@@ -19,7 +19,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.fefu.pnexpert.main.presentation.screens.MainScreen
+import ru.fefu.pnexpert.presentation.main.screens.MainScreen
 import ru.fefu.pnexpert.presentation.initialization.InitializationScreens
 import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.initialization.registration.manual.ManualScreen
@@ -61,10 +61,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-//                    MainScreen()
                     InitializationScreens()
-
-//                    ManualScreen(hiltViewModel<RegistrationViewModel>())
                 }
             }
         }

@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.main.presentation.screens
+package ru.fefu.pnexpert.presentation.main.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -21,8 +21,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import ru.fefu.pnexpert.main.presentation.navigation.BottomNavTab
-import ru.fefu.pnexpert.main.presentation.navigation.MarkedBottomNabTab
+import ru.fefu.pnexpert.presentation.main.navigation.BottomNavTab
+import ru.fefu.pnexpert.presentation.main.navigation.MarkedBottomNabTab
 import ru.fefu.theme.BadgeColor
 import ru.fefu.theme.PnExpertTheme
 
