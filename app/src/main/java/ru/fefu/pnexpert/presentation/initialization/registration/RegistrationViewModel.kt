@@ -110,6 +110,10 @@ class RegistrationViewModel @Inject constructor(
         }
     }
 
+    fun registrationSuccess(){
+        application.initializationFinish()
+    }
+
 
     sealed class ValidationEvent{
         object Success:ValidationEvent()
