@@ -24,6 +24,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,6 +38,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.PagerState
 import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.launch
 import ru.fefu.pnexpert.R
 import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
@@ -67,13 +69,16 @@ fun ManualScreen(
     ) {
         ManualCardHolder(pagerState)
         Spacer(modifier = Modifier.weight(1f))
-        NextButton(viewModel)
+        NextButton(viewModel, pagerState)
         Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
 @Composable
-fun NextButton(viewModel: RegistrationViewModel) {
+fun NextButton(viewModel: RegistrationViewModel, pagerState: PagerState) {
+
+    val scope = rememberCoroutineScope()
+
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
@@ -86,7 +91,13 @@ fun NextButton(viewModel: RegistrationViewModel) {
             )
         ,
         onClick = {
-            viewModel.registrationSuccess()
+            if (pagerState.currentPage != pagerState.pageCount-1){
+                scope.launch {
+                    pagerState.animateScrollToPage(pagerState.currentPage + 1, 0f)
+                }
+            }
+            else
+                viewModel.registrationSuccess()
         },
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
@@ -95,14 +106,19 @@ fun NextButton(viewModel: RegistrationViewModel) {
         )
     ) {
         Text(
-            text = "Пропустить шаг",
+            text = if (pagerState.currentPage != pagerState.pageCount-1){
+                "Пропустить шаг"
+            }
+            else{
+                "Завершить регистрацию"
+            },
             style = PnExpertTheme.typography.subtitle.medium_18,
             color = PnExpertTheme.colors.textColors.FontBlueColor
         )
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
+
 @Composable
 fun ManualCardHolder(
     pagerState: PagerState
