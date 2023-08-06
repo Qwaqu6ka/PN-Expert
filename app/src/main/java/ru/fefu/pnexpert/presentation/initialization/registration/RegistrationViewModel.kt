@@ -1,5 +1,6 @@
 package ru.fefu.pnexpert.presentation.initialization.registration
 
+import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -7,9 +8,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import ru.fefu.pnexpert.PnExpertApp
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.pnexpert.presentation.initialization.registration.sing_up.SingUpFormEvent
 import ru.fefu.pnexpert.utils.validation.models.SingUpFormState
@@ -21,6 +24,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationViewModel @Inject constructor(
+    private val application: PnExpertApp,
     private val validatePhoneNumber: ValidatePhoneNumber,
     private val validatePassword: ValidatePassword,
     private val validateRepeatPassword: ValidateRepeatPassword,
@@ -42,6 +46,7 @@ class RegistrationViewModel @Inject constructor(
     //a thread for sending notifications to the UI thread
     private val validationEventChannel = Channel<ValidationEvent>()
     val validationEvents = validationEventChannel.receiveAsFlow()
+
 
     //init pages nav controller
     fun initPagesNavController(navController: NavController){

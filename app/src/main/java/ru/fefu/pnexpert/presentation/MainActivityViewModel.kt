@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+
 class MainActivityViewModel:ViewModel() {
     //splash screen variables
     private val _isUiReady = MutableStateFlow(false)

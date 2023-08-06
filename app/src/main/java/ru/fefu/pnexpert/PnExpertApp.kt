@@ -4,9 +4,10 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
 @HiltAndroidApp
-class PnExpertApp : Application(){
+class PnExpertApp @Inject constructor() : Application(){
     //initialization variables
     private val _isInitializationReady = MutableStateFlow(false)
     val isInitializationReady = _isInitializationReady.asStateFlow()
