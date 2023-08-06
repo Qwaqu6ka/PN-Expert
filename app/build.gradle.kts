@@ -8,6 +8,7 @@ plugins {
 android {
     val targetAndroidSdk: Int by rootProject.extra
     val minAndroidSdk: Int by rootProject.extra
+    val jdkVersion: Int by rootProject.extra
 
     namespace = "ru.fefu.pnexpert"
     compileSdk = targetAndroidSdk
@@ -24,7 +25,9 @@ android {
             useSupportLibrary = true
         }
     }
-
+    kotlin {
+        jvmToolchain(jdkVersion)
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -33,13 +36,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -86,7 +82,8 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
     implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.accompanist.systemuicontroller)
+
+    implementation(project(":core:theme"))
 
     debugImplementation(libs.compose.ui.tooling)
 }

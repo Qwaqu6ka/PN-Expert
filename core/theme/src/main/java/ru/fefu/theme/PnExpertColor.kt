@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.theme
+package ru.fefu.theme
 
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color

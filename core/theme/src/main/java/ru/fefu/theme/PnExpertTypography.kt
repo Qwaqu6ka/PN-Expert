@@ -1,11 +1,10 @@
-package ru.fefu.pnexpert.presentation.theme
+package ru.fefu.theme
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import ru.fefu.pnexpert.R
 
 private val SfProDisplay = FontFamily(
     Font(R.font.sf_pro_display_semibold, FontWeight.W600),

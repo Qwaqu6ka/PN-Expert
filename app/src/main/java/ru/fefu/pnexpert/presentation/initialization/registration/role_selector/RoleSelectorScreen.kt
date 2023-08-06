@@ -16,8 +16,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -44,7 +42,7 @@ import androidx.compose.ui.unit.dp
 import ru.fefu.pnexpert.R
 import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+import ru.fefu.theme.PnExpertTheme
 
 private val CURRENT_PAGE = RegistrationNavigationRoute.SelectRoleScreen
 

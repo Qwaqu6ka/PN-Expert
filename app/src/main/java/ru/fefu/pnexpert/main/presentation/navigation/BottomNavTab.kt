@@ -11,8 +11,8 @@ sealed class BottomNavTab(
 ) {
     object Main : BottomNavTab("MainTab", R.string.main_page, R.drawable.ic_heart)
     object Profile : BottomNavTab("ProfileTab", R.string.profile, R.drawable.ic_person)
-    object Services: BottomNavTab("ServicesTab", R.string.services, R.drawable.ic_settings)
-    object History: BottomNavTab("HistoryTab", R.string.history, R.drawable.ic_notebook)
+    object Services : BottomNavTab("ServicesTab", R.string.services, R.drawable.ic_settings)
+    object History : BottomNavTab("HistoryTab", R.string.history, R.drawable.ic_notebook)
 }
 
 sealed class MarkedBottomNabTab(
@@ -21,7 +21,7 @@ sealed class MarkedBottomNabTab(
     @DrawableRes iconRes: Int,
     val isMarked: Boolean = false
 ) : BottomNavTab(route, titleRes, iconRes) {
-    object Notes: MarkedBottomNabTab("NotesTab", R.string.note, R.drawable.ic_calendar)
+    object Notes : MarkedBottomNabTab("NotesTab", R.string.note, R.drawable.ic_calendar)
 }
 
 /**

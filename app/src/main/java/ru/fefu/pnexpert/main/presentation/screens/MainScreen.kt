@@ -12,7 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.pnexpert.main.presentation.navigation.MainScreenNavGraph
 import ru.fefu.pnexpert.main.presentation.navigation.bottomNavTabItems
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+import ru.fefu.theme.PnExpertTheme
 
 @Composable
 fun MainScreen() {

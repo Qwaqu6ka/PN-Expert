@@ -55,7 +55,8 @@ import androidx.compose.ui.unit.sp
 import ru.fefu.pnexpert.R
 import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.initialization.registration.navigation.RegistrationNavigationRoute
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+import ru.fefu.theme.PnExpertTheme
+
 
 private val CURRENT_PAGE = RegistrationNavigationRoute.SingUpScreen
 

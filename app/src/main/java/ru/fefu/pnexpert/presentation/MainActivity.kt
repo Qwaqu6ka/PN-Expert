@@ -23,7 +23,8 @@ import ru.fefu.pnexpert.main.presentation.screens.MainScreen
 import ru.fefu.pnexpert.presentation.initialization.InitializationScreens
 import ru.fefu.pnexpert.presentation.initialization.registration.RegistrationViewModel
 import ru.fefu.pnexpert.presentation.initialization.registration.manual.ManualScreen
-import ru.fefu.pnexpert.presentation.theme.PnExpertTheme
+import ru.fefu.theme.PnExpertTheme
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -45,7 +46,7 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            PnExpertTheme() {
+            PnExpertTheme {
 
                 //painted system controllers
                 val systemUiController = rememberSystemUiController()
