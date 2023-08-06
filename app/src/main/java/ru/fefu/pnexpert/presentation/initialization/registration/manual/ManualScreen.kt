@@ -67,13 +67,13 @@ fun ManualScreen(
     ) {
         ManualCardHolder(pagerState)
         Spacer(modifier = Modifier.weight(1f))
-        NextButton()
+        NextButton(viewModel)
         Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
 @Composable
-fun NextButton() {
+fun NextButton(viewModel: RegistrationViewModel) {
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
@@ -86,7 +86,7 @@ fun NextButton() {
             )
         ,
         onClick = {
-
+            viewModel.registrationSuccess()
         },
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
