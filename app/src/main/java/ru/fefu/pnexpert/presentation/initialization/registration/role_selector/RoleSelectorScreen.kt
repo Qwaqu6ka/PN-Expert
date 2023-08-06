@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -61,14 +62,16 @@ fun RoleSelectorScreen(
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
+            .fillMaxSize()
+            .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         RoleImage()
         Spacer(modifier = Modifier.height(24.dp))
         RoleSelectors(selectedRole)
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.weight(1f))
         NextButton(viewModel, selectedRole)
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
