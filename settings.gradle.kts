@@ -17,7 +17,6 @@ rootProject.name = "PN Expert"
 include(":app")
 include(":features:main-menu")
 include(":features:sign-up")
-include(":navigation")
 include(":core:feature-api")
 include(":core:presentation")
 include(":core:theme")

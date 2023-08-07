@@ -1,18 +1,20 @@
-package ru.fefu.navigation.presentation.tabsscreen
+package ru.fefu.pnexpert.presentation.navigation.tabsscreen.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.rememberCompositionContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import ru.fefu.navigation.presentation.navigation.bottomNavTabItems
+import ru.fefu.pnexpert.presentation.navigation.AppNavGraph
+import ru.fefu.pnexpert.presentation.navigation.tabsscreen.entities.bottomNavTabItems
 import ru.fefu.theme.PnExpertTheme
 
 @Composable
@@ -21,11 +23,9 @@ fun TabsScreen() {
     val bottomBarBackgroundColor = PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor
     SideEffect {
         systemUiController.setNavigationBarColor(color = bottomBarBackgroundColor)
+        systemUiController.setSystemBarsColor(color = Color.Transparent)
     }
 
-    BottomAppBar {
-
-    }
     Scaffold(
         bottomBar = {
             BottomNavBar(
@@ -35,7 +35,7 @@ fun TabsScreen() {
             )
         }
     ) { innerPadding ->
-        MainScreenNavGraph(navController, innerPadding)
+        AppNavGraph()
     }
 }
 

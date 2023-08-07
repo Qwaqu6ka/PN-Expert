@@ -1,4 +1,4 @@
-package ru.fefu.navigation.presentation
+package ru.fefu.pnexpert.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

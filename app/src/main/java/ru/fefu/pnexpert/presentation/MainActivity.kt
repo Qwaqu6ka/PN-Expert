@@ -1,4 +1,4 @@
-package ru.fefu.navigation.presentation
+package ru.fefu.pnexpert.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
-import ru.fefu.navigation.presentation.tabsscreen.MainScreen
+import ru.fefu.pnexpert.presentation.navigation.AppNavGraph
 import ru.fefu.theme.PnExpertTheme
 
 @AndroidEntryPoint
@@ -27,10 +27,8 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             PnExpertTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    ru.fefu.navigation.presentation.AppNavGraph()
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    AppNavGraph()
                 }
             }
         }

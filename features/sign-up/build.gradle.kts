@@ -42,4 +42,6 @@ android {
 dependencies {
 
     implementation(libs.core.ktx)
+
+    implementation(project(":core:feature-api"))
 }

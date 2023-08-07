@@ -82,7 +82,6 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
 
+    implementation(project(":core:feature-api"))
     implementation(project(":core:presentation"))
-
-    implementation(project(":navigation"))
 }

@@ -1,4 +1,4 @@
-package ru.fefu.navigation.presentation.tabsscreen
+package ru.fefu.pnexpert.presentation.navigation.tabsscreen.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -21,13 +21,15 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
+import ru.fefu.pnexpert.presentation.navigation.tabsscreen.entities.BottomNavTab
+import ru.fefu.pnexpert.presentation.navigation.tabsscreen.entities.MarkedBottomNabTab
 import ru.fefu.theme.BadgeColor
 import ru.fefu.theme.PnExpertTheme
 
 @Composable
 fun BottomNavBar(
     navController: NavController,
-    tabItems: List<ru.fefu.navigation.presentation.navigation.BottomNavTab>,
+    tabItems: List<BottomNavTab>,
     backgroundColor: Color
 ) {
     BottomNavigation(
@@ -39,7 +41,7 @@ fun BottomNavBar(
 
             val isTabSelected = currentDestination?.hierarchy?.any { it.route == tab.route } == true
             val tabButtonContentColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor
-            val isTabMarked = tab is ru.fefu.navigation.presentation.navigation.MarkedBottomNabTab && tab.isMarked
+            val isTabMarked = tab is MarkedBottomNabTab && tab.isMarked
 
             BottomNavigationItem(
                 icon = {
@@ -87,7 +89,8 @@ fun BottomNavBar(
                     if (isTabSelected) PnExpertTheme.colors.buttonColors.ButtonPressedBlueColor
                     else PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor
                 ),
-                selectedContentColor = PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor  // color of ripple
+                // color of ripple
+                selectedContentColor = PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor
             )
         }
     }

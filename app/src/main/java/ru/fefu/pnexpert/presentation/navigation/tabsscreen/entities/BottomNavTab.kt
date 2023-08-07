@@ -1,8 +1,7 @@
-package ru.fefu.navigation.presentation.navigation
+package ru.fefu.pnexpert.presentation.navigation.tabsscreen.entities
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import ru.fefu.navigation.R
 import ru.fefu.pnexpert.R
 
 sealed class BottomNavTab(
@@ -24,14 +23,3 @@ sealed class MarkedBottomNabTab(
 ) : BottomNavTab(route, titleRes, iconRes) {
     object Notes : MarkedBottomNabTab("NotesTab", R.string.note, R.drawable.ic_calendar)
 }
-
-/**
- * Place tab here in order which you want to they placed in app
- */
-val bottomNavTabItems = listOf(
-    BottomNavTab.Services,
-    MarkedBottomNabTab.Notes,
-    BottomNavTab.Main,
-    BottomNavTab.History,
-    BottomNavTab.Profile
-)
