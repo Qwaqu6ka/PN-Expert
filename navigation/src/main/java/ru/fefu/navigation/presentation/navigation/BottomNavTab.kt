@@ -1,7 +1,8 @@
-package ru.fefu.pnexpert.main.presentation.navigation
+package ru.fefu.navigation.presentation.navigation
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import ru.fefu.navigation.R
 import ru.fefu.pnexpert.R
 
 sealed class BottomNavTab(

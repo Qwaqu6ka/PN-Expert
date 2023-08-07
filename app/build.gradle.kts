@@ -56,7 +56,6 @@ kapt {
     correctErrorTypes = true
 }
 
-
 dependencies {
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.accompanist.pager)
@@ -85,5 +84,5 @@ dependencies {
 
     implementation(project(":core:presentation"))
 
-
+    implementation(project(":navigation"))
 }

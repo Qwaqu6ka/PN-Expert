@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.main.presentation.screens
+package ru.fefu.navigation.presentation.tabsscreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -21,15 +21,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import ru.fefu.pnexpert.main.presentation.navigation.BottomNavTab
-import ru.fefu.pnexpert.main.presentation.navigation.MarkedBottomNabTab
 import ru.fefu.theme.BadgeColor
 import ru.fefu.theme.PnExpertTheme
 
 @Composable
 fun BottomNavBar(
     navController: NavController,
-    tabItems: List<BottomNavTab>,
+    tabItems: List<ru.fefu.navigation.presentation.navigation.BottomNavTab>,
     backgroundColor: Color
 ) {
     BottomNavigation(
@@ -41,7 +39,7 @@ fun BottomNavBar(
 
             val isTabSelected = currentDestination?.hierarchy?.any { it.route == tab.route } == true
             val tabButtonContentColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor
-            val isTabMarked = tab is MarkedBottomNabTab && tab.isMarked
+            val isTabMarked = tab is ru.fefu.navigation.presentation.navigation.MarkedBottomNabTab && tab.isMarked
 
             BottomNavigationItem(
                 icon = {
