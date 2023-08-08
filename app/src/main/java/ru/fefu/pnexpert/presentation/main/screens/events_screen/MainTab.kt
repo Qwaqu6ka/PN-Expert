@@ -39,6 +39,7 @@ import ru.fefu.pnexpert.presentation.main.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 
 data class LongCardData(val image: Int, val title: String, val subtitle: String)
+data class BoxCardData(val image: Int, val title: String)
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -51,6 +52,11 @@ fun MainTab() {
         LongCardData(R.drawable.event_three_chat, "Чат с врачем", "Смотреть"),
         LongCardData(R.drawable.event_four_records, "Ваши показатели выше чем у 75% пользователей!", "Смотреть"),
         LongCardData(R.drawable.event_five_pils, "Лекартсвенная терапия", "Смотреть"),
+    )
+
+    val boxCardsData = listOf(
+        BoxCardData(R.drawable.event_box_columns, "Диагностическая программа мероприятий"),
+        BoxCardData(R.drawable.event_box_graph, "Мониторинг"),
     )
 
     Scaffold(
@@ -73,16 +79,48 @@ fun MainTab() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ){
-                BoxCard()
+                BoxCardDiagnostic(boxCardsData[0])
                 Spacer(modifier = Modifier.width(8.dp))
-                BoxCard()
+                BoxCardMonitoring(boxCardsData[1])
             }
         }
     }
 }
 
 @Composable
-fun BoxCard() {
+fun BoxCardMonitoring(data: BoxCardData) {
+    Card(
+        modifier = Modifier
+            .size(165.dp)
+            .shadow(1.dp, PnExpertTheme.shapes.imageShapes.imageClassic15),
+        shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
+        colors = CardDefaults.cardColors(
+            containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            Text(
+                modifier = Modifier.padding(16.dp),
+                text = data.title,
+                style = PnExpertTheme.typography.text.medium_14,
+                color = PnExpertTheme.colors.textColors.FontDarkColor,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Image(
+                modifier = Modifier
+                    .fillMaxSize(),
+                painter = painterResource(id = data.image),
+                contentDescription = null
+            )
+        }
+    }
+}
+
+@Composable
+fun BoxCardDiagnostic(data: BoxCardData) {
     Card(
         modifier = Modifier
             .size(165.dp)
@@ -98,7 +136,7 @@ fun BoxCard() {
                 .padding(16.dp)
         ) {
             Text(
-                text = "Диагностическая программа мероприятий",
+                text = data.title,
                 style = PnExpertTheme.typography.text.medium_14,
                 color = PnExpertTheme.colors.textColors.FontDarkColor,
             )
@@ -106,7 +144,7 @@ fun BoxCard() {
             Image(
                 modifier = Modifier
                     .fillMaxSize(),
-                painter = painterResource(id = R.drawable.event_box_columns),
+                painter = painterResource(id = data.image),
                 contentDescription = null
             )
         }
