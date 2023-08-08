@@ -31,7 +31,7 @@ fun Toolbar(title: String, isInverseColor: Boolean = false, onBackPressed: (() -
     Box(
         Modifier
             .fillMaxWidth()
-            .background(Color.Transparent)
+            .background(PnExpertTheme.colors.mainAppColors.AppGreyLightColor)
             .padding(horizontal = 16.dp, vertical = 7.dp)
             .defaultMinSize(minHeight = 50.dp)
     ) {
