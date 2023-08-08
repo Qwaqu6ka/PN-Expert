@@ -19,7 +19,7 @@ fun MainScreen() {
 
     val navController = rememberNavController()
     val systemUiController = rememberSystemUiController()
-    val bottomBarBackgroundColor = PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor
+    val bottomBarBackgroundColor = PnExpertTheme.colors.mainAppColors.AppBlueColor
 
     //painted system upp & bottom panels
     SideEffect {

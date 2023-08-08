@@ -52,12 +52,13 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                 ) {
-                    if (!application.isInitializationReady.value){
-                        InitializationScreens()
-                    }
-                    else{
-                       MainScreen()
-                    }
+//                    if (!application.isInitializationReady.value){
+//                        InitializationScreens()
+//                    }
+//                    else{
+//                       MainScreen()
+//                    }
+                    MainScreen()
                 }
             }
         }

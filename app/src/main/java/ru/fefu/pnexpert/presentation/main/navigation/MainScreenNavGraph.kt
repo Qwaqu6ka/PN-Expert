@@ -8,7 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.fefu.pnexpert.presentation.main.screens.InDevPlug
-import ru.fefu.pnexpert.presentation.main.screens.MainTab
+import ru.fefu.pnexpert.presentation.main.screens.events_screen.MainTab
 
 @Composable
 fun MainScreenNavGraph(navController: NavHostController, navHostPadding: PaddingValues) {
