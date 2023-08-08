@@ -25,9 +25,21 @@ import ru.fefu.pnexpert.R
 import ru.fefu.pnexpert.presentation.main.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 
+data class LongCardData(val image: Int, val title: String, val subtitle: String)
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainTab() {
+
+    //variables
+    val longCardsData = listOf(
+        LongCardData(R.drawable.event_one_updrs, "Оценка текущего состояния по UPDRS", "8 из 16 заданий"),
+        LongCardData(R.drawable.event_two_warning, "Строка предупреждений", "Смотреть"),
+        LongCardData(R.drawable.event_three_chat, "Чат с врачем", "Смотреть"),
+        LongCardData(R.drawable.event_four_records, "Ваши показатели выше чем у 75% пользователей!", "Смотреть"),
+        LongCardData(R.drawable.event_five_pils, "Лекартсвенная терапия", "Смотреть"),
+    )
+
     Scaffold(
         topBar = {Toolbar(title = stringResource(id = R.string.events))},
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor
