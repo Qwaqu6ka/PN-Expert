@@ -1,9 +1,14 @@
 package ru.fefu.pnexpert.presentation.main.screens.events_screen
 
 import android.annotation.SuppressLint
+import android.icu.number.Scale
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +23,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -51,44 +60,53 @@ fun MainTab() {
                 .padding(16.dp),
         ) {
             Spacer(modifier = Modifier.height(scaffoldPadding.calculateTopPadding()))
-            for (i in 1..4){
-                LongActionCard()
+            for (cardData in longCardsData){
+                LongActionCard(cardData)
                 Spacer(modifier = Modifier.height(8.dp))
             }
         }
     }
 }
 
-@Preview
+
 @Composable
-private fun LongActionCard(){
+private fun LongActionCard(data: LongCardData){
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(140.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor
-        ),
         shape = PnExpertTheme.shapes.imageShapes.imageClassic15
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(0.6f)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+        Box(
+            modifier = Modifier.fillMaxSize()
         ) {
-            Text(
-                text = "Оценка текущего состояния по UPDRS",
-                style = PnExpertTheme.typography.subtitle.medium_18,
-                color = PnExpertTheme.colors.textColors.FontWhiteColor
+            Image(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(PnExpertTheme.shapes.imageShapes.imageClassic15),
+                painter = painterResource(id = data.image),
+                contentScale = ContentScale.FillHeight,
+                contentDescription = null,
             )
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(0.6f)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = data.title,
+                    style = PnExpertTheme.typography.subtitle.medium_18,
+                    color = PnExpertTheme.colors.textColors.FontWhiteColor
+                )
 
-            Text(
-                text = "8 из 16 заданий",
-                style = PnExpertTheme.typography.text.regular_14,
-                color = PnExpertTheme.colors.textColors.FontWhiteColor
-            )
+                Text(
+                    text = data.subtitle,
+                    style = PnExpertTheme.typography.text.regular_14,
+                    color = PnExpertTheme.colors.textColors.FontWhiteColor
+                )
+            }
         }
     }
 }
