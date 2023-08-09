@@ -1,6 +1,7 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.com.android.library)
+    alias(libs.plugins.kotlin.android)
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
 }
@@ -11,20 +12,14 @@ android {
     val jdkVersion: Int by rootProject.extra
     val compilerExtensionVersion: String by rootProject.extra
 
-    namespace = "ru.fefu.pnexpert"
+    namespace = "ru.fefu.sign_up_impl"
     compileSdk = targetAndroidSdk
 
     defaultConfig {
-        applicationId = "ru.fefu.pnexpert"
         minSdk = minAndroidSdk
-        targetSdk = targetAndroidSdk
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
     kotlin {
         jvmToolchain(jdkVersion)
@@ -44,49 +39,22 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = compilerExtensionVersion
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-}
-
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
-}
-
-hilt {
-    enableAggregatingTask = true
 }
 
 dependencies {
-    implementation(libs.accompanist.systemuicontroller)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
-
-    implementation(libs.core.splashscreen)
-
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.navigation.compose)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
-
-    implementation(libs.retrofit)
-
-    implementation(libs.navigation.compose)
-
-    implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.activity.compose)
-    implementation(platform(libs.kotlin.bom))
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
-    implementation(libs.compose.ui.tooling.preview)
-    debugImplementation(libs.compose.ui.tooling)
 
     implementation(project(":core:feature-api"))
     implementation(project(":core:presentation"))
-    implementation(project(":features:sign-up-impl"))
+    api(project(":features:sign-up-api"))
 }

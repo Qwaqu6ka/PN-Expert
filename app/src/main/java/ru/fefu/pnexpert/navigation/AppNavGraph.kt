@@ -6,18 +6,26 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import ru.fefu.feature_api.register
 import ru.fefu.pnexpert.presentation.BottomTabs
 import ru.fefu.pnexpert.presentation.InDevPlug
 
 @Composable
 fun AppNavGraph(
     navController: NavHostController,
+    featureApiHolder: FeatureApiHolder,
     modifier: Modifier = Modifier
 ) {
     NavHost(
         navController,
-        startDestination = BottomTabs.Main.route
+        startDestination = featureApiHolder.signUpApi.route
     ) {
+
+        register(
+            featureApi = featureApiHolder.signUpApi,
+            navController = navController,
+            modifier = modifier
+        )
 
         navigation(
             route = BottomTabs.Main.route,

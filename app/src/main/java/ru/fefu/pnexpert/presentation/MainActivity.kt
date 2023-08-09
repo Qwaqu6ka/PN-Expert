@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             PnExpertTheme {
-                AppContent()
+                AppContent(viewModel)
             }
         }
     }

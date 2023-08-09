@@ -25,7 +25,7 @@ import ru.fefu.pnexpert.navigation.AppNavGraph
 import ru.fefu.theme.PnExpertTheme
 
 @Composable
-fun AppContent() {
+fun AppContent(viewModel: ActivityScopeViewModel) {
     val tabs = remember { BottomTabs.values() }
     val navController = rememberNavController()
 
@@ -34,6 +34,7 @@ fun AppContent() {
     ) { innerPaddingModifier ->
         AppNavGraph(
             navController = navController,
+            featureApiHolder = viewModel,
             modifier = Modifier.padding(innerPaddingModifier)
         )
     }
