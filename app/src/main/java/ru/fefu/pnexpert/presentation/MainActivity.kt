@@ -4,18 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCompositionContext
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
-import ru.fefu.pnexpert.presentation.navigation.AppNavGraph
 import ru.fefu.theme.PnExpertTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by viewModels<ActivityScopeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
@@ -27,10 +30,17 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             PnExpertTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    AppNavGraph()
-                }
+                AppContent()
             }
         }
+    }
+}
+
+// TODO: DELETE
+@Composable
+fun InDevPlug(testStr: String = "") {
+    rememberCompositionContext()
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Text(text = "Раздел в разработке $testStr")
     }
 }

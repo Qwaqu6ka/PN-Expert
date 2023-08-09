@@ -12,3 +12,15 @@ interface FeatureApi {
         modifier: Modifier
     )
 }
+
+fun NavGraphBuilder.register(
+    featureApi: FeatureApi,
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
+    featureApi.registerGraph(
+        navGraphBuilder = this,
+        navController = navController,
+        modifier = modifier
+    )
+}
