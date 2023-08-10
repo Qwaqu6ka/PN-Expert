@@ -89,4 +89,5 @@ dependencies {
     implementation(project(":core:feature-api"))
     implementation(project(":core:presentation"))
     implementation(project(":features:sign-up-impl"))
+    implementation(project(":features:main-impl"))
 }

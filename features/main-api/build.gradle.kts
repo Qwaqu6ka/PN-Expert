@@ -5,16 +5,22 @@ plugins {
 }
 
 android {
+    val targetAndroidSdk: Int by rootProject.extra
+    val minAndroidSdk: Int by rootProject.extra
+    val jdkVersion: Int by rootProject.extra
+
     namespace = "com.example.main_api"
-    compileSdk = 33
+    compileSdk = targetAndroidSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = minAndroidSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
-
+    kotlin {
+        jvmToolchain(jdkVersion)
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -23,13 +29,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 }
 
