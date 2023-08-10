@@ -9,6 +9,7 @@ import androidx.navigation.navigation
 import ru.fefu.feature_api.register
 import ru.fefu.pnexpert.presentation.BottomTabs
 import ru.fefu.pnexpert.presentation.InDevPlug
+import ru.fefu.pnexpert.presentation.main.screens.events_screen.MainTab
 
 @Composable
 fun AppNavGraph(
@@ -18,7 +19,8 @@ fun AppNavGraph(
 ) {
     NavHost(
         navController,
-        startDestination = featureApiHolder.signUpApi.route
+//        startDestination = featureApiHolder.signUpApi.route
+        startDestination = BottomTabs.Main.route
     ) {
 
         register(
@@ -32,7 +34,7 @@ fun AppNavGraph(
             startDestination = "testMain"
         ) {
             composable("testMain") {
-                InDevPlug("Main")
+                MainTab()
             }
         }
         navigation(
