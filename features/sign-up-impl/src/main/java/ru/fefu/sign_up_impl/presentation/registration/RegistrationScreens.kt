@@ -87,12 +87,11 @@ fun RegistrationScreens(
     }
 
     Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
         color = PnExpertTheme.colors.mainAppColors.AppWhiteColor
     ) {
         Column(
+            modifier = Modifier
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(30.dp))
@@ -103,7 +102,7 @@ fun RegistrationScreens(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "$pageNumber/6",
+                text = "$pageNumber/5",
                 style = PnExpertTheme.typography.subtitle.bold_20,
                 color = PnExpertTheme.colors.textColors.FontDarkColor
             )

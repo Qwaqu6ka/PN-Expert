@@ -15,6 +15,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 import ru.fefu.theme.PnExpertTheme
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 

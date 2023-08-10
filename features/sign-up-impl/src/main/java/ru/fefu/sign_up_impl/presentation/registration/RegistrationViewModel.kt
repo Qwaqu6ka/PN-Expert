@@ -1,5 +1,6 @@
 package ru.fefu.sign_up_impl.presentation.registration
 
+
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -42,6 +43,7 @@ class RegistrationViewModel @Inject constructor(
     //a thread for sending notifications to the UI thread
     private val validationEventChannel = Channel<ValidationEvent>()
     val validationEvents = validationEventChannel.receiveAsFlow()
+
 
     //init pages nav controller
     fun initPagesNavController(navController: NavController){
@@ -103,6 +105,10 @@ class RegistrationViewModel @Inject constructor(
         viewModelScope.launch {
             validationEventChannel.send(ValidationEvent.Success)
         }
+    }
+
+    fun registrationSuccess(){
+//        application.initializationFinish()
     }
 
 

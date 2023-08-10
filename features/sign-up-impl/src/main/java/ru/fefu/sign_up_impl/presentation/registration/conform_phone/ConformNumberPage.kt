@@ -6,17 +6,20 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -51,8 +54,9 @@ fun ConformNumberPage(viewModel: RegistrationViewModel) {
 
     Column(
         modifier = Modifier
-        .padding(horizontal = 16.dp),
-
+            .fillMaxSize()
+            .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState()),
     ) {
         Spacer(modifier = Modifier.height(30.dp))
         InputCodeFields(fieldsIsFool)
@@ -60,8 +64,9 @@ fun ConformNumberPage(viewModel: RegistrationViewModel) {
         MessageTimer(totalTime = timerValue)
         Spacer(modifier = Modifier.height(80.dp))
         TextRepeatCode(timerValue)
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.weight(1f))
         ConformButton(viewModel,fieldsIsFool)
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
@@ -210,11 +215,8 @@ private fun InputCodeFields(
                     fontSize = 40.sp,
                     textAlign = TextAlign.Center
                 ),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = fieldBackground,
-//                    textColor = PnExpertTheme.colors.textColors.FontDarkColor
-                    unfocusedContainerColor = fieldBackground,
-                    disabledContainerColor = fieldBackground,
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    containerColor = fieldBackground,
                     focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
                     unfocusedBorderColor = Color.Transparent,
                 ),
