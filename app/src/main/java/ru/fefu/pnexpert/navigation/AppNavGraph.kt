@@ -2,6 +2,7 @@ package ru.fefu.pnexpert.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -9,7 +10,6 @@ import androidx.navigation.navigation
 import ru.fefu.feature_api.register
 import ru.fefu.pnexpert.presentation.BottomTabs
 import ru.fefu.pnexpert.presentation.InDevPlug
-import ru.fefu.pnexpert.presentation.main.screens.events_screen.MainTab
 
 @Composable
 fun AppNavGraph(
@@ -29,14 +29,14 @@ fun AppNavGraph(
             modifier = modifier
         )
 
-        navigation(
-            route = BottomTabs.Main.route,
-            startDestination = "testMain"
-        ) {
-            composable("testMain") {
-                MainTab()
-            }
-        }
+
+        register(
+            featureApi = featureApiHolder.mainPageApi,
+            navController = navController,
+            modifier = modifier
+        )
+
+
         navigation(
             route = BottomTabs.Profile.route,
             startDestination = "testProfile"
