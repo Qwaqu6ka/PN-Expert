@@ -9,6 +9,7 @@ android {
     val targetAndroidSdk: Int by rootProject.extra
     val minAndroidSdk: Int by rootProject.extra
     val jdkVersion: Int by rootProject.extra
+    val compilerExtensionVersion: String by rootProject.extra
 
     namespace = "ru.fefu.pnexpert"
     compileSdk = targetAndroidSdk
@@ -41,7 +42,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = compilerExtensionVersion
     }
     packaging {
         resources {
@@ -55,6 +56,9 @@ kapt {
     correctErrorTypes = true
 }
 
+hilt {
+    enableAggregatingTask = true
+}
 
 dependencies {
     implementation(libs.accompanist.systemuicontroller)
@@ -71,8 +75,6 @@ dependencies {
 
     implementation(libs.navigation.compose)
 
-    implementation(libs.material) // for BottomNavigation and BottomNavigationItem
-
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
@@ -82,8 +84,9 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
     implementation(libs.compose.ui.tooling.preview)
-
-    implementation(project(":core:theme"))
-
     debugImplementation(libs.compose.ui.tooling)
+
+    implementation(project(":core:feature-api"))
+    implementation(project(":core:presentation"))
+    implementation(project(":features:sign-up-impl"))
 }

@@ -1,66 +1,47 @@
 package ru.fefu.pnexpert.presentation
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.SideEffect
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCompositionContext
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-import ru.fefu.pnexpert.PnExpertApp
-import ru.fefu.pnexpert.presentation.initialization.InitializationScreens
-import ru.fefu.pnexpert.presentation.main.screens.MainScreen
 import ru.fefu.theme.PnExpertTheme
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: MainActivityViewModel by viewModels()
+    private val viewModel by viewModels<ActivityScopeViewModel>()
 
-    @Inject
-    lateinit var application: PnExpertApp
-
-    @SuppressLint("StateFlowValueCalledInComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        //splash screen
         splashScreen.setKeepOnScreenCondition {
-            !viewModel.isUiReady.value
+            viewModel.isUiReady.value == false
         }
 
         setContent {
             PnExpertTheme {
-                //painted system controllers
-                val systemUiController = rememberSystemUiController()
-                val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
-
-                //painted system upp & bottom panels
-                SideEffect {
-                    systemUiController.setStatusBarColor(color = barBackground)
-                    systemUiController.setNavigationBarColor(color = barBackground)
-                }
-
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-//                    if (!application.isInitializationReady.value){
-//                        InitializationScreens()
-//                    }
-//                    else{
-//                       MainScreen()
-//                    }
-                    MainScreen()
-                }
+                AppContent(viewModel)
             }
         }
+    }
+}
+
+// TODO: DELETE
+@Composable
+fun InDevPlug(testStr: String = "") {
+    rememberCompositionContext()
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Text(text = "Раздел в разработке $testStr")
     }
 }

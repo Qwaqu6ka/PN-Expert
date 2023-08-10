@@ -8,6 +8,7 @@ android {
     val targetAndroidSdk: Int by rootProject.extra
     val minAndroidSdk: Int by rootProject.extra
     val jdkVersion: Int by rootProject.extra
+    val compilerExtensionVersion: String by rootProject.extra
 
     namespace = "ru.fefu.theme"
     compileSdk = targetAndroidSdk
@@ -34,7 +35,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = compilerExtensionVersion
     }
 }
 

@@ -9,7 +9,7 @@ sealed class BottomNavTab(
     @StringRes val titleRes: Int,
     @DrawableRes val iconRes: Int
 ) {
-    object Main : BottomNavTab("MainTab", R.string.main_page, R.drawable.ic_heart)
+    object Main : BottomNavTab("MainTab", R.string.main, R.drawable.ic_heart)
     object Profile : BottomNavTab("ProfileTab", R.string.profile, R.drawable.ic_person)
     object Services : BottomNavTab("ServicesTab", R.string.services, R.drawable.ic_settings)
     object History : BottomNavTab("HistoryTab", R.string.history, R.drawable.ic_notebook)

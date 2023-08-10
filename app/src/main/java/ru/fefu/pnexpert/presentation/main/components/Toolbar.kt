@@ -1,4 +1,5 @@
-package ru.fefu.pnexpert.presentation.main.components
+package ru.fefu.presentation
+
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,7 +19,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.fefu.pnexpert.R
 import ru.fefu.theme.PnExpertTheme
 
 @Composable
