@@ -41,7 +41,7 @@ data class BoxCardData(val image: Int, val title: String)
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainTab() {
+fun MainTab(modifier: Modifier) {
 
     //variables
     val longCardsData = listOf(
@@ -81,6 +81,7 @@ fun MainTab() {
                 Spacer(modifier = Modifier.width(8.dp))
                 BoxCardMonitoring(boxCardsData[1])
             }
+            Spacer(modifier = Modifier.height(scaffoldPadding.calculateTopPadding()))
         }
     }
 }
