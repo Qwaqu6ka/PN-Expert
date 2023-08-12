@@ -27,6 +27,7 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
@@ -301,10 +302,13 @@ private fun SingUpInputFields(
                     value = selectedCountryCodeItem,
                     onValueChange = {},
                     singleLine = true,
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = fieldBackground,
+                        unfocusedContainerColor = fieldBackground,
+                        disabledContainerColor = fieldBackground,
                         focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
                         unfocusedBorderColor = Color.Transparent,
-                        containerColor = fieldBackground,
+                        errorContainerColor = fieldBackground
                     )
                 )
                 DropdownMenu(
@@ -387,10 +391,13 @@ private fun SingUpInputFields(
                 ),
                 singleLine = true,
                 textStyle = TextStyle(fontSize = 16.sp),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = fieldBackground,
+                    unfocusedContainerColor = fieldBackground,
+                    disabledContainerColor = fieldBackground,
                     focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
                     unfocusedBorderColor = Color.Transparent,
-                    containerColor = fieldBackground
+                    errorContainerColor = fieldBackground
                 )
             )
 
@@ -433,10 +440,13 @@ private fun SingUpInputFields(
             visualTransformation = if (passwordVisibility) VisualTransformation.None else PasswordVisualTransformation(),
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = fieldBackground,
+                unfocusedContainerColor = fieldBackground,
+                disabledContainerColor = fieldBackground,
                 focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
                 unfocusedBorderColor = Color.Transparent,
-                containerColor = fieldBackground
+                errorContainerColor = fieldBackground
             )
         )
 
@@ -478,10 +488,13 @@ private fun SingUpInputFields(
             visualTransformation = if (passwordRepeatVisibility) VisualTransformation.None else PasswordVisualTransformation(),
             singleLine = true,
             textStyle = TextStyle(fontSize = 16.sp),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
+                unfocusedContainerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
+                disabledContainerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
                 focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
                 unfocusedBorderColor = Color.Transparent,
-                containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
+                errorContainerColor = fieldBackground
             )
         )
 
