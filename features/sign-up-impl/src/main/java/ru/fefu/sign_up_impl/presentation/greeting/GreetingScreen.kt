@@ -27,13 +27,12 @@ import ru.fefu.theme.PnExpertTheme
 @Composable
 fun GreetingScreen(onRegisterNavigate: () -> Unit) {
 
-//    //painted system controllers
     val systemUiController = rememberSystemUiController()
 
-//    //painted system upp & bottom panels
-//    SideEffect {
-//        systemUiController.setStatusBarColor()
-//    }
+    SideEffect {
+        systemUiController.statusBarDarkContentEnabled = false
+        systemUiController.navigationBarDarkContentEnabled = false
+    }
 
     Surface(
         color = PnExpertTheme.colors.mainAppColors.AppBlueColor

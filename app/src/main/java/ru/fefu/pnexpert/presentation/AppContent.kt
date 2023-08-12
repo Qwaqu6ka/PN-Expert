@@ -15,6 +15,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -29,6 +30,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.pnexpert.navigation.AppNavGraph
 import ru.fefu.theme.PnExpertTheme
 
@@ -50,6 +52,12 @@ fun AppContent(viewModel: ActivityScopeViewModel) {
 
 @Composable
 fun BottomNavBar(navController: NavController, tabItems: Array<BottomTabs>) {
+
+    val systemUiController = rememberSystemUiController()
+
+    SideEffect {
+        systemUiController.navigationBarDarkContentEnabled = false
+    }
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination

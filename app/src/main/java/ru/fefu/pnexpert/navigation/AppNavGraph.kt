@@ -23,8 +23,8 @@ fun AppNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = BottomTabs.Main.route
-//        startDestination = featureApiHolder.signUpApi.route
+//        startDestination = BottomTabs.Main.route
+        startDestination = featureApiHolder.signUpApi.route
     ) {
 
         register(

@@ -35,17 +35,12 @@ fun RegistrationScreens(
     viewModel: RegistrationViewModel
 ) {
 
-//    //painted system controllers
-//    val systemUiController = rememberSystemUiController()
-//    val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
-//
-//    //painted system upp & bottom panels
-//    SideEffect {
-//        systemUiController.apply {
-//            setStatusBarColor(color = barBackground)
-//            setNavigationBarColor(color = barBackground)
-//        }
-//    }
+    val systemUiController = rememberSystemUiController()
+
+    SideEffect {
+        systemUiController.statusBarDarkContentEnabled = true
+        systemUiController.navigationBarDarkContentEnabled = true
+    }
 
     val context = LocalContext.current
     LaunchedEffect(context){
