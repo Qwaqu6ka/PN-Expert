@@ -7,7 +7,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -17,15 +19,14 @@ import ru.fefu.sign_up_impl.utils.models.SingUpFormState
 import ru.fefu.sign_up_impl.utils.singUpValidation.ValidatePassword
 import ru.fefu.sign_up_impl.utils.singUpValidation.ValidatePhoneNumber
 import ru.fefu.sign_up_impl.utils.singUpValidation.ValidateRepeatPassword
-import javax.inject.Inject
 
 
-@HiltViewModel
-class RegistrationViewModel @Inject constructor(
+class RegistrationViewModel @AssistedInject constructor(
     private val validatePhoneNumber: ValidatePhoneNumber,
     private val validatePassword: ValidatePassword,
     private val validateRepeatPassword: ValidateRepeatPassword,
-):ViewModel() {
+    @Assisted private val launchMainTab: () -> Unit
+) : ViewModel() {
     //registration pages variables
     private var _pagesNavController: NavController? = null
     val pagesNavController get() = _pagesNavController
@@ -46,27 +47,30 @@ class RegistrationViewModel @Inject constructor(
 
 
     //init pages nav controller
-    fun initPagesNavController(navController: NavController){
+    fun initPagesNavController(navController: NavController) {
         _pagesNavController = navController
     }
 
-    fun changeRegistrationPage(currentPage: RegistrationNavigationRoute){
+    fun changeRegistrationPage(currentPage: RegistrationNavigationRoute) {
         _currentRegistrationPage = currentPage
     }
 
     //listener ui input events
-    fun inputDataEvent(event: SingUpFormEvent){
-        when(event){
-            is SingUpFormEvent.PhoneNumberChanged ->{
+    fun inputDataEvent(event: SingUpFormEvent) {
+        when (event) {
+            is SingUpFormEvent.PhoneNumberChanged -> {
                 inputDataState = inputDataState.copy(phoneNumber = event.phoneNumber)
             }
-            is SingUpFormEvent.PasswordChanged->{
+
+            is SingUpFormEvent.PasswordChanged -> {
                 inputDataState = inputDataState.copy(password = event.password)
             }
-            is SingUpFormEvent.RepeatPasswordChanged->{
+
+            is SingUpFormEvent.RepeatPasswordChanged -> {
                 inputDataState = inputDataState.copy(repeatPassword = event.repeatPassword)
             }
-            is SingUpFormEvent.Submit ->{
+
+            is SingUpFormEvent.Submit -> {
                 submitInputData()
             }
         }
@@ -85,9 +89,9 @@ class RegistrationViewModel @Inject constructor(
             phoneNumberResult,
             passwordResult,
             repeatPasswordResult
-        ).any{ !it.success}
+        ).any { !it.success }
 
-        if (hasError){
+        if (hasError) {
             inputDataState = inputDataState.copy(
                 phoneNumberError = phoneNumberResult.errorMessage,
                 passwordError = passwordResult.errorMessage,
@@ -107,13 +111,16 @@ class RegistrationViewModel @Inject constructor(
         }
     }
 
-    fun registrationSuccess(){
-//        application.initializationFinish()
+    fun registrationSuccess() = launchMainTab()
+
+
+    sealed class ValidationEvent {
+        object Success : ValidationEvent()
+        object Error : ValidationEvent()
     }
 
-
-    sealed class ValidationEvent{
-        object Success: ValidationEvent()
-        object Error: ValidationEvent()
+    @AssistedFactory
+    interface Factory {
+        fun create(launchMainTab: () -> Unit): RegistrationViewModel
     }
 }

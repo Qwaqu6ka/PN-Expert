@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    extra.set("targetAndroidSdk", 33)
+    extra.set("targetAndroidSdk", 34)
     extra.set("minAndroidSdk", 26)
     extra.set("jdkVersion", 17)
     extra.set("compilerExtensionVersion", "1.4.3")

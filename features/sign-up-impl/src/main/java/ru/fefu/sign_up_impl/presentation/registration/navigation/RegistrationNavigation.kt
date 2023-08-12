@@ -17,20 +17,23 @@ fun RegistrationNavigation(
 ) {
     val navController = rememberNavController()
     viewModel.initPagesNavController(navController)
-    NavHost(navController = navController, startDestination = RegistrationNavigationRoute.SingUpScreen.route){
-        composable(route = RegistrationNavigationRoute.SingUpScreen.route){
+    NavHost(
+        navController = navController,
+        startDestination = RegistrationNavigationRoute.SingUpScreen.route
+    ) {
+        composable(route = RegistrationNavigationRoute.SingUpScreen.route) {
             SingUpScreen(viewModel)
         }
-        composable(RegistrationNavigationRoute.ConformPhoneScreen.route){
+        composable(RegistrationNavigationRoute.ConformPhoneScreen.route) {
             ConformNumberPage(viewModel)
         }
-        composable(RegistrationNavigationRoute.SelectRoleScreen.route){
+        composable(RegistrationNavigationRoute.SelectRoleScreen.route) {
             RoleSelectorScreen(viewModel)
         }
-        composable(RegistrationNavigationRoute.UsersAgreementScreen.route){
+        composable(RegistrationNavigationRoute.UsersAgreementScreen.route) {
             UsersAgreementScreen(viewModel)
         }
-        composable(RegistrationNavigationRoute.ManualScreen.route){
+        composable(RegistrationNavigationRoute.ManualScreen.route) {
             ManualScreen(viewModel)
         }
     }
