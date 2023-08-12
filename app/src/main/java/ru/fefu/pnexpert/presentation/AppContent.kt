@@ -2,16 +2,25 @@ package ru.fefu.pnexpert.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -21,6 +30,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.pnexpert.navigation.AppNavGraph
 import ru.fefu.theme.PnExpertTheme
 
@@ -30,7 +40,7 @@ fun AppContent(viewModel: ActivityScopeViewModel) {
     val navController = rememberNavController()
 
     Scaffold(
-        bottomBar = { BottomNavBar(navController = navController, tabItems = tabs) }
+        bottomBar = { BottomNavBar(navController = navController, tabItems = tabs) },
     ) { innerPaddingModifier ->
         AppNavGraph(
             navController = navController,
@@ -43,6 +53,12 @@ fun AppContent(viewModel: ActivityScopeViewModel) {
 @Composable
 fun BottomNavBar(navController: NavController, tabItems: Array<BottomTabs>) {
 
+    val systemUiController = rememberSystemUiController()
+
+    SideEffect {
+        systemUiController.navigationBarDarkContentEnabled = false
+    }
+
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
@@ -53,7 +69,12 @@ fun BottomNavBar(navController: NavController, tabItems: Array<BottomTabs>) {
     } == true
 
     if (showBottomTabs) {
-        BottomNavigation {
+        BottomNavigation(
+            modifier = Modifier
+                .background(PnExpertTheme.colors.mainAppColors.AppBlueColor)
+                .windowInsetsPadding(WindowInsets.navigationBars),
+            elevation = 0.dp
+        ) {
             tabItems.forEach { tab ->
                 val isTabSelected =
                     currentDestination?.hierarchy?.any { it.route == tab.route } == true

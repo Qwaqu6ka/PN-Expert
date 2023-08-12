@@ -2,14 +2,18 @@ package ru.fefu.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,10 +22,17 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.theme.PnExpertTheme
 
 @Composable
 fun Toolbar(title: String, isInverseColor: Boolean = false, onBackPressed: (() -> Unit)? = null) {
+
+    val systemUiController = rememberSystemUiController()
+
+    SideEffect {
+        systemUiController.statusBarDarkContentEnabled = true
+    }
 
     val textColor = if (isInverseColor) PnExpertTheme.colors.textColors.FontWhiteColor
     else PnExpertTheme.colors.textColors.FontDarkColor
@@ -31,7 +42,8 @@ fun Toolbar(title: String, isInverseColor: Boolean = false, onBackPressed: (() -
         Modifier
             .fillMaxWidth()
             .background(PnExpertTheme.colors.mainAppColors.AppGreyLightColor)
-            .padding(horizontal = 16.dp, vertical = 7.dp)
+            .padding(horizontal = 16.dp)
+            .windowInsetsPadding(WindowInsets.statusBars)
             .defaultMinSize(minHeight = 50.dp)
     ) {
         if (onBackPressed != null) {

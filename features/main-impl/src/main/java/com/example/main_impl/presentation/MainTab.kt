@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.presentation.main.screens.events_screen
+package com.example.main_impl.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -9,13 +9,17 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ripple.rememberRipple
@@ -32,7 +36,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import ru.fefu.pnexpert.R
+import com.example.main_impl.R
 import ru.fefu.presentation.Toolbar
 import ru.fefu.theme.PnExpertTheme
 
@@ -41,7 +45,7 @@ data class BoxCardData(val image: Int, val title: String)
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainTab() {
+fun MainTab(modifier: Modifier) {
 
     //variables
     val longCardsData = listOf(
@@ -65,7 +69,8 @@ fun MainTab() {
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(16.dp),
+                .padding(horizontal = 16.dp)
+                .windowInsetsPadding(WindowInsets.safeDrawing),
         ) {
             Spacer(modifier = Modifier.height(scaffoldPadding.calculateTopPadding()))
             for (cardData in longCardsData){
@@ -81,6 +86,7 @@ fun MainTab() {
                 Spacer(modifier = Modifier.width(8.dp))
                 BoxCardMonitoring(boxCardsData[1])
             }
+            Spacer(modifier = Modifier.height(scaffoldPadding.calculateTopPadding()))
         }
     }
 }

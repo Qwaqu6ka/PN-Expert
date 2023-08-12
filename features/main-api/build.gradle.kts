@@ -8,9 +8,8 @@ android {
     val targetAndroidSdk: Int by rootProject.extra
     val minAndroidSdk: Int by rootProject.extra
     val jdkVersion: Int by rootProject.extra
-    val compilerExtensionVersion: String by rootProject.extra
 
-    namespace = "ru.fefu.presentation"
+    namespace = "com.example.main_api"
     compileSdk = targetAndroidSdk
 
     defaultConfig {
@@ -21,12 +20,6 @@ android {
     }
     kotlin {
         jvmToolchain(jdkVersion)
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = compilerExtensionVersion
     }
     buildTypes {
         release {
@@ -40,13 +33,5 @@ android {
 }
 
 dependencies {
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.material3)
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.graphics)
-    implementation(libs.compose.ui.tooling.preview)
-    debugImplementation(libs.compose.ui.tooling)
-    implementation(libs.accompanist.systemuicontroller)
-
-    api(project(":core:theme"))
+    implementation(project(":core:feature-api"))
 }

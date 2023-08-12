@@ -1,6 +1,7 @@
 package ru.fefu.pnexpert.presentation
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -12,6 +13,7 @@ import androidx.compose.runtime.rememberCompositionContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
 import dagger.hilt.android.AndroidEntryPoint
 import ru.fefu.theme.PnExpertTheme
 
@@ -22,8 +24,12 @@ class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<ActivityScopeViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        //SOFT_INPUT_KEYBOARD
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        
+        val splashScreen = installSplashScreen()
 
         splashScreen.setKeepOnScreenCondition {
             viewModel.isUiReady.value == false
