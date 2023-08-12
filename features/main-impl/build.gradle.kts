@@ -12,7 +12,7 @@ android {
     val jdkVersion: Int by rootProject.extra
     val compilerExtensionVersion: String by rootProject.extra
 
-    namespace = "com.example.main_impl"
+    namespace = "ru.fefu.main_impl"
     compileSdk = targetAndroidSdk
 
     defaultConfig {
@@ -56,7 +56,6 @@ dependencies {
     implementation(libs.compose.ui.graphics)
     implementation(libs.accompanist.systemuicontroller)
 
-    implementation(project(":core:feature-api"))
     implementation(project(":core:presentation"))
     api(project(":features:main-api"))
 }

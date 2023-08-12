@@ -54,7 +54,6 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
 
-    implementation(project(":core:feature-api"))
     implementation(project(":core:presentation"))
     api(project(":features:sign-up-api"))
 }

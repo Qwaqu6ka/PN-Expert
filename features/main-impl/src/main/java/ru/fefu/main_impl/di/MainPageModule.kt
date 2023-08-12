@@ -1,7 +1,7 @@
-package com.example.main_impl.di
+package ru.fefu.main_impl.di
 
-import com.example.main_api.MainPageApi
-import com.example.main_impl.navigation.MainPageImpl
+import ru.fefu.main_api.MainPageApi
+import ru.fefu.main_impl.navigation.MainPageImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -11,5 +11,5 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 interface MainPageModule {
     @Binds
-    fun bindSingUp(singUpImpl: MainPageImpl): MainPageApi
+    fun bindMainPage(mainImpl: MainPageImpl): MainPageApi
 }

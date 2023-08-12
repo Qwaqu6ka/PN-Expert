@@ -1,12 +1,7 @@
 package ru.fefu.pnexpert.navigation
 
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -34,16 +29,16 @@ fun AppNavGraph(
         )
 
 
-       navigation(
-           route = BottomTabs.Main.route,
-           startDestination = featureApiHolder.mainPageApi.route
-       ){
-           register(
-               featureApi = featureApiHolder.mainPageApi,
-               navController = navController,
-               modifier = modifier
-           )
-       }
+        navigation(
+            route = BottomTabs.Main.route,
+            startDestination = featureApiHolder.mainPageApi.route
+        ) {
+            register(
+                featureApi = featureApiHolder.mainPageApi,
+                navController = navController,
+                modifier = modifier
+            )
+        }
 
 
         navigation(

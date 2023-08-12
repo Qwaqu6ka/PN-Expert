@@ -145,7 +145,7 @@ private fun RoleCard(
         ) {
             Column() {
                 Icon(
-                    painter = painterResource(id = R.drawable.person_role_icon),
+                    painter = painterResource(id = R.drawable.ic_person),
                     contentDescription = "roleImage"
                 )
             }

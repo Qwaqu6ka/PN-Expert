@@ -1,4 +1,4 @@
-package com.example.main_impl.presentation
+package ru.fefu.main_impl.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
@@ -36,7 +35,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.main_impl.R
+import ru.fefu.main_impl.R
 import ru.fefu.presentation.Toolbar
 import ru.fefu.theme.PnExpertTheme
 
@@ -49,10 +48,18 @@ fun MainTab(modifier: Modifier) {
 
     //variables
     val longCardsData = listOf(
-        LongCardData(R.drawable.event_one_updrs, "Оценка текущего состояния по UPDRS", "8 из 16 заданий"),
+        LongCardData(
+            R.drawable.event_one_updrs,
+            "Оценка текущего состояния по UPDRS",
+            "8 из 16 заданий"
+        ),
         LongCardData(R.drawable.event_two_warning, "Строка предупреждений", "Смотреть"),
         LongCardData(R.drawable.event_three_chat, "Чат с врачем", "Смотреть"),
-        LongCardData(R.drawable.event_four_records, "Ваши показатели выше чем у 75% пользователей!", "Смотреть"),
+        LongCardData(
+            R.drawable.event_four_records,
+            "Ваши показатели выше чем у 75% пользователей!",
+            "Смотреть"
+        ),
         LongCardData(R.drawable.event_five_pils, "Лекартсвенная терапия", "Смотреть"),
     )
 
@@ -62,9 +69,9 @@ fun MainTab(modifier: Modifier) {
     )
 
     Scaffold(
-        topBar = {Toolbar(title = stringResource(id = R.string.main))},
+        topBar = { Toolbar(title = stringResource(id = R.string.main)) },
         containerColor = PnExpertTheme.colors.mainAppColors.AppGreyLightColor
-    ) {scaffoldPadding->
+    ) { scaffoldPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -73,15 +80,15 @@ fun MainTab(modifier: Modifier) {
                 .windowInsetsPadding(WindowInsets.safeDrawing),
         ) {
             Spacer(modifier = Modifier.height(scaffoldPadding.calculateTopPadding()))
-            for (cardData in longCardsData){
+            for (cardData in longCardsData) {
                 LongActionCard(cardData)
                 Spacer(modifier = Modifier.height(8.dp))
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Row (
+            Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
-            ){
+            ) {
                 BoxCardDiagnostic(boxCardsData[0])
                 Spacer(modifier = Modifier.width(8.dp))
                 BoxCardMonitoring(boxCardsData[1])
@@ -141,7 +148,7 @@ fun BoxCardDiagnostic(data: BoxCardData) {
         modifier = Modifier
             .size(165.dp)
             .shadow(1.dp, PnExpertTheme.shapes.imageShapes.imageClassic15)
-            .clickable (
+            .clickable(
                 interactionSource = interactionSource,
                 indication = rememberRipple(radius = 400.dp),
                 onClick = {
@@ -176,7 +183,7 @@ fun BoxCardDiagnostic(data: BoxCardData) {
 
 
 @Composable
-private fun LongActionCard(data: LongCardData){
+private fun LongActionCard(data: LongCardData) {
     val interactionSource = remember { MutableInteractionSource() }
 
     Card(
@@ -184,7 +191,7 @@ private fun LongActionCard(data: LongCardData){
             .fillMaxWidth()
             .height(140.dp)
             .shadow(6.dp, PnExpertTheme.shapes.imageShapes.imageClassic15)
-            .clickable (
+            .clickable(
                 interactionSource = interactionSource,
                 indication = rememberRipple(radius = 400.dp),
                 onClick = {

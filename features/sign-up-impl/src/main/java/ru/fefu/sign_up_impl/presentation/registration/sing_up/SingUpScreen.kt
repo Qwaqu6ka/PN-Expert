@@ -30,7 +30,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -165,7 +164,7 @@ private fun AlternativeSingUp() {
             ) {
                 Image(
                     modifier = Modifier.shadow(buttonShadow, CircleShape),
-                    painter = painterResource(id = R.drawable.ok_icon),
+                    painter = painterResource(id = R.drawable.ic_ok),
                     contentDescription = "okSingUpIcon"
                 )
             }
@@ -174,7 +173,7 @@ private fun AlternativeSingUp() {
             ) {
                 Image(
                     modifier = Modifier.shadow(buttonShadow, CircleShape),
-                    painter = painterResource(id = R.drawable.google_icon),
+                    painter = painterResource(id = R.drawable.ic_google),
                     contentDescription = "okSingUpIcon"
                 )
             }
@@ -183,7 +182,7 @@ private fun AlternativeSingUp() {
             ) {
                 Image(
                     modifier = Modifier.shadow(buttonShadow, CircleShape),
-                    painter = painterResource(id = R.drawable.whatsapp_icon),
+                    painter = painterResource(id = R.drawable.ic_whatsapp),
                     contentDescription = "okSingUpIcon"
                 )
             }
@@ -192,7 +191,7 @@ private fun AlternativeSingUp() {
             ) {
                 Image(
                     modifier = Modifier.shadow(buttonShadow, CircleShape),
-                    painter = painterResource(id = R.drawable.telegram_icon),
+                    painter = painterResource(id = R.drawable.ic_telegram),
                     contentDescription = "okSingUpIcon"
                 )
             }
@@ -254,16 +253,16 @@ private fun SingUpInputFields(
     //Password fields variables
     var passwordVisibility by remember { mutableStateOf(false) }
     val iconPassword = if (passwordVisibility) {
-        painterResource(id = R.drawable.baseline_visibility_off_24)
+        painterResource(id = R.drawable.ic_visibility_off)
     } else {
-        painterResource(id = R.drawable.baseline_visibility_24)
+        painterResource(id = R.drawable.ic_visibility)
     }
 
     var passwordRepeatVisibility by remember { mutableStateOf(false) }
     val iconPasswordRepeat = if (passwordRepeatVisibility) {
-        painterResource(id = R.drawable.baseline_visibility_off_24)
+        painterResource(id = R.drawable.ic_visibility_off)
     } else {
-        painterResource(id = R.drawable.baseline_visibility_24)
+        painterResource(id = R.drawable.ic_visibility)
     }
 
     Column(
@@ -381,7 +380,7 @@ private fun SingUpInputFields(
                         }
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.error_mark_icon),
+                            painter = painterResource(id = R.drawable.ic_error),
                             contentDescription = "calendar icon",
                         )
                     }

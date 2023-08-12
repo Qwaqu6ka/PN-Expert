@@ -9,7 +9,7 @@ android {
     val minAndroidSdk: Int by rootProject.extra
     val jdkVersion: Int by rootProject.extra
 
-    namespace = "com.example.main_api"
+    namespace = "ru.fefu.main_api"
     compileSdk = targetAndroidSdk
 
     defaultConfig {
@@ -33,5 +33,5 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:feature-api"))
+    api(project(":core:feature-api"))
 }

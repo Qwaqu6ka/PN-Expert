@@ -33,5 +33,5 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:feature-api"))
+    api(project(":core:feature-api"))
 }
