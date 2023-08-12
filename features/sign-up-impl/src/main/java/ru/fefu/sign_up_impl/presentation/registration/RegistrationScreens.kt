@@ -1,9 +1,14 @@
 package ru.fefu.sign_up_impl.presentation.registration
 
+import android.view.Window
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
@@ -30,15 +35,17 @@ fun RegistrationScreens(
     viewModel: RegistrationViewModel
 ) {
 
-    //painted system controllers
-    val systemUiController = rememberSystemUiController()
-    val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
-
-    //painted system upp & bottom panels
-    SideEffect {
-        systemUiController.setStatusBarColor(color = barBackground)
-        systemUiController.setNavigationBarColor(color = barBackground)
-    }
+//    //painted system controllers
+//    val systemUiController = rememberSystemUiController()
+//    val barBackground = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+//
+//    //painted system upp & bottom panels
+//    SideEffect {
+//        systemUiController.apply {
+//            setStatusBarColor(color = barBackground)
+//            setNavigationBarColor(color = barBackground)
+//        }
+//    }
 
     val context = LocalContext.current
     LaunchedEffect(context){
@@ -91,7 +98,8 @@ fun RegistrationScreens(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.safeDrawing),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(30.dp))

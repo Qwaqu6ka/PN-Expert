@@ -4,10 +4,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -24,26 +27,21 @@ import ru.fefu.theme.PnExpertTheme
 @Composable
 fun GreetingScreen(onRegisterNavigate: () -> Unit) {
 
-    //painted system controllers
+//    //painted system controllers
     val systemUiController = rememberSystemUiController()
-    val barBackground = PnExpertTheme.colors.mainAppColors.AppBlueColor
 
-    //painted system upp & bottom panels
-    SideEffect {
-        systemUiController.setStatusBarColor(color = barBackground)
-        systemUiController.setNavigationBarColor(color = barBackground)
-    }
+//    //painted system upp & bottom panels
+//    SideEffect {
+//        systemUiController.setStatusBarColor()
+//    }
 
     Surface(
-        modifier = Modifier
-            .fillMaxSize(),
         color = PnExpertTheme.colors.mainAppColors.AppBlueColor
     ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp)
-                .padding(bottom = 71.dp),
+                .padding(horizontal = 16.dp),
             contentAlignment = Alignment.Center
         ) {
             Column(
@@ -78,7 +76,7 @@ fun GreetingScreen(onRegisterNavigate: () -> Unit) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 16.dp)
-                .padding(bottom = 16.dp),
+                .windowInsetsPadding(WindowInsets.safeDrawing),
             contentAlignment = Alignment.BottomCenter
         ) {
             TextButton(

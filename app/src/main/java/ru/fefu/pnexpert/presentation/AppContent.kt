@@ -2,7 +2,13 @@ package ru.fefu.pnexpert.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
@@ -12,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -54,7 +61,12 @@ fun BottomNavBar(navController: NavController, tabItems: Array<BottomTabs>) {
     } == true
 
     if (showBottomTabs) {
-        BottomNavigation {
+        BottomNavigation(
+            modifier = Modifier
+                .background(PnExpertTheme.colors.mainAppColors.AppBlueColor)
+                .windowInsetsPadding(WindowInsets.navigationBars),
+            elevation = 0.dp
+        ) {
             tabItems.forEach { tab ->
                 val isTabSelected =
                     currentDestination?.hierarchy?.any { it.route == tab.route } == true
