@@ -39,12 +39,12 @@ import ru.fefu.main_impl.R
 import ru.fefu.presentation.Toolbar
 import ru.fefu.theme.PnExpertTheme
 
-data class LongCardData(val image: Int, val title: String, val subtitle: String)
-data class BoxCardData(val image: Int, val title: String)
+internal data class LongCardData(val image: Int, val title: String, val subtitle: String)
+internal data class BoxCardData(val image: Int, val title: String)
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainTab(modifier: Modifier) {
+internal fun MainTab(modifier: Modifier) {
 
     //variables
     val longCardsData = listOf(
@@ -99,7 +99,7 @@ fun MainTab(modifier: Modifier) {
 }
 
 @Composable
-fun BoxCardMonitoring(data: BoxCardData) {
+internal fun BoxCardMonitoring(data: BoxCardData) {
 
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -141,7 +141,7 @@ fun BoxCardMonitoring(data: BoxCardData) {
 }
 
 @Composable
-fun BoxCardDiagnostic(data: BoxCardData) {
+internal fun BoxCardDiagnostic(data: BoxCardData) {
     val interactionSource = remember { MutableInteractionSource() }
 
     Card(

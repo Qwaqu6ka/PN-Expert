@@ -10,13 +10,15 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.fefu.pnexpert.navigation.FeatureApiHolder
 import ru.fefu.sign_up_api.SignUpApi
+import ru.fefu.written_test_api.WrittenTestApi
 import javax.inject.Inject
 
 @HiltViewModel
 class ActivityScopeViewModel @Inject constructor(
     override val signUpApi: SignUpApi,
     override val mainPageApi: MainPageApi,
-) : ViewModel(), FeatureApiHolder {
+    override val writtenTestApi: WrittenTestApi,
+    ) : ViewModel(), FeatureApiHolder {
 
     private val _isUiReady = MutableLiveData(false)
     val isUiReady: LiveData<Boolean> = _isUiReady

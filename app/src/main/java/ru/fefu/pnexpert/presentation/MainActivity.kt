@@ -6,7 +6,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCompositionContext
@@ -16,7 +18,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import dagger.hilt.android.AndroidEntryPoint
 import ru.fefu.theme.PnExpertTheme
-
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -45,9 +46,16 @@ class MainActivity : ComponentActivity() {
 
 // TODO: DELETE
 @Composable
-fun InDevPlug(testStr: String = "") {
+fun InDevPlug(testStr: String = "", onClick: (() -> Unit)? = null) {
     rememberCompositionContext()
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Раздел в разработке $testStr")
+        Column {
+            Text(text = "Раздел в разработке $testStr")
+            onClick?.let {
+                Button(onClick = it) {
+                    Text(text = "Тык")
+                }
+            }
+        }
     }
 }

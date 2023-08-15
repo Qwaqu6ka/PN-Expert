@@ -18,8 +18,8 @@ fun AppNavGraph(
 ) {
     NavHost(
         navController = navController,
-//        startDestination = BottomTabs.Main.route
-        startDestination = featureApiHolder.signUpApi.route
+        startDestination = BottomTabs.Main.route
+//        startDestination = featureApiHolder.signUpApi.route
     ) {
 
         register(
@@ -49,13 +49,22 @@ fun AppNavGraph(
                 InDevPlug("Profile")
             }
         }
+
         navigation(
             route = BottomTabs.History.route,
             startDestination = "testHistory"
         ) {
+
             composable("testHistory") {
-                InDevPlug("History")
+                InDevPlug("History") {
+                    navController.navigate(featureApiHolder.writtenTestApi.testFabRoute)
+                }
             }
+            register(
+                featureApi = featureApiHolder.writtenTestApi,
+                navController = navController,
+                modifier = modifier
+            )
         }
         navigation(
             route = BottomTabs.Notes.route,
