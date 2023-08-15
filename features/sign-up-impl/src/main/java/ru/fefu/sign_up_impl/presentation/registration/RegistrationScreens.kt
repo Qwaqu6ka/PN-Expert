@@ -1,22 +1,19 @@
 package ru.fefu.sign_up_impl.presentation.registration
 
-import android.view.Window
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -59,7 +56,7 @@ fun RegistrationScreens(
 
     //Text variables
     var titleText by remember { mutableStateOf("Регистрация") }
-    var pageNumber by remember { mutableStateOf(1) }
+    var pageNumber by remember { mutableIntStateOf(1) }
 
     when(viewModel.currentRegistrationPage){
         is RegistrationNavigationRoute.SingUpScreen->{
