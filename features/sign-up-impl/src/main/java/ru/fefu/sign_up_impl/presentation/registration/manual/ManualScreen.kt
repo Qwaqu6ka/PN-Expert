@@ -63,6 +63,7 @@ fun ManualScreen(
     ) {
         ManualCardHolder(pagerState)
         Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.weight(1f))
         NextButton(viewModel, pagerState)
         Spacer(modifier = Modifier.height(16.dp))
     }

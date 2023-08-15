@@ -39,7 +39,11 @@ class SingUpImpl @Inject constructor(
             }
             composable(REGISTER_ROUTE) {
                 val mainTabRoute = signUpRouter.provideMainTabRoute()
-                val launchMainTab = { navController.navigate(mainTabRoute) }
+                val launchMainTab = {
+                    navController.navigate(mainTabRoute){
+                        popUpTo(0)
+                    }
+                }
                 val viewModel = viewModelCreator {
                     registerVMFactory.create(launchMainTab)
                 }
