@@ -15,16 +15,16 @@ private const val TEST_PAGE_ROUTE = "written_test"
 @Singleton
 class WrittenTestImpl @Inject constructor() : WrittenTestApi {
 
-    override val testUpdrs1Route = TEST_PAGE_ROUTE + "/" + TestType.Updrs1.name
-    override val testUpdrs2Route = TEST_PAGE_ROUTE + "/" + TestType.Updrs2.name
-    override val testUpdrs3Route = TEST_PAGE_ROUTE + "/" + TestType.Updrs3.name
-    override val testUpdrs4Route = TEST_PAGE_ROUTE + "/" + TestType.Updrs4.name
-    override val testPdq39Route = TEST_PAGE_ROUTE + "/" + TestType.Pdq39.name
-    override val testHadsRoute = TEST_PAGE_ROUTE + "/" + TestType.Hads.name
+    override val testUpdrs1Route = TEST_PAGE_ROUTE + "/" + TestType.UPDRS1.name
+    override val testUpdrs2Route = TEST_PAGE_ROUTE + "/" + TestType.UPDRS2.name
+    override val testUpdrs3Route = TEST_PAGE_ROUTE + "/" + TestType.UPDRS3.name
+    override val testUpdrs4Route = TEST_PAGE_ROUTE + "/" + TestType.UPDRS4.name
+    override val testPdq39Route = TEST_PAGE_ROUTE + "/" + TestType.PDQ39.name
+    override val testHadsRoute = TEST_PAGE_ROUTE + "/" + TestType.HADS.name
     override val testSchwabEnglandRoute = TEST_PAGE_ROUTE + "/" + TestType.SchwabEngland.name
     override val testHoehnYahrRoute = TEST_PAGE_ROUTE + "/" + TestType.HoehnYahr.name
-    override val testFabRoute = TEST_PAGE_ROUTE + "/" + TestType.Fab.name
-    override val testPsqiRoute = TEST_PAGE_ROUTE + "/" + TestType.Psqi.name
+    override val testFabRoute = TEST_PAGE_ROUTE + "/" + TestType.FAB.name
+    override val testPsqiRoute = TEST_PAGE_ROUTE + "/" + TestType.PSQI.name
 
     override fun registerGraph(
         navGraphBuilder: NavGraphBuilder,

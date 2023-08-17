@@ -25,6 +25,7 @@ class SingUpImpl @Inject constructor(
     @Inject lateinit var registerVMFactory: RegistrationViewModel.Factory
 
     override val route = GRAPH_ROUTE
+
     override fun registerGraph(
         navGraphBuilder: NavGraphBuilder,
         navController: NavHostController,

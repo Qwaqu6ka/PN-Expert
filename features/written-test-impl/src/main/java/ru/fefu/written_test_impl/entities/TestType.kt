@@ -1,14 +1,17 @@
 package ru.fefu.written_test_impl.entities
 
-internal enum class TestType {
-    Updrs1,
-    Updrs2,
-    Updrs3,
-    Updrs4,
-    Pdq39,
-    Hads,
-    SchwabEngland,
-    HoehnYahr,
-    Fab,
-    Psqi
+import ru.fefu.written_test_impl.entities.testentities.WrittenTest
+import ru.fefu.written_test_impl.entities.tests.TestPSQI
+
+internal enum class TestType(val test: WrittenTest) {
+    UPDRS1(TestPSQI),
+    UPDRS2(TestPSQI),
+    UPDRS3(TestPSQI),
+    UPDRS4(TestPSQI),
+    PDQ39(TestPSQI),
+    HADS(TestPSQI),
+    SchwabEngland(TestPSQI),
+    HoehnYahr(TestPSQI),
+    FAB(TestPSQI),
+    PSQI(TestPSQI)
 }

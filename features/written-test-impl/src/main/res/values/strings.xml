@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Resource name format for tests-->
+    <!--
+        <test>_title - full name of test
+        <test>_code_title - short name of test
+        <test>_question<num> - question №<num> for <test>
+        <test>_answer_<ans_group>_<points> - answer where <ans_group> - sequence number of group of similar answers
+    -->
+
+
+    <!--    Service Res  -->
+    <string name="enter_minutes">Введите минуты</string>
+    <string name="test">Тест</string>
+
+
+    <!--    PSQI    -->
+    <string name="PSQI_title">Питтсбургский опросник на определение индекса качества сна</string>
+    <string name="PSQI_code_title">PSQI</string>
+    <string name="PSQI_question1">В какое время Вы обычно ложитесь спать в течение последнего месяца?</string>
+    <string name="PSQI_question2">Сколько времени(минут) Вам обычно требовалось, чтобы заснуть (в течение первого месяца)?</string>
+    <string name="PSQI_question5">В течение прошедшего месяца как часто у Вас были проблемы со сном, потому что Вы не могли уснуть в течение 30 минут?</string>
+    <string name="PSQI_answer_1_0">Ни разу в течение последнего месяца</string>
+    <string name="PSQI_answer_1_1">Менее, чем один раз в неделю</string>
+    <string name="PSQI_answer_1_2">Один раз или два раза в неделю</string>
+    <string name="PSQI_answer_1_3">Три и более раз в неделю</string>
+</resources>
