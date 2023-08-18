@@ -4,8 +4,7 @@ import androidx.annotation.StringRes
 
 internal class SelectableAnswer(
     @StringRes val text: Int,
-    val points: Int,
-    var isSelected: Boolean = false
+    val points: Int
 )
 
 internal class InputAnswer<T>(
