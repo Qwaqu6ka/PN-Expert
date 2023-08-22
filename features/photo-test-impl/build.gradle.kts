@@ -12,7 +12,7 @@ android {
     val jdkVersion: Int by rootProject.extra
     val compilerExtensionVersion: String by rootProject.extra
 
-    namespace = "ru.fefu.main_impl"
+    namespace = "ru.fefu.photo_test_impl"
     compileSdk = targetAndroidSdk
 
     defaultConfig {
@@ -21,7 +21,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
-
     kotlin {
         jvmToolchain(jdkVersion)
     }
@@ -43,18 +42,15 @@ android {
 }
 
 dependencies {
-    implementation(libs.accompanist.pager)
-    implementation(libs.accompanist.pager.indicators)
-    implementation(libs.accompanist.systemuicontroller)
     implementation(libs.navigation.compose)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.graphics)
 
     implementation(project(":core:presentation"))
-    api(project(":features:main-api"))
+    implementation(project(":core:theme"))
+
+    api(project(":features:photo-test-api"))
 }
