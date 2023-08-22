@@ -1,4 +1,4 @@
-package ru.fefu.photo_test_api
+package ru.fefu.photo_tests_api
 
 import ru.fefu.feature_api.FeatureApi
 
