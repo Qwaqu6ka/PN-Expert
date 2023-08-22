@@ -4,14 +4,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
-import ru.fefu.photo_tests_api.PhotoTestApi
+import ru.fefu.photo_tests_api.PhotoTestsApi
 import javax.inject.Inject
 import javax.inject.Singleton
 
 private const val GRAPH_ROUTE = "photoTestsGraph"
 
 @Singleton
-class PhotoTestsImpl @Inject constructor():PhotoTestApi {
+class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
     override val route: String = GRAPH_ROUTE
 
     override fun registerGraph(
