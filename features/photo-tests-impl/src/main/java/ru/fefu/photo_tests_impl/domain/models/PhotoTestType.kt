@@ -1,6 +1,6 @@
 package ru.fefu.photo_tests_impl.domain.models
 
-internal sealed class PhotoTestType {
+sealed class PhotoTestType {
     object ClockPhotoTest : PhotoTestType()
 
     object FacePhotoTest : PhotoTestType()

@@ -5,7 +5,7 @@ import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
 import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsRepository
 import javax.inject.Inject
 
-internal class GetTestDataUseCase @Inject constructor(
+class GetTestDataUseCase @Inject constructor(
     private val repository: PhotoTestsRepository
 ) {
     operator fun invoke(testType: PhotoTestType): PhotoTestDataModel{

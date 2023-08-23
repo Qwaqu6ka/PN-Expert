@@ -51,5 +51,6 @@ dependencies {
 
     implementation(project(":core:presentation"))
     implementation(project(":core:theme"))
+
     api(project(":features:photo-tests-api"))
 }

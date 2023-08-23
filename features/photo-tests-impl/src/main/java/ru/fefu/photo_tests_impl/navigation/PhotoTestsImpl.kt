@@ -5,6 +5,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import ru.fefu.photo_tests_api.PhotoTestsApi
+import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
+import ru.fefu.photo_tests_impl.presentation.PhotoTestsViewModel
+import ru.fefu.viewModelCreator
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -12,15 +15,19 @@ private const val GRAPH_ROUTE = "photoTestsGraph"
 
 @Singleton
 class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
-    override val route: String = GRAPH_ROUTE
+    @Inject
+    lateinit var photoTestsViewModelFactory: PhotoTestsViewModel.Factory
 
+    override val route: String = GRAPH_ROUTE
     override fun registerGraph(
         navGraphBuilder: NavGraphBuilder,
         navController: NavHostController,
         modifier: Modifier
     ) {
         navGraphBuilder.composable(route){
-
+            val viewModel = viewModelCreator {
+                photoTestsViewModelFactory.create(PhotoTestType.ClockPhotoTest)
+            }
         }
     }
 }
