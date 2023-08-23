@@ -11,12 +11,15 @@ internal class InternalPhotoTestsRepository():PhotoTestsRepository {
 
     private val clockPhotoTest: PhotoTestDataModel = PhotoTestDataModel(
         testName = "Нарисвать часы",
-        testGuide = "Нарисуйте на бумаге часы и указите на них время: 6 часов 15 минут",
+        testGuide = "Нарисуйте на бумаге часы и укажите на них время: 6 часов 15 минут",
         testGuidePhotos = listOf(
             TestPhoto(R.drawable.photo_test_clock)
         ),
         testTasks = listOf(
-            PhotoTestTask("Нарисовать часы", TestPhoto(R.drawable.photo_test_clock))
+            PhotoTestTask(
+                taskName = "Нарисовать часы",
+                taskMaskPhoto = TestPhoto(R.drawable.photo_test_clock)
+            )
         )
     )
 
