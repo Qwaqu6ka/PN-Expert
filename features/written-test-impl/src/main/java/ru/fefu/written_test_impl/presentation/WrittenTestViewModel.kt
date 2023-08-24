@@ -1,13 +1,10 @@
 package ru.fefu.written_test_impl.presentation
 
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import ru.fefu.presentation.BaseViewModel
 import ru.fefu.written_test_impl.domain.CompleteTestUseCase
