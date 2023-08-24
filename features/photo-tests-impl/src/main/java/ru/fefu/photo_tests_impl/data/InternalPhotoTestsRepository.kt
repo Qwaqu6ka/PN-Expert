@@ -12,7 +12,7 @@ internal class InternalPhotoTestsRepository @Inject constructor():PhotoTestsRepo
 
     private val clockPhotoTest: PhotoTestDataModel = PhotoTestDataModel(
         testName = "Нарисвать часы",
-        testGuide = "Нарисуйте на бумаге часы и укажите на них время: 6 часов 15 минут",
+        testGuide = "Нарисйте на бумаге часы, на которых будет указано время (необходимое время будет дано при начале теста), сфотографируйте и отправьте полученный результат",
         testGuidePhotos = listOf(
             TestPhoto(R.drawable.photo_test_clock)
         ),

@@ -1,26 +1,22 @@
 package ru.fefu.photo_tests_impl.presentation.guide_screen.elements
 
-import android.provider.ContactsContract.Contacts.Photo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import ru.fefu.photo_test_impl.R
-import ru.fefu.photo_tests_impl.domain.models.PhotoTestTask
 import ru.fefu.photo_tests_impl.domain.models.TestPhoto
 import ru.fefu.theme.PnExpertTheme
 
@@ -32,6 +28,12 @@ internal fun GuidePhotosHolder(
     Column(
         modifier = modifier
     ) {
+        Text(
+            text = "Инструкция к упражнению",
+            style = PnExpertTheme.typography.text.medium_16,
+            color = PnExpertTheme.colors.textColors.FontDarkColor
+        )
+        Spacer(modifier = Modifier.height(16.dp))
         for ((id,photo) in guidePhotos.withIndex()){
             GuidPhoto(photo = photo)
             if (guidePhotos.size > 1 && id != guidePhotos.size-1)
@@ -49,8 +51,7 @@ private fun GuidPhoto(
         Card(
             modifier = modifier
                 .fillMaxWidth()
-                .height(200.dp)
-                .shadow(6.dp, PnExpertTheme.shapes.imageShapes.imageClassic15),
+                .height(200.dp),
             shape = PnExpertTheme.shapes.imageShapes.imageClassic15
         ) {
             Image(
@@ -58,7 +59,7 @@ private fun GuidPhoto(
                     .fillMaxSize()
                     .clip(PnExpertTheme.shapes.imageShapes.imageClassic15),
                 painter = painterResource(id = photo.drawableId),
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.FillBounds,
                 contentDescription = null
             )
         }
@@ -72,8 +73,7 @@ private fun PreviewGuidPhoto(){
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
-                .shadow(6.dp, PnExpertTheme.shapes.imageShapes.imageClassic15),
+                .height(200.dp),
             shape = PnExpertTheme.shapes.imageShapes.imageClassic15
         ) {
             Image(
@@ -81,7 +81,7 @@ private fun PreviewGuidPhoto(){
                     .fillMaxSize()
                     .clip(PnExpertTheme.shapes.imageShapes.imageClassic15),
                 painter = painterResource(id = R.drawable.photo_test_clock),
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.FillBounds,
                 contentDescription = null
             )
         }
@@ -101,6 +101,12 @@ private fun PreviewGuidePhotosHolder() {
         modifier = Modifier
             .fillMaxWidth()
     ) {
+        Text(
+            text = "Инструкция к упражнению",
+            style = PnExpertTheme.typography.text.medium_16,
+            color = PnExpertTheme.colors.textColors.FontDarkColor
+        )
+        Spacer(modifier = Modifier.height(16.dp))
         for ((id,photo) in guidePhotos.withIndex()){
             GuidPhoto(photo = photo)
             if (guidePhotos.size > 1 && id != guidePhotos.size-1)

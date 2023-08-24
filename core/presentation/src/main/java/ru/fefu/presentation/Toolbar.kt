@@ -26,7 +26,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.theme.PnExpertTheme
 
 @Composable
-fun Toolbar(modifier: Modifier = Modifier, title: String, isInverseColor: Boolean = false, onBackPressed: (() -> Unit)? = null) {
+fun Toolbar(title: String, isInverseColor: Boolean = false, onBackPressed: (() -> Unit)? = null) {
 
     val systemUiController = rememberSystemUiController()
 
@@ -39,9 +39,9 @@ fun Toolbar(modifier: Modifier = Modifier, title: String, isInverseColor: Boolea
     val iconColor = if (isInverseColor) PnExpertTheme.colors.mainAppColors.AppWhiteColor
     else PnExpertTheme.colors.mainAppColors.AppBlueColor
     Box(
-        modifier
+        Modifier
             .fillMaxWidth()
-            .background(PnExpertTheme.colors.mainAppColors.AppWhiteColor)
+            .background(PnExpertTheme.colors.mainAppColors.AppGreyLightColor)
             .padding(horizontal = 16.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
             .defaultMinSize(minHeight = 50.dp)
