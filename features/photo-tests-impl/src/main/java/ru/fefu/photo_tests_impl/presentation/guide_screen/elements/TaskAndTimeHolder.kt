@@ -12,7 +12,7 @@ import ru.fefu.theme.PnExpertTheme
 
 
 @Composable
-fun TaskAndTimeHolder(
+internal fun TaskAndTimeHolder(
     modifier:Modifier,
     taskName:String,
     date:String,
