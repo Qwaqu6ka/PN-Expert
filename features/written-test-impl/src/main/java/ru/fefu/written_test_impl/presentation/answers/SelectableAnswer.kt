@@ -25,8 +25,8 @@ import ru.fefu.written_test_impl.entities.testentities.SelectableAnswer
 @Composable
 internal fun SelectableAnswerList(
     answers: List<SelectableAnswer>,
-    activeIndex: Int?,
-    onAnswerClick: () -> Unit
+    chosenAnswerIndex: Int?,
+    onAnswerClick: (Int) -> Unit
 ) {
     LazyColumn(
         contentPadding = PaddingValues(all = 16.dp),
@@ -35,8 +35,8 @@ internal fun SelectableAnswerList(
         items(answers.size) { index ->
             SelectableAnswerCard(
                 answer = answers[index],
-                onClick = onAnswerClick,
-                isSelected = activeIndex == index
+                onClick = { onAnswerClick(index) },
+                isSelected = chosenAnswerIndex == index
             )
         }
     }
@@ -89,7 +89,7 @@ private fun CardListPreview() {
     PnExpertTheme {
         Surface(Modifier.fillMaxSize(), color = Color.Gray) {
             SelectableAnswerList(
-                activeIndex = 5,
+                chosenAnswerIndex = 5,
                 onAnswerClick = {},
                 answers = listOf(
                     SelectableAnswer(R.string.PSQI_question5, 0),

@@ -2,22 +2,26 @@ package ru.fefu.written_test_impl.entities.testentities
 
 import androidx.annotation.StringRes
 
-internal sealed class Question(
-    @StringRes val text: Int,
-    val isAnswered: Boolean = false
+sealed class Question(
+    @StringRes val text: Int
 )
 
-internal class ChoiceQuestion(
+class ChoiceQuestion(
     @StringRes text: Int,
     val answers: List<SelectableAnswer>
 ) : Question(text)
 
-internal class TimeQuestion(
-    @StringRes text: Int,
-    val answer: TimeAnswer? = null
+class TimeQuestion(
+    @StringRes text: Int
 ) : Question(text)
 
-internal class InputQuestion<T>(
+class InputQuestion(
     @StringRes text: Int,
-    val answer: InputAnswer<T>
+    @StringRes val hint: Int,
+    val validator: ((String) -> Boolean)? = null
 ) : Question(text)
+
+data class SelectableAnswer(
+    @StringRes val text: Int,
+    val points: Int
+)

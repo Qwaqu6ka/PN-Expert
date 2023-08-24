@@ -2,7 +2,6 @@ package ru.fefu.written_test_impl.entities.tests
 
 import ru.fefu.written_test_impl.R
 import ru.fefu.written_test_impl.entities.testentities.ChoiceQuestion
-import ru.fefu.written_test_impl.entities.testentities.InputAnswer
 import ru.fefu.written_test_impl.entities.testentities.InputQuestion
 import ru.fefu.written_test_impl.entities.testentities.SelectableAnswer
 import ru.fefu.written_test_impl.entities.testentities.TimeQuestion
@@ -17,10 +16,8 @@ internal object TestPSQI : WrittenTest {
         ),
         InputQuestion(
             text = R.string.PSQI_question2,
-            answer = InputAnswer<Int>(
-                hint = R.string.enter_minutes,
-                validator = { it >= 0 }
-            )
+            hint = R.string.enter_minutes,
+            validator = { it.toInt() > 0 }
         ),
         ChoiceQuestion(
             text = R.string.PSQI_question5,

@@ -41,7 +41,7 @@ fun Toolbar(title: String, isInverseColor: Boolean = false, onBackPressed: (() -
     Box(
         Modifier
             .fillMaxWidth()
-            .background(PnExpertTheme.colors.mainAppColors.AppGreyLightColor)
+            .background(Color.Transparent)
             .padding(horizontal = 16.dp)
             .windowInsetsPadding(WindowInsets.statusBars)
             .defaultMinSize(minHeight = 50.dp)

@@ -12,6 +12,8 @@
     <!--    Service Res  -->
     <string name="enter_minutes">Введите минуты</string>
     <string name="test">Тест</string>
+    <string name="back">Назад</string>
+    <string name="next">Дальше</string>
 
 
     <!--    PSQI    -->
