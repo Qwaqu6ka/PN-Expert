@@ -8,6 +8,7 @@ import ru.fefu.main_api.MainPageApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import ru.fefu.photo_tests_api.PhotoTestsApi
 import ru.fefu.pnexpert.navigation.FeatureApiHolder
 import ru.fefu.sign_up_api.SignUpApi
 import ru.fefu.written_test_api.WrittenTestApi
@@ -18,6 +19,7 @@ class ActivityScopeViewModel @Inject constructor(
     override val signUpApi: SignUpApi,
     override val mainPageApi: MainPageApi,
     override val writtenTestApi: WrittenTestApi,
+    override val photoTestsApi: PhotoTestsApi
     ) : ViewModel(), FeatureApiHolder {
 
     private val _isUiReady = MutableLiveData(false)

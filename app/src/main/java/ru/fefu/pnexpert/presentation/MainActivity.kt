@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import dagger.hilt.android.AndroidEntryPoint
+import ru.fefu.photo_tests_impl.navigation.PhotoTestsImpl
 import ru.fefu.theme.PnExpertTheme
 
 @AndroidEntryPoint

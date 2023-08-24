@@ -90,4 +90,5 @@ dependencies {
     implementation(project(":features:main-impl"))
     implementation(project(":features:sign-up-impl"))
     implementation(project(":features:written-test-impl"))
+    implementation(project(":features:photo-tests-impl"))
 }

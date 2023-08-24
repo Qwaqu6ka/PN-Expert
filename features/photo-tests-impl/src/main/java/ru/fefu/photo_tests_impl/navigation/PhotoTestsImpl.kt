@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import ru.fefu.photo_tests_api.PhotoTestsApi
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
+import ru.fefu.photo_tests_impl.presentation.GuideScreen
 import ru.fefu.photo_tests_impl.presentation.PhotoTestsViewModel
 import ru.fefu.viewModelCreator
 import javax.inject.Inject
@@ -28,6 +29,7 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
             val viewModel = viewModelCreator {
                 photoTestsViewModelFactory.create(PhotoTestType.ClockPhotoTest)
             }
+            GuideScreen(viewModel = viewModel)
         }
     }
 }

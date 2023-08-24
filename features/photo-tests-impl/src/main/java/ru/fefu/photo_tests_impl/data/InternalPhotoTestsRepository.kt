@@ -6,8 +6,9 @@ import ru.fefu.photo_tests_impl.domain.models.PhotoTestTask
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
 import ru.fefu.photo_tests_impl.domain.models.TestPhoto
 import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsRepository
+import javax.inject.Inject
 
-internal class InternalPhotoTestsRepository():PhotoTestsRepository {
+internal class InternalPhotoTestsRepository @Inject constructor():PhotoTestsRepository {
 
     private val clockPhotoTest: PhotoTestDataModel = PhotoTestDataModel(
         testName = "Нарисвать часы",
