@@ -18,6 +18,15 @@ class PhotoTestsViewModel @Inject constructor(
     private var _testDataState = mutableStateOf(TestDataState())
     val testDataState: State<TestDataState> = _testDataState
 
+    init {
+        getTestData(testType)
+    }
+
+    private fun getTestData(testType: PhotoTestType){
+        val testData = getTestDataUseCase(testType)
+        _testDataState.value = TestDataState(data = testData)
+    }
+
     @AssistedFactory
     interface Factory {
         fun create(testType: PhotoTestType): PhotoTestsViewModel
