@@ -24,7 +24,7 @@ fun TextCardHolderPink(
 ) {
     PnExpertTheme {
         Card(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier,
             shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
             colors = CardDefaults.cardColors(
                 containerColor = PnExpertTheme.colors.mainAppColors.AppPinkLightColors
@@ -37,7 +37,7 @@ fun TextCardHolderPink(
             ) {
                 Text(
                     text = titleText,
-                    style = PnExpertTheme.typography.subtitle.bold_18,
+                    style = PnExpertTheme.typography.text.medium_16,
                     color = PnExpertTheme.colors.textColors.FontDarkColor
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -56,31 +56,6 @@ fun TextCardHolderPink(
 @Composable
 private fun PreviewTextCardHolderPink() {
     PnExpertTheme {
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
-            colors = CardDefaults.cardColors(
-                containerColor = PnExpertTheme.colors.mainAppColors.AppPinkLightColors
-            )
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                Text(
-                    text = "Требования",
-                    style = PnExpertTheme.typography.subtitle.bold_18,
-                    color = PnExpertTheme.colors.textColors.FontDarkColor
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "Приложение работает с Вашими данными, поэтому для продолжения регистрации потребуется согласие с нашей политикой работы с персональными данными и конфиденциальной информацией. ",
-                    style = PnExpertTheme.typography.text.medium_14,
-                    color = PnExpertTheme.colors.textColors.FontGreyColor,
-                    lineHeight = 20.sp
-                )
-            }
-        }
+        TextCardHolderPink(Modifier, "Требования", "Приложение работает с Вашими данными, поэтому для продолжения регистрации потребуется согласие с нашей политикой работы с персональными данными и конфиденциальной информацией. ")
     }
 }

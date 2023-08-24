@@ -1,6 +1,7 @@
 package ru.fefu.photo_tests_impl.presentation.guide_screen
 
 import android.annotation.SuppressLint
+import android.widget.Space
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,14 +11,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.fefu.photo_tests_impl.presentation.PhotoTestsViewModel
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.GuidePhotosHolder
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.TaskAndTimeHolder
+import ru.fefu.presentation.TextCardHolderPink
 import ru.fefu.presentation.Toolbar
 import ru.fefu.theme.PnExpertTheme
 
@@ -25,7 +29,7 @@ import ru.fefu.theme.PnExpertTheme
 @Composable
 fun GuideScreen(viewModel: PhotoTestsViewModel) {
     Scaffold(
-        topBar = { Toolbar(title = "Упражнение") },
+        topBar = { Toolbar(title = "Упражнение", onBackPressed = {}) },
     ) {scaffoldPadding->
         Column(
             modifier = Modifier
@@ -48,11 +52,29 @@ fun GuideScreen(viewModel: PhotoTestsViewModel) {
                 guidePhotos = viewModel.testDataState.value.data!!.testGuidePhotos
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = viewModel.testDataState.value.data!!.testGuide,
-                style = PnExpertTheme.typography.text.medium_14,
-                color = PnExpertTheme.colors.textColors.FontGreyColor
+            TextCardHolderPink(
+                modifier = Modifier.fillMaxWidth(),
+                titleText = "Инструкция",
+                text = viewModel.testDataState.value.data!!.testGuide
             )
+            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.weight(1f))
+            TextButton(
+                onClick = {},
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
+                shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
+                colors = ButtonDefaults.textButtonColors(
+                    containerColor = PnExpertTheme.colors.buttonColors.ButtonNormalRedColor
+                )
+            ) {
+                Text(
+                    text = "Начать",
+                    style = PnExpertTheme.typography.subtitle.medium_18,
+                    color = PnExpertTheme.colors.textColors.FontWhiteColor
+                )
+            }
         }
     }
 }
