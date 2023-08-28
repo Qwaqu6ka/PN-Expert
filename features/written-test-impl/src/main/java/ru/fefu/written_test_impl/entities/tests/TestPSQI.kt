@@ -1,5 +1,6 @@
 package ru.fefu.written_test_impl.entities.tests
 
+import androidx.core.text.isDigitsOnly
 import ru.fefu.written_test_impl.R
 import ru.fefu.written_test_impl.entities.testentities.ChoiceQuestion
 import ru.fefu.written_test_impl.entities.testentities.InputQuestion
@@ -17,7 +18,7 @@ internal object TestPSQI : WrittenTest {
         InputQuestion(
             text = R.string.PSQI_question2,
             hint = R.string.enter_minutes,
-            validator = { it.toInt() > 0 }
+            validator = { it != null && it.isDigitsOnly() }
         ),
         ChoiceQuestion(
             text = R.string.PSQI_question5,

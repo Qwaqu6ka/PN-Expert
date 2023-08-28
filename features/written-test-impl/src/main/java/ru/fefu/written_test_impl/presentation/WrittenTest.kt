@@ -2,6 +2,7 @@ package ru.fefu.written_test_impl.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -18,19 +19,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import ru.fefu.presentation.Toolbar
+import ru.fefu.presentation.components.SimpleAlertDialog
+import ru.fefu.presentation.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.R
 import ru.fefu.written_test_impl.entities.testentities.ChoiceQuestion
 import ru.fefu.written_test_impl.entities.testentities.InputQuestion
 import ru.fefu.written_test_impl.entities.testentities.TimeQuestion
+import ru.fefu.written_test_impl.presentation.answers.InputAnswer
 import ru.fefu.written_test_impl.presentation.answers.SelectableAnswerList
+import ru.fefu.written_test_impl.presentation.answers.TimeAnswer
 
 @Composable
 internal fun WrittenTest(
     modifier: Modifier = Modifier,
     testViewModel: WrittenTestViewModel = hiltViewModel(),
 ) {
+    val uiState by testViewModel.testUiState.collectAsState()
+
+    if (uiState.showOldTestDialog) {
+        SimpleAlertDialog(
+            onDismissRequest = testViewModel::onDismissOldTest,
+            onConfirmation = testViewModel::onConfirmOldTest,
+            dialogTitle = stringResource(id = R.string.old_test_dialog_title),
+            dialogText = stringResource(id = R.string.old_test_dialog_text),
+            confirmButtonText = stringResource(id = R.string.yes),
+            dismissButtonText = stringResource(id = R.string.no)
+        )
+    }
+
     Scaffold(
         topBar = {
             Toolbar(
@@ -53,23 +70,49 @@ internal fun TestContent(
     val uiState by testViewModel.testUiState.collectAsState()
 
     Surface(modifier = modifier) {
-        Column(modifier = Modifier.padding(10.dp)) {
+        Column(modifier = Modifier.padding(20.dp)) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.verticalScroll(
                     rememberScrollState()
                 )
             ) {
+                val currentQuestion = uiState.currentQuestion
+                val hintRes = if (currentQuestion is InputQuestion) {
+                    currentQuestion.hint
+                } else {
+                    null
+                }
+                val inputValidator = if (currentQuestion is InputQuestion) {
+                    currentQuestion.validator
+                } else {
+                    null
+                }
+
+
+
                 Text(text = stringResource(id = uiState.currentQuestion.text))
+
                 when (val question = uiState.currentQuestion) {
                     is ChoiceQuestion -> SelectableAnswerList(
                         answers = question.answers,
-                        chosenAnswerIndex = uiState.chosenSelectableAnswerIndex,
-                        onAnswerClick = testViewModel::onChooseSelectableAnswer
+                        chosenAnswerIndex = uiState.answer?.toInt(),
+                        onAnswerClick = testViewModel::onAnswerChange
                     )
 
-                    is TimeQuestion -> Text("Time")
-                    is InputQuestion -> Text("input")
+                    is TimeQuestion -> TimeAnswer(
+                        time = uiState.answer,
+                        onTimeChange = testViewModel::onAnswerChange,
+                        modifier = Modifier.fillMaxSize()
+                    )
+
+                    is InputQuestion -> InputAnswer(
+                        inputValue = uiState.answer,
+                        onInputChange = testViewModel::onAnswerChange,
+                        hintRes = hintRes,
+                        validator = inputValidator,
+                        modifier = Modifier.fillMaxSize()
+                    )
                 }
 
             }
@@ -100,7 +143,11 @@ private fun ManageButtons(
             Text(text = stringResource(id = R.string.back))
         }
         Button(onClick = onNextQuestion, enabled = nextButtonIsActive) {
-            Text(text = stringResource(id = R.string.next))
+            Text(
+                text = stringResource(
+                    id = if (replaceNextButtonWithDone) R.string.complete else R.string.next
+                )
+            )
         }
     }
 }

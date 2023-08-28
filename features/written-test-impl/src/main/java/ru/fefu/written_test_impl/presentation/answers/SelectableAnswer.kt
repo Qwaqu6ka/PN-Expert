@@ -3,11 +3,10 @@ package ru.fefu.written_test_impl.presentation.answers
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -26,16 +25,17 @@ import ru.fefu.written_test_impl.entities.testentities.SelectableAnswer
 internal fun SelectableAnswerList(
     answers: List<SelectableAnswer>,
     chosenAnswerIndex: Int?,
-    onAnswerClick: (Int) -> Unit
+    onAnswerClick: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        contentPadding = PaddingValues(all = 16.dp),
+    Column(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        items(answers.size) { index ->
+        for (index in answers.indices) {
             SelectableAnswerCard(
                 answer = answers[index],
-                onClick = { onAnswerClick(index) },
+                onClick = { onAnswerClick(index.toString()) },
                 isSelected = chosenAnswerIndex == index
             )
         }

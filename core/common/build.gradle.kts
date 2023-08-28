@@ -11,7 +11,7 @@ android {
     val minAndroidSdk: Int by rootProject.extra
     val jdkVersion: Int by rootProject.extra
 
-    namespace = "ru.fefu.data"
+    namespace = "ru.fefu.common"
     compileSdk = targetAndroidSdk
 
     defaultConfig {
@@ -35,12 +35,7 @@ android {
 }
 
 dependencies {
+
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    kapt(libs.room.compiler)
-    implementation(libs.datastore.preferences)
-
-    implementation(project(":core:common"))
 }

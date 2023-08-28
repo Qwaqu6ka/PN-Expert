@@ -1,16 +1,17 @@
 package ru.fefu.written_test_impl.domain.repositories
 
-import ru.fefu.written_test_impl.entities.TestType
+import kotlinx.coroutines.flow.Flow
+import ru.fefu.written_test_impl.entities.testentities.WrittenAnswer
 
 interface WrittenTestRepository {
 
-    suspend fun isTestCompleted(testType: TestType): Boolean
+    suspend fun isTestCompleted(testTitle: String, testSize: Int): Boolean
 
-    suspend fun saveTestResult(testType: TestType, testResult: List<String?>)
+    suspend fun saveTestResult(answer: WrittenAnswer)
 
-    suspend fun getTestResults(testType: TestType): List<String?>
+    fun getTestResults(testTitle: String): Flow<List<WrittenAnswer>>
 
-    suspend fun submitResult(testType: TestType, testResult: List<String>)
+    suspend fun submitResult(testTitle: String)
 
-    suspend fun clearTest(testType: TestType)
+    suspend fun clearTest(testTitle: String)
 }

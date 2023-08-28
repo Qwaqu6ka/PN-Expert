@@ -87,6 +87,7 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
 
     implementation(project(":core:theme"))
+    implementation(project(":data"))
     implementation(project(":features:main-impl"))
     implementation(project(":features:sign-up-impl"))
     implementation(project(":features:written-test-impl"))
