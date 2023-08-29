@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.map
 import ru.fefu.data.WrittenTestDataRepository
 import ru.fefu.pnexpert.glue.written_tests.toWrittenAnswerData
 import ru.fefu.pnexpert.glue.written_tests.toWrittenAnswerFeature
-import ru.fefu.written_test_impl.domain.repositories.WrittenTestRepository
+import ru.fefu.written_test_impl.domain.WrittenTestRepository
 import ru.fefu.written_test_impl.entities.testentities.WrittenAnswer
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,8 +15,8 @@ class AdapterWrittenTestRepository @Inject constructor(
     private val writtenTestDataRepository: WrittenTestDataRepository
 ) : WrittenTestRepository {
 
-    override suspend fun isTestCompleted(testTitle: String, testSize: Int): Boolean {
-        return writtenTestDataRepository.isTestCompleted(testTitle, testSize)
+    override suspend fun isTestUncompleted(testTitle: String): Boolean {
+        return writtenTestDataRepository.isTestUncompleted(testTitle)
     }
 
     override suspend fun saveTestResult(answer: WrittenAnswer) {
@@ -37,5 +37,12 @@ class AdapterWrittenTestRepository @Inject constructor(
 
     override suspend fun clearTest(testTitle: String) {
         writtenTestDataRepository.clearTest(testTitle)
+    }
+
+    override fun getLastAnsweredQuestion(testTitle: String): Flow<Int> =
+        writtenTestDataRepository.getLastAnsweredQuestion(testTitle)
+
+    override suspend fun setLastAnsweredQuestion(testTitle: String, lastQuestion: Int) {
+        writtenTestDataRepository.setLastAnsweredQuestion(testTitle, lastQuestion)
     }
 }

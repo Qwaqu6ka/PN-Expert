@@ -1,10 +1,14 @@
 package ru.fefu.data.written_tests.sources
 
-import android.util.Log
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import ru.fefu.data.database.AppDatabase
 import ru.fefu.data.written_tests.entities.WrittenAnswerData
@@ -14,20 +18,20 @@ import javax.inject.Singleton
 @Singleton
 class DatabaseWrittenTestDataSource @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
-    private val db: AppDatabase
+    private val db: AppDatabase,
+    private val dataStore: DataStore<Preferences>
 ) : WrittenTestDataSource {
 
-    override suspend fun isTestCompleted(testTitle: String, testSize: Int): Boolean =
+    override suspend fun isTestUncompleted(testTitle: String): Boolean =
         withContext(ioDispatcher) {
             val answersDef = async {
                 db.writtenTestDao().getAllInTest(testTitle).first()
             }
-            answersDef.await().size == testSize
+            answersDef.await().isNotEmpty()
         }
 
     override suspend fun saveTestResult(vararg answer: WrittenAnswerData) =
         withContext(ioDispatcher) {
-            Log.d("debug", "Go to db")
             db.writtenTestDao().addAnswers(*answer)
         }
 
@@ -38,11 +42,17 @@ class DatabaseWrittenTestDataSource @Inject constructor(
         db.writtenTestDao().deleteAllInTest(testTitle)
     }
 
-    override suspend fun getLastAnsweredQuestion(testTitle: String): Int {
-        TODO("Not yet implemented")
+    override fun getLastAnsweredQuestion(testTitle: String): Flow<Int> {
+        val key = intPreferencesKey(testTitle)
+        return dataStore.data.map { preferences ->
+            preferences[key] ?: 0
+        }
     }
 
-    override fun serLastAnsweredQuestion(testTitle: String, lastQuestion: Int) {
-        TODO("Not yet implemented")
+    override suspend fun setLastAnsweredQuestion(testTitle: String, lastQuestion: Int) {
+        val key = intPreferencesKey(testTitle)
+        dataStore.edit { preferences ->
+            preferences[key] = lastQuestion
+        }
     }
 }

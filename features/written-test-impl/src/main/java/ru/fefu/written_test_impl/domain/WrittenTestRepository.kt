@@ -1,11 +1,11 @@
-package ru.fefu.written_test_impl.domain.repositories
+package ru.fefu.written_test_impl.domain
 
 import kotlinx.coroutines.flow.Flow
 import ru.fefu.written_test_impl.entities.testentities.WrittenAnswer
 
 interface WrittenTestRepository {
 
-    suspend fun isTestCompleted(testTitle: String, testSize: Int): Boolean
+    suspend fun isTestUncompleted(testTitle: String): Boolean
 
     suspend fun saveTestResult(answer: WrittenAnswer)
 
@@ -14,4 +14,8 @@ interface WrittenTestRepository {
     suspend fun submitResult(testTitle: String)
 
     suspend fun clearTest(testTitle: String)
+
+    fun getLastAnsweredQuestion(testTitle: String): Flow<Int>
+
+    suspend fun setLastAnsweredQuestion(testTitle: String, lastQuestion: Int)
 }

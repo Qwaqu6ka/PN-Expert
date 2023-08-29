@@ -7,10 +7,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import ru.fefu.presentation.BaseViewModel
-import ru.fefu.written_test_impl.domain.repositories.WrittenTestRepository
+import ru.fefu.written_test_impl.domain.WrittenTestRepository
 import ru.fefu.written_test_impl.entities.TestType
 import ru.fefu.written_test_impl.entities.testentities.Question
 import ru.fefu.written_test_impl.entities.testentities.WrittenAnswer
@@ -37,7 +38,7 @@ internal class WrittenTestViewModel @Inject constructor(
             testResult = repository.getTestResults(testTitle)
                 .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-            val haveOldTest = repository.isTestCompleted(testTitle, test.questions.size)
+            val haveOldTest = repository.isTestUncompleted(testTitle)
             if (haveOldTest) {
                 showOldTestDialog.value = true
             }
@@ -56,6 +57,9 @@ internal class WrittenTestViewModel @Inject constructor(
         )
 
     fun onConfirmOldTest() {
+        viewModelScope.launch {
+            currentQuestionIndex.value = repository.getLastAnsweredQuestion(testTitle).first()
+        }
         showOldTestDialog.value = false
         Log.d("debug", "confirm clicked")
     }
@@ -90,6 +94,8 @@ internal class WrittenTestViewModel @Inject constructor(
             // todo nav to other page
         } else {
             currentQuestionIndex.value++
+            repository.setLastAnsweredQuestion(testTitle, currentQuestionIndex.value)
+            Log.d("debug", "lastIndexSubmit")
         }
     }
 
@@ -131,3 +137,8 @@ internal class WrittenTestViewModel @Inject constructor(
         val replaceNextButtonWithDone = isQuestionLast
     }
 }
+
+/**
+ * TODO: inputAnswer bug where cursor puts in start after print first symbol
+ * Todo: inputAnswer validator bug where nextButton activates on wrong input
+ */

@@ -1,13 +1,15 @@
 package ru.fefu.written_test_impl.presentation
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -17,9 +19,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.fefu.presentation.components.SimpleAlertDialog
+import ru.fefu.presentation.components.SimpleTextButton
 import ru.fefu.presentation.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.R
@@ -54,10 +58,13 @@ internal fun WrittenTest(
                 title = stringResource(id = R.string.test),
                 onBackPressed = { testViewModel.onBackPressed() })
         },
-        containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+        containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
+        modifier = modifier
     ) { innerPadding ->
-
-        TestContent(testViewModel = testViewModel, modifier = Modifier.padding(innerPadding))
+        TestContent(
+            testViewModel = testViewModel,
+            modifier = Modifier.padding(top = innerPadding.calculateTopPadding())
+        )
     }
 }
 
@@ -73,9 +80,11 @@ internal fun TestContent(
         Column(modifier = Modifier.padding(20.dp)) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.verticalScroll(
-                    rememberScrollState()
-                )
+                modifier = Modifier
+                    .verticalScroll(
+                        rememberScrollState()
+                    )
+                    .weight(1f)
             ) {
                 val currentQuestion = uiState.currentQuestion
                 val hintRes = if (currentQuestion is InputQuestion) {
@@ -91,7 +100,12 @@ internal fun TestContent(
 
 
 
-                Text(text = stringResource(id = uiState.currentQuestion.text))
+                Text(
+                    text = stringResource(id = uiState.currentQuestion.text),
+                    textAlign = TextAlign.Justify,
+                    style = PnExpertTheme.typography.text.medium_16
+                )
+                Spacer(modifier = Modifier.height(10.dp))
 
                 when (val question = uiState.currentQuestion) {
                     is ChoiceQuestion -> SelectableAnswerList(
@@ -138,16 +152,19 @@ private fun ManageButtons(
     replaceNextButtonWithDone: Boolean,
     modifier: Modifier
 ) {
-    Row(modifier = modifier) {
-        Button(onClick = onPreviousQuestion, enabled = previousButtonIsActive) {
-            Text(text = stringResource(id = R.string.back))
-        }
-        Button(onClick = onNextQuestion, enabled = nextButtonIsActive) {
-            Text(
-                text = stringResource(
-                    id = if (replaceNextButtonWithDone) R.string.complete else R.string.next
-                )
-            )
-        }
+    Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceEvenly) {
+        SimpleTextButton(
+            onClick = onPreviousQuestion,
+            text = stringResource(id = R.string.back),
+            enabled = previousButtonIsActive
+        )
+        SimpleTextButton(
+            onClick = onNextQuestion,
+            text = if (replaceNextButtonWithDone)
+                stringResource(id = R.string.complete)
+            else
+                stringResource(id = R.string.next),
+            enabled = nextButtonIsActive
+        )
     }
 }

@@ -13,8 +13,8 @@ class RealWrittenTestDataRepository @Inject constructor(
     private val writtenTestDataSource: WrittenTestDataSource
 ) : WrittenTestDataRepository {
 
-    override suspend fun isTestCompleted(testTitle: String, testSize: Int): Boolean {
-        return writtenTestDataSource.isTestCompleted(testTitle, testSize)
+    override suspend fun isTestUncompleted(testTitle: String): Boolean {
+        return writtenTestDataSource.isTestUncompleted(testTitle)
     }
 
     override suspend fun saveTestResult(answer: WrittenAnswerData) {
@@ -25,12 +25,11 @@ class RealWrittenTestDataRepository @Inject constructor(
         return writtenTestDataSource.getTestResults(testTitle)
     }
 
-    override suspend fun getLastAnsweredQuestion(testTitle: String): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getLastAnsweredQuestion(testTitle: String): Flow<Int> =
+        writtenTestDataSource.getLastAnsweredQuestion(testTitle)
 
     override suspend fun setLastAnsweredQuestion(testTitle: String, lastQuestion: Int) {
-        TODO("Not yet implemented")
+        writtenTestDataSource.setLastAnsweredQuestion(testTitle, lastQuestion)
     }
 
     override suspend fun submitResult(testTitle: String) {
@@ -40,5 +39,6 @@ class RealWrittenTestDataRepository @Inject constructor(
 
     override suspend fun clearTest(testTitle: String) {
         writtenTestDataSource.clearResult(testTitle)
+        writtenTestDataSource.setLastAnsweredQuestion(testTitle, 0)
     }
 }

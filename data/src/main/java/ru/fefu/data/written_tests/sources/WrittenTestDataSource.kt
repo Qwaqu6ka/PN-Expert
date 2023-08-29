@@ -5,7 +5,7 @@ import ru.fefu.data.written_tests.entities.WrittenAnswerData
 
 interface WrittenTestDataSource {
 
-    suspend fun isTestCompleted(testTitle: String, testSize: Int): Boolean
+    suspend fun isTestUncompleted(testTitle: String): Boolean
 
     suspend fun saveTestResult(vararg answer: WrittenAnswerData)
 
@@ -13,7 +13,7 @@ interface WrittenTestDataSource {
 
     suspend fun clearResult(testTitle: String)
 
-    suspend fun getLastAnsweredQuestion(testTitle: String): Int
+    fun getLastAnsweredQuestion(testTitle: String): Flow<Int>
 
-    fun serLastAnsweredQuestion(testTitle: String, lastQuestion: Int)
+    suspend fun setLastAnsweredQuestion(testTitle: String, lastQuestion: Int)
 }
