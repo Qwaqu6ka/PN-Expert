@@ -208,7 +208,7 @@ private fun LongActionCard(data: LongCardData) {
                     .fillMaxSize()
                     .clip(PnExpertTheme.shapes.imageShapes.imageClassic15),
                 painter = painterResource(id = data.image),
-                contentScale = ContentScale.FillHeight,
+                contentScale = ContentScale.FillBounds,
                 contentDescription = null,
             )
             Column(
