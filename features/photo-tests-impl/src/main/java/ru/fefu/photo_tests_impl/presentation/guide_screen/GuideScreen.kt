@@ -28,6 +28,7 @@ import ru.fefu.theme.PnExpertTheme
 fun GuideScreen(
     modifier: Modifier,
     viewModel: GuideScreenViewModel,
+    onNavigateToTest: () -> Unit
 ) {
     Scaffold(
         topBar = { Toolbar(title = "Упражнение", onBackPressed = {}) },
@@ -62,7 +63,7 @@ fun GuideScreen(
             Spacer(modifier = Modifier.height(16.dp))
             Spacer(modifier = Modifier.weight(1f))
             TextButton(
-                onClick = {},
+                onClick = {onNavigateToTest()},
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
