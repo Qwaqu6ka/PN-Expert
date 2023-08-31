@@ -41,6 +41,7 @@ fun AppContent(viewModel: ActivityScopeViewModel) {
 
     Scaffold(
         bottomBar = { BottomNavBar(navController = navController, tabItems = tabs) },
+        containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
     ) { innerPaddingModifier ->
         AppNavGraph(
             navController = navController,

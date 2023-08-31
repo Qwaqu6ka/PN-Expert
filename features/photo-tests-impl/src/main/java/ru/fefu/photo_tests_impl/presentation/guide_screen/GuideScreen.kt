@@ -31,12 +31,12 @@ fun GuideScreen(
 ) {
     Scaffold(
         topBar = { Toolbar(title = "Упражнение", onBackPressed = {}) },
-        modifier = modifier
+        modifier = modifier,
+        containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
     ) {scaffoldPadding->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(PnExpertTheme.colors.mainAppColors.AppGreyLightColor)
                 .verticalScroll(rememberScrollState())
                 .padding(vertical = scaffoldPadding.calculateTopPadding())
                 .padding(horizontal = 16.dp)
