@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.GuidePhotosHolder
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.TaskAndTimeHolder
-import ru.fefu.presentation.TextCardHolderPink
+import ru.fefu.presentation.TextCardHolder
 import ru.fefu.presentation.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 
@@ -54,7 +54,7 @@ fun GuideScreen(
                 guidePhotos = viewModel.testDataState.value.data!!.testGuidePhotos
             )
             Spacer(modifier = Modifier.height(16.dp))
-            TextCardHolderPink(
+            TextCardHolder(
                 modifier = Modifier.fillMaxWidth(),
                 titleText = "Инструкция",
                 text = viewModel.testDataState.value.data!!.testGuide
@@ -68,7 +68,7 @@ fun GuideScreen(
                     .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
                 shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
                 colors = ButtonDefaults.textButtonColors(
-                    containerColor = PnExpertTheme.colors.buttonColors.ButtonNormalRedColor
+                    containerColor = PnExpertTheme.colors.buttonColors.ButtonHoverBlueColor
                 )
             ) {
                 Text(

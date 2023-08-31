@@ -1,5 +1,6 @@
 package ru.fefu.photo_tests_impl.presentation.guide_screen.elements
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -52,7 +53,8 @@ private fun GuidPhoto(
             modifier = modifier
                 .fillMaxWidth()
                 .height(200.dp),
-            shape = PnExpertTheme.shapes.imageShapes.imageClassic15
+            shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
+            border = BorderStroke(1.dp, PnExpertTheme.colors.mainAppColors.AppDarkColor)
         ) {
             Image(
                 modifier = Modifier

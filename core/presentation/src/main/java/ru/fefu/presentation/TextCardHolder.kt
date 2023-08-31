@@ -6,28 +6,31 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.fefu.theme.PnExpertTheme
 
 @Composable
-fun TextCardHolderPink(
+fun TextCardHolder(
     modifier: Modifier,
+    background: Color = PnExpertTheme.colors.mainAppColors.AppBlueColor,
     titleText: String,
+    titleTextColor:Color = PnExpertTheme.colors.textColors.FontWhiteColor,
     text:String,
+    textColor:Color = PnExpertTheme.colors.textColors.FontWhiteColor,
 ) {
     PnExpertTheme {
         Card(
             modifier = modifier,
             shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
             colors = CardDefaults.cardColors(
-                containerColor = PnExpertTheme.colors.mainAppColors.AppPinkLightColors
+                containerColor = background
             )
         ) {
             Column(
@@ -37,14 +40,14 @@ fun TextCardHolderPink(
             ) {
                 Text(
                     text = titleText,
-                    style = PnExpertTheme.typography.text.medium_16,
-                    color = PnExpertTheme.colors.textColors.FontDarkColor
+                    style = PnExpertTheme.typography.subtitle.medium_18,
+                    color = titleTextColor
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(12.dp))
                 Text(
                     text = text,
                     style = PnExpertTheme.typography.text.medium_14,
-                    color = PnExpertTheme.colors.textColors.FontGreyColor,
+                    color = textColor,
                     lineHeight = 20.sp
                 )
             }
@@ -56,6 +59,10 @@ fun TextCardHolderPink(
 @Composable
 private fun PreviewTextCardHolderPink() {
     PnExpertTheme {
-        TextCardHolderPink(Modifier, "Требования", "Приложение работает с Вашими данными, поэтому для продолжения регистрации потребуется согласие с нашей политикой работы с персональными данными и конфиденциальной информацией. ")
+        TextCardHolder(
+            Modifier,
+            titleText = "Требования",
+            text = "Приложение работает с Вашими данными, поэтому для продолжения регистрации потребуется согласие с нашей политикой работы с персональными данными и конфиденциальной информацией. ",
+        )
     }
 }
