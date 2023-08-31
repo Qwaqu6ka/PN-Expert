@@ -1,4 +1,4 @@
-package ru.fefu.pnexpert.di
+package ru.fefu.pnexpert.glue.signup.di
 
 import dagger.Module
 import dagger.Provides

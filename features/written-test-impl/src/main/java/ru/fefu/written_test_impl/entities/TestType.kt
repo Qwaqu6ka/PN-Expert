@@ -3,7 +3,7 @@ package ru.fefu.written_test_impl.entities
 import ru.fefu.written_test_impl.entities.testentities.WrittenTest
 import ru.fefu.written_test_impl.entities.tests.TestPSQI
 
-internal enum class TestType(val test: WrittenTest) {
+enum class TestType(val test: WrittenTest) {
     UPDRS1(TestPSQI),
     UPDRS2(TestPSQI),
     UPDRS3(TestPSQI),

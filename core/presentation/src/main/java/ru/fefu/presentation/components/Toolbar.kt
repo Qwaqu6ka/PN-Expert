@@ -1,13 +1,10 @@
-package ru.fefu.presentation
+package ru.fefu.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
@@ -23,10 +20,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import ru.fefu.presentation.R
 import ru.fefu.theme.PnExpertTheme
 
 @Composable
-fun Toolbar(title: String, isInverseColor: Boolean = false, onBackPressed: (() -> Unit)? = null) {
+fun Toolbar(
+    title: String,
+    isInverseColor: Boolean = false,
+    onBackPressed: (() -> Unit)? = null
+) {
 
     val systemUiController = rememberSystemUiController()
 
@@ -41,9 +43,8 @@ fun Toolbar(title: String, isInverseColor: Boolean = false, onBackPressed: (() -
     Box(
         Modifier
             .fillMaxWidth()
-            .background(PnExpertTheme.colors.mainAppColors.AppGreyLightColor)
+            .background(Color.Transparent)
             .padding(horizontal = 16.dp)
-            .windowInsetsPadding(WindowInsets.statusBars)
             .defaultMinSize(minHeight = 50.dp)
     ) {
         if (onBackPressed != null) {

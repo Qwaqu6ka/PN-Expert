@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--    Service Res  -->
+    <string name="enter_minutes">Введите минуты</string>
+    <string name="test">Тест</string>
+    <string name="back">Назад</string>
+    <string name="next">Дальше</string>
+    <string name="complete">Завершить</string>
+    <string name="picked_time">Выбранное время</string>
+    <string name="pick_time">Выбрать время</string>
+    <string name="old_test_dialog_title">Неоконченный тест</string>
+    <string name="old_test_dialog_text">У вас остался неоконченный тест. Желаете его продолжить?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+
+
     <!--Resource name format for tests-->
     <!--
         <test>_title - full name of test
@@ -7,11 +23,6 @@
         <test>_question<num> - question №<num> for <test>
         <test>_answer_<ans_group>_<points> - answer where <ans_group> - sequence number of group of similar answers
     -->
-
-
-    <!--    Service Res  -->
-    <string name="enter_minutes">Введите минуты</string>
-    <string name="test">Тест</string>
 
 
     <!--    PSQI    -->

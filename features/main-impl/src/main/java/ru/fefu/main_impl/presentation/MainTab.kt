@@ -36,7 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.fefu.main_impl.R
-import ru.fefu.presentation.Toolbar
+import ru.fefu.presentation.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 
 internal data class LongCardData(val image: Int, val title: String, val subtitle: String)
@@ -208,7 +208,7 @@ private fun LongActionCard(data: LongCardData) {
                     .fillMaxSize()
                     .clip(PnExpertTheme.shapes.imageShapes.imageClassic15),
                 painter = painterResource(id = data.image),
-                contentScale = ContentScale.FillHeight,
+                contentScale = ContentScale.FillBounds,
                 contentDescription = null,
             )
             Column(
