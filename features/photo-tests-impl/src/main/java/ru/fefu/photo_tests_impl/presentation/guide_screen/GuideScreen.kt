@@ -17,7 +17,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.fefu.photo_tests_impl.presentation.PhotoTestsViewModel
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.GuidePhotosHolder
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.TaskAndTimeHolder
 import ru.fefu.presentation.TextCardHolderPink
@@ -26,9 +25,13 @@ import ru.fefu.theme.PnExpertTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun GuideScreen(viewModel: PhotoTestsViewModel) {
+fun GuideScreen(
+    modifier: Modifier,
+    viewModel: GuideScreenViewModel,
+) {
     Scaffold(
         topBar = { Toolbar(title = "Упражнение", onBackPressed = {}) },
+        modifier = modifier
     ) {scaffoldPadding->
         Column(
             modifier = Modifier

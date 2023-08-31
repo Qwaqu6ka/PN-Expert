@@ -1,4 +1,4 @@
-package ru.fefu.photo_tests_impl.presentation
+package ru.fefu.photo_tests_impl.presentation.guide_screen
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -6,14 +6,12 @@ import androidx.lifecycle.ViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import dagger.hilt.android.lifecycle.HiltViewModel
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
 import ru.fefu.photo_tests_impl.domain.use_cases.GetTestDataUseCase
 import ru.fefu.photo_tests_impl.presentation.models.TestDataState
-import javax.inject.Inject
 
 
-class PhotoTestsViewModel @AssistedInject constructor(
+class GuideScreenViewModel @AssistedInject constructor(
     private val getTestDataUseCase: GetTestDataUseCase,
     @Assisted private val testType: PhotoTestType
     ):ViewModel() {
@@ -31,6 +29,6 @@ class PhotoTestsViewModel @AssistedInject constructor(
 
     @AssistedFactory
     interface Factory {
-        fun create(testType: PhotoTestType): PhotoTestsViewModel
+        fun create(testType: PhotoTestType): GuideScreenViewModel
     }
 }
