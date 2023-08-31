@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.GuidePhotosHolder
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.TaskAndTimeHolder
@@ -36,11 +37,10 @@ fun GuideScreen(
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
     ) {scaffoldPadding->
         Column(
-            modifier = Modifier
+            modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(vertical = scaffoldPadding.calculateTopPadding())
                 .padding(horizontal = 16.dp)
+                .padding(top = scaffoldPadding.calculateTopPadding())
         ) {
             TaskAndTimeHolder(
                 modifier = Modifier
@@ -69,7 +69,7 @@ fun GuideScreen(
                     .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
                 shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
                 colors = ButtonDefaults.textButtonColors(
-                    containerColor = PnExpertTheme.colors.buttonColors.ButtonHoverBlueColor
+                    containerColor = PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor
                 )
             ) {
                 Text(
