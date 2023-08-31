@@ -1,7 +1,6 @@
 package ru.fefu.photo_tests_impl.presentation.guide_screen
 
 import android.annotation.SuppressLint
-import android.widget.Space
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -22,7 +21,7 @@ import ru.fefu.photo_tests_impl.presentation.PhotoTestsViewModel
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.GuidePhotosHolder
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.TaskAndTimeHolder
 import ru.fefu.presentation.TextCardHolderPink
-import ru.fefu.presentation.Toolbar
+import ru.fefu.presentation.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
