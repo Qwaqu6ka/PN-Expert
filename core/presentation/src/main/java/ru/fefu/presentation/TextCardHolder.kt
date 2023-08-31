@@ -1,5 +1,6 @@
 package ru.fefu.presentation
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,16 +20,18 @@ import ru.fefu.theme.PnExpertTheme
 @Composable
 fun TextCardHolder(
     modifier: Modifier,
-    background: Color = PnExpertTheme.colors.mainAppColors.AppBlueColor,
+    background: Color = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
+    borderColor: Color = PnExpertTheme.colors.mainAppColors.AppBlueColor,
     titleText: String,
-    titleTextColor:Color = PnExpertTheme.colors.textColors.FontWhiteColor,
+    titleTextColor:Color = PnExpertTheme.colors.textColors.FontBlueColor,
     text:String,
-    textColor:Color = PnExpertTheme.colors.textColors.FontWhiteColor,
+    textColor:Color = PnExpertTheme.colors.textColors.FontBlueColor,
 ) {
     PnExpertTheme {
         Card(
             modifier = modifier,
             shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
+            border = BorderStroke(1.dp, borderColor),
             colors = CardDefaults.cardColors(
                 containerColor = background
             )
