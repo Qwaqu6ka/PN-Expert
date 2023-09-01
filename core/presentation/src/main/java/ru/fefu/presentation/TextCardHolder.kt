@@ -20,12 +20,12 @@ import ru.fefu.theme.PnExpertTheme
 @Composable
 fun TextCardHolder(
     modifier: Modifier,
+    text: String,
+    titleText: String = "",
     background: Color = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
     borderColor: Color = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-    titleText: String,
-    titleTextColor:Color = PnExpertTheme.colors.textColors.FontBlueColor,
-    text:String,
-    textColor:Color = PnExpertTheme.colors.textColors.FontBlueColor,
+    titleTextColor: Color = PnExpertTheme.colors.textColors.FontBlueColor,
+    textColor: Color = PnExpertTheme.colors.textColors.FontBlueColor,
 ) {
     PnExpertTheme {
         Card(
@@ -41,12 +41,14 @@ fun TextCardHolder(
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                Text(
-                    text = titleText,
-                    style = PnExpertTheme.typography.subtitle.medium_18,
-                    color = titleTextColor
-                )
-                Spacer(modifier = Modifier.height(12.dp))
+                if (titleText.isNotBlank()) {
+                    Text(
+                        text = titleText,
+                        style = PnExpertTheme.typography.subtitle.medium_18,
+                        color = titleTextColor
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                }
                 Text(
                     text = text,
                     style = PnExpertTheme.typography.text.medium_14,

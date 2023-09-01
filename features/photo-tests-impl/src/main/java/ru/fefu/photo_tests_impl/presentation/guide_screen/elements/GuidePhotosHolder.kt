@@ -76,7 +76,8 @@ private fun PreviewGuidPhoto(){
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp),
-            shape = PnExpertTheme.shapes.imageShapes.imageClassic15
+            shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
+            border = BorderStroke(1.dp, PnExpertTheme.colors.mainAppColors.AppDarkColor)
         ) {
             Image(
                 modifier = Modifier
