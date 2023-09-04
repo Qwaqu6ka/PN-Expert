@@ -1,5 +1,6 @@
 package ru.fefu.written_test_impl.presentation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -77,35 +78,36 @@ internal fun TestContent(
     val uiState by testViewModel.testUiState.collectAsState()
 
     Surface(modifier = modifier) {
-        Column(modifier = Modifier.padding(20.dp)) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(15.dp)
+        ) {
+            val currentQuestion = uiState.currentQuestion
+            val hintRes = if (currentQuestion is InputQuestion) {
+                currentQuestion.hint
+            } else {
+                null
+            }
+            val inputValidator = if (currentQuestion is InputQuestion) {
+                currentQuestion.validator
+            } else {
+                null
+            }
+
+            Text(
+                text = stringResource(id = uiState.currentQuestion.text),
+                textAlign = TextAlign.Justify,
+                style = PnExpertTheme.typography.text.medium_16
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .verticalScroll(
-                        rememberScrollState()
-                    )
-                    .weight(1f)
+                    .verticalScroll(rememberScrollState())
+                    .background(PnExpertTheme.colors.mainAppColors.AppGreyLightColor)
+
             ) {
-                val currentQuestion = uiState.currentQuestion
-                val hintRes = if (currentQuestion is InputQuestion) {
-                    currentQuestion.hint
-                } else {
-                    null
-                }
-                val inputValidator = if (currentQuestion is InputQuestion) {
-                    currentQuestion.validator
-                } else {
-                    null
-                }
-
-
-
-                Text(
-                    text = stringResource(id = uiState.currentQuestion.text),
-                    textAlign = TextAlign.Justify,
-                    style = PnExpertTheme.typography.text.medium_16
-                )
-                Spacer(modifier = Modifier.height(10.dp))
 
                 when (val question = uiState.currentQuestion) {
                     is ChoiceQuestion -> SelectableAnswerList(
@@ -128,18 +130,17 @@ internal fun TestContent(
                         modifier = Modifier.fillMaxSize()
                     )
                 }
-
+                Spacer(modifier = Modifier.height(15.dp))
+                ManageButtons(
+                    onPreviousQuestion = testViewModel::onBackQuestPressed,
+                    onNextQuestion = testViewModel::onNextQuestPressed,
+                    previousButtonIsActive = uiState.isPreviousQuestButtonActive,
+                    nextButtonIsActive = uiState.isNextQuestButtonActive,
+                    replaceNextButtonWithDone = uiState.replaceNextButtonWithDone,
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
-            ManageButtons(
-                onPreviousQuestion = testViewModel::onBackQuestPressed,
-                onNextQuestion = testViewModel::onNextQuestPressed,
-                previousButtonIsActive = uiState.isPreviousQuestButtonActive,
-                nextButtonIsActive = uiState.isNextQuestButtonActive,
-                replaceNextButtonWithDone = uiState.replaceNextButtonWithDone,
-                modifier = Modifier.fillMaxWidth()
-            )
         }
-
     }
 }
 
