@@ -3,6 +3,7 @@
 
     <!--    Service Res  -->
     <string name="enter_minutes">Введите минуты</string>
+    <string name="enter_hours">Введите часы</string>
     <string name="test">Тест</string>
     <string name="back">Назад</string>
     <string name="next">Дальше</string>
@@ -30,9 +31,181 @@
     <string name="PSQI_code_title">PSQI</string>
     <string name="PSQI_question1">В какое время Вы обычно ложитесь спать в течение последнего месяца?</string>
     <string name="PSQI_question2">Сколько времени(минут) Вам обычно требовалось, чтобы заснуть (в течение первого месяца)?</string>
-    <string name="PSQI_question5">В течение прошедшего месяца как часто у Вас были проблемы со сном, потому что Вы не могли уснуть в течение 30 минут?</string>
+    <string name="PSQI_question3">Во сколько вы обычно просыпаетесь по утрам?</string>
+    <string name="PSQI_question4">Сколько часов в среднем Вы спали за ночь в течение последнего месяца? (количество часов может отличаться от количества времени, проведенного в постели).</string>
+    <string name="PSQI_question5a">В течение прошедшего месяца как часто у Вас были проблемы со сном, потому что Вы не могли уснуть в течение 30 минут?</string>
+    <string name="PSQI_question5b">В течение прошедшего месяца как часто у Вас были проблемы со сном, потому что Вы просыпались в середине ночи или под утро</string>
+    <string name="PSQI_question5c">В течение прошедшего месяца как часто у Вас были проблемы со сном, потому что Вы были вынуждены вставать, чтобы воспользоваться ванной комнатой?</string>
+    <string name="PSQI_question5d">В течение прошедшего месяца как часто у Вас были проблемы со сном, потому что Вы не могли свободно дышать?</string>
+    <string name="PSQI_question5e">В течение прошедшего месяца как часто у Вас были проблемы со сном, потому что Вы кашляли или громко храпели?</string>
+    <string name="PSQI_question5f">В течение прошедшего месяца как часто у Вас были проблемы со сном, потому что Вы чувствовали, что холодно?</string>
+    <string name="PSQI_question5g">В течение прошедшего месяца как часто у Вас были проблемы со сном, потому что Вы чувствовали, что жарко?</string>
+    <string name="PSQI_question5h">В течение прошедшего месяца как часто у Вас были проблемы со сном, потому что Вы видели плохие сны?</string>
+    <string name="PSQI_question5i">В течение прошедшего месяца как часто у Вас были проблемы со сном, потому что Вы испытывали боль?</string>
+    <string name="PSQI_question5j">В течение прошедшего месяца как часто у Вас были проблемы со сном, по иным причинам?</string>
+    <string name="PSQI_question6">За прошедший месяц как часто Вы принимали лекарства, которые помогают уснуть?</string>
+    <string name="PSQI_question7">Как часто за прошедший месяц Вам было сложно оставаться бодрствующим во время вождения автомобиля, после приема пищи или в процессе социальной деятельности?</string>
+    <string name="PSQI_question8">За прошедший месяц насколько сложно было Вам сохранять достаточный настрой на то, чтобы сделать все дела?</string>
+    <string name="PSQI_question9">Как бы Вы охарактеризовали качество Вашего сна за последний месяц?</string>
     <string name="PSQI_answer_1_0">Ни разу в течение последнего месяца</string>
     <string name="PSQI_answer_1_1">Менее, чем один раз в неделю</string>
     <string name="PSQI_answer_1_2">Один раз или два раза в неделю</string>
     <string name="PSQI_answer_1_3">Три и более раз в неделю</string>
+    <string name="PSQI_answer_2_0">Совсем не сложно</string>
+    <string name="PSQI_answer_2_1">Лишь чуть-чуть сложно</string>
+    <string name="PSQI_answer_2_2">Несколько сложно</string>
+    <string name="PSQI_answer_2_3">Очень сложно</string>
+    <string name="PSQI_answer_3_0">Очень хорошее</string>
+    <string name="PSQI_answer_3_1">Достаточно хорошее</string>
+    <string name="PSQI_answer_3_2">Скорее плохое</string>
+    <string name="PSQI_answer_3_3">Очень плохое</string>
+
+
+    <!--    HoehnYahr    -->
+    <string name="HoehnYahr_title">Шкала Хен и Яра</string>
+    <string name="HoehnYahr_code_title">Хен-Яр</string>
+    <string name="HoehnYahr_question1">Стадия прогрессирования болезни Паркинсона</string>
+    <string name="HoehnYahr_answer_0">Двигательные проявления отсутствуют</string>
+    <string name="HoehnYahr_answer_1">Односторонние проявления заболевания</string>
+    <string name="HoehnYahr_answer_2">Двусторонние проявления заболевания без постуральной неустойчивости</string>
+    <string name="HoehnYahr_answer_3">Умеренно выраженная постуральная неустойчивость, возможно самостоятельное передвижение</string>
+    <string name="HoehnYahr_answer_4">Значительная утрата двигательных возможностей, но пациент в состоянии передвигаться</string>
+    <string name="HoehnYahr_answer_5">При отсутствии посторонней помощи пациент прикован к постели или инвалидному креслу</string>
+
+
+    <!--    FAB    -->
+    <string name="FAB_title">Батарея лобной дисфункции</string>
+    <string name="FAB_code_title">FAB</string>
+    <string name="FAB_question1">Пациента спрашивают: «Что общего между яблоком и грушей?» Правильным считают ответ, который содержит категориальное обобщение («Это фрукты»). Если больной затрудняется или дает иной ответ, ему говорят правильный ответ. Потом спрашивают: «Что общего между пальто и курткой?» «Что общего между столом и стулом?» Каждое категориальное обобщение оценивается в 1 балл.</string>
+    <string name="FAB_question2">Просят закрыть глаза и в течение минуты называть слова на букву С. При этом имена собственные не засчитываются. Результат: более 9 слов за минуту – 3 балла, от 7 до 9 – 2 балла, от 4 до 6 – 1 балл, менее 4 – 0 баллов.</string>
+    <string name="FAB_question3">Больному предлагается повторить за врачом одной рукой серию из трех движений: • кулак (ставится горизонтально, параллельно поверхности стола) • ребро (кисть ставится вертикально на медиальный край) • ладонь (кисть ставится горизонтально, ладонью вниз). При первом предъявлении серии больной только следит за врачом, при втором предъявлении – повторяет движения врача, наконец, последующие две серии делает самостоятельно. При самостоятельном выполнении подсказки больному недопустимы. Результат: правильное выполнение трех серий — 3 балла, двух серий – 2 балла, одной серии (совместно с врачом) – 1 балл.</string>
+    <string name="FAB_question4">Дается инструкция: «Сейчас я проверю Ваше внимание. Мы будем выстукивать ритм. Если я ударю один раз, Вы должны ударить два раза подряд. Если я ударю два раза подряд, Вы должны ударить только один раз». Выстукивается следующий ритм: 1–1–2–1–2–2–2–1–1–2. Оценка результата: правильное – 3 балла, не более 2 ошибок – 2 балла, много ошибок – 1 балл, полное копирование ритма врача – 0 баллов.</string>
+    <string name="FAB_question5">Дается инструкция: «Теперь если я ударю один раз, то Вы ничего не должны делать. Если я ударю два раза подряд, Вы должны ударить только один раз». Выстукивается ритм: 1–1–2–1–2–2–2– 1–1–2. Оценка результата аналогично п. 4.</string>
+    <string name="FAB_question6">Больной сидит, его просят положить руки на колени ладонями вверх и проверяют хватательный рефлекс. Отсутствие хватательного рефлекса оценивается в 3 балла. Если больной спрашивает, должен ли он схватить, ставится оценка 2. Если больной хватает, ему дается инструкция не делать этого, и хватательный рефлекс проверяется повторно. Если при повторном исследовании рефлекс отсутствует, ставится 1, в противном случае – 0 баллов.</string>
+    <string name="FAB_answer_0">0 баллов</string>
+    <string name="FAB_answer_1">1 балл</string>
+    <string name="FAB_answer_2">2 балла</string>
+    <string name="FAB_answer_3">3 балла</string>
+
+
+    <!--    SchwabEngland    -->
+    <string name="SchwabEngland_title">Шкала повседневной активности Шваба и Ингланда</string>
+    <string name="SchwabEngland_code_title">Schwab&amp;England</string>
+    <string name="SchwabEngland_question1">Оценка функционального состояния</string>
+    <string name="SchwabEngland_answer_0">Нарушаются вегетативные функции: глотание, мочеиспускание и дефекация</string>
+    <string name="SchwabEngland_answer_1">Полностью зависим от посторонней помощи. Беспомощен. Полная инвалидизация.</string>
+    <string name="SchwabEngland_answer_2">Не в состоянии ничего сделать без посторонней помощи. Немного помогает ухаживающему персоналу. Тяжелая инвалидизация.</string>
+    <string name="SchwabEngland_answer_3">С трудом выполняю (или начинает выполнять) лишь отдельные повседневные обязанности сам. Нуждаюсь в значительной посторонней помощи.</string>
+    <string name="SchwabEngland_answer_4">Зависим от посторонней помощи. Повседневные обязанности выполняю, но почти всегда с посторонней помощью.</string>
+    <string name="SchwabEngland_answer_5">Еще более зависим от посторонней помощи. Повседневные обязанности выполняю медленно, в половине случаев нуждаюсь в посторонней помощи.</string>
+    <string name="SchwabEngland_answer_6">Нередко завишу от посторонней помощи. С большинством повседневных обязанностей справляюсь, но медленно, прилагая значительные усилия и нередко с ошибками. Некоторые действия выполнить не могу.</string>
+    <string name="SchwabEngland_answer_7">Частично нуждаюсь в посторонней помощи. С большим трудом справляюсь с некоторыми повседневными обязанностями. Трачу на них в 3–4 раза больше времени, чем обычно</string>
+    <string name="SchwabEngland_answer_8">Я полностью независим при выполнении большинства повседневных обязанностей, но трачу на них в 2 раза больше времени, чем в норме. Осознаю, что стало сложнее выполнять работу.</string>
+    <string name="SchwabEngland_answer_9">Я полностью независим. Справляюсь с повседневными обязанностями, но более медленно. Нередко в 2 раза медленнее, чем в норме. Появляются жалобы на трудность при выполнении повседневных дел.</string>
+    <string name="SchwabEngland_answer_10">Я полностью независим. Легко и быстро справляется с повседневными обязанностями. Жалобы отсутствуют.</string>
+
+
+    <!--    HADS    -->
+    <string name="HADS_title">Шкала тревоги и депрессии</string>
+    <string name="HADS_code_title">HADS</string>
+    <string name="HADS_question1">Я испытываю напряжение, мне не по себе</string>
+    <string name="HADS_question2">Я испытываю страх, кажется, что что-то ужасное может вот-вот случиться</string>
+    <string name="HADS_question3">Беспокойные мысли крутятся у меня в голове</string>
+    <string name="HADS_question4">Я легко могу присесть и расслабиться</string>
+    <string name="HADS_question5">Я испытываю внутреннее напряжение или дрожь</string>
+    <string name="HADS_question6">Я испытываю неусидчивость, мне постоянно нужно двигаться</string>
+    <string name="HADS_question7">У меня бывает внезапное чувство паники</string>
+    <string name="HADS_question8">То, что приносило мне большое удовольствие, и сейчас вызывает у меня такое же чувство</string>
+    <string name="HADS_question9">Я способен рассмеяться и увидеть в том или ином событии смешное</string>
+    <string name="HADS_question10">Я испытываю бодрость</string>
+    <string name="HADS_question11">Мне кажется, что я стал все делать очень медленно</string>
+    <string name="HADS_question12">Я не слежу за своей внешностью</string>
+    <string name="HADS_question13">Я считаю, что мои дела (занятия, увлечения) могут принести мне чувство удовлетворения</string>
+    <string name="HADS_question14">Я могу получить удовольствие от хорошей книги, радио- или телепрограммы</string>
+    <string name="HADS_answer_all_time">все время</string>
+    <string name="HADS_answer_often">часто</string>
+    <string name="HADS_answer_very_often">очень часто</string>
+    <string name="HADS_answer_sometimes">иногда</string>
+    <string name="HADS_answer_dont_feel">совсем не испытываю</string>
+    <string name="HADS_answer_1_1">время от времени, иногда</string>
+    <string name="HADS_answer_2_3">определенно это так, и страх очень велик</string>
+    <string name="HADS_answer_2_2">да, это так, но страх не очень велик</string>
+    <string name="HADS_answer_2_1">иногда, но это меня не беспокоит</string>
+    <string name="HADS_answer_3_3">постоянно</string>
+    <string name="HADS_answer_3_2">большую часть времени</string>
+    <string name="HADS_answer_3_1">время от времени и не так часто</string>
+    <string name="HADS_answer_3_0">только иногда</string>
+    <string name="HADS_answer_4_3">совсем не могу</string>
+    <string name="HADS_answer_4_2">лишь изредка, это так</string>
+    <string name="HADS_answer_4_1">наверно, это так</string>
+    <string name="HADS_answer_4_0">определенно, это так</string>
+    <string name="HADS_answer_6_1">лишь в некоторой степени, это так</string>
+    <string name="HADS_answer_7_2">довольно часто</string>
+    <string name="HADS_answer_7_1">не так уж часто</string>
+    <string name="HADS_answer_7_0">совсем не бывает</string>
+    <string name="HADS_answer_8_3">это совсем не так</string>
+    <string name="HADS_answer_8_2">лишь в очень малой степени, это так</string>
+    <string name="HADS_answer_8_1">наверное, это так</string>
+    <string name="HADS_answer_9_3">совсем не способен</string>
+    <string name="HADS_answer_10_2">очень редко</string>
+    <string name="HADS_answer_10_0">практически все время</string>
+    <string name="HADS_answer_11_0">совсем нет</string>
+    <string name="HADS_answer_12_2">я не уделяю этому столько времени, сколько нужно</string>
+    <string name="HADS_answer_12_1">может быть, я стал меньше уделять этому времени</string>
+    <string name="HADS_answer_12_0">я слежу за собой так же, как и раньше</string>
+    <string name="HADS_answer_13_3">совсем так не считаю</string>
+    <string name="HADS_answer_13_2">значительно меньше, чем обычно</string>
+    <string name="HADS_answer_13_1">да, но не в той степени, как раньше</string>
+    <string name="HADS_answer_13_0">точно так же, как и обычно</string>
+    <string name="HADS_answer_14_2">редко</string>
+
+
+    <!--    PDQ39    -->
+    <string name="PDQ39_title">Опросник по болезни Паркинсона</string>
+    <string name="PDQ39_code_title">PDQ 39</string>
+    <string name="PDQ39_question1">Испытывали ли Вы трудности при занятиях делами, привычными для Вашего досуга?</string>
+    <string name="PDQ39_question2">Испытывали ли Вы трудности при выполнении домашней работы (уборке квартиры, приготовлении пищи и т.п.)?</string>
+    <string name="PDQ39_question3">Трудно ли Вам было донести сумки из магазина?</string>
+    <string name="PDQ39_question4">Испытывали ли Вы трудности при преодолении расстояния в 1 км?</string>
+    <string name="PDQ39_question5">Испытывали ли Вы трудности при преодолении расстояния в 100 м?</string>
+    <string name="PDQ39_question6">Испытывали ли Вы затруднения при передвижении по дому?</string>
+    <string name="PDQ39_question7">Возникали ли у Вас трудности при посещении магазина и другого общественного места или поездке в транспорте и т.п., связанные с Вашим заболеванием?</string>
+    <string name="PDQ39_question8">Нуждались ли Вы в посторонней помощи, чтобы выйти из дома?</string>
+    <string name="PDQ39_question9">Возникли ли у Вас беспокойство или тревога в общественных местах?</string>
+    <string name="PDQ39_question10">Были ли у Вас случаи, когда Вы вынуждены были остаться дома против желания?</string>
+    <string name="PDQ39_question11">Испытывали ли Вы трудности при принятии душа или ванны?</string>
+    <string name="PDQ39_question12">Испытывали ли Вы трудности при одевании?</string>
+    <string name="PDQ39_question13">Трудно ли Вам было завязывать шнурки или застегивать пуговицы?</string>
+    <string name="PDQ39_question14">Возникали ли у Вас проблемы в связи с неразборчивым почерком?</string>
+    <string name="PDQ39_question15">Возникали ли у Вас трудности при разрезании пищи ножом?</string>
+    <string name="PDQ39_question16">Случалось ли вам расплескивать чай, кофе и т.п.?</string>
+    <string name="PDQ39_question17">Испытывали ли Вы чувство подавленности или уныния?</string>
+    <string name="PDQ39_question18">Было ли у Вас ощущение, что Вы одиноки и покинуты?</string>
+    <string name="PDQ39_question19">Были ли у Вас беспричинная грусть и слезы?</string>
+    <string name="PDQ39_question20">Чувствовали ли Вы раздражение или горечь?</string>
+    <string name="PDQ39_question21">Испытывали ли Вы чувство тревоги?</string>
+    <string name="PDQ39_question22">Возникал ли у Вас страх перед будущим?</string>
+    <string name="PDQ39_question23">Было ли у Вас ощущение, что Вы должны скрывать свою болезнь от окружающих?</string>
+    <string name="PDQ39_question24">Приходилось ли Вам избегать ситуаций, в которых нужно было принимать пищу при посторонних?</string>
+    <string name="PDQ39_question25">Чувствовали ли Вы стеснение при посторонних?</string>
+    <string name="PDQ39_question26">Беспокоила ли Вас реакция окружающих на Ваше заболевание?</string>
+    <string name="PDQ39_question27">Были ли у Вас проблемы во взаимоотношениях с близкими из-за болезни?</string>
+    <string name="PDQ39_question28">Всегда ли Вы получали поддержку со стороны супруга?</string>
+    <string name="PDQ39_question29">Всегда ли Вы получали поддержку со стороны семьи или близких друзей?</string>
+    <string name="PDQ39_question30">Случалось ли Вам неожиданно засыпать в дневное время?</string>
+    <string name="PDQ39_question31">Трудно ли Вам было сконцентрировать внимание, например, при чтении или просмотре телепередач?</string>
+    <string name="PDQ39_question32">Случалось ли, что Ваша память давала сбои?</string>
+    <string name="PDQ39_question33">Мешали ли Вам навязчивые мысли или галлюцинации?</string>
+    <string name="PDQ39_question34">Трудно ли Вам было произносить слова?</string>
+    <string name="PDQ39_question35">Были ли случаи, когда Вы не могли общаться с окружающими?</string>
+    <string name="PDQ39_question36">Было ли у Вас ощущение, что окружающие Вас игнорируют?</string>
+    <string name="PDQ39_question37">Возникали ли у Вас болезненные мышечные спазмы?</string>
+    <string name="PDQ39_question38">Были ли у Вас боли в суставах или в теле?</string>
+    <string name="PDQ39_question39">Беспокоил ли Вас жар или озноб?</string>
+    <string name="PDQ39_answer_0">Никогда</string>
+    <string name="PDQ39_answer_1">Редко</string>
+    <string name="PDQ39_answer_2">Временами</string>
+    <string name="PDQ39_answer_3">Часто</string>
+    <string name="PDQ39_answer_4">Всегда</string>
+
 </resources>
