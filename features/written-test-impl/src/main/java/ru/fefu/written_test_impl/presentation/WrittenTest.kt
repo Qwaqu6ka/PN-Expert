@@ -70,7 +70,7 @@ internal fun WrittenTest(
 }
 
 @Composable
-internal fun TestContent(
+private fun TestContent(
     testViewModel: WrittenTestViewModel,
     modifier: Modifier = Modifier
 ) {

@@ -16,7 +16,7 @@ import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.entities.testentities.InputQuestionValidator
 
 @Composable
-fun InputAnswer(
+internal fun InputAnswer(
     inputValue: String?,
     onInputChange: (String) -> Unit,
     @StringRes hintRes: Int?,
