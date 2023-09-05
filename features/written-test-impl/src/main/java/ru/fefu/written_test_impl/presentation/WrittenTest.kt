@@ -1,10 +1,10 @@
 package ru.fefu.written_test_impl.presentation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,12 +17,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.launch
 import ru.fefu.presentation.components.SimpleAlertDialog
 import ru.fefu.presentation.components.SimpleTextButton
 import ru.fefu.presentation.components.Toolbar
@@ -60,11 +62,12 @@ internal fun WrittenTest(
                 onBackPressed = { testViewModel.onBackPressed() })
         },
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
+        contentWindowInsets = WindowInsets(0.dp),
         modifier = modifier
     ) { innerPadding ->
         TestContent(
             testViewModel = testViewModel,
-            modifier = Modifier.padding(top = innerPadding.calculateTopPadding())
+            modifier = Modifier.padding(innerPadding)
         )
     }
 }
@@ -78,9 +81,12 @@ private fun TestContent(
     val uiState by testViewModel.testUiState.collectAsState()
 
     Surface(modifier = modifier) {
+        val scrollState = rememberScrollState()
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(15.dp)
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+                .verticalScroll(scrollState)
         ) {
             val currentQuestion = uiState.currentQuestion
             val hintRes = if (currentQuestion is InputQuestion) {
@@ -94,52 +100,54 @@ private fun TestContent(
                 null
             }
 
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "${uiState.currentQuestionNumber}/${uiState.amountOfQuestions}",
+                textAlign = TextAlign.Center,
+                style = PnExpertTheme.typography.text.medium_16
+            )
+            Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = stringResource(id = uiState.currentQuestion.text),
                 textAlign = TextAlign.Justify,
                 style = PnExpertTheme.typography.text.medium_16
             )
+            Spacer(modifier = Modifier.height(15.dp))
 
-            Spacer(modifier = Modifier.height(20.dp))
+            when (val question = uiState.currentQuestion) {
+                is ChoiceQuestion -> SelectableAnswerList(
+                    answers = question.answers,
+                    chosenAnswerIndex = uiState.answer?.toInt(),
+                    onAnswerClick = testViewModel::onAnswerChange
+                )
 
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-                    .background(PnExpertTheme.colors.mainAppColors.AppGreyLightColor)
+                is TimeQuestion -> TimeAnswer(
+                    time = uiState.answer,
+                    onTimeChange = testViewModel::onAnswerChange,
+                    modifier = Modifier.fillMaxSize()
+                )
 
-            ) {
-
-                when (val question = uiState.currentQuestion) {
-                    is ChoiceQuestion -> SelectableAnswerList(
-                        answers = question.answers,
-                        chosenAnswerIndex = uiState.answer?.toInt(),
-                        onAnswerClick = testViewModel::onAnswerChange
-                    )
-
-                    is TimeQuestion -> TimeAnswer(
-                        time = uiState.answer,
-                        onTimeChange = testViewModel::onAnswerChange,
-                        modifier = Modifier.fillMaxSize()
-                    )
-
-                    is InputQuestion -> InputAnswer(
-                        inputValue = uiState.answer,
-                        onInputChange = testViewModel::onAnswerChange,
-                        hintRes = hintRes,
-                        validator = inputValidator,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-                Spacer(modifier = Modifier.height(15.dp))
-                ManageButtons(
-                    onPreviousQuestion = testViewModel::onBackQuestPressed,
-                    onNextQuestion = testViewModel::onNextQuestPressed,
-                    previousButtonIsActive = uiState.isPreviousQuestButtonActive,
-                    nextButtonIsActive = uiState.isNextQuestButtonActive,
-                    replaceNextButtonWithDone = uiState.replaceNextButtonWithDone,
-                    modifier = Modifier.fillMaxWidth()
+                is InputQuestion -> InputAnswer(
+                    inputValue = uiState.answer,
+                    onInputChange = testViewModel::onAnswerChange,
+                    hintRes = hintRes,
+                    validator = inputValidator,
+                    modifier = Modifier.fillMaxSize()
                 )
             }
+            Spacer(modifier = Modifier.height(15.dp))
+
+            val coroutineScope = rememberCoroutineScope()
+            ManageButtons(
+                onPreviousQuestion = testViewModel::onBackQuestPressed,
+                onNextQuestion = testViewModel::onNextQuestPressed,
+                scrollToStart = { coroutineScope.launch { scrollState.scrollTo(0) } },
+                previousButtonIsActive = uiState.isPreviousQuestButtonActive,
+                nextButtonIsActive = uiState.isNextQuestButtonActive,
+                replaceNextButtonWithDone = uiState.replaceNextButtonWithDone,
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(15.dp))
         }
     }
 }
@@ -148,6 +156,7 @@ private fun TestContent(
 private fun ManageButtons(
     onPreviousQuestion: () -> Unit,
     onNextQuestion: () -> Unit,
+    scrollToStart: () -> Unit,
     previousButtonIsActive: Boolean,
     nextButtonIsActive: Boolean,
     replaceNextButtonWithDone: Boolean,
@@ -155,12 +164,18 @@ private fun ManageButtons(
 ) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceEvenly) {
         SimpleTextButton(
-            onClick = onPreviousQuestion,
+            onClick = {
+                onPreviousQuestion()
+                scrollToStart()
+            },
             text = stringResource(id = R.string.back),
             enabled = previousButtonIsActive
         )
         SimpleTextButton(
-            onClick = onNextQuestion,
+            onClick = {
+                onNextQuestion()
+                scrollToStart()
+            },
             text = if (replaceNextButtonWithDone)
                 stringResource(id = R.string.complete)
             else
