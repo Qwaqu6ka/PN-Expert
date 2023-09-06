@@ -64,7 +64,7 @@ fun AppNavGraph(
 
             composable("testHistory") {
                 InDevPlug("History") {
-                    navController.navigate(featureApiHolder.writtenTestApi.testPsqiRoute)
+                    navController.navigate(featureApiHolder.photoTestsApi.route)
                 }
             }
             register(

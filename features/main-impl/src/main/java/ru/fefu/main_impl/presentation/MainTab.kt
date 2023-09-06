@@ -1,6 +1,5 @@
 package ru.fefu.main_impl.presentation
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -15,16 +14,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -42,7 +40,6 @@ import ru.fefu.theme.PnExpertTheme
 internal data class LongCardData(val image: Int, val title: String, val subtitle: String)
 internal data class BoxCardData(val image: Int, val title: String)
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 internal fun MainTab(modifier: Modifier) {
 
@@ -71,27 +68,30 @@ internal fun MainTab(modifier: Modifier) {
     Scaffold(
         topBar = { Toolbar(title = stringResource(id = R.string.main)) },
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
-        modifier = modifier
+        contentWindowInsets = WindowInsets(0.dp),
+        modifier = modifier,
     ) { scaffoldPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp)
-                .padding(scaffoldPadding)
-        ) {
-            for (cardData in longCardsData) {
-                LongActionCard(cardData)
-                Spacer(modifier = Modifier.height(8.dp))
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+        Surface(modifier = Modifier.padding(scaffoldPadding)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 16.dp)
             ) {
-                BoxCardDiagnostic(boxCardsData[0])
-                Spacer(modifier = Modifier.width(8.dp))
-                BoxCardMonitoring(boxCardsData[1])
+                for (cardData in longCardsData) {
+                    LongActionCard(cardData)
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    BoxCardDiagnostic(boxCardsData[0])
+                    Spacer(modifier = Modifier.width(8.dp))
+                    BoxCardMonitoring(boxCardsData[1])
+                }
+                Spacer(modifier = Modifier.height(10.dp))
             }
         }
     }
