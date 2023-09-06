@@ -80,7 +80,10 @@ private fun TestContent(
 
     val uiState by testViewModel.testUiState.collectAsState()
 
-    Surface(modifier = modifier) {
+    Surface(
+        modifier = modifier,
+        color = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+    ) {
         val scrollState = rememberScrollState()
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -114,22 +117,23 @@ private fun TestContent(
             )
             Spacer(modifier = Modifier.height(15.dp))
 
+            val answer by testViewModel.answer.collectAsState()
             when (val question = uiState.currentQuestion) {
                 is ChoiceQuestion -> SelectableAnswerList(
                     answers = question.answers,
-                    chosenAnswerIndex = uiState.answer?.toInt(),
-                    onAnswerClick = testViewModel::onAnswerChange
+                    chosenAnswerIndex = if (answer.isNotBlank()) answer.toInt() else null,
+                    onAnswerClick = testViewModel::onLocalAnswerChange
                 )
 
                 is TimeQuestion -> TimeAnswer(
-                    time = uiState.answer,
-                    onTimeChange = testViewModel::onAnswerChange,
+                    time = answer,
+                    onTimeChange = testViewModel::onLocalAnswerChange,
                     modifier = Modifier.fillMaxSize()
                 )
 
                 is InputQuestion -> InputAnswer(
-                    inputValue = uiState.answer,
-                    onInputChange = testViewModel::onAnswerChange,
+                    inputValue = answer,
+                    onInputChange = testViewModel::onLocalAnswerChange,
                     hintRes = hintRes,
                     validator = inputValidator,
                     modifier = Modifier.fillMaxSize()

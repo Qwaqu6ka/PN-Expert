@@ -23,6 +23,7 @@ internal class WrittenTestViewModel @Inject constructor(
     private val repository: WrittenTestRepository
 ) : BaseViewModel() {
 
+    private var uncompletedLeave: Boolean = true
     private val testTitle: String = savedStateHandle["testType"]
         ?: throw IllegalArgumentException("Test type can not be null")
     private val test: WrittenTest
@@ -30,11 +31,14 @@ internal class WrittenTestViewModel @Inject constructor(
     private val currentQuestionIndex = MutableStateFlow(0)
     private val showOldTestDialog = MutableStateFlow(false)
     private var testResult: StateFlow<List<WrittenAnswer>> = MutableStateFlow(emptyList())
+    private val _answer = MutableStateFlow("")
+    val answer: StateFlow<String> = _answer
 
     init {
         viewModelScope.launch {
             testResult = repository.getTestResults(testTitle)
                 .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+
 
             val haveOldTest = repository.isTestUncompleted(testTitle)
             if (haveOldTest) {
@@ -45,13 +49,21 @@ internal class WrittenTestViewModel @Inject constructor(
 
     val testUiState: StateFlow<TestUiState> =
         combineState(
-            currentQuestionIndex, testResult, showOldTestDialog,
+            answer, currentQuestionIndex, showOldTestDialog,
             scope = viewModelScope, transform = ::mergeSources
         )
+
+    override fun onCleared() {
+        if (uncompletedLeave) {
+            saveLocalAnswer()
+        }
+        super.onCleared()
+    }
 
     fun onConfirmOldTest() {
         viewModelScope.launch {
             currentQuestionIndex.value = repository.getLastAnsweredQuestion(testTitle).first()
+            changeLocalAnswer()
         }
         showOldTestDialog.value = false
     }
@@ -63,50 +75,74 @@ internal class WrittenTestViewModel @Inject constructor(
         showOldTestDialog.value = false
     }
 
-    fun onAnswerChange(newValue: String) {
-        viewModelScope.launch {
-            repository.saveTestResult(
-                WrittenAnswer(
-                    testTitle = testTitle,
-                    questionNumber = currentQuestionIndex.value,
-                    value = newValue
-                )
-            )
-        }
-    }
-
     fun onBackPressed() {
         // todo
     }
 
     fun onNextQuestPressed() = viewModelScope.launch {
+        saveLocalAnswer().join()
         if (currentQuestionIndex.value == test.questions.lastIndex) {
             repository.submitResult(testTitle)
-            // todo nav to other page
+            uncompletedLeave = false
+            onBackPressed()
         } else {
             currentQuestionIndex.value++
+            changeLocalAnswer()
             repository.setLastAnsweredQuestion(testTitle, currentQuestionIndex.value)
         }
     }
 
     fun onBackQuestPressed() = viewModelScope.launch {
-        if (currentQuestionIndex.value > 0)
+        if (currentQuestionIndex.value > 0) {
             currentQuestionIndex.value--
+            changeLocalAnswer()
+        }
     }
 
+    fun onLocalAnswerChange(newValue: String) {
+        changeLocalAnswer(newValue)
+    }
+
+    private fun getFromTestResultOrNull(): String? {
+        val list = testResult.value
+        val index = currentQuestionIndex.value
+        return if (index < list.size) {
+            list[index].value
+        } else {
+            null
+        }
+    }
+
+    private fun changeLocalAnswer(newValue: String? = null) {
+        if (newValue == null) {
+            _answer.value = getFromTestResultOrNull() ?: ""
+        } else {
+            _answer.value = newValue
+        }
+
+    }
+
+    private fun saveLocalAnswer() =
+        viewModelScope.launch {
+            repository.saveTestResult(
+                WrittenAnswer(
+                    testTitle = testTitle,
+                    questionNumber = currentQuestionIndex.value,
+                    value = _answer.value
+                )
+            )
+        }
+
     private fun mergeSources(
+        answer: String,
         currentQuestionIndex: Int,
-        testResult: List<WrittenAnswer>,
         showOldTestDialog: Boolean,
     ): TestUiState {
-        val answer = testResult.find { it.questionNumber == currentQuestionIndex }
         val validator = (test.questions[currentQuestionIndex] as? InputQuestion)?.validator
-        val isQuestionAnsweredCorrect = answer != null &&
-                validator?.let { it(answer.value) } != false &&
-                answer.value.isNotBlank()
+        val isQuestionAnsweredCorrect =
+            answer.isNotBlank() && validator?.let { it(answer) } != false
         return TestUiState(
             isNextQuestButtonActive = isQuestionAnsweredCorrect,
-            answer = answer?.value,
             showOldTestDialog = showOldTestDialog,
             currentQuestionIndex = currentQuestionIndex,
             test = test
@@ -114,7 +150,6 @@ internal class WrittenTestViewModel @Inject constructor(
     }
 
     data class TestUiState(
-        val answer: String?,
         val showOldTestDialog: Boolean,
         val isNextQuestButtonActive: Boolean,
         private val currentQuestionIndex: Int,
@@ -127,7 +162,3 @@ internal class WrittenTestViewModel @Inject constructor(
         val currentQuestionNumber = currentQuestionIndex + 1
     }
 }
-
-/**
- * TODO: inputAnswer bug where cursor puts in start after print first symbol
- */
