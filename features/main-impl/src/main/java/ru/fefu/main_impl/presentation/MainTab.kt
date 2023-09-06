@@ -70,16 +70,16 @@ internal fun MainTab(modifier: Modifier) {
 
     Scaffold(
         topBar = { Toolbar(title = stringResource(id = R.string.main)) },
-        containerColor = PnExpertTheme.colors.mainAppColors.AppGreyLightColor
+        containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
+        modifier = modifier
     ) { scaffoldPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp)
-                .windowInsetsPadding(WindowInsets.safeDrawing),
+                .padding(scaffoldPadding)
         ) {
-            Spacer(modifier = Modifier.height(scaffoldPadding.calculateTopPadding()))
             for (cardData in longCardsData) {
                 LongActionCard(cardData)
                 Spacer(modifier = Modifier.height(8.dp))
@@ -93,7 +93,6 @@ internal fun MainTab(modifier: Modifier) {
                 Spacer(modifier = Modifier.width(8.dp))
                 BoxCardMonitoring(boxCardsData[1])
             }
-            Spacer(modifier = Modifier.height(scaffoldPadding.calculateTopPadding()))
         }
     }
 }

@@ -15,14 +15,16 @@ dependencyResolutionManagement {
 
 rootProject.name = "PN Expert"
 include(":app")
+include(":data")
 include(":core:feature-api")
 include(":core:presentation")
 include(":core:theme")
-include(":data")
 include(":features:main-api")
 include(":features:main-impl")
 include(":features:sign-up-api")
 include(":features:sign-up-impl")
 include(":features:written-test-api")
 include(":features:written-test-impl")
+include(":features:photo-tests-api")
+include(":features:photo-tests-impl")
 include(":core:common")

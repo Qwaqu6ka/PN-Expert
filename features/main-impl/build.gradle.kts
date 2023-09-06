@@ -54,7 +54,6 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
-    implementation(libs.accompanist.systemuicontroller)
 
     implementation(project(":core:presentation"))
     api(project(":features:main-api"))

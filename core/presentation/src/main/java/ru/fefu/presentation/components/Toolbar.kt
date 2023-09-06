@@ -65,6 +65,7 @@ fun Toolbar(
             modifier = Modifier
                 .align(Alignment.Center)
                 .padding(horizontal = 55.dp)
+                .padding(bottom = 6.dp)
         )
     }
 }
