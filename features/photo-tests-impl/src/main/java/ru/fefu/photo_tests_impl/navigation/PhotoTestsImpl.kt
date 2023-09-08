@@ -9,7 +9,7 @@ import ru.fefu.photo_tests_api.PhotoTestsApi
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
 import ru.fefu.photo_tests_impl.presentation.guide_screen.GuideScreen
 import ru.fefu.photo_tests_impl.presentation.guide_screen.GuideScreenViewModel
-import ru.fefu.photo_tests_impl.presentation.photo_test.PhotoTestScreen
+import ru.fefu.photo_tests_impl.presentation.photo_test_screen.PhotoTestScreen
 import ru.fefu.viewModelCreator
 import javax.inject.Inject
 import javax.inject.Singleton
