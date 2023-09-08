@@ -58,7 +58,7 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
 
             composable(CAMERA_ROUTE) {
                 CameraScreen(
-                    modifier = modifier,
+                    modifier = modifier
                 )
             }
         }
