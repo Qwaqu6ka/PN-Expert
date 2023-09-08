@@ -17,4 +17,6 @@ internal interface InternalDataModule {
     @Binds
     fun bindPhotoTestRepository(repository: InternalPhotoTestsRepository): PhotoTestsRepository
 
+    @Binds
+    fun bindCameraRepository(repository: CustomCameraRepository):PhotoTestsCameraRepository
 }
