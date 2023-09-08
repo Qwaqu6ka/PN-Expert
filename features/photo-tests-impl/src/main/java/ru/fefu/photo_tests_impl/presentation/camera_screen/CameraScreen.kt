@@ -30,6 +30,7 @@ import ru.fefu.photo_test_impl.R
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun CameraScreen(
+    modifier: Modifier,
     viewModel: CameraScreenViewModel = hiltViewModel()
 ) {
     val permission = if (Build.VERSION.SDK_INT <= 28){
@@ -55,6 +56,7 @@ fun CameraScreen(
     var previewView:PreviewView
 
     Column(
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

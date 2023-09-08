@@ -1,12 +1,14 @@
 package ru.fefu.photo_tests_impl.navigation
 
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import ru.fefu.photo_tests_api.PhotoTestsApi
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
+import ru.fefu.photo_tests_impl.presentation.camera_screen.CameraScreen
 import ru.fefu.photo_tests_impl.presentation.guide_screen.GuideScreen
 import ru.fefu.photo_tests_impl.presentation.guide_screen.GuideScreenViewModel
 import ru.fefu.photo_tests_impl.presentation.photo_test_screen.PhotoTestScreen
@@ -33,8 +35,7 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
     ) {
         navGraphBuilder.navigation(
             route = route,
-//            startDestination = GUIDE_ROUTE
-            startDestination = TEST_ROUTE
+            startDestination = GUIDE_ROUTE
         ){
             composable(GUIDE_ROUTE) {
                 val viewModel = viewModelCreator {
@@ -50,7 +51,14 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
             composable(TEST_ROUTE) {
                 PhotoTestScreen(
                     modifier = modifier,
-                    onNavigateToGuide = {navController.navigate(GUIDE_ROUTE)}
+                    onNavigateToGuide = {navController.navigate(GUIDE_ROUTE)},
+                    onNavigateToCamera = {navController.navigate(CAMERA_ROUTE)}
+                )
+            }
+
+            composable(CAMERA_ROUTE) {
+                CameraScreen(
+                    modifier = modifier,
                 )
             }
         }

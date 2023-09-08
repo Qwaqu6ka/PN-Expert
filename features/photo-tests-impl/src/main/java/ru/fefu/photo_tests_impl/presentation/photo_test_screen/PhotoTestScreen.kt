@@ -40,7 +40,8 @@ import ru.fefu.theme.PnExpertTheme
 @Composable
 fun PhotoTestScreen(
     modifier: Modifier,
-    onNavigateToGuide: () -> Unit
+    onNavigateToGuide: () -> Unit,
+    onNavigateToCamera: () -> Unit,
 ) {
    Scaffold(
        topBar = { Toolbar(title = "Сделать фото", onBackPressed = {onNavigateToGuide()})},
@@ -76,7 +77,7 @@ fun PhotoTestScreen(
            Row (
                modifier = Modifier.fillMaxWidth()
            ){
-               PhotoButton()
+               PhotoButton(onNavigateToCamera)
                Spacer(modifier = Modifier.width(16.dp))
                DownloadButton()
            }
@@ -137,9 +138,9 @@ private fun DownloadButton(){
 }
 
 @Composable
-private fun PhotoButton(){
+private fun PhotoButton(onNavigateToCamera: ()->Unit){
     Button(
-        onClick = {},
+        onClick = {onNavigateToCamera()},
         modifier = Modifier
             .size(PnExpertTheme.sizes.buttonSize.buttonClassic55),
         colors = ButtonDefaults.buttonColors(
