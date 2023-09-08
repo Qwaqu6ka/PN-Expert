@@ -61,6 +61,8 @@ dependencies {
 
     implementation(libs.accompanist.permissions)
 
+    implementation(libs.coil)
+
     implementation(project(":core:presentation"))
     implementation(project(":core:theme"))
 
