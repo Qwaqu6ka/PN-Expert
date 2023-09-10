@@ -2,6 +2,7 @@ package ru.fefu.photo_tests_impl.data
 
 import android.content.ContentValues
 import android.content.Context
+import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.compose.runtime.MutableState
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsCameraRepository
@@ -26,7 +28,7 @@ class CustomCameraRepository @Inject constructor(
     private val imageAnalysis: ImageAnalysis,
     private val imageCapture: ImageCapture,
 ) :PhotoTestsCameraRepository {
-    override suspend fun captureAndSaveImage(context: Context) {
+    override suspend fun captureAndSaveImage(context: Context, photoPath:MutableState<Uri>){
         val name = SimpleDateFormat(
             "yyyy-MM-dd-HH-mm-ss-SSS",
             Locale.ENGLISH
@@ -59,9 +61,11 @@ class CustomCameraRepository @Inject constructor(
                         "Saved image ${outputFileResults.savedUri!!}",
                         Toast.LENGTH_LONG
                     ).show()
+                    photoPath.value = outputFileResults.savedUri!!
                 }
 
                 override fun onError(exception: ImageCaptureException) {
+                    photoPath.value = Uri.EMPTY
                     Toast.makeText(
                         context,
                         "Some error occurred ${exception.message}",

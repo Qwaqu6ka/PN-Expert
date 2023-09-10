@@ -1,6 +1,8 @@
 package ru.fefu.photo_tests_impl.presentation.camera_screen
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.net.Uri
 import android.os.Build
 import android.widget.Toast
 import androidx.camera.view.PreviewView
@@ -18,7 +20,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,6 +40,7 @@ import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import ru.fefu.photo_test_impl.R
 import ru.fefu.theme.PnExpertTheme
 
+@SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun CameraScreen(
@@ -61,6 +68,16 @@ fun CameraScreen(
     val screenHeight = configuration.screenHeightDp.dp
     val screenWith = configuration.screenWidthDp.dp
     var previewView:PreviewView
+    val openDialog = remember { mutableStateOf(false) }
+
+    LaunchedEffect(key1 = viewModel.photoUri.value){
+        if (viewModel.photoUri.value != Uri.EMPTY){
+            openDialog.value = true
+        }
+    }
+
+    if (openDialog.value)
+        PhotoDialog(openDialog = openDialog, uri = viewModel.photoUri.value)
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -102,13 +119,14 @@ fun CameraScreen(
                         }
                     }) {
                         Icon(
-                            modifier = Modifier.size(64.dp).background(PnExpertTheme.colors.mainAppColors.AppBlueColor),
+                            modifier = Modifier
+                                .size(64.dp)
+                                .background(PnExpertTheme.colors.mainAppColors.AppBlueColor),
                             painter = painterResource(id = R.drawable.baseline_camera_24),
                             contentDescription = "cameraButton",
                             tint = Color.White
                         )
                     }
-//                    Spacer(modifier = Modifier.height(64.dp))
                 }
             }
         }
