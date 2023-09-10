@@ -79,7 +79,8 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                 val photoPath = Uri.parse(backStackEntry.arguments?.getString("photoPath")!!)
                 LastPhotoScreen(
                     modifier = modifier,
-                    photoPath = photoPath
+                    photoPath = photoPath,
+                    onNavigateToCamera = {navController.navigate(CAMERA_ROUTE)}
                 )
             }
         }
