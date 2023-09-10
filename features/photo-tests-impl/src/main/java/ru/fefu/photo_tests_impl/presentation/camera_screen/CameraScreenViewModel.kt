@@ -41,4 +41,8 @@ class CameraScreenViewModel @Inject constructor(
         }
     }
 
+    fun cleanPhotoUri(){
+        _photoUri.value = Uri.EMPTY
+    }
+
 }

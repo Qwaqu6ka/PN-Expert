@@ -38,6 +38,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import ru.fefu.photo_test_impl.R
+import ru.fefu.photo_tests_impl.presentation.last_photo_screen.LastPhotoScreen
 import ru.fefu.theme.PnExpertTheme
 
 @SuppressLint("UnrememberedMutableState")
@@ -45,6 +46,7 @@ import ru.fefu.theme.PnExpertTheme
 @Composable
 fun CameraScreen(
     modifier: Modifier,
+    onNavigateToPhotoResult: (String)->Unit,
     viewModel: CameraScreenViewModel = hiltViewModel()
 ) {
     val permission = if (Build.VERSION.SDK_INT <= 28){
@@ -68,16 +70,12 @@ fun CameraScreen(
     val screenHeight = configuration.screenHeightDp.dp
     val screenWith = configuration.screenWidthDp.dp
     var previewView:PreviewView
-    val openDialog = remember { mutableStateOf(false) }
 
-    LaunchedEffect(key1 = viewModel.photoUri.value){
-        if (viewModel.photoUri.value != Uri.EMPTY){
-            openDialog.value = true
-        }
+    if (viewModel.photoUri.value != Uri.EMPTY){
+        val uri = viewModel.photoUri.value
+        viewModel.cleanPhotoUri()
+        onNavigateToPhotoResult(uri.toString())
     }
-
-    if (openDialog.value)
-        PhotoDialog(openDialog = openDialog, uri = viewModel.photoUri.value)
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
