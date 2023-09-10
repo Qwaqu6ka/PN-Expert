@@ -41,9 +41,9 @@ import ru.fefu.theme.PnExpertTheme
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LastPhotoScreen(
+    viewModel: LastPhotoScreenViewModel,
     modifier: Modifier = Modifier,
-    photoPath:Uri,
-    onNavigateToCamera: ()->Unit
+    onNavigateToCamera: ()->Unit,
 ) {
     Scaffold(
         modifier = modifier,
@@ -59,7 +59,7 @@ fun LastPhotoScreen(
         ) {
             Spacer(modifier = Modifier.weight(1f))
             PhotoResult(
-                photoPath = photoPath,
+                photoPath = viewModel.getPhotoPath(),
                 modifier = Modifier.fillMaxHeight(0.8f).padding(horizontal = 16.dp)
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -68,7 +68,7 @@ fun LastPhotoScreen(
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
-                CancellationButton()
+                CancellationButton(onNavigateToCamera)
                 SuccessButton()
             }
             Spacer(modifier = Modifier.weight(1f))
@@ -130,7 +130,7 @@ private fun SuccessButton(
 
 @Composable
 private fun CancellationButton(
-
+    onNavigateToCamera: () -> Unit
 ){
     Button(
         modifier = Modifier
@@ -140,7 +140,7 @@ private fun CancellationButton(
         ),
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         contentPadding = PaddingValues(0.dp),
-        onClick = { /*TODO*/ }
+        onClick = { onNavigateToCamera() }
     ) {
         Icon(
             painter = painterResource(id = R.drawable.baseline_close_24),

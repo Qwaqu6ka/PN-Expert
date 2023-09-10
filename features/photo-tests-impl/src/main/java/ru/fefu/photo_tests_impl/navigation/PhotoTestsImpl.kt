@@ -14,6 +14,7 @@ import ru.fefu.photo_tests_impl.presentation.camera_screen.CameraScreen
 import ru.fefu.photo_tests_impl.presentation.guide_screen.GuideScreen
 import ru.fefu.photo_tests_impl.presentation.guide_screen.GuideScreenViewModel
 import ru.fefu.photo_tests_impl.presentation.last_photo_screen.LastPhotoScreen
+import ru.fefu.photo_tests_impl.presentation.last_photo_screen.LastPhotoScreenViewModel
 import ru.fefu.photo_tests_impl.presentation.photo_test_screen.PhotoTestScreen
 import ru.fefu.viewModelCreator
 import java.net.URLEncoder
@@ -31,7 +32,10 @@ private const val CAMERA_ROUTE = "cameraRoute"
 @Singleton
 class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
     @Inject
-    lateinit var photoTestsViewModelFactory: GuideScreenViewModel.Factory
+    lateinit var guideScreenViewModelFactory: GuideScreenViewModel.Factory
+
+    @Inject
+    lateinit var lastPhotoViewModelFactory: LastPhotoScreenViewModel.Factory
 
     override val route: String = GRAPH_ROUTE
     override fun registerGraph(
@@ -45,7 +49,7 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
         ){
             composable(GUIDE_ROUTE) {
                 val viewModel = viewModelCreator {
-                    photoTestsViewModelFactory.create(PhotoTestType.ClockPhotoTest)
+                    guideScreenViewModelFactory.create(PhotoTestType.ClockPhotoTest)
                 }
                 GuideScreen(
                     modifier = modifier,
@@ -77,9 +81,13 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                 arguments = listOf(navArgument("photoPath") { type = NavType.StringType })
             ) { backStackEntry->
                 val photoPath = Uri.parse(backStackEntry.arguments?.getString("photoPath")!!)
+
+                val viewModel = viewModelCreator {
+                    lastPhotoViewModelFactory.create(photoPath)
+                }
                 LastPhotoScreen(
+                    viewModel = viewModel,
                     modifier = modifier,
-                    photoPath = photoPath,
                     onNavigateToCamera = {navController.navigate(CAMERA_ROUTE)}
                 )
             }
