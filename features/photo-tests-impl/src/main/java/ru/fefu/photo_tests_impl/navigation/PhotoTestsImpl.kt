@@ -2,6 +2,7 @@ package ru.fefu.photo_tests_impl.navigation
 
 import android.net.Uri
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -16,6 +17,7 @@ import ru.fefu.photo_tests_impl.presentation.guide_screen.GuideScreenViewModel
 import ru.fefu.photo_tests_impl.presentation.last_photo_screen.LastPhotoScreen
 import ru.fefu.photo_tests_impl.presentation.last_photo_screen.LastPhotoScreenViewModel
 import ru.fefu.photo_tests_impl.presentation.photo_test_screen.PhotoTestScreen
+import ru.fefu.photo_tests_impl.presentation.photo_test_screen.PhotoTestScreenViewModel
 import ru.fefu.viewModelCreator
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -45,7 +47,7 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
     ) {
         navGraphBuilder.navigation(
             route = route,
-            startDestination = CAMERA_ROUTE
+            startDestination = GUIDE_ROUTE
         ){
             composable(GUIDE_ROUTE) {
                 val viewModel = viewModelCreator {
@@ -54,12 +56,27 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                 GuideScreen(
                     modifier = modifier,
                     viewModel = viewModel,
-                    onNavigateToTest = {navController.navigate(TEST_ROUTE)}
+                    onNavigateToTest = {navController.navigate("$TEST_ROUTE/")}
                 )
             }
 
-            composable(TEST_ROUTE) {
+            composable(
+                "$TEST_ROUTE/?photoPath={photoPath}",
+                arguments = listOf(navArgument("photoPath") {
+                    type = NavType.StringType
+                    defaultValue = ""
+                }),
+            ) {backStackEntry->
+                val viewModel = viewModel() as PhotoTestScreenViewModel
+                val argument = backStackEntry.arguments?.getString("photoPath")!!
+
+                if (argument.isNotBlank()){
+                    val photoPath = Uri.parse(argument)
+                    viewModel.setPhotoPath(photoPath)
+                }
+
                 PhotoTestScreen(
+                    viewModel = viewModel,
                     modifier = modifier,
                     onNavigateToGuide = {navController.navigate(GUIDE_ROUTE)},
                     onNavigateToCamera = {navController.navigate(CAMERA_ROUTE)}

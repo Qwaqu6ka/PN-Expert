@@ -39,6 +39,7 @@ import ru.fefu.theme.PnExpertTheme
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PhotoTestScreen(
+    viewModel: PhotoTestScreenViewModel,
     modifier: Modifier,
     onNavigateToGuide: () -> Unit,
     onNavigateToCamera: () -> Unit,
