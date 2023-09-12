@@ -8,9 +8,7 @@ import android.widget.Toast
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -20,8 +18,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -46,7 +42,7 @@ import ru.fefu.theme.PnExpertTheme
 @Composable
 fun CameraScreen(
     modifier: Modifier,
-    onNavigateToPhotoResult: (String)->Unit,
+    onNavigateToPhotoResult: (String) -> Unit,
     viewModel: CameraScreenViewModel = hiltViewModel()
 ) {
     val permission = if (Build.VERSION.SDK_INT <= 28){

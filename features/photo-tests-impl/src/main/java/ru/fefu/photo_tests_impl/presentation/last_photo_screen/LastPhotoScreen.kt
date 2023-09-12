@@ -44,6 +44,7 @@ fun LastPhotoScreen(
     viewModel: LastPhotoScreenViewModel,
     modifier: Modifier = Modifier,
     onNavigateToCamera: ()->Unit,
+    onNavigateToTest:(photoPath:String)->Unit
 ) {
     Scaffold(
         modifier = modifier,
@@ -69,7 +70,7 @@ fun LastPhotoScreen(
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 CancellationButton(onNavigateToCamera)
-                SuccessButton()
+                SuccessButton(viewModel.getPhotoPath(),onNavigateToTest)
             }
             Spacer(modifier = Modifier.weight(1f))
         }
@@ -107,7 +108,8 @@ private fun PhotoResult(
 
 @Composable
 private fun SuccessButton(
-
+    photoPath: Uri,
+    onNavigateToTest: (photoPath: String) -> Unit
 ){
     Button(
         modifier = Modifier
@@ -118,7 +120,7 @@ private fun SuccessButton(
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         border = BorderStroke(2.dp, PnExpertTheme.colors.mainAppColors.AppBlueColor),
         contentPadding = PaddingValues(0.dp),
-        onClick = { /*TODO*/ }
+        onClick = { onNavigateToTest(photoPath.toString()) }
     ) {
         Icon(
             painter = painterResource(id = R.drawable.baseline_check_24),

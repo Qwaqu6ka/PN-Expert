@@ -1,6 +1,7 @@
 package ru.fefu.photo_tests_impl.presentation.photo_test_screen
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +21,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -31,6 +33,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.ImagePainter
+import coil.compose.rememberImagePainter
 import ru.fefu.photo_test_impl.R
 import ru.fefu.presentation.TextCardHolder
 import ru.fefu.presentation.components.Toolbar
@@ -67,12 +72,20 @@ fun PhotoTestScreen(
                verticalArrangement = Arrangement.Center,
                horizontalAlignment = Alignment.CenterHorizontally
            ) {
-               GuidePhoto()
-               Text(
-                   text = "Пример выполненного задания",
-                   style = PnExpertTheme.typography.text.medium_16,
-                   color = PnExpertTheme.colors.textColors.FontDarkColor
-               )
+               if(viewModel.photoPath.value == Uri.EMPTY){
+                   GuidePhoto()
+                   Text(
+                       text = "Пример выполненного задания",
+                       style = PnExpertTheme.typography.text.medium_16,
+                       color = PnExpertTheme.colors.textColors.FontDarkColor
+                   )
+               } else{
+                 PhotoResult(
+                     photoPath = viewModel.photoPath.value,
+                     modifier = Modifier
+                         .fillMaxHeight(0.4f)
+                 )
+               }
            }
            Spacer(modifier = Modifier.weight(1f))
            Row (
@@ -86,6 +99,50 @@ fun PhotoTestScreen(
            NextButton()
        }
    }
+}
+
+@OptIn(ExperimentalCoilApi::class)
+@Composable
+private fun PhotoResult(
+    photoPath: Uri,
+    modifier: Modifier = Modifier
+){
+    val resultPhoto = rememberImagePainter(photoPath)
+
+    if (resultPhoto.state is ImagePainter.State.Loading){
+        CircularProgressIndicator(
+            modifier = Modifier.size(24.dp),
+            color = PnExpertTheme.colors.mainAppColors.AppBlueColor,
+            strokeWidth = 2.dp
+        )
+    }
+    if (resultPhoto.state is ImagePainter.State.Error){
+        CircularProgressIndicator(
+            modifier = Modifier.size(24.dp),
+            color = PnExpertTheme.colors.mainAppColors.AppBlueColor,
+            strokeWidth = 2.dp
+        )
+    }
+    if (resultPhoto.state is ImagePainter.State.Empty){
+        Text(text = photoPath.toString())
+    }
+    if (resultPhoto.state is ImagePainter.State.Success){
+        Text(text = "саксес")
+    }
+    else{
+        Card(
+            modifier = modifier,
+            shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
+            border = BorderStroke(1.dp, PnExpertTheme.colors.mainAppColors.AppBlueColor)
+        ){
+            Image(
+                painter = resultPhoto,
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.FillBounds
+            )
+        }
+    }
 }
 
 @Composable

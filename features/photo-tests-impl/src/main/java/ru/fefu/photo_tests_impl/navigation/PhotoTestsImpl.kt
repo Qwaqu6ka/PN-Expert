@@ -19,6 +19,7 @@ import ru.fefu.photo_tests_impl.presentation.last_photo_screen.LastPhotoScreenVi
 import ru.fefu.photo_tests_impl.presentation.photo_test_screen.PhotoTestScreen
 import ru.fefu.photo_tests_impl.presentation.photo_test_screen.PhotoTestScreenViewModel
 import ru.fefu.viewModelCreator
+import java.net.URLDecoder
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import javax.inject.Inject
@@ -56,12 +57,12 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                 GuideScreen(
                     modifier = modifier,
                     viewModel = viewModel,
-                    onNavigateToTest = {navController.navigate("$TEST_ROUTE/")}
+                    onNavigateToTest = {navController.navigate("$TEST_ROUTE/ ")}
                 )
             }
 
             composable(
-                "$TEST_ROUTE/?photoPath={photoPath}",
+                "$TEST_ROUTE/{photoPath}",
                 arguments = listOf(navArgument("photoPath") {
                     type = NavType.StringType
                     defaultValue = ""
@@ -71,7 +72,7 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                 val argument = backStackEntry.arguments?.getString("photoPath")!!
 
                 if (argument.isNotBlank()){
-                    val photoPath = Uri.parse(argument)
+                    val photoPath = Uri.parse(URLDecoder.decode(argument))
                     viewModel.setPhotoPath(photoPath)
                 }
 
@@ -97,15 +98,19 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                 route = "$PHOTO_RESULT_ROUTE/{photoPath}",
                 arguments = listOf(navArgument("photoPath") { type = NavType.StringType })
             ) { backStackEntry->
-                val photoPath = Uri.parse(backStackEntry.arguments?.getString("photoPath")!!)
+                val uri= Uri.parse(backStackEntry.arguments?.getString("photoPath")!!)
 
                 val viewModel = viewModelCreator {
-                    lastPhotoViewModelFactory.create(photoPath)
+                    lastPhotoViewModelFactory.create(uri)
                 }
                 LastPhotoScreen(
                     viewModel = viewModel,
                     modifier = modifier,
-                    onNavigateToCamera = {navController.navigate(CAMERA_ROUTE)}
+                    onNavigateToCamera = {navController.navigate(CAMERA_ROUTE)},
+                    onNavigateToTest = {photoPath: String ->
+                        val encodedUrl = URLEncoder.encode(photoPath, StandardCharsets.UTF_8.toString())
+                        navController.navigate("$TEST_ROUTE/$encodedUrl")
+                    }
                 )
             }
         }
