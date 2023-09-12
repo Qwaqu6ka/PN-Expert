@@ -67,18 +67,15 @@ dependencies {
 
     implementation(libs.core.splashscreen)
 
+    // hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
 
-    implementation(libs.retrofit)
-
+    // navigation
     implementation(libs.navigation.compose)
 
-    implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.activity.compose)
-    implementation(platform(libs.kotlin.bom))
+    // compose
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
     implementation(libs.compose.ui)
