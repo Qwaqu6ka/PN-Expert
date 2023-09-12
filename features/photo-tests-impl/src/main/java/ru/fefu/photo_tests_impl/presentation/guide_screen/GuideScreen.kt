@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.GuidePhotosHolder
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.TaskAndTimeHolder
-import ru.fefu.presentation.TextCardHolderPink
+import ru.fefu.presentation.components.TextCardHolderPink
 import ru.fefu.presentation.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 
