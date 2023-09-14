@@ -14,7 +14,3 @@ internal fun VideoScreen(viewModel: VideoTestViewModel = hiltViewModel()) {
         Text(text = "Video Screen")
     }
 }
-
-class VideoScreen {
-
-}

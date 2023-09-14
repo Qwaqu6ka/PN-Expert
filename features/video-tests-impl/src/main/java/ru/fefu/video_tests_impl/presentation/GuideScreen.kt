@@ -9,8 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-internal fun GuideScreen(viewModel: VideoTestViewModel = hiltViewModel()) {
+internal fun GuideScreen(
+    onNavigateToVideoScreen: () -> Unit,
+    viewModel: VideoTestViewModel = hiltViewModel()
+) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        // TODO: create button with navigate to VideoScreen and check recreation of viewModel
         Text(text = "Guide Screen")
     }
 }

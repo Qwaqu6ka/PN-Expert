@@ -18,10 +18,10 @@ fun AppNavGraph(
 ) {
     NavHost(
         navController = navController,
-//        startDestination = BottomTabs.Main.route
+        startDestination = BottomTabs.Main.route
 //        startDestination = featureApiHolder.signUpApi.route
 //        startDestination = featureApiHolder.photoTestsApi.route
-        startDestination = featureApiHolder.videoTestsApi.gaitTestRoute
+//        startDestination = featureApiHolder.videoTestsApi.kineticHandsTremorTestRoute
     ) {
 
         register(
@@ -70,7 +70,7 @@ fun AppNavGraph(
 
             composable("testHistory") {
                 InDevPlug("History") {
-                    navController.navigate(featureApiHolder.writtenTestApi.testUpdrs4Route)
+                    navController.navigate(featureApiHolder.videoTestsApi.kineticHandsTremorTestRoute)
                 }
             }
             register(

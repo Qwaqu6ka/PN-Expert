@@ -11,12 +11,11 @@ internal class VideoTestViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val testTitle: String = savedStateHandle["testType"]
-        ?: throw IllegalArgumentException("Test type can not be null")
+    private val testTitle: String = checkNotNull(savedStateHandle["testType"])
 
     // TODO: getTestTitle from navigation and share this viewModel to 2 screens
 
     init {
-        Log.d("debug", testTitle)
+        Log.d("debug", "init ViewModel $testTitle")
     }
 }

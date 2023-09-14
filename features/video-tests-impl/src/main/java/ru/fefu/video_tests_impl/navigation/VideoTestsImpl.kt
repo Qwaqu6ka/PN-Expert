@@ -1,5 +1,6 @@
 package ru.fefu.video_tests_impl.navigation
 
+import android.util.Log
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
@@ -19,6 +20,7 @@ import javax.inject.Singleton
 private const val VIDEO_TESTS_ROUTE = "video_test"
 private const val GUIDE_SCREEN_ROUTE = "guide"
 private const val VIDEO_SCREEN_ROUTE = "video"
+private const val TEST_TYPE_KEY = "testType"
 
 @Singleton
 class VideoTestsImpl @Inject constructor() : VideoTestApi {
@@ -45,13 +47,12 @@ class VideoTestsImpl @Inject constructor() : VideoTestApi {
     ) {
         navGraphBuilder.navigation(
             startDestination = GUIDE_SCREEN_ROUTE,
-            route = "$VIDEO_TESTS_ROUTE/{testType}"
+            route = "$VIDEO_TESTS_ROUTE/{$TEST_TYPE_KEY}"
         ) {
-            val arguments = listOf(navArgument("testType") { type = NavType.StringType })
+            val arguments = listOf(navArgument(TEST_TYPE_KEY) { type = NavType.StringType })
 
             composable(route = GUIDE_SCREEN_ROUTE, arguments = arguments) {
-                val viewModel: VideoTestViewModel = hiltViewModel()
-                GuideScreen(viewModel)
+                GuideScreen()
             }
             composable(route = VIDEO_SCREEN_ROUTE, arguments = arguments) {
                 VideoScreen()
