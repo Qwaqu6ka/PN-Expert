@@ -82,12 +82,13 @@ dependencies {
     implementation(libs.compose.ui.graphics)
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
-
-    implementation(project(":core:theme"))
+    
     implementation(project(":core:presentation"))
     implementation(project(":data"))
     implementation(project(":features:main-impl"))
-    implementation(project(":features:sign-up-impl"))
-    implementation(project(":features:written-test-impl"))
     implementation(project(":features:photo-tests-impl"))
+    implementation(project(":features:sign-up-impl"))
+    implementation(project(":features:video-tests-impl"))
+    implementation(project(":features:written-test-impl"))
+
 }
