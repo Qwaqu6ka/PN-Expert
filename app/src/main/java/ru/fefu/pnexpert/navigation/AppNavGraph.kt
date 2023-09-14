@@ -1,5 +1,8 @@
 package ru.fefu.pnexpert.navigation
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -53,7 +56,9 @@ fun AppNavGraph(
             startDestination = "testProfile"
         ) {
             composable("testProfile") {
-                InDevPlug("Profile")
+                InDevPlug("History") {
+                    navController.navigate(featureApiHolder.photoTestsApi.route)
+                }
             }
         }
 
@@ -63,8 +68,37 @@ fun AppNavGraph(
         ) {
 
             composable("testHistory") {
-                InDevPlug("History") {
-                    navController.navigate(featureApiHolder.photoTestsApi.route)
+                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                    InDevPlug("Updrs1") {
+                        navController.navigate(featureApiHolder.writtenTestApi.testUpdrs1Route)
+                    }
+                    InDevPlug("Updrs2") {
+                        navController.navigate(featureApiHolder.writtenTestApi.testUpdrs2Route)
+                    }
+                    InDevPlug("Updrs3") {
+                        navController.navigate(featureApiHolder.writtenTestApi.testUpdrs3Route)
+                    }
+                    InDevPlug("Updrs4") {
+                        navController.navigate(featureApiHolder.writtenTestApi.testUpdrs4Route)
+                    }
+                    InDevPlug("Psqi") {
+                        navController.navigate(featureApiHolder.writtenTestApi.testPsqiRoute)
+                    }
+                    InDevPlug("Hads") {
+                        navController.navigate(featureApiHolder.writtenTestApi.testHadsRoute)
+                    }
+                    InDevPlug("Fab") {
+                        navController.navigate(featureApiHolder.writtenTestApi.testFabRoute)
+                    }
+                    InDevPlug("HoehnYahr") {
+                        navController.navigate(featureApiHolder.writtenTestApi.testHoehnYahrRoute)
+                    }
+                    InDevPlug("Pdq39") {
+                        navController.navigate(featureApiHolder.writtenTestApi.testPdq39Route)
+                    }
+                    InDevPlug("SchwabEngland") {
+                        navController.navigate(featureApiHolder.writtenTestApi.testSchwabEnglandRoute)
+                    }
                 }
             }
             register(
