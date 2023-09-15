@@ -58,35 +58,15 @@ fun PhotoTestScreen(
            modifier = Modifier
                .fillMaxSize()
                .verticalScroll(rememberScrollState())
-               .padding(horizontal = 16.dp)
                .padding(scaffoldTopPadding)
+               .padding(horizontal = 16.dp),
+           horizontalAlignment = Alignment.CenterHorizontally
        ) {
-           Spacer(modifier = Modifier.height(8.dp))
-           TextCardHolder(
-               modifier = Modifier.fillMaxWidth(),
-               text = "Выполните задание и сфотографируйте или загрузите результат."
-           )
+           TextCardHolder(modifier = Modifier.fillMaxWidth(), text = "Выполните задание и сфотографируйте или загрузите результат")
            Spacer(modifier = Modifier.weight(1f))
-           Column(
-               modifier = Modifier.fillMaxWidth(),
-               verticalArrangement = Arrangement.Center,
-               horizontalAlignment = Alignment.CenterHorizontally
-           ) {
-               if(viewModel.photoPath.value == Uri.EMPTY){
-                   GuidePhoto()
-                   Text(
-                       text = "Пример выполненного задания",
-                       style = PnExpertTheme.typography.text.medium_16,
-                       color = PnExpertTheme.colors.textColors.FontDarkColor
-                   )
-               } else{
-                 PhotoResult(
-                     photoPath = viewModel.photoPath.value,
-                     modifier = Modifier
-                         .fillMaxHeight(0.4f)
-                 )
-               }
-           }
+           Spacer(modifier = Modifier.height(16.dp))
+           PhotoResult(photoPath = viewModel.photoPath.value, modifier = Modifier.height(500.dp))
+           Spacer(modifier = Modifier.height(16.dp))
            Spacer(modifier = Modifier.weight(1f))
            Row (
                modifier = Modifier.fillMaxWidth()
@@ -116,18 +96,11 @@ private fun PhotoResult(
             strokeWidth = 2.dp
         )
     }
-    if (resultPhoto.state is ImagePainter.State.Error){
-        CircularProgressIndicator(
-            modifier = Modifier.size(24.dp),
-            color = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-            strokeWidth = 2.dp
-        )
-    }
     if (resultPhoto.state is ImagePainter.State.Empty){
-        Text(text = photoPath.toString())
+        GuidePhoto()
     }
-    if (resultPhoto.state is ImagePainter.State.Success){
-        Text(text = "саксес")
+    if (resultPhoto.state is ImagePainter.State.Error){
+        GuidePhoto()
     }
     else{
         Card(
@@ -147,20 +120,26 @@ private fun PhotoResult(
 
 @Composable
 private fun GuidePhoto(){
-    Card(
-        modifier = Modifier
-            .fillMaxHeight()
-            .height(200.dp),
-        shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
-        border = BorderStroke(1.dp, PnExpertTheme.colors.mainAppColors.AppDarkColor)
-    ) {
-        Image(
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Card(
             modifier = Modifier
-                .fillMaxSize()
-                .clip(PnExpertTheme.shapes.imageShapes.imageClassic15),
-            painter = painterResource(id = R.drawable.photo_test_clock),
-            contentScale = ContentScale.FillBounds,
-            contentDescription = null
+                .fillMaxWidth()
+                .height(200.dp),
+            shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
+            border = BorderStroke(1.dp, PnExpertTheme.colors.mainAppColors.AppDarkColor)
+        ) {
+            Image(
+                modifier = Modifier
+                    .clip(PnExpertTheme.shapes.imageShapes.imageClassic15),
+                painter = painterResource(id = R.drawable.photo_test_clock),
+                contentScale = ContentScale.FillBounds,
+                contentDescription = null
+            )
+        }
+        Text(
+            text = "Пример выполненного задания",
+            style = PnExpertTheme.typography.text.medium_16,
+            color = PnExpertTheme.colors.textColors.FontDarkColor
         )
     }
 }
