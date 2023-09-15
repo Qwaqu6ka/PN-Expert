@@ -4,12 +4,10 @@ import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -51,17 +49,18 @@ fun PhotoTestScreen(
 ) {
    Scaffold(
        topBar = { Toolbar(title = "Сделать фото", onBackPressed = {onNavigateToGuide()})},
+       containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
        modifier = modifier,
-       containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor
    ) {scaffoldTopPadding->
        Column(
            modifier = Modifier
                .fillMaxSize()
                .verticalScroll(rememberScrollState())
-               .padding(scaffoldTopPadding)
+               .padding(top = scaffoldTopPadding.calculateTopPadding())
                .padding(horizontal = 16.dp),
            horizontalAlignment = Alignment.CenterHorizontally
        ) {
+           Spacer(modifier = Modifier.height(8.dp))
            TextCardHolder(modifier = Modifier.fillMaxWidth(), text = "Выполните задание и сфотографируйте или загрузите результат")
            Spacer(modifier = Modifier.weight(1f))
            Spacer(modifier = Modifier.height(16.dp))
@@ -77,6 +76,7 @@ fun PhotoTestScreen(
            }
            Spacer(modifier = Modifier.height(16.dp))
            NextButton()
+           Spacer(modifier = Modifier.height(8.dp))
        }
    }
 }

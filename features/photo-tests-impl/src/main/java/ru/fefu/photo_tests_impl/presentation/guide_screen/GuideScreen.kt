@@ -40,7 +40,7 @@ fun GuideScreen(
             modifier
                 .fillMaxSize()
                 .padding(horizontal = 16.dp)
-                .padding(top = scaffoldPadding.calculateTopPadding())
+                .padding(top = scaffoldPadding.calculateTopPadding()-40.dp)
         ) {
             TaskAndTimeHolder(
                 modifier = Modifier

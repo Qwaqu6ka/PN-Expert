@@ -43,7 +43,7 @@ fun Toolbar(
     Box(
         Modifier
             .fillMaxWidth()
-            .background(Color.Transparent)
+            .background(PnExpertTheme.colors.mainAppColors.AppWhiteColor)
             .padding(horizontal = 16.dp)
             .defaultMinSize(minHeight = 50.dp)
     ) {
