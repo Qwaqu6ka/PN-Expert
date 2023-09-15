@@ -47,6 +47,10 @@ fun PhotoTestScreen(
     onNavigateToGuide: () -> Unit,
     onNavigateToCamera: () -> Unit,
 ) {
+    val testIsSuccess = {
+        viewModel.photoPath.value != Uri.EMPTY
+    }
+
    Scaffold(
        topBar = { Toolbar(title = "Сделать фото", onBackPressed = {onNavigateToGuide()})},
        containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
@@ -61,7 +65,8 @@ fun PhotoTestScreen(
            horizontalAlignment = Alignment.CenterHorizontally
        ) {
            Spacer(modifier = Modifier.height(8.dp))
-           TextCardHolder(modifier = Modifier.fillMaxWidth(), text = "Выполните задание и сфотографируйте или загрузите результат")
+           if (!testIsSuccess())
+               TextCardHolder(modifier = Modifier.fillMaxWidth(), text = "Выполните задание и сфотографируйте или загрузите результат")
            Spacer(modifier = Modifier.weight(1f))
            Spacer(modifier = Modifier.height(16.dp))
            PhotoResult(photoPath = viewModel.photoPath.value, modifier = Modifier.height(500.dp))
@@ -75,7 +80,7 @@ fun PhotoTestScreen(
                DownloadButton()
            }
            Spacer(modifier = Modifier.height(16.dp))
-           NextButton()
+           NextButton(testIsSuccess())
            Spacer(modifier = Modifier.height(8.dp))
        }
    }
@@ -196,13 +201,15 @@ private fun PhotoButton(onNavigateToCamera: ()->Unit){
 }
 
 @Composable
-private fun NextButton(){
+private fun NextButton(
+    testIsSuccess: Boolean
+){
     TextButton(
         onClick = {},
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
-        enabled = false,
+        enabled = testIsSuccess,
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
         colors = ButtonDefaults.textButtonColors(
             containerColor = PnExpertTheme.colors.buttonColors.ButtonNormalBlueColor,
