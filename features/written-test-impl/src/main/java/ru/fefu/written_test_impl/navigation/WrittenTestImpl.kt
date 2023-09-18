@@ -11,6 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 private const val TEST_PAGE_ROUTE = "written_test"
+internal const val TEST_TYPE_KEY = "testType"
 
 @Singleton
 class WrittenTestImpl @Inject constructor() : WrittenTestApi {
@@ -31,7 +32,7 @@ class WrittenTestImpl @Inject constructor() : WrittenTestApi {
         navController: NavHostController,
         modifier: Modifier
     ) {
-        navGraphBuilder.composable("$TEST_PAGE_ROUTE/{testType}") {
+        navGraphBuilder.composable("$TEST_PAGE_ROUTE/{$TEST_TYPE_KEY}") {
             WrittenTest(modifier = modifier)
         }
     }

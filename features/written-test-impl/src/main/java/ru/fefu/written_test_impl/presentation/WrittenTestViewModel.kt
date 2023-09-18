@@ -15,6 +15,7 @@ import ru.fefu.written_test_impl.entities.TestType
 import ru.fefu.written_test_impl.entities.testentities.InputQuestion
 import ru.fefu.written_test_impl.entities.testentities.WrittenAnswer
 import ru.fefu.written_test_impl.entities.testentities.WrittenTest
+import ru.fefu.written_test_impl.navigation.TEST_TYPE_KEY
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,8 +25,8 @@ internal class WrittenTestViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private var uncompletedLeave: Boolean = true
-    private val testTitle: String = savedStateHandle["testType"]
-        ?: throw IllegalArgumentException("Test type can not be null")
+    private val testTitle: String =
+        checkNotNull(savedStateHandle[TEST_TYPE_KEY]) { "Test type can not be null" }
     private val test: WrittenTest
         get() = TestType.valueOf(testTitle).test
     private val currentQuestionIndex = MutableStateFlow(0)
