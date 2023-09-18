@@ -59,7 +59,9 @@ class VideoTestsImpl @Inject constructor() : VideoTestApi {
 
                 GuideScreen(
                     viewModel = parentViewModel,
-                    onNavigateToVideoScreen = { navController.navigate(VIDEO_SCREEN_ROUTE) })
+                    onNavigateToVideoScreen = { navController.navigate(VIDEO_SCREEN_ROUTE) },
+                    modifier = modifier
+                )
             }
             composable(route = VIDEO_SCREEN_ROUTE) { backStackEntry ->
                 val parentEntry = remember(backStackEntry) {
@@ -67,7 +69,7 @@ class VideoTestsImpl @Inject constructor() : VideoTestApi {
                 }
                 val parentViewModel = hiltViewModel<VideoTestViewModel>(parentEntry)
 
-                VideoScreen(viewModel = parentViewModel)
+                VideoScreen(viewModel = parentViewModel, modifier = modifier)
             }
         }
     }

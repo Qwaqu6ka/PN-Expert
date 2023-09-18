@@ -76,9 +76,8 @@ fun ToolbarPreviewBack() {
     PnExpertTheme {
         Surface(color = Color.White, modifier = Modifier.fillMaxWidth()) {
             Toolbar(
-                title = "Программtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
-                onBackPressed = {}
-            )
+                title = "Программtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+            ) {}
         }
     }
 }
@@ -100,7 +99,7 @@ fun ToolbarPreview() {
 fun ToolbarDarkPreviewBack() {
     PnExpertTheme {
         Surface(color = Color.Black, modifier = Modifier.fillMaxWidth()) {
-            Toolbar(title = "Мероприятия", isInverseColor = true, onBackPressed = {})
+            Toolbar(title = "Мероприятия", isInverseColor = true) {}
         }
     }
 }

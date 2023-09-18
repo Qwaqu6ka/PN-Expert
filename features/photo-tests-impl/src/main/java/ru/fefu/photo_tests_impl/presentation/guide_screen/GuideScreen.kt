@@ -29,7 +29,7 @@ fun GuideScreen(
     viewModel: GuideScreenViewModel,
 ) {
     Scaffold(
-        topBar = { Toolbar(title = "Упражнение", onBackPressed = {}) },
+        topBar = { Toolbar(title = "Упражнение") {} },
         modifier = modifier,
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
         contentWindowInsets = WindowInsets(0.dp)

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="exercise">Упражнение</string>
+    <string name="instruction_to_exercise">Инструкция к упражнению</string>
+    <string name="start">Начать</string>
+
+
+
+    <string name="facial_expressiveness">Выразительность лица</string>
+    <string name="fingers_tapping">Постукивание пальцами</string>
+    <string name="brush_movements">Кистевые движения</string>
+    <string name="brush_pronation_supination">Пронация-супинация кистей</string>
+    <string name="foot_tapping">Постукивание носком стопы</string>
+    <string name="legs_mobility">Подвижность ног</string>
+    <string name="getting_up_from_chair">Вставание с кресла</string>
+    <string name="gait">Походка</string>
+    <string name="postural_hands_tremor">Постуральный тремор рук</string>
+    <string name="kinetic_hands_tremor">Кинетический тремор рук</string>
+    <string name="amplitude_of_resting_tremor">Амплитуда тремора покоя</string>
+</resources>

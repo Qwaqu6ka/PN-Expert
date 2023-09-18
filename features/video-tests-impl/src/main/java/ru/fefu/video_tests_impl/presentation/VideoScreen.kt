@@ -8,7 +8,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-internal fun VideoScreen(viewModel: VideoTestViewModel) {
+internal fun VideoScreen(
+    viewModel: VideoTestViewModel,
+    modifier: Modifier = Modifier
+) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(text = "Video Screen")
     }
