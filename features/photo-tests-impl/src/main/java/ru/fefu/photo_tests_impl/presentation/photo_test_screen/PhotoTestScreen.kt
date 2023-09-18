@@ -2,6 +2,8 @@ package ru.fefu.photo_tests_impl.presentation.photo_test_screen
 
 import android.annotation.SuppressLint
 import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -77,7 +79,9 @@ fun PhotoTestScreen(
            ){
                PhotoButton(onNavigateToCamera)
                Spacer(modifier = Modifier.width(16.dp))
-               DownloadButton()
+               DownloadButton(
+                   setUri = {uri: Uri -> viewModel.setPhotoPath(uri) }
+               )
            }
            Spacer(modifier = Modifier.height(16.dp))
            NextButton(testIsSuccess())
@@ -150,9 +154,14 @@ private fun GuidePhoto(){
 }
 
 @Composable
-private fun DownloadButton(){
+private fun DownloadButton(setUri: (Uri) -> Unit){
+    val launcher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
+            setUri(uri!!)
+        }
+
     TextButton(
-        onClick = {},
+        onClick = {launcher.launch("image/*")},
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
