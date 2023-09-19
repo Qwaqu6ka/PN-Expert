@@ -12,11 +12,9 @@ internal class VideoTestViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val test: TestType =
+    val test: TestType =
         TestType.valueOf(checkNotNull(savedStateHandle[TEST_TYPE_KEY]) { "Test type can not be null" })
 
-    val testTitleRes: Int
-        get() = test.title
 
 
 }

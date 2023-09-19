@@ -17,9 +17,9 @@ import ru.fefu.theme.PnExpertTheme
 
 @Composable
 fun TextCardHolderPink(
-    modifier: Modifier,
     titleText: String,
     text:String,
+    modifier: Modifier = Modifier
 ) {
     PnExpertTheme {
         Card(
@@ -55,6 +55,6 @@ fun TextCardHolderPink(
 @Composable
 private fun PreviewTextCardHolderPink() {
     PnExpertTheme {
-        TextCardHolderPink(Modifier, "Требования", "Приложение работает с Вашими данными, поэтому для продолжения регистрации потребуется согласие с нашей политикой работы с персональными данными и конфиденциальной информацией. ")
+        TextCardHolderPink("Требования", "Приложение работает с Вашими данными, поэтому для продолжения регистрации потребуется согласие с нашей политикой работы с персональными данными и конфиденциальной информацией. ")
     }
 }

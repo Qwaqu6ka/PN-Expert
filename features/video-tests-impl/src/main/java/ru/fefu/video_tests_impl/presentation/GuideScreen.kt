@@ -8,16 +8,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.fefu.presentation.components.GifImage
 import ru.fefu.presentation.components.SimpleTextButton
+import ru.fefu.presentation.components.TextCardHolderPink
 import ru.fefu.presentation.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 import ru.fefu.video_tests_impl.R
@@ -53,7 +56,7 @@ internal fun GuideScreen(
                     .padding(horizontal = 16.dp)
             ) {
                 Text(
-                    text = stringResource(viewModel.testTitleRes),
+                    text = stringResource(viewModel.test.titleRes),
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     style = PnExpertTheme.typography.text.medium_14
                 )
@@ -65,22 +68,13 @@ internal fun GuideScreen(
                 GifImage(
                     data = R.drawable.exercise,
                     contentDescription = null,
-                    modifier = Modifier.padding(vertical = 10.dp)
+                    modifier = Modifier
+                        .padding(vertical = 10.dp)
+                        .clip(RoundedCornerShape(15.dp))
                 )
-                GifImage(
-                    data = R.drawable.exercise,
-                    contentDescription = null,
-                    modifier = Modifier.padding(vertical = 10.dp)
-                )
-                GifImage(
-                    data = R.drawable.exercise,
-                    contentDescription = null,
-                    modifier = Modifier.padding(vertical = 10.dp)
-                )
-                GifImage(
-                    data = R.drawable.exercise,
-                    contentDescription = null,
-                    modifier = Modifier.padding(vertical = 10.dp)
+                TextCardHolderPink(
+                    titleText = stringResource(id = R.string.instruction),
+                    text = stringResource(id = viewModel.test.instructionRes)
                 )
             }
         }
