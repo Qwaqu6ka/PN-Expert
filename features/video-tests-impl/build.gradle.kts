@@ -52,6 +52,18 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
 
+    // camera
+    implementation(libs.camera.camera2)
+    implementation(libs.camera.video)
+    implementation(libs.camera.mlkit)
+    implementation(libs.camera.lifecycle)
+    implementation(libs.camera.view)
+
+    // ai for video
+    implementation(libs.mlkit.posedetection.accurate)
+
+    implementation(libs.accompanist.permissions)
+
     implementation(project(":core:presentation"))
     api(project(":features:video-tests-api"))
 }

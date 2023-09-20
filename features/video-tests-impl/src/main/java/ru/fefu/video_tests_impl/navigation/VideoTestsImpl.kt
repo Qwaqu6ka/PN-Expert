@@ -1,5 +1,6 @@
 package ru.fefu.video_tests_impl.navigation
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -69,7 +70,7 @@ class VideoTestsImpl @Inject constructor() : VideoTestApi {
                 }
                 val parentViewModel = hiltViewModel<VideoTestViewModel>(parentEntry)
 
-                VideoScreen(viewModel = parentViewModel, modifier = modifier)
+                VideoScreen(viewModel = parentViewModel, modifier = modifier.fillMaxSize())
             }
         }
     }

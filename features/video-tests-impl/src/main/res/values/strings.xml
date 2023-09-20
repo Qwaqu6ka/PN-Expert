@@ -4,6 +4,8 @@
     <string name="instruction_to_exercise">Инструкция к упражнению</string>
     <string name="start">Начать</string>
     <string name="instruction">Инструкция</string>
+    <string name="permission_need_text">Для того, чтобы записать видеотест, необходимо разрешение на использование камеры</string>
+    <string name="give_permission">Дать разрешения</string>
 
 
     <string name="facial_expressiveness">Выразительность лица</string>
