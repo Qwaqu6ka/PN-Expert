@@ -63,6 +63,8 @@ dependencies {
 
     implementation(libs.coil)
 
+    implementation(libs.baracode)
+
     implementation(project(":core:presentation"))
     implementation(project(":core:theme"))
 
