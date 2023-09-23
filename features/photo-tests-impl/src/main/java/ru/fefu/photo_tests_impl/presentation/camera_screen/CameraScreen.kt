@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,6 +36,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import ru.fefu.photo_test_impl.R
 import ru.fefu.photo_tests_impl.presentation.last_photo_screen.LastPhotoScreen
+import ru.fefu.presentation.TextCardHolder
 import ru.fefu.theme.PnExpertTheme
 
 @SuppressLint("UnrememberedMutableState")
@@ -82,6 +84,21 @@ fun CameraScreen(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
+                Column(
+                    modifier = Modifier
+                        .weight(1f),
+                    verticalArrangement = Arrangement.Center
+                ){
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.BottomCenter
+                        ){
+                        TextCardHolder(
+                            modifier = Modifier.padding(16.dp),
+                            text = "Сфотографирйте ваш результат так, чтобы был виден Qr код"
+                        )
+                    }
+                }
                 AndroidView(
                     factory = {
                         previewView = PreviewView(it)
@@ -89,12 +106,11 @@ fun CameraScreen(
                         previewView
                     },
                     modifier = Modifier
-                        .width(screenWith)
-                        .height(screenHeight * 0.9f)
+                        .weight(4f)
                 )
                 Column(
                     modifier = Modifier
-                        .fillMaxHeight(),
+                        .weight(1f),
                     verticalArrangement = Arrangement.Center
                 ){
                     IconButton(

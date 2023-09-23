@@ -46,7 +46,7 @@ class CameraScreenViewModel @Inject constructor(
                 lifecycleOwner,
                 true
             ) { barcodeScanner: BarcodeScanner, imageProxy: ImageProxy ->
-                processImageProxy(barcodeScanner, imageProxy)
+                processImageProxyListener(barcodeScanner, imageProxy)
             }
         }
     }
@@ -62,7 +62,7 @@ class CameraScreenViewModel @Inject constructor(
     }
 
     @OptIn(ExperimentalGetImage::class)
-    private fun processImageProxy(
+    private fun processImageProxyListener(
         barcodeScanner: BarcodeScanner,
         imageProxy: ImageProxy
     ) {
