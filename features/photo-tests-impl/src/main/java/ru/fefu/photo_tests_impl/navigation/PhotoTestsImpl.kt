@@ -79,8 +79,14 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                 PhotoTestScreen(
                     viewModel = viewModel,
                     modifier = modifier,
-                    onNavigateToGuide = {navController.navigate(GUIDE_ROUTE)},
-                    onNavigateToCamera = {navController.navigate(CAMERA_ROUTE)}
+                    onNavigateToGuide = {
+                        navController.navigate(GUIDE_ROUTE) {
+                            popUpTo(GUIDE_ROUTE) {
+                                inclusive = false
+                            }
+                        }
+                    },
+                    onNavigateToCamera = { navController.navigate(CAMERA_ROUTE) }
                 )
             }
 
@@ -109,7 +115,11 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                     onNavigateToCamera = {navController.navigate(CAMERA_ROUTE)},
                     onNavigateToTest = {photoPath: String ->
                         val encodedUrl = URLEncoder.encode(photoPath, StandardCharsets.UTF_8.toString())
-                        navController.navigate("$TEST_ROUTE/$encodedUrl")
+                        navController.navigate("$TEST_ROUTE/$encodedUrl"){
+                            popUpTo(GUIDE_ROUTE) {
+                                inclusive = false
+                            }
+                        }
                     }
                 )
             }
