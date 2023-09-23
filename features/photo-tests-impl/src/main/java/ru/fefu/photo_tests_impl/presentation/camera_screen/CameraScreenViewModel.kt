@@ -24,6 +24,8 @@ import ru.fefu.photo_tests_impl.data.CustomCameraRepository
 import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsCameraRepository
 import javax.inject.Inject
 
+private const val SUCCESS_BARCODE_VALUE = "testValue"
+
 @HiltViewModel
 class CameraScreenViewModel @Inject constructor(
     private val cameraRepository: PhotoTestsCameraRepository
@@ -32,8 +34,8 @@ class CameraScreenViewModel @Inject constructor(
     private val _photoUri = mutableStateOf(Uri.EMPTY)
     val photoUri:MutableState<Uri> = _photoUri
 
-    private val _barcodeData = MutableStateFlow("")
-    val barcodeData:StateFlow<String> = _barcodeData
+    private val _isBarcodeDetected = MutableStateFlow(false)
+    val isBarcodeDetected:StateFlow<Boolean> = _isBarcodeDetected
 
 
     fun showCameraPreview(
@@ -74,13 +76,8 @@ class CameraScreenViewModel @Inject constructor(
                 barcodes.forEach { barcode ->
                     val barcodeValue = barcode.rawValue
 
-                    if (barcodeValue != null){
-                        _barcodeData.value = barcodeValue
-                        println(barcodeValue)
-                    }
-                    else {
-                        _barcodeData.value = ""
-                        println("------------NO BARCODE------------")
+                    if (barcodeValue != null && barcodeValue == SUCCESS_BARCODE_VALUE){
+                        _isBarcodeDetected.value = true
                     }
                 }
             }

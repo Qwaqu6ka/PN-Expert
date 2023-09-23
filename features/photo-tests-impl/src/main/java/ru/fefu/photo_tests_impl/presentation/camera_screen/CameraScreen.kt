@@ -18,8 +18,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -69,6 +71,8 @@ fun CameraScreen(
     val screenWith = configuration.screenWidthDp.dp
     var previewView:PreviewView
 
+    val isPhotoButtonEnabled = viewModel.isBarcodeDetected.collectAsState()
+
     if (viewModel.photoUri.value != Uri.EMPTY){
         val uri = viewModel.photoUri.value
         viewModel.cleanPhotoUri()
@@ -112,26 +116,30 @@ fun CameraScreen(
                     modifier = Modifier
                         .weight(1f),
                     verticalArrangement = Arrangement.Center
-                ){
+                ) {
                     IconButton(
                         modifier = Modifier
                             .padding(bottom = 40.dp)
                             .size(64.dp),
+                        enabled = isPhotoButtonEnabled.value,
                         onClick = {
-                        if (permissionState.allPermissionsGranted){
-                            viewModel.captureAndSave(context)
-                        }else{
-                            Toast.makeText(
-                                context,
-                                "Please accept permission in app settings",
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-                    }) {
+                            if (permissionState.allPermissionsGranted) {
+                                viewModel.captureAndSave(context)
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Please accept permission in app settings",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        },
+                        colors = IconButtonDefaults.iconButtonColors(
+                            containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
+                            disabledContainerColor = PnExpertTheme.colors.buttonColors.ButtonInactiveColor
+                        )
+                    ) {
                         Icon(
-                            modifier = Modifier
-                                .size(64.dp)
-                                .background(PnExpertTheme.colors.mainAppColors.AppBlueColor),
+                            modifier = Modifier.size(64.dp),
                             painter = painterResource(id = R.drawable.baseline_camera_24),
                             contentDescription = "cameraButton",
                             tint = Color.White
