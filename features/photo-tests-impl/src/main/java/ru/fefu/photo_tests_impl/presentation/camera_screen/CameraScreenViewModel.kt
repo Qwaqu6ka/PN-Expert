@@ -71,14 +71,16 @@ class CameraScreenViewModel @Inject constructor(
         val inputImage =
             InputImage.fromMediaImage(imageProxy.image!!, imageProxy.imageInfo.rotationDegrees)
 
+
         barcodeScanner.process(inputImage)
             .addOnSuccessListener { barcodes ->
+                if (barcodes.isEmpty())
+                    _isBarcodeDetected.value = false
+
                 barcodes.forEach { barcode ->
                     val barcodeValue = barcode.rawValue
 
-                    if (barcodeValue != null && barcodeValue == SUCCESS_BARCODE_VALUE){
-                        _isBarcodeDetected.value = true
-                    }
+                    _isBarcodeDetected.value = barcodeValue != null && barcodeValue == SUCCESS_BARCODE_VALUE
                 }
             }
             .addOnFailureListener {
