@@ -19,11 +19,15 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,12 +40,13 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
+import kotlinx.coroutines.launch
 import ru.fefu.photo_test_impl.R
 import ru.fefu.photo_tests_impl.presentation.last_photo_screen.LastPhotoScreen
 import ru.fefu.presentation.TextCardHolder
 import ru.fefu.theme.PnExpertTheme
 
-@SuppressLint("UnrememberedMutableState")
+@SuppressLint("UnrememberedMutableState", "UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun CameraScreen(
@@ -49,16 +54,16 @@ fun CameraScreen(
     onNavigateToPhotoResult: (String) -> Unit,
     viewModel: CameraScreenViewModel = hiltViewModel()
 ) {
-    val permission = if (Build.VERSION.SDK_INT <= 28){
+    val permission = if (Build.VERSION.SDK_INT <= 28) {
         listOf(
             Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
-    }else listOf(Manifest.permission.CAMERA)
+    } else listOf(Manifest.permission.CAMERA)
 
     val permissionState = rememberMultiplePermissionsState(permissions = permission)
 
-    if (!permissionState.allPermissionsGranted){
+    if (!permissionState.allPermissionsGranted) {
         SideEffect {
             permissionState.launchMultiplePermissionRequest()
         }
@@ -66,84 +71,100 @@ fun CameraScreen(
 
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
-    val configuration = LocalConfiguration.current
-    val screenHeight = configuration.screenHeightDp.dp
-    val screenWith = configuration.screenWidthDp.dp
-    var previewView:PreviewView
+    var previewView: PreviewView
+
+    val snackBarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
     val isPhotoButtonEnabled = viewModel.isBarcodeDetected.collectAsState()
 
-    if (viewModel.photoUri.value != Uri.EMPTY){
+
+    if (viewModel.photoUri.value != Uri.EMPTY) {
         val uri = viewModel.photoUri.value
         viewModel.cleanPhotoUri()
         onNavigateToPhotoResult(uri.toString())
     }
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    Scaffold(
+        containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
+        snackbarHost = {SnackbarHost(snackBarHostState)}
     ) {
-        if (permissionState.allPermissionsGranted){
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ){
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            if (permissionState.allPermissionsGranted){
                 Column(
-                    modifier = Modifier
-                        .weight(1f),
-                    verticalArrangement = Arrangement.Center
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ){
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.BottomCenter
-                        ){
-                        TextCardHolder(
-                            modifier = Modifier.padding(16.dp),
-                            text = "Сфотографирйте ваш результат так, чтобы был виден Qr код"
-                        )
-                    }
-                }
-                AndroidView(
-                    factory = {
-                        previewView = PreviewView(it)
-                        viewModel.showCameraPreview(previewView, lifecycleOwner)
-                        previewView
-                    },
-                    modifier = Modifier
-                        .weight(4f)
-                )
-                Column(
-                    modifier = Modifier
-                        .weight(1f),
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    IconButton(
+                    Column(
                         modifier = Modifier
-                            .padding(bottom = 40.dp)
-                            .size(64.dp),
-                        enabled = isPhotoButtonEnabled.value,
-                        onClick = {
-                            if (permissionState.allPermissionsGranted) {
-                                viewModel.captureAndSave(context)
-                            } else {
-                                Toast.makeText(
-                                    context,
-                                    "Please accept permission in app settings",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
+                            .weight(1f),
+                        verticalArrangement = Arrangement.Center
+                    ){
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.BottomCenter
+                        ){
+                            TextCardHolder(
+                                modifier = Modifier.padding(16.dp),
+                                text = "Сфотографирйте ваш результат так, чтобы был виден Qr код"
+                            )
+                        }
+                    }
+                    AndroidView(
+                        factory = {
+                            previewView = PreviewView(it)
+                            viewModel.showCameraPreview(previewView, lifecycleOwner)
+                            previewView
                         },
-                        colors = IconButtonDefaults.iconButtonColors(
-                            containerColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
-                            disabledContainerColor = PnExpertTheme.colors.buttonColors.ButtonInactiveColor
-                        )
+                        modifier = Modifier
+                            .weight(4f)
+                    )
+                    Column(
+                        modifier = Modifier
+                            .weight(1f),
+                        verticalArrangement = Arrangement.Center
                     ) {
-                        Icon(
-                            modifier = Modifier.size(64.dp),
-                            painter = painterResource(id = R.drawable.baseline_camera_24),
-                            contentDescription = "cameraButton",
-                            tint = Color.White
-                        )
+                        IconButton(
+                            modifier = Modifier
+                                .padding(bottom = 40.dp)
+                                .size(64.dp),
+                            onClick = {
+                                if (permissionState.allPermissionsGranted) {
+                                    if (isPhotoButtonEnabled.value){
+                                        viewModel.captureAndSave(context)
+                                    }
+                                    else{
+                                        scope.launch {
+                                            snackBarHostState.showSnackbar(
+                                                "Qr код не был распознан или его не видно"
+                                            )
+                                        }
+                                    }
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        "Please accept permission in app settings",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            },
+                            colors = IconButtonDefaults.iconButtonColors(
+                                containerColor = if(isPhotoButtonEnabled.value)
+                                    PnExpertTheme.colors.mainAppColors.AppBlueColor
+                                else
+                                    PnExpertTheme.colors.buttonColors.ButtonInactiveColor,
+                            )
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(64.dp),
+                                painter = painterResource(id = R.drawable.baseline_camera_24),
+                                contentDescription = "cameraButton",
+                                tint = Color.White
+                            )
+                        }
                     }
                 }
             }
