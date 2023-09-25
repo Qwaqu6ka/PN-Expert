@@ -6,9 +6,12 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
+
 class PhotoTestScreenViewModel:ViewModel() {
     private val _photoPath = mutableStateOf(Uri.EMPTY)
     val photoPath: State<Uri> = _photoPath
+
+//    private val userAnswers: UserAnswer =
 
     fun setPhotoPath(photoPath:Uri){
         _photoPath.value = photoPath
