@@ -48,12 +48,12 @@ fun PhotoTestScreen(
     modifier: Modifier,
     onNavigateToGuide: () -> Unit,
     onNavigateToCamera: () -> Unit,
-    onNavigateToNextPage: () -> Unit
+    onNavigateToNextPage: (testPage:Int) -> Unit
 ) {
     val testIsSuccess = {
         viewModel.photoPath.value != Uri.EMPTY
     }
-
+    println(viewModel.testPage)
    Scaffold(
        topBar = { Toolbar(title = "Сделать фото", onBackPressed = {onNavigateToGuide()})},
        containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
@@ -85,7 +85,7 @@ fun PhotoTestScreen(
                )
            }
            Spacer(modifier = Modifier.height(16.dp))
-           NextButton(testIsSuccess(), onNavigateToNextPage)
+           NextButton(testIsSuccess(), onNavigateToNextPage, viewModel.testPage.value)
            Spacer(modifier = Modifier.height(8.dp))
        }
    }
@@ -213,10 +213,11 @@ private fun PhotoButton(onNavigateToCamera: ()->Unit){
 @Composable
 private fun NextButton(
     testIsSuccess: Boolean,
-    onNavigateToNextPage: () -> Unit
+    onNavigateToNextPage: (testPage:Int) -> Unit,
+    testPage: Int
 ){
     TextButton(
-        onClick = {onNavigateToNextPage()},
+        onClick = {onNavigateToNextPage(testPage + 1)},
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),

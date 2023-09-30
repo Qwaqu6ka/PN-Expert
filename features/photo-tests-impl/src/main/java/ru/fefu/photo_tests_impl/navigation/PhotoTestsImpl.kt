@@ -19,6 +19,7 @@ import ru.fefu.photo_tests_impl.presentation.last_photo_screen.LastPhotoScreenVi
 import ru.fefu.photo_tests_impl.presentation.photo_test_screen.PhotoTestScreen
 import ru.fefu.photo_tests_impl.presentation.photo_test_screen.PhotoTestScreenViewModel
 import ru.fefu.viewModelCreator
+import java.lang.NumberFormatException
 import java.net.URLDecoder
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -41,6 +42,9 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
     lateinit var lastPhotoViewModelFactory: LastPhotoScreenViewModel.Factory
 
     override val route: String = GRAPH_ROUTE
+
+    private var testType = PhotoTestType.ClockPhotoTest
+
     override fun registerGraph(
         navGraphBuilder: NavGraphBuilder,
         navController: NavHostController,
@@ -52,12 +56,12 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
         ){
             composable(GUIDE_ROUTE) {
                 val viewModel = viewModelCreator {
-                    guideScreenViewModelFactory.create(PhotoTestType.ClockPhotoTest)
+                    guideScreenViewModelFactory.create(testType)
                 }
                 GuideScreen(
                     modifier = modifier,
                     viewModel = viewModel,
-                    onNavigateToTest = {navController.navigate("$TEST_ROUTE/ ")}
+                    onNavigateToTest = {navController.navigate("$TEST_ROUTE/1")}
                 )
             }
 
@@ -72,8 +76,13 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                 val argument = backStackEntry.arguments?.getString("photoPath")!!
 
                 if (argument.isNotBlank()){
-                    val photoPath = Uri.parse(URLDecoder.decode(argument))
-                    viewModel.setPhotoPath(photoPath)
+                    try {
+                        val testNumber = argument.toInt()
+                        viewModel.setTestPage(testNumber)
+                    }catch (e:NumberFormatException){
+                        val photoPath = Uri.parse(URLDecoder.decode(argument))
+                        viewModel.setPhotoPath(photoPath)
+                    }
                 }
 
                 PhotoTestScreen(
@@ -87,8 +96,8 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                         }
                     },
                     onNavigateToCamera = { navController.navigate(CAMERA_ROUTE) },
-                    onNavigateToNextPage = {
-                        navController.navigate("${TEST_ROUTE}/ ")
+                    onNavigateToNextPage = {testPage: Int ->
+                        navController.navigate("${TEST_ROUTE}/$testPage")
                     }
                 )
             }
@@ -122,9 +131,6 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                             navController.popBackStack()
                             navController.popBackStack()
                             navController.popBackStack()
-//                            popUpTo(GUIDE_ROUTE) {
-//                                inclusive = false
-//                            }
                         }
                     }
                 )
