@@ -44,7 +44,7 @@ fun LastPhotoScreen(
     viewModel: LastPhotoScreenViewModel,
     modifier: Modifier = Modifier,
     onNavigateToCamera: ()->Unit,
-    onNavigateToTest:(photoPath:String)->Unit
+    onNavigateToTest:(photoPath:String)->Unit,
 ) {
     Scaffold(
         modifier = modifier,

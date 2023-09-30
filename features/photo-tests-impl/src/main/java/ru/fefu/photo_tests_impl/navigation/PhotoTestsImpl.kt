@@ -86,7 +86,10 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                             }
                         }
                     },
-                    onNavigateToCamera = { navController.navigate(CAMERA_ROUTE) }
+                    onNavigateToCamera = { navController.navigate(CAMERA_ROUTE) },
+                    onNavigateToNextPage = {
+                        navController.navigate("${TEST_ROUTE}/ ")
+                    }
                 )
             }
 
@@ -116,9 +119,12 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                     onNavigateToTest = {photoPath: String ->
                         val encodedUrl = URLEncoder.encode(photoPath, StandardCharsets.UTF_8.toString())
                         navController.navigate("$TEST_ROUTE/$encodedUrl"){
-                            popUpTo(GUIDE_ROUTE) {
-                                inclusive = false
-                            }
+                            navController.popBackStack()
+                            navController.popBackStack()
+                            navController.popBackStack()
+//                            popUpTo(GUIDE_ROUTE) {
+//                                inclusive = false
+//                            }
                         }
                     }
                 )

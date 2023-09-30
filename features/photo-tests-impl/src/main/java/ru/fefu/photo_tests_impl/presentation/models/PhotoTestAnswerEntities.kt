@@ -15,7 +15,7 @@ class PhotoTestAnswer() {
 
     fun setAnswer(photoUri: Uri, answerNumber: Int){
         if (answerNumber < 1 || answerNumber > answers.size)
-            throw Exception(message = "answerNumber must be in 1..answers.size diapason")
+            throw ExceptionInInitializerError()
 
         answers[answerNumber] = photoUri
     }
