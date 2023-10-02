@@ -10,8 +10,10 @@ data class PhotoTestDataModel(
     val testTasks: List<PhotoTestTask>
 ){
     fun receivedPhotoTest(testNumber: Int): PhotoTestItem{
-        if (testNumber < 1 || testNumber > testTasks.size)
+        if (testNumber < 1 || testNumber > testTasks.size){
+            println("_________________________$testNumber")
             throw IllegalArgumentException()
+        }
 
         return PhotoTestItem(
             testGuidePhoto = this.testGuidePhotos[testNumber-1],

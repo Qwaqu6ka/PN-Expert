@@ -39,8 +39,9 @@ fun GuideScreen(
         Column(
             modifier
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp)
-                .padding(top = scaffoldPadding.calculateTopPadding()-40.dp)
+                .padding(top = scaffoldPadding.calculateTopPadding() - 40.dp)
         ) {
             TaskAndTimeHolder(
                 modifier = Modifier

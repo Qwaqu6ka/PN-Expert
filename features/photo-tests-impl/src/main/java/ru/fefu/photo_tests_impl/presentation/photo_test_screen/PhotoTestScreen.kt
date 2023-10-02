@@ -37,6 +37,7 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import ru.fefu.photo_test_impl.R
+import ru.fefu.photo_tests_impl.domain.models.TestPhoto
 import ru.fefu.presentation.TextCardHolder
 import ru.fefu.presentation.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
@@ -69,10 +70,10 @@ fun PhotoTestScreen(
        ) {
            Spacer(modifier = Modifier.height(8.dp))
            if (!testIsSuccess())
-               TextCardHolder(modifier = Modifier.fillMaxWidth(), text = "Выполните задание и сфотографируйте или загрузите результат")
+               TextCardHolder(modifier = Modifier.fillMaxWidth(), text = viewModel.testData.value!!.testTask.taskName)
            Spacer(modifier = Modifier.weight(1f))
            Spacer(modifier = Modifier.height(16.dp))
-           PhotoResult(photoPath = viewModel.photoPath.value, modifier = Modifier.height(500.dp))
+           PhotoResult(photoPath = viewModel.photoPath.value, guidePhoto = viewModel.testData.value!!.testGuidePhoto, modifier = Modifier.height(500.dp))
            Spacer(modifier = Modifier.height(16.dp))
            Spacer(modifier = Modifier.weight(1f))
            Row (
@@ -85,7 +86,7 @@ fun PhotoTestScreen(
                )
            }
            Spacer(modifier = Modifier.height(16.dp))
-           NextButton(testIsSuccess(), onNavigateToNextPage, viewModel.testPage.value)
+           NextButton(testIsSuccess(), onNavigateToNextPage, viewModel.testPage.value!!)
            Spacer(modifier = Modifier.height(8.dp))
        }
    }
@@ -95,6 +96,7 @@ fun PhotoTestScreen(
 @Composable
 private fun PhotoResult(
     photoPath: Uri,
+    guidePhoto: TestPhoto,
     modifier: Modifier = Modifier
 ){
     val resultPhoto = rememberImagePainter(photoPath)
@@ -107,10 +109,10 @@ private fun PhotoResult(
         )
     }
     if (resultPhoto.state is ImagePainter.State.Empty){
-        GuidePhoto()
+        GuidePhoto(guidePhoto)
     }
     if (resultPhoto.state is ImagePainter.State.Error){
-        GuidePhoto()
+        GuidePhoto(guidePhoto)
     }
     else{
         Card(
@@ -129,7 +131,7 @@ private fun PhotoResult(
 }
 
 @Composable
-private fun GuidePhoto(){
+private fun GuidePhoto(guidePhoto: TestPhoto){
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Card(
             modifier = Modifier
@@ -141,7 +143,7 @@ private fun GuidePhoto(){
             Image(
                 modifier = Modifier
                     .clip(PnExpertTheme.shapes.imageShapes.imageClassic15),
-                painter = painterResource(id = R.drawable.photo_test_clock),
+                painter = painterResource(id = guidePhoto.drawableId),
                 contentScale = ContentScale.FillBounds,
                 contentDescription = null
             )

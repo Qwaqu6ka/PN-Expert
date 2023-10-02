@@ -17,14 +17,15 @@ internal class InternalPhotoTestsRepository @Inject constructor():PhotoTestsRepo
         testGuide = "Нарисйте на бумаге часы, на которых будет указано время (необходимое время будет дано при начале теста), сфотографируйте и отправьте полученный результат",
         testGuidePhotos = listOf(
             TestPhoto(R.drawable.photo_test_clock),
+            TestPhoto(R.drawable.test_image)
         ),
         testTasks = listOf(
             PhotoTestTask(
-                taskName = "Нарисовать часы",
+                taskName = "Нарисовать часы и сфотографируйте или загрузите результат",
                 taskMaskPhoto = TestPhoto(R.drawable.photo_test_clock)
             ),
             PhotoTestTask(
-                taskName = "Нарисовать часы еще раз",
+                taskName = "Нарисовать часы еще раз и сфотографируйте или загрузите результат",
                 taskMaskPhoto = TestPhoto(R.drawable.test_image)
             )
         )
