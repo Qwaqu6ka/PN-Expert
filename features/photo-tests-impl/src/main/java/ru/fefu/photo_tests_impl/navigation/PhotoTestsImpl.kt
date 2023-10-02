@@ -41,6 +41,9 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
     @Inject
     lateinit var lastPhotoViewModelFactory: LastPhotoScreenViewModel.Factory
 
+    @Inject
+    lateinit var photoTestViewModelFactory: PhotoTestScreenViewModel.Factory
+
     override val route: String = GRAPH_ROUTE
 
     private var testType = PhotoTestType.ClockPhotoTest
@@ -77,7 +80,9 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                     }
                 ),
             ) { backStackEntry ->
-                val viewModel = viewModel() as PhotoTestScreenViewModel
+                val viewModel = viewModelCreator {
+                    photoTestViewModelFactory.create(testType)
+                }
                 val argumentPhoto = backStackEntry.arguments?.getString("photoPath")!!
                 val argumentNumber = backStackEntry.arguments?.getInt("testNumber")!!
 

@@ -5,9 +5,17 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
+import ru.fefu.photo_tests_impl.domain.use_cases.GetTestDataItem
 
 
-class PhotoTestScreenViewModel:ViewModel() {
+class PhotoTestScreenViewModel @AssistedInject constructor(
+    private val getTestDataItem: GetTestDataItem,
+    @Assisted private val testType: PhotoTestType
+):ViewModel() {
     private val _photoPath = mutableStateOf(Uri.EMPTY)
     val photoPath: State<Uri> = _photoPath
 
@@ -20,5 +28,10 @@ class PhotoTestScreenViewModel:ViewModel() {
 
     fun setTestPage(testPage:Int){
         _testPage.intValue = testPage
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(testType: PhotoTestType): PhotoTestScreenViewModel
     }
 }
