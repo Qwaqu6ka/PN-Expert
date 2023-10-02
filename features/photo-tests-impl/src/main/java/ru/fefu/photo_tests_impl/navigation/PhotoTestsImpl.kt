@@ -61,28 +61,31 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                 GuideScreen(
                     modifier = modifier,
                     viewModel = viewModel,
-                    onNavigateToTest = {navController.navigate("$TEST_ROUTE/1")}
+                    onNavigateToTest = {navController.navigate("$TEST_ROUTE/1/ ")}
                 )
             }
 
             composable(
-                "$TEST_ROUTE/{photoPath}",
-                arguments = listOf(navArgument("photoPath") {
-                    type = NavType.StringType
-                    defaultValue = ""
-                }),
-            ) {backStackEntry->
-                val viewModel = viewModel() as PhotoTestScreenViewModel
-                val argument = backStackEntry.arguments?.getString("photoPath")!!
-
-                if (argument.isNotBlank()){
-                    try {
-                        val testNumber = argument.toInt()
-                        viewModel.setTestPage(testNumber)
-                    }catch (e:NumberFormatException){
-                        val photoPath = Uri.parse(URLDecoder.decode(argument))
-                        viewModel.setPhotoPath(photoPath)
+                "$TEST_ROUTE/{testNumber}/{photoPath}",
+                arguments = listOf(
+                    navArgument("photoPath") {
+                        type = NavType.StringType
+                        defaultValue = ""
+                    },
+                    navArgument("testNumber") {
+                        type = NavType.IntType
                     }
+                ),
+            ) { backStackEntry ->
+                val viewModel = viewModel() as PhotoTestScreenViewModel
+                val argumentPhoto = backStackEntry.arguments?.getString("photoPath")!!
+                val argumentNumber = backStackEntry.arguments?.getInt("testNumber")!!
+
+                viewModel.setTestPage(argumentNumber)
+
+                if (argumentPhoto.isNotBlank()) {
+                    val photoPath = Uri.parse(URLDecoder.decode(argumentPhoto))
+                    viewModel.setPhotoPath(photoPath)
                 }
 
                 PhotoTestScreen(
@@ -95,28 +98,47 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                             }
                         }
                     },
-                    onNavigateToCamera = { navController.navigate(CAMERA_ROUTE) },
-                    onNavigateToNextPage = {testPage: Int ->
-                        navController.navigate("${TEST_ROUTE}/$testPage")
-                    }
-                )
-            }
-
-            composable(CAMERA_ROUTE) {
-                CameraScreen(
-                    modifier = modifier,
-                    onNavigateToPhotoResult = { photoPath: String ->
-                        val encodedUrl = URLEncoder.encode(photoPath, StandardCharsets.UTF_8.toString())
-                        navController.navigate("$PHOTO_RESULT_ROUTE/$encodedUrl")
+                    onNavigateToCamera = { navController.navigate("$CAMERA_ROUTE/$argumentNumber") },
+                    onNavigateToNextPage = {
+                        val nextTestPage = argumentNumber + 1
+                        navController.navigate("${TEST_ROUTE}/$nextTestPage/ ")
                     }
                 )
             }
 
             composable(
-                route = "$PHOTO_RESULT_ROUTE/{photoPath}",
-                arguments = listOf(navArgument("photoPath") { type = NavType.StringType })
+                "$CAMERA_ROUTE/{testNumber}",
+                arguments = listOf(
+                    navArgument("testNumber"){
+                        type = NavType.IntType
+                    }
+                )
+            ) {backStackEntry->
+
+                val argumentNumber = backStackEntry.arguments?.getInt("testNumber")!!
+
+                CameraScreen(
+                    modifier = modifier,
+                    onNavigateToPhotoResult = { photoPath: String ->
+                        val encodedUrl = URLEncoder.encode(photoPath, StandardCharsets.UTF_8.toString())
+                        navController.navigate("$PHOTO_RESULT_ROUTE/$argumentNumber/$encodedUrl")
+                    }
+                )
+            }
+
+            composable(
+                route = "$PHOTO_RESULT_ROUTE/{testNumber}/{photoPath}",
+                arguments = listOf(
+                    navArgument("photoPath") {
+                        type = NavType.StringType
+                    },
+                    navArgument("testNumber") {
+                        type = NavType.IntType
+                    }
+                ),
             ) { backStackEntry->
                 val uri= Uri.parse(backStackEntry.arguments?.getString("photoPath")!!)
+                val argumentNumber = backStackEntry.arguments?.getInt("testNumber")!!
 
                 val viewModel = viewModelCreator {
                     lastPhotoViewModelFactory.create(uri)
@@ -127,7 +149,7 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                     onNavigateToCamera = {navController.navigate(CAMERA_ROUTE)},
                     onNavigateToTest = {photoPath: String ->
                         val encodedUrl = URLEncoder.encode(photoPath, StandardCharsets.UTF_8.toString())
-                        navController.navigate("$TEST_ROUTE/$encodedUrl"){
+                        navController.navigate("$TEST_ROUTE/$argumentNumber/$encodedUrl"){
                             navController.popBackStack()
                             navController.popBackStack()
                             navController.popBackStack()

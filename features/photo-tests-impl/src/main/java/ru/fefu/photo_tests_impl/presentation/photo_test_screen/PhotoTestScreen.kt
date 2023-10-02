@@ -48,7 +48,7 @@ fun PhotoTestScreen(
     modifier: Modifier,
     onNavigateToGuide: () -> Unit,
     onNavigateToCamera: () -> Unit,
-    onNavigateToNextPage: (testPage:Int) -> Unit
+    onNavigateToNextPage: () -> Unit
 ) {
     val testIsSuccess = {
         viewModel.photoPath.value != Uri.EMPTY
@@ -213,11 +213,11 @@ private fun PhotoButton(onNavigateToCamera: ()->Unit){
 @Composable
 private fun NextButton(
     testIsSuccess: Boolean,
-    onNavigateToNextPage: (testPage:Int) -> Unit,
+    onNavigateToNextPage: () -> Unit,
     testPage: Int
 ){
     TextButton(
-        onClick = {onNavigateToNextPage(testPage + 1)},
+        onClick = {onNavigateToNextPage()},
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
