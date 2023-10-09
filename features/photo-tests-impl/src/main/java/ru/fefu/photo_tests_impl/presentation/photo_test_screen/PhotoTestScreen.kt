@@ -86,7 +86,7 @@ fun PhotoTestScreen(
                )
            }
            Spacer(modifier = Modifier.height(16.dp))
-           NextButton(testIsSuccess(), onNavigateToNextPage, viewModel.testPage.value!!)
+           NextButton(testIsSuccess(), onNavigateToNextPage){viewModel.addAnswer()}
            Spacer(modifier = Modifier.height(8.dp))
        }
    }
@@ -216,10 +216,13 @@ private fun PhotoButton(onNavigateToCamera: ()->Unit){
 private fun NextButton(
     testIsSuccess: Boolean,
     onNavigateToNextPage: () -> Unit,
-    testPage: Int
+    buttonMotion: () -> Unit
 ){
     TextButton(
-        onClick = {onNavigateToNextPage()},
+        onClick = {
+            buttonMotion()
+            onNavigateToNextPage()
+          },
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),

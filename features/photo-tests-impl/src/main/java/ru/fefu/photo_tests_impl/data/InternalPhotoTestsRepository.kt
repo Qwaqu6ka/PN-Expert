@@ -1,6 +1,9 @@
 package ru.fefu.photo_tests_impl.data
 
+import android.net.Uri
 import ru.fefu.photo_test_impl.R
+import ru.fefu.photo_tests_impl.domain.models.PhotoTestAnswer
+import ru.fefu.photo_tests_impl.domain.models.PhotoTestAnswerForReading
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestDataModel
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestGuide
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestItem
@@ -9,9 +12,10 @@ import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
 import ru.fefu.photo_tests_impl.domain.models.TestPhoto
 import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 internal class InternalPhotoTestsRepository @Inject constructor():PhotoTestsRepository {
-
     private val clockPhotoTest: PhotoTestDataModel = PhotoTestDataModel(
         testName = "Нарисвать часы",
         testGuide = "Нарисйте на бумаге часы, на которых будет указано время (необходимое время будет дано при начале теста), сфотографируйте и отправьте полученный результат",
@@ -31,6 +35,8 @@ internal class InternalPhotoTestsRepository @Inject constructor():PhotoTestsRepo
         )
     )
 
+    private var userAnswer: PhotoTestAnswer = PhotoTestAnswer()
+
     private fun getPhotoTest(photoTestType: PhotoTestType): PhotoTestDataModel {
         return when (photoTestType) {
             is PhotoTestType.ClockPhotoTest -> clockPhotoTest
@@ -46,6 +52,14 @@ internal class InternalPhotoTestsRepository @Inject constructor():PhotoTestsRepo
 
     override fun getPhotoTestGuide(photoTestType: PhotoTestType): PhotoTestGuide {
         return getPhotoTest(photoTestType).receivedTestGuide()
+    }
+
+    override fun getUserAnswers(): PhotoTestAnswerForReading {
+        return userAnswer.toReadingModel()
+    }
+
+    override fun newUserAnswer(photo:Uri, answerNumber: Int) {
+        userAnswer.addNewAnswer(photo, answerNumber)
     }
 
 

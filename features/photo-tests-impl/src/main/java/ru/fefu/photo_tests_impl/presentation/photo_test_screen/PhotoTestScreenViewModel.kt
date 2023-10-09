@@ -12,11 +12,15 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.MutableStateFlow
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestItem
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
+import ru.fefu.photo_tests_impl.domain.use_cases.AddUserAnswerUseCase
 import ru.fefu.photo_tests_impl.domain.use_cases.GetTestDataItem
+import ru.fefu.photo_tests_impl.domain.use_cases.GetUserAnswersUseCase
 
 
 class PhotoTestScreenViewModel @AssistedInject constructor(
     private val getTestDataItem: GetTestDataItem,
+    private val addUserAnswerUseCase: AddUserAnswerUseCase,
+    private val getUserAnswerUseCase: GetUserAnswersUseCase,
     @Assisted private val testType: PhotoTestType
 ):ViewModel() {
     private val _photoPath = mutableStateOf(Uri.EMPTY)
@@ -39,6 +43,11 @@ class PhotoTestScreenViewModel @AssistedInject constructor(
 
     private fun getTestData(testType:PhotoTestType, testNumber:Int): PhotoTestItem {
         return getTestDataItem(testType, testNumber)
+    }
+
+    fun addAnswer(){
+        println(getUserAnswerUseCase().userAnswer)
+        addUserAnswerUseCase(_photoPath.value, _testPage.value!!)
     }
 
     @AssistedFactory
