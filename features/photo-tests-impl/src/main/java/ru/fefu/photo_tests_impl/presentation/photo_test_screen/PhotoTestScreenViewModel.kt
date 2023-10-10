@@ -32,6 +32,9 @@ class PhotoTestScreenViewModel @AssistedInject constructor(
     private var  _testData = mutableStateOf<PhotoTestItem?>(null)
     val testData:State<PhotoTestItem?> = _testData
 
+    private var _isLastTest =  mutableStateOf<Boolean>(_testData.value?.isLastTask ?: true)
+    val isLastTest: State<Boolean> = _isLastTest
+
     fun setPhotoPath(photoPath:Uri){
         _photoPath.value = photoPath
     }

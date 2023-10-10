@@ -49,7 +49,8 @@ fun PhotoTestScreen(
     modifier: Modifier,
     onNavigateToGuide: () -> Unit,
     onNavigateToCamera: () -> Unit,
-    onNavigateToNextPage: () -> Unit
+    onNavigateToNextPage: () -> Unit,
+    onNavigateToResult: () -> Unit
 ) {
     val testIsSuccess = {
         viewModel.photoPath.value != Uri.EMPTY
@@ -86,7 +87,7 @@ fun PhotoTestScreen(
                )
            }
            Spacer(modifier = Modifier.height(16.dp))
-           NextButton(testIsSuccess(), onNavigateToNextPage){viewModel.addAnswer()}
+           NextButton(testIsSuccess(), onNavigateToNextPage,{viewModel.addAnswer()}, onNavigateToResult, viewModel.isLastTest.value)
            Spacer(modifier = Modifier.height(8.dp))
        }
    }
@@ -216,12 +217,18 @@ private fun PhotoButton(onNavigateToCamera: ()->Unit){
 private fun NextButton(
     testIsSuccess: Boolean,
     onNavigateToNextPage: () -> Unit,
-    buttonMotion: () -> Unit
+    buttonMotion: () -> Unit,
+    onNavigateToResult: () -> Unit,
+    isLastTest:Boolean
 ){
     TextButton(
         onClick = {
             buttonMotion()
-            onNavigateToNextPage()
+            if(isLastTest){
+                onNavigateToResult()
+            }else{
+                onNavigateToNextPage()
+            }
           },
         modifier = Modifier
             .fillMaxWidth()

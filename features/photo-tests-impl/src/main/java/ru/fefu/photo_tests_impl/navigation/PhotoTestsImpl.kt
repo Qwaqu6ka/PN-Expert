@@ -18,6 +18,7 @@ import ru.fefu.photo_tests_impl.presentation.last_photo_screen.LastPhotoScreen
 import ru.fefu.photo_tests_impl.presentation.last_photo_screen.LastPhotoScreenViewModel
 import ru.fefu.photo_tests_impl.presentation.photo_test_screen.PhotoTestScreen
 import ru.fefu.photo_tests_impl.presentation.photo_test_screen.PhotoTestScreenViewModel
+import ru.fefu.photo_tests_impl.presentation.result_screen.ResultScreen
 import ru.fefu.viewModelCreator
 import java.lang.NumberFormatException
 import java.net.URLDecoder
@@ -55,7 +56,7 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
     ) {
         navGraphBuilder.navigation(
             route = route,
-            startDestination = GUIDE_ROUTE
+            startDestination = TEST_RESULT_ROUTE
         ){
             composable(GUIDE_ROUTE) {
                 val viewModel = viewModelCreator {
@@ -107,7 +108,8 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                     onNavigateToNextPage = {
                         val nextTestPage = argumentNumber + 1
                         navController.navigate("${TEST_ROUTE}/$nextTestPage/ ")
-                    }
+                    },
+                    onNavigateToResult = {navController.navigate(TEST_RESULT_ROUTE)}
                 )
             }
 
@@ -161,6 +163,12 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
                         }
                     }
                 )
+            }
+
+            composable(
+                route = TEST_RESULT_ROUTE,
+            ){
+                ResultScreen(modifier = modifier)
             }
         }
     }

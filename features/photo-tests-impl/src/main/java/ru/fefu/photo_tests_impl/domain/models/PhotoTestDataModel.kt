@@ -17,7 +17,8 @@ data class PhotoTestDataModel(
 
         return PhotoTestItem(
             testGuidePhoto = this.testGuidePhotos[testNumber-1],
-            testTask = this.testTasks[testNumber-1]
+            testTask = this.testTasks[testNumber-1],
+            isLastTask = testNumber == this.testTasks.size
         )
     }
 
@@ -32,7 +33,8 @@ data class PhotoTestDataModel(
 
 data class PhotoTestItem(
     val testGuidePhoto: TestPhoto,
-    val testTask: PhotoTestTask
+    val testTask: PhotoTestTask,
+    val isLastTask: Boolean
 )
 
 data class PhotoTestGuide(
