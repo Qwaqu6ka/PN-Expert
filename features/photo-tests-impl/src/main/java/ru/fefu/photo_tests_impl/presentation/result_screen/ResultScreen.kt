@@ -5,6 +5,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,9 +22,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import ru.fefu.photo_test_impl.R
+import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.rememberImagePainter
+import ru.fefu.photo_tests_impl.domain.models.PhotoTestAnswerForReading
+import ru.fefu.photo_tests_impl.domain.models.UserAnswerItem
 import ru.fefu.presentation.TextCardHolder
 import ru.fefu.presentation.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
@@ -32,6 +35,7 @@ import ru.fefu.theme.PnExpertTheme
 @Composable
 fun ResultScreen(
     modifier: Modifier,
+    viewModel: ResultScreenViewModel = hiltViewModel()
 ) {
     Scaffold(
         modifier = modifier,
@@ -47,7 +51,7 @@ fun ResultScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(8.dp))
-            ResultHolder()
+            ResultHolder(viewModel.answers.value!!)
             Spacer(modifier = Modifier.height(8.dp))
             Spacer(modifier = Modifier.weight(1f))
             SendButton()
@@ -57,32 +61,35 @@ fun ResultScreen(
 }
 
 @Composable
-private fun ResultHolder(){
-    for (i in 0..1){
-        ResultItem()
+private fun ResultHolder(answers: PhotoTestAnswerForReading){
+    for ((answerId, answerItem) in answers.userAnswer.withIndex()){
+        ResultItem(answerItem, answerId+1)
         Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
 @Composable
-private fun ResultItem(){
+private fun ResultItem(answerItem:UserAnswerItem, testNumber:Int){
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TextCardHolder(
             modifier = Modifier.fillMaxWidth(),
-            text = "Нарислвать часы еще раз и сфотографировать результат",
-            titleText = "Задание 1"
+            text = answerItem.testTask,
+            titleText = "Задание $testNumber"
         )
         Spacer(modifier = Modifier.height(4.dp))
         Card(
             shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
             border = BorderStroke(1.dp, PnExpertTheme.colors.mainAppColors.AppBlueColor)
         ){
+            val resultPhoto = rememberImagePainter(answerItem.testAnswer)
             Image(
-                painter = painterResource(id = R.drawable.photo_test_clock),
+                painter = resultPhoto,
                 contentDescription = null,
+                modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 1.dp),
+                contentScale = ContentScale.FillWidth
             )
         }
 

@@ -87,7 +87,7 @@ fun PhotoTestScreen(
                )
            }
            Spacer(modifier = Modifier.height(16.dp))
-           NextButton(testIsSuccess(), onNavigateToNextPage,{viewModel.addAnswer()}, onNavigateToResult, viewModel.isLastTest.value)
+           NextButton(testIsSuccess(), onNavigateToNextPage,{viewModel.addAnswer()}, onNavigateToResult, viewModel.isLastTest.value!!)
            Spacer(modifier = Modifier.height(8.dp))
        }
    }

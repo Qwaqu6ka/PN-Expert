@@ -58,8 +58,8 @@ internal class InternalPhotoTestsRepository @Inject constructor():PhotoTestsRepo
         return userAnswer.toReadingModel()
     }
 
-    override fun newUserAnswer(photo:Uri, answerNumber: Int) {
-        userAnswer.addNewAnswer(photo, answerNumber)
+    override fun newUserAnswer(testTask:String, photo:Uri, answerNumber: Int) {
+        userAnswer.addNewAnswer(testTask, photo, answerNumber)
     }
 
 

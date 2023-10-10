@@ -8,7 +8,7 @@ import javax.inject.Inject
 class AddUserAnswerUseCase @Inject constructor(
     private val repository: PhotoTestsRepository
 ) {
-    operator fun invoke(photo: Uri, testNumber:Int){
-        repository.newUserAnswer(photo, testNumber)
+    operator fun invoke(testTask:String, photo: Uri, testNumber:Int){
+        repository.newUserAnswer(testTask, photo, testNumber)
     }
 }

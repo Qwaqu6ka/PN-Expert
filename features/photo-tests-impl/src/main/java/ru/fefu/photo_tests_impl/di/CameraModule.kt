@@ -56,7 +56,7 @@ object CameraModule {
         //either 16_9 or 4_3
         //you can set flash type if its a back camera some devices
         return ImageCapture.Builder()
-            .setFlashMode(FLASH_MODE_ON)
+//            .setFlashMode(FLASH_MODE_ON)
             .setTargetAspectRatio(AspectRatio.RATIO_16_9)
             .build()
     }

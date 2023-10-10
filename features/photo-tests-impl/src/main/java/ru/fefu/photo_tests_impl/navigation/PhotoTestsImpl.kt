@@ -56,7 +56,7 @@ class PhotoTestsImpl @Inject constructor():PhotoTestsApi {
     ) {
         navGraphBuilder.navigation(
             route = route,
-            startDestination = TEST_RESULT_ROUTE
+            startDestination = GUIDE_ROUTE
         ){
             composable(GUIDE_ROUTE) {
                 val viewModel = viewModelCreator {

@@ -15,6 +15,6 @@ interface PhotoTestsRepository {
 
     fun getUserAnswers():PhotoTestAnswerForReading
 
-    fun newUserAnswer(photo: Uri, answerNumber: Int)
+    fun newUserAnswer(testTask: String, photo: Uri, answerNumber: Int)
 
 }

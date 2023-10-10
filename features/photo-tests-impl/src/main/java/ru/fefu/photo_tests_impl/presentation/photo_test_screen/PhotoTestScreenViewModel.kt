@@ -1,6 +1,7 @@
 package ru.fefu.photo_tests_impl.presentation.photo_test_screen
 
 import android.net.Uri
+import android.support.v4.os.IResultReceiver._Parcel
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
@@ -32,8 +33,8 @@ class PhotoTestScreenViewModel @AssistedInject constructor(
     private var  _testData = mutableStateOf<PhotoTestItem?>(null)
     val testData:State<PhotoTestItem?> = _testData
 
-    private var _isLastTest =  mutableStateOf<Boolean>(_testData.value?.isLastTask ?: true)
-    val isLastTest: State<Boolean> = _isLastTest
+    private var _isLastTest =  mutableStateOf<Boolean?>(null)
+    val isLastTest: State<Boolean?> = _isLastTest
 
     fun setPhotoPath(photoPath:Uri){
         _photoPath.value = photoPath
@@ -42,6 +43,7 @@ class PhotoTestScreenViewModel @AssistedInject constructor(
     fun setTestPage(testPage:Int){
         _testPage.value = testPage
         _testData.value = getTestData(testType, _testPage.value!!)
+        _isLastTest.value = _testData.value!!.isLastTask
     }
 
     private fun getTestData(testType:PhotoTestType, testNumber:Int): PhotoTestItem {
@@ -50,7 +52,7 @@ class PhotoTestScreenViewModel @AssistedInject constructor(
 
     fun addAnswer(){
         println(getUserAnswerUseCase().userAnswer)
-        addUserAnswerUseCase(_photoPath.value, _testPage.value!!)
+        addUserAnswerUseCase(_testData.value!!.testTask.taskName, _photoPath.value, _testPage.value!!)
     }
 
     @AssistedFactory
