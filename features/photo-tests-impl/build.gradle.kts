@@ -65,6 +65,8 @@ dependencies {
 
     implementation(libs.baracode)
 
+    implementation(libs.zxing)
+
     implementation(project(":core:presentation"))
     implementation(project(":core:theme"))
 

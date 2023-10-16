@@ -66,11 +66,6 @@ class CustomCameraRepository @Inject constructor(
             ContextCompat.getMainExecutor(context),
             object : ImageCapture.OnImageSavedCallback{
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-//                    Toast.makeText(
-//                        context,
-//                        "Saved image ${outputFileResults.savedUri!!}",
-//                        Toast.LENGTH_LONG
-//                    ).show()
                     photoPath.value = outputFileResults.savedUri!!
                 }
 
