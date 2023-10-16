@@ -161,7 +161,7 @@ private fun GuidePhoto(guidePhoto: TestPhoto){
 private fun DownloadButton(setUri: (Uri) -> Unit){
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
-            setUri(uri!!)
+            setUri(uri?: Uri.EMPTY)
         }
 
     TextButton(
