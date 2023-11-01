@@ -2,18 +2,16 @@ package ru.fefu.video_tests_impl.presentation
 
 import android.Manifest
 import android.os.Build
-import android.util.Log
-import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.core.ImageAnalysis.COORDINATE_SYSTEM_ORIGINAL
 import androidx.camera.mlkit.vision.MlKitAnalyzer
-import androidx.camera.view.CameraController.COORDINATE_SYSTEM_VIEW_REFERENCED
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -83,50 +81,75 @@ internal fun VideoScreen(
 private fun SimpleCameraPreview() {
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
-    val cameraController = remember { LifecycleCameraController(context) }
-    val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
     val configuration = LocalConfiguration.current
-
-    val options = AccuratePoseDetectorOptions.Builder()
-        .setDetectorMode(AccuratePoseDetectorOptions.STREAM_MODE)
-        .build()
-    val poseDetector = PoseDetection.getClient(options)
+    val cameraController = remember { LifecycleCameraController(context) }
 
     AndroidView(
         factory = { ctx ->
-            val previewView = PreviewView(ctx)
+            val options = AccuratePoseDetectorOptions.Builder()
+                .setDetectorMode(AccuratePoseDetectorOptions.STREAM_MODE)
+                .build()
+            val poseDetector = PoseDetection.getClient(options)
             val executor = ContextCompat.getMainExecutor(ctx)
+
+            // view to show
+            val previewView = PreviewView(ctx)
+            previewView.controller = cameraController
 
             cameraController.bindToLifecycle(lifecycleOwner)
             cameraController.setImageAnalysisAnalyzer(
                 executor,
                 MlKitAnalyzer(
                     listOf(poseDetector),
-                    COORDINATE_SYSTEM_VIEW_REFERENCED,
+                    COORDINATE_SYSTEM_ORIGINAL,
                     executor
                 ) { result ->
-                    val allPoseLandmark = result.getValue(poseDetector)?.allPoseLandmarks
-                    Log.d(
-                        "debug",
-                        allPoseLandmark?.joinToString(
-                            separator = "\n",
-                            transform = { "x: ${it.position.x} y: ${it.position.y}" })
-                            ?: "null null null null null null "
+                    val pose = result.getValue(poseDetector)
+                    if (pose == null || pose.allPoseLandmarks.isEmpty()) {
+                        previewView.overlay.clear()
+                        return@MlKitAnalyzer
+                    }
+
+
+//                    val poseGraphic = PoseGraphic(
+//                        context = ctx,
+//                        attrs = null,
+//                        pose = pose,
+//                        showInFrameLikelihood = false,
+//                        visualizeZ = true,
+//                        rescaleZForVisualization = true
+//                    )
+//                    previewView.bitmap?.width?.let {
+//                        poseGraphic.setImageSourceInfo(
+//                            imageWidth = it,
+//                            imageHeight = previewView.bitmap?.height!!,
+//                            isFlipped = false
+//                        )
+//                    }
+//t
+//                    previewView.overlay.clear()
+//                    previewView.overlay.add(poseGraphic)
+
+
+                    val poseDrawable = PoseDrawable(
+                        pose = pose,
+                        showInFrameLikelihood = true,
+                        visualizeZ = true,
+                        rescaleZForVisualization = true
                     )
+
+                    previewView.overlay.clear()
+                    previewView.overlay.add(poseDrawable)
                 }
             )
-            previewView.controller = cameraController
-
             previewView
         },
-        modifier = Modifier
-            .height(configuration.screenHeightDp.dp)
-            .width(configuration.screenWidthDp.dp)
+        modifier = Modifier.fillMaxSize()
     )
 }
 
 @Composable
-fun RequirePermissionCard(
+private fun RequirePermissionCard(
     onRequirePermission: @Composable () -> Unit,
     modifier: Modifier = Modifier
 ) {
