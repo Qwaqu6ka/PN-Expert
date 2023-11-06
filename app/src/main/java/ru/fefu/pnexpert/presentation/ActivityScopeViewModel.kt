@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.calendar_api.CalendarApi
 import ru.fefu.main_api.MainPageApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -19,8 +20,9 @@ class ActivityScopeViewModel @Inject constructor(
     override val signUpApi: SignUpApi,
     override val mainPageApi: MainPageApi,
     override val writtenTestApi: WrittenTestApi,
-    override val photoTestsApi: PhotoTestsApi
-    ) : ViewModel(), FeatureApiHolder {
+    override val photoTestsApi: PhotoTestsApi,
+    override val calendarApi: CalendarApi
+) : ViewModel(), FeatureApiHolder {
 
     private val _isUiReady = MutableLiveData(false)
     val isUiReady: LiveData<Boolean> = _isUiReady
