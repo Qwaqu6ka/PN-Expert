@@ -69,7 +69,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
-    implementation(project(mapOf("path" to ":features:calendar-api")))
+    implementation(project(":features:calendar-api"))
     kapt(libs.hilt.compiler)
 
     implementation(libs.retrofit)

@@ -1,6 +1,6 @@
 package ru.fefu.pnexpert.navigation
 
-import com.example.calendar_api.CalendarApi
+import ru.fefu.calendar_api.CalendarApi
 import ru.fefu.main_api.MainPageApi
 import ru.fefu.photo_tests_api.PhotoTestsApi
 import ru.fefu.sign_up_api.SignUpApi

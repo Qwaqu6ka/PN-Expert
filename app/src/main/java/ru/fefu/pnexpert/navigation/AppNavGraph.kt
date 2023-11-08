@@ -38,11 +38,6 @@ fun AppNavGraph(
             modifier = modifier
         )
 
-        register(
-            featureApi = featureApiHolder.calendarApi,
-            navController = navController,
-            modifier = modifier
-        )
 
 
         navigation(

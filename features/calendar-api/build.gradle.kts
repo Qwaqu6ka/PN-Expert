@@ -5,16 +5,23 @@ plugins {
 }
 
 android {
-    namespace = "com.example.calendar_api"
-    compileSdk = 33
+    val targetAndroidSdk: Int by rootProject.extra
+    val minAndroidSdk: Int by rootProject.extra
+    val jdkVersion: Int by rootProject.extra
+    val compilerExtensionVersion: String by rootProject.extra
+    namespace = "ru.fefu.calendar_api"
+    compileSdk = targetAndroidSdk
 
     defaultConfig {
-        minSdk = 24
+        minSdk = minAndroidSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
+    kotlin {
+        jvmToolchain(jdkVersion)
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -24,13 +31,7 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+
 }
 
 dependencies {

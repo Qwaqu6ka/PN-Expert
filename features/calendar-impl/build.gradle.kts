@@ -11,7 +11,7 @@ android {
     val minAndroidSdk: Int by rootProject.extra
     val jdkVersion: Int by rootProject.extra
     val compilerExtensionVersion: String by rootProject.extra
-    namespace = "com.example.calendar_impl"
+    namespace = "ru.fefu.calendar_impl"
     compileSdk = targetAndroidSdk
 
     defaultConfig {
@@ -35,10 +35,6 @@ android {
     buildFeatures {
         compose = true
     }
-//    compileOptions {
-//        sourceCompatibility = JavaVersion.VERSION_1_8
-//        targetCompatibility = JavaVersion.VERSION_1_8
-//    }
 
     composeOptions {
         kotlinCompilerExtensionVersion = compilerExtensionVersion
@@ -53,13 +49,10 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.compose.ui.tooling.preview)
-    implementation(project(mapOf("path" to ":data")))
     api(project(":features:calendar-api"))
-    implementation(project(mapOf("path" to ":core:theme")))
-    implementation(project(mapOf("path" to ":core:theme")))
-    implementation(project(mapOf("path" to ":features:written-test-api")))
-    implementation(project(mapOf("path" to ":features:written-test-impl")))
-    implementation(project(mapOf("path" to ":features:photo-tests-impl")))
+    api(project(":features:photo-tests-api"))
+    api(project(":features:written-test-api"))
+    implementation(project(":core:theme"))
     debugImplementation(libs.compose.ui.tooling)
     kapt(libs.hilt.compiler)
     implementation(platform(libs.compose.bom))
