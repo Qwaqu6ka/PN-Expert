@@ -15,14 +15,15 @@
  */
 
 package ru.fefu.video_tests_impl.visionutils.classification;
-import static com.example.mlkirexample.visionutils.classification.PoseEmbedding.getPoseEmbedding;
-import static com.example.mlkirexample.visionutils.classification.Utils.maxAbs;
-import static com.example.mlkirexample.visionutils.classification.Utils.multiply;
-import static com.example.mlkirexample.visionutils.classification.Utils.multiplyAll;
-import static com.example.mlkirexample.visionutils.classification.Utils.subtract;
-import static com.example.mlkirexample.visionutils.classification.Utils.sumAbs;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
+
+import static ru.fefu.video_tests_impl.visionutils.classification.PoseEmbedding.getPoseEmbedding;
+import static ru.fefu.video_tests_impl.visionutils.classification.Utils.maxAbs;
+import static ru.fefu.video_tests_impl.visionutils.classification.Utils.multiply;
+import static ru.fefu.video_tests_impl.visionutils.classification.Utils.multiplyAll;
+import static ru.fefu.video_tests_impl.visionutils.classification.Utils.subtract;
+import static ru.fefu.video_tests_impl.visionutils.classification.Utils.sumAbs;
 
 import android.util.Pair;
 

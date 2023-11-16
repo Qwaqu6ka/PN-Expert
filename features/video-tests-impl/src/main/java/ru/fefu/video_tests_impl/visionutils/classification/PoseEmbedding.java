@@ -16,12 +16,12 @@
 
 package ru.fefu.video_tests_impl.visionutils.classification;
 
-import static com.example.mlkirexample.visionutils.classification.Utils.average;
-import static com.example.mlkirexample.visionutils.classification.Utils.l2Norm2D;
-import static com.example.mlkirexample.visionutils.classification.Utils.multiplyAll;
-import static com.example.mlkirexample.visionutils.classification.Utils.subtract;
-import static com.example.mlkirexample.visionutils.classification.Utils.subtractAll;
 
+import static ru.fefu.video_tests_impl.visionutils.classification.Utils.average;
+import static ru.fefu.video_tests_impl.visionutils.classification.Utils.l2Norm2D;
+import static ru.fefu.video_tests_impl.visionutils.classification.Utils.multiplyAll;
+import static ru.fefu.video_tests_impl.visionutils.classification.Utils.subtract;
+import static ru.fefu.video_tests_impl.visionutils.classification.Utils.subtractAll;
 
 import com.google.mlkit.vision.common.PointF3D;
 import com.google.mlkit.vision.pose.PoseLandmark;

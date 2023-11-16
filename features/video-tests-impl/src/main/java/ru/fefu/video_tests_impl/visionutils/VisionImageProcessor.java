@@ -19,9 +19,6 @@ package ru.fefu.video_tests_impl.visionutils;
 import android.graphics.Bitmap;
 
 import androidx.camera.core.ImageProxy;
-
-import com.example.mlkirexample.visionutils.FrameMetadata;
-import com.example.mlkirexample.visionutils.GraphicOverlay;
 import com.google.mlkit.common.MlKitException;
 
 import java.nio.ByteBuffer;
