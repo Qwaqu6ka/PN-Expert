@@ -41,6 +41,8 @@ android {
     }
 }
 
+private val camerax_version = "1.3.0"
+
 dependencies {
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
@@ -53,14 +55,29 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
 
     // camera
-    implementation(libs.camera.camera2)
-    implementation(libs.camera.video)
-    implementation(libs.camera.mlkit)
-    implementation(libs.camera.lifecycle)
-    implementation(libs.camera.view)
+//    implementation(libs.camera.camera2)
+//    implementation(libs.camera.video)
+//    implementation(libs.camera.mlkit)
+//    implementation(libs.camera.lifecycle)
+//    implementation(libs.camera.view)
+
+    // tmp
+    implementation("com.google.mlkit:pose-detection:18.0.0-beta3")
+    implementation("com.google.mlkit:pose-detection-accurate:18.0.0-beta3")
+    implementation("androidx.camera:camera-core:1.3.0")
+    implementation("com.google.android.odml:image:1.0.0-beta1")
+    implementation("com.google.mlkit:camera:16.0.0-beta3")
+
+    implementation("androidx.camera:camera-core:${camerax_version}")
+    implementation("androidx.camera:camera-camera2:${camerax_version}")
+    implementation ("androidx.camera:camera-lifecycle:${camerax_version}")
+    implementation("androidx.camera:camera-video:${camerax_version}")
+    implementation ("androidx.camera:camera-view:${camerax_version}")
+    implementation ("androidx.camera:camera-extensions:${camerax_version}")
+    implementation("androidx.camera:camera-mlkit-vision:1.4.0-alpha02")
 
     // ai for video
-    implementation(libs.mlkit.posedetection.accurate)
+//    implementation(libs.mlkit.posedetection.accurate)
 
     implementation(libs.accompanist.permissions)
 
