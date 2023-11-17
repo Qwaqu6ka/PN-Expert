@@ -56,4 +56,7 @@
 
     <string name="pref_key_info_hide" translatable="false">ih</string>
     <string name="pref_key_live_preview_pose_detection_performance_mode" translatable="false">lppdpm</string>
+    <string name="pref_key_pose_detector_prefer_gpu" translatable="false">pdpg</string>
+    <string name="pref_key_live_preview_pose_detector_show_in_frame_likelihood" translatable="false">lppdsifl</string>
+    <string name="pref_key_pose_detector_run_classification" translatable="false">pdrc</string>
 </resources>
