@@ -1,5 +1,6 @@
 package ru.fefu.calendar_impl.presentation
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
@@ -18,6 +19,8 @@ import ru.fefu.calendar_impl.domain.models.CalendarType
 import ru.fefu.calendar_impl.domain.models.CalendarUiModel
 import ru.fefu.calendar_impl.domain.models.TimeRange
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import ru.fefu.calendar_impl.R
 import ru.fefu.calendar_impl.domain.models.PillModel
 import ru.fefu.calendar_impl.domain.models.TestModel
 import ru.fefu.photo_tests_api.PhotoTestsApi
@@ -27,52 +30,54 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CalendarViewModel@Inject constructor(
-    private val rep: CalendarEventsRepository,
+    private val calendarEventsRepository: CalendarEventsRepository,
     private val photoTestsApi: PhotoTestsApi,
     private val writtenTestApi: WrittenTestApi,
+    @ApplicationContext application: Context,
 ):ViewModel() {
-    private val calendarRepository = rep
-    var activeType  by mutableIntStateOf(0)
+    private val calendarRepository = calendarEventsRepository
+    var indexOfActiveType  by mutableIntStateOf(0)
     var openBottomSheetPills by mutableStateOf(false)
     var openBottomSheetTimes  by mutableStateOf(false)
     val typesCalendar = mutableStateListOf<CalendarType>(
         CalendarType(
             CalendarActions.ALL,
-            "Личный календарь",
+            application.getString(R.string.user_calendar),
             true
         ),
         CalendarType(
             CalendarActions.CONSULTATION,
-            "Запись на онлайн консультацию",
+            application.getString(R.string.consultation_calendar),
             false
         ),
         CalendarType(
             CalendarActions.APPOINTMENT,
-            "Запись на прием",
+            application.getString(R.string.appointment_calendar),
             false
         ),
         CalendarType(
             CalendarActions.EVENT,
-            "Мероприятия",
+            application.getString(R.string.event_calendar),
             false
         )
     )
-    var calendarUiModel by mutableStateOf(
-            rep.getData(
+    var calendarState by mutableStateOf(
+            calendarEventsRepository.getData(
                 lastSelectedDate = LocalDate.now(),
-                typeCalendar = typesCalendar[activeType].type
+                typeCalendar = typesCalendar[indexOfActiveType].type
             )
         )
 
-    private var selectedDate by mutableStateOf(calendarUiModel.selectedDate.date)
+    private var selectedDate by mutableStateOf(calendarState.selectedDate.date)
 
     var clickableEventElementIndex by mutableStateOf<Int?>(null)
     var clickableTimesElementIndex by mutableStateOf<Int?>(null)
 
-    fun chooseType(index:Int) {
-        typesCalendar[activeType] = typesCalendar[activeType].copy(isSelected = false)
+
+    fun chooseTypeCalendar(index:Int) {
+        typesCalendar[indexOfActiveType] = typesCalendar[indexOfActiveType].copy(isSelected = false)
         typesCalendar[index] = typesCalendar[index].copy(isSelected = true)
-        activeType = index
+        indexOfActiveType = index
     }
 
     fun getAvailableTime():List<AvailableTime>{
@@ -81,33 +86,33 @@ class CalendarViewModel@Inject constructor(
         return list.filter {it.date == date}
     }
     fun updateUiModelData(type: CalendarActions){
-        calendarUiModel.endDate
-        calendarUiModel = rep.getData(
-                        startDate = calendarUiModel.startDate.date,
-                        lastSelectedDate = calendarUiModel.selectedDate.date,
+        calendarState.endDate
+        calendarState = calendarEventsRepository.getData(
+                        startDate = calendarState.startDate.date,
+                        lastSelectedDate = calendarState.selectedDate.date,
                         typeCalendar = type
                     )
     }
 
     fun onNextMonthClickListener(date:LocalDate,type: CalendarActions){
-        calendarUiModel = rep.getData(
+        calendarState = calendarEventsRepository.getData(
             startDate = date.plusMonths(1).withDayOfMonth(1),
-            lastSelectedDate = calendarUiModel.selectedDate.date,
+            lastSelectedDate = calendarState.selectedDate.date,
             typeCalendar = type
         )
     }
 
     fun onPrevMonthClickListener(date:LocalDate,type: CalendarActions){
-        calendarUiModel = rep.getData(
+        calendarState = calendarEventsRepository.getData(
             startDate = date.minusMonths(1).withDayOfMonth(1),
-            lastSelectedDate = calendarUiModel.selectedDate.date,
+            lastSelectedDate = calendarState.selectedDate.date,
             typeCalendar = type
         )
     }
     fun onDateClickListener(date: CalendarUiModel.Date){
-        calendarUiModel = calendarUiModel.copy(
+        calendarState = calendarState.copy(
             selectedDate = date,
-            visibleDates = calendarUiModel.visibleDates.map {
+            visibleDates = calendarState.visibleDates.map {
                 it.copy(
                     isSelected = it.date.isEqual(date.date)
                 )
@@ -128,13 +133,13 @@ class CalendarViewModel@Inject constructor(
 
     fun setEventStateTrue(index:Int){
 
-        calendarUiModel.selectedDate.listEvents.set(index,
-            if(calendarUiModel.selectedDate.listEvents[index] is TaskModel){
-            (calendarUiModel.selectedDate.listEvents[index] as TaskModel).copy(
+        calendarState.selectedDate.listEvents.set(index,
+            if(calendarState.selectedDate.listEvents[index] is TaskModel){
+            (calendarState.selectedDate.listEvents[index] as TaskModel).copy(
                 isCompleted = true
             )
         }else{
-            (calendarUiModel.selectedDate.listEvents[index] as PillModel).copy(
+            (calendarState.selectedDate.listEvents[index] as PillModel).copy(
                 isCompleted = true
             )
         }
@@ -161,7 +166,7 @@ class CalendarViewModel@Inject constructor(
     }
 
     private fun addEvent(item: BaseEvent){
-        calendarUiModel.selectedDate.listEvents.add(item)
+        calendarState.selectedDate.listEvents.add(item)
     }
 
     fun changeBottomSheetPillsState(){

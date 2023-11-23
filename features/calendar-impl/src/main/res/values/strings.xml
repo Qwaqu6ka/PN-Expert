@@ -11,4 +11,9 @@
     <string name="MRI_btn">Записаться на МРТ</string>
     <string name="current_booking">Текущие записи</string>
     <string name="comment">"Комментарий: "</string>
+    <string name="ru_locale">"ru"</string>
+    <string name="user_calendar">Личный календарь</string>
+    <string name="consultation_calendar">Запись на онлайн консультацию</string>
+    <string name="appointment_calendar">Запись на прием</string>
+    <string name="event_calendar">Мероприятия</string>
 </resources>

@@ -1,4 +1,4 @@
-package ru.fefu.calendar_impl.data.di
+package ru.fefu.calendar_impl.di
 
 import ru.fefu.calendar_api.CalendarApi
 import ru.fefu.calendar_impl.navigation.CalendarImpl

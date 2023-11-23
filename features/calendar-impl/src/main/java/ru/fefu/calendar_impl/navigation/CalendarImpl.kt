@@ -5,7 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import ru.fefu.calendar_api.CalendarApi
-import ru.fefu.calendar_impl.presentation.CalendarApp
+import ru.fefu.calendar_impl.presentation.CalendarScreen
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -20,7 +20,7 @@ class CalendarImpl @Inject constructor() : CalendarApi {
         modifier: Modifier
     ) {
         navGraphBuilder.composable(route){
-            CalendarApp(modifier = modifier, onBackNavigate = {
+            CalendarScreen(modifier = modifier, onBackNavigate = {
                 navController.popBackStack()
             },onTaskNavigate = {
                 navController.navigate(it){
