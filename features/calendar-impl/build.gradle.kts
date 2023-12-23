@@ -1,6 +1,6 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.com.android.library)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
@@ -11,6 +11,7 @@ android {
     val minAndroidSdk: Int by rootProject.extra
     val jdkVersion: Int by rootProject.extra
     val compilerExtensionVersion: String by rootProject.extra
+
     namespace = "ru.fefu.calendar_impl"
     compileSdk = targetAndroidSdk
 
@@ -59,10 +60,4 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.graphics)
-    implementation(libs.core.ktx)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
 }

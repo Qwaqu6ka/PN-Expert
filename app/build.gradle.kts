@@ -15,11 +15,15 @@ android {
     compileSdk = targetAndroidSdk
 
     defaultConfig {
+        val major = 1
+        val minor = 0 // max 99
+        val patch = 0 // max 99
+
         applicationId = "ru.fefu.pnexpert"
         minSdk = minAndroidSdk
         targetSdk = targetAndroidSdk
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = (major * 10000) + (minor * 100) + patch
+        versionName = "$major.$minor.$patch"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

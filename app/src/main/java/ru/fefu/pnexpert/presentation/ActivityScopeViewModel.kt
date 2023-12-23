@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ru.fefu.calendar_api.CalendarApi
-import ru.fefu.main_api.MainPageApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import ru.fefu.calendar_api.CalendarApi
+import ru.fefu.main_api.MainPageApi
 import ru.fefu.photo_tests_api.PhotoTestsApi
 import ru.fefu.pnexpert.navigation.FeatureApiHolder
 import ru.fefu.sign_up_api.SignUpApi
