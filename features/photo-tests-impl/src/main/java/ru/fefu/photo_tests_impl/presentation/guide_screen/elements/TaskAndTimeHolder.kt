@@ -13,10 +13,10 @@ import ru.fefu.theme.PnExpertTheme
 
 @Composable
 internal fun TaskAndTimeHolder(
-    modifier:Modifier,
-    taskName:String,
-    date:String,
-    time:String
+    modifier: Modifier,
+    taskName: String,
+    date: String,
+    time: String
 ) {
     Column(
         modifier = modifier,

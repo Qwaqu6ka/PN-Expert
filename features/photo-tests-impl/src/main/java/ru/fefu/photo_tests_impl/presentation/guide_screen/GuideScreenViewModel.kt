@@ -7,14 +7,14 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
-import ru.fefu.photo_tests_impl.domain.use_cases.GetTestDataUseCase
+import ru.fefu.photo_tests_impl.domain.use_cases.GetGuideDataUseCase
 import ru.fefu.photo_tests_impl.presentation.models.TestDataState
 
 
 class GuideScreenViewModel @AssistedInject constructor(
-    private val getTestDataUseCase: GetTestDataUseCase,
+    private val getTestDataUseCase: GetGuideDataUseCase,
     @Assisted private val testType: PhotoTestType
-    ):ViewModel() {
+) : ViewModel() {
     private var _testDataState = mutableStateOf(TestDataState())
     val testDataState: State<TestDataState> = _testDataState
 
@@ -22,7 +22,7 @@ class GuideScreenViewModel @AssistedInject constructor(
         getTestData(testType)
     }
 
-    private fun getTestData(testType: PhotoTestType){
+    private fun getTestData(testType: PhotoTestType) {
         val testData = getTestDataUseCase(testType)
         _testDataState.value = TestDataState(data = testData)
     }

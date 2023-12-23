@@ -5,7 +5,9 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
+import ru.fefu.photo_tests_impl.data.CustomCameraRepository
 import ru.fefu.photo_tests_impl.data.InternalPhotoTestsRepository
+import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsCameraRepository
 import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsRepository
 
 @Module
@@ -14,4 +16,7 @@ internal interface InternalDataModule {
 
     @Binds
     fun bindPhotoTestRepository(repository: InternalPhotoTestsRepository): PhotoTestsRepository
+
+    @Binds
+    fun bindCameraRepository(repository: CustomCameraRepository):PhotoTestsCameraRepository
 }

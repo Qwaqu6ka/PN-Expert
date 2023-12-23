@@ -1,5 +1,6 @@
 package ru.fefu.photo_tests_impl.presentation.guide_screen.elements
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +12,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,9 +34,9 @@ internal fun GuidePhotosHolder(
             color = PnExpertTheme.colors.textColors.FontDarkColor
         )
         Spacer(modifier = Modifier.height(16.dp))
-        for ((id,photo) in guidePhotos.withIndex()){
+        for ((id, photo) in guidePhotos.withIndex()) {
             GuidPhoto(photo = photo)
-            if (guidePhotos.size > 1 && id != guidePhotos.size-1)
+            if (guidePhotos.size > 1 && id != guidePhotos.size - 1)
                 Spacer(modifier = Modifier.height(12.dp))
         }
     }
@@ -46,13 +46,14 @@ internal fun GuidePhotosHolder(
 private fun GuidPhoto(
     modifier: Modifier = Modifier,
     photo: TestPhoto
-){
+) {
     PnExpertTheme {
         Card(
             modifier = modifier
                 .fillMaxWidth()
                 .height(200.dp),
-            shape = PnExpertTheme.shapes.imageShapes.imageClassic15
+            shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
+            border = BorderStroke(1.dp, PnExpertTheme.colors.mainAppColors.AppDarkColor)
         ) {
             Image(
                 modifier = Modifier
@@ -68,13 +69,14 @@ private fun GuidPhoto(
 
 @Preview
 @Composable
-private fun PreviewGuidPhoto(){
+private fun PreviewGuidPhoto() {
     PnExpertTheme {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp),
-            shape = PnExpertTheme.shapes.imageShapes.imageClassic15
+            shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
+            border = BorderStroke(1.dp, PnExpertTheme.colors.mainAppColors.AppDarkColor)
         ) {
             Image(
                 modifier = Modifier
@@ -107,9 +109,9 @@ private fun PreviewGuidePhotosHolder() {
             color = PnExpertTheme.colors.textColors.FontDarkColor
         )
         Spacer(modifier = Modifier.height(16.dp))
-        for ((id,photo) in guidePhotos.withIndex()){
+        for ((id, photo) in guidePhotos.withIndex()) {
             GuidPhoto(photo = photo)
-            if (guidePhotos.size > 1 && id != guidePhotos.size-1)
+            if (guidePhotos.size > 1 && id != guidePhotos.size - 1)
                 Spacer(modifier = Modifier.height(12.dp))
         }
     }

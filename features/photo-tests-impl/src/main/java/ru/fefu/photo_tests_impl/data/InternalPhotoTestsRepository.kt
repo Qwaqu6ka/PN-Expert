@@ -1,30 +1,43 @@
 package ru.fefu.photo_tests_impl.data
 
+import android.net.Uri
 import ru.fefu.photo_test_impl.R
+import ru.fefu.photo_tests_impl.domain.models.PhotoTestAnswer
+import ru.fefu.photo_tests_impl.domain.models.PhotoTestAnswerForReading
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestDataModel
+import ru.fefu.photo_tests_impl.domain.models.PhotoTestGuide
+import ru.fefu.photo_tests_impl.domain.models.PhotoTestItem
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestTask
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
 import ru.fefu.photo_tests_impl.domain.models.TestPhoto
 import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 internal class InternalPhotoTestsRepository @Inject constructor():PhotoTestsRepository {
-
     private val clockPhotoTest: PhotoTestDataModel = PhotoTestDataModel(
         testName = "Нарисвать часы",
         testGuide = "Нарисйте на бумаге часы, на которых будет указано время (необходимое время будет дано при начале теста), сфотографируйте и отправьте полученный результат",
         testGuidePhotos = listOf(
-            TestPhoto(R.drawable.photo_test_clock)
+            TestPhoto(R.drawable.photo_test_clock),
+            TestPhoto(R.drawable.test_image)
         ),
         testTasks = listOf(
             PhotoTestTask(
-                taskName = "Нарисовать часы",
+                taskName = "Нарисовать часы и сфотографируйте или загрузите результат",
                 taskMaskPhoto = TestPhoto(R.drawable.photo_test_clock)
+            ),
+            PhotoTestTask(
+                taskName = "Нарисовать часы еще раз и сфотографируйте или загрузите результат",
+                taskMaskPhoto = TestPhoto(R.drawable.test_image)
             )
         )
     )
 
-    override fun getPhotoTest(photoTestType: PhotoTestType): PhotoTestDataModel {
+    private var userAnswer: PhotoTestAnswer = PhotoTestAnswer()
+
+    private fun getPhotoTest(photoTestType: PhotoTestType): PhotoTestDataModel {
         return when (photoTestType) {
             is PhotoTestType.ClockPhotoTest -> clockPhotoTest
             is PhotoTestType.FacePhotoTest -> clockPhotoTest
@@ -32,5 +45,22 @@ internal class InternalPhotoTestsRepository @Inject constructor():PhotoTestsRepo
             is PhotoTestType.HandwritingPhotoTest -> clockPhotoTest
         }
     }
+
+    override fun getPhotoTestItem(photoTestType: PhotoTestType, testNumber: Int): PhotoTestItem {
+        return getPhotoTest(photoTestType).receivedPhotoTest(testNumber)
+    }
+
+    override fun getPhotoTestGuide(photoTestType: PhotoTestType): PhotoTestGuide {
+        return getPhotoTest(photoTestType).receivedTestGuide()
+    }
+
+    override fun getUserAnswers(): PhotoTestAnswerForReading {
+        return userAnswer.toReadingModel()
+    }
+
+    override fun newUserAnswer(testTask:String, photo:Uri, answerNumber: Int) {
+        userAnswer.addNewAnswer(testTask, photo, answerNumber)
+    }
+
 
 }
