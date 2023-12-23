@@ -14,7 +14,7 @@ import ru.fefu.photo_tests_impl.presentation.models.TestDataState
 class GuideScreenViewModel @AssistedInject constructor(
     private val getTestDataUseCase: GetGuideDataUseCase,
     @Assisted private val testType: PhotoTestType
-    ):ViewModel() {
+) : ViewModel() {
     private var _testDataState = mutableStateOf(TestDataState())
     val testDataState: State<TestDataState> = _testDataState
 
@@ -22,7 +22,7 @@ class GuideScreenViewModel @AssistedInject constructor(
         getTestData(testType)
     }
 
-    private fun getTestData(testType: PhotoTestType){
+    private fun getTestData(testType: PhotoTestType) {
         val testData = getTestDataUseCase(testType)
         _testDataState.value = TestDataState(data = testData)
     }

@@ -1,7 +1,6 @@
 package ru.fefu.photo_tests_impl.presentation.guide_screen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.GuidePhotosHolder
 import ru.fefu.photo_tests_impl.presentation.guide_screen.elements.TaskAndTimeHolder
@@ -35,7 +33,7 @@ fun GuideScreen(
         topBar = { Toolbar(title = "Упражнение", onBackPressed = {}) },
         modifier = modifier,
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
-    ) {scaffoldPadding->
+    ) { scaffoldPadding ->
         Column(
             modifier
                 .fillMaxSize()
@@ -64,7 +62,7 @@ fun GuideScreen(
             Spacer(modifier = Modifier.height(16.dp))
             Spacer(modifier = Modifier.weight(1f))
             TextButton(
-                onClick = {onNavigateToTest()},
+                onClick = { onNavigateToTest() },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
