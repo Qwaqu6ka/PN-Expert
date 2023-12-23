@@ -39,6 +39,7 @@ fun AppNavGraph(
         )
 
 
+
         navigation(
             route = BottomTabs.Main.route,
             startDestination = featureApiHolder.mainPageApi.route
@@ -109,11 +110,13 @@ fun AppNavGraph(
         }
         navigation(
             route = BottomTabs.Notes.route,
-            startDestination = "testNotes"
+            startDestination = featureApiHolder.calendarApi.route
         ) {
-            composable("testNotes") {
-                InDevPlug("Notes")
-            }
+            register(
+                featureApi = featureApiHolder.calendarApi,
+                navController = navController,
+                modifier = modifier
+            )
         }
         navigation(
             route = BottomTabs.Services.route,

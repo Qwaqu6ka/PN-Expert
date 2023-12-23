@@ -69,6 +69,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
+    implementation(project(":features:calendar-api"))
     kapt(libs.hilt.compiler)
 
     implementation(libs.retrofit)
@@ -93,4 +94,5 @@ dependencies {
     implementation(project(":features:sign-up-impl"))
     implementation(project(":features:written-test-impl"))
     implementation(project(":features:photo-tests-impl"))
+    implementation(project(":features:calendar-impl"))
 }

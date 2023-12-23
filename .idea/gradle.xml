@@ -19,6 +19,8 @@
             <option value="$PROJECT_DIR$/core/theme" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/calendar-api" />
+            <option value="$PROJECT_DIR$/features/calendar-impl" />
             <option value="$PROJECT_DIR$/features/main-api" />
             <option value="$PROJECT_DIR$/features/main-impl" />
             <option value="$PROJECT_DIR$/features/photo-tests-api" />
