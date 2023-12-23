@@ -16,7 +16,7 @@ import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.R
 
 @Composable
-fun TimeAnswer(time: String?, onTimeChange: (String) -> Unit, modifier: Modifier = Modifier) {
+internal fun TimeAnswer(time: String?, onTimeChange: (String) -> Unit, modifier: Modifier = Modifier) {
 
     val timePickerDialog = TimePickerDialog(
         LocalContext.current,

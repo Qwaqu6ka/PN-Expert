@@ -82,6 +82,3 @@ fun GuideScreen(
         }
     }
 }
-
-
-

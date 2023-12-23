@@ -15,11 +15,15 @@ android {
     compileSdk = targetAndroidSdk
 
     defaultConfig {
+        val major = 1
+        val minor = 0 // max 99
+        val patch = 0 // max 99
+
         applicationId = "ru.fefu.pnexpert"
         minSdk = minAndroidSdk
         targetSdk = targetAndroidSdk
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = (major * 10000) + (minor * 100) + patch
+        versionName = "$major.$minor.$patch"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -69,6 +73,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
+    implementation(project(":features:calendar-api"))
     kapt(libs.hilt.compiler)
 
     implementation(libs.retrofit)
@@ -93,4 +98,5 @@ dependencies {
     implementation(project(":features:sign-up-impl"))
     implementation(project(":features:written-test-impl"))
     implementation(project(":features:photo-tests-impl"))
+    implementation(project(":features:calendar-impl"))
 }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,12 +17,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.launch
 import ru.fefu.presentation.components.SimpleAlertDialog
 import ru.fefu.presentation.components.SimpleTextButton
 import ru.fefu.presentation.components.Toolbar
@@ -59,87 +62,97 @@ internal fun WrittenTest(
                 onBackPressed = { testViewModel.onBackPressed() })
         },
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
+        contentWindowInsets = WindowInsets(0.dp),
         modifier = modifier
     ) { innerPadding ->
         TestContent(
             testViewModel = testViewModel,
-            modifier = Modifier.padding(top = innerPadding.calculateTopPadding())
+            modifier = Modifier.padding(innerPadding)
         )
     }
 }
 
 @Composable
-internal fun TestContent(
+private fun TestContent(
     testViewModel: WrittenTestViewModel,
     modifier: Modifier = Modifier
 ) {
 
     val uiState by testViewModel.testUiState.collectAsState()
 
-    Surface(modifier = modifier) {
-        Column(modifier = Modifier.padding(20.dp)) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .verticalScroll(
-                        rememberScrollState()
-                    )
-                    .weight(1f)
-            ) {
-                val currentQuestion = uiState.currentQuestion
-                val hintRes = if (currentQuestion is InputQuestion) {
-                    currentQuestion.hint
-                } else {
-                    null
-                }
-                val inputValidator = if (currentQuestion is InputQuestion) {
-                    currentQuestion.validator
-                } else {
-                    null
-                }
-
-
-
-                Text(
-                    text = stringResource(id = uiState.currentQuestion.text),
-                    textAlign = TextAlign.Justify,
-                    style = PnExpertTheme.typography.text.medium_16
-                )
-                Spacer(modifier = Modifier.height(10.dp))
-
-                when (val question = uiState.currentQuestion) {
-                    is ChoiceQuestion -> SelectableAnswerList(
-                        answers = question.answers,
-                        chosenAnswerIndex = uiState.answer?.toInt(),
-                        onAnswerClick = testViewModel::onAnswerChange
-                    )
-
-                    is TimeQuestion -> TimeAnswer(
-                        time = uiState.answer,
-                        onTimeChange = testViewModel::onAnswerChange,
-                        modifier = Modifier.fillMaxSize()
-                    )
-
-                    is InputQuestion -> InputAnswer(
-                        inputValue = uiState.answer,
-                        onInputChange = testViewModel::onAnswerChange,
-                        hintRes = hintRes,
-                        validator = inputValidator,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-
+    Surface(
+        modifier = modifier,
+        color = PnExpertTheme.colors.mainAppColors.AppWhiteColor
+    ) {
+        val scrollState = rememberScrollState()
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+                .verticalScroll(scrollState)
+        ) {
+            val currentQuestion = uiState.currentQuestion
+            val hintRes = if (currentQuestion is InputQuestion) {
+                currentQuestion.hint
+            } else {
+                null
             }
+            val inputValidator = if (currentQuestion is InputQuestion) {
+                currentQuestion.validator
+            } else {
+                null
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "${uiState.currentQuestionNumber}/${uiState.amountOfQuestions}",
+                textAlign = TextAlign.Center,
+                style = PnExpertTheme.typography.text.medium_16
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = stringResource(id = uiState.currentQuestion.text),
+                textAlign = TextAlign.Justify,
+                style = PnExpertTheme.typography.text.medium_16
+            )
+            Spacer(modifier = Modifier.height(15.dp))
+
+            val answer by testViewModel.answer.collectAsState()
+            when (val question = uiState.currentQuestion) {
+                is ChoiceQuestion -> SelectableAnswerList(
+                    answers = question.answers,
+                    chosenAnswerIndex = if (answer.isNotBlank()) answer.toInt() else null,
+                    onAnswerClick = testViewModel::onLocalAnswerChange
+                )
+
+                is TimeQuestion -> TimeAnswer(
+                    time = answer,
+                    onTimeChange = testViewModel::onLocalAnswerChange,
+                    modifier = Modifier.fillMaxSize()
+                )
+
+                is InputQuestion -> InputAnswer(
+                    inputValue = answer,
+                    onInputChange = testViewModel::onLocalAnswerChange,
+                    hintRes = hintRes,
+                    validator = inputValidator,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+            Spacer(modifier = Modifier.height(15.dp))
+
+            val coroutineScope = rememberCoroutineScope()
             ManageButtons(
                 onPreviousQuestion = testViewModel::onBackQuestPressed,
                 onNextQuestion = testViewModel::onNextQuestPressed,
+                scrollToStart = { coroutineScope.launch { scrollState.scrollTo(0) } },
                 previousButtonIsActive = uiState.isPreviousQuestButtonActive,
                 nextButtonIsActive = uiState.isNextQuestButtonActive,
                 replaceNextButtonWithDone = uiState.replaceNextButtonWithDone,
                 modifier = Modifier.fillMaxWidth()
             )
+            Spacer(modifier = Modifier.height(15.dp))
         }
-
     }
 }
 
@@ -147,6 +160,7 @@ internal fun TestContent(
 private fun ManageButtons(
     onPreviousQuestion: () -> Unit,
     onNextQuestion: () -> Unit,
+    scrollToStart: () -> Unit,
     previousButtonIsActive: Boolean,
     nextButtonIsActive: Boolean,
     replaceNextButtonWithDone: Boolean,
@@ -154,12 +168,18 @@ private fun ManageButtons(
 ) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceEvenly) {
         SimpleTextButton(
-            onClick = onPreviousQuestion,
+            onClick = {
+                onPreviousQuestion()
+                scrollToStart()
+            },
             text = stringResource(id = R.string.back),
             enabled = previousButtonIsActive
         )
         SimpleTextButton(
-            onClick = onNextQuestion,
+            onClick = {
+                onNextQuestion()
+                scrollToStart()
+            },
             text = if (replaceNextButtonWithDone)
                 stringResource(id = R.string.complete)
             else

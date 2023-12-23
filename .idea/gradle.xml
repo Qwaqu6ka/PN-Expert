@@ -4,10 +4,8 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="testRunner" value="GRADLE" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="jbr-17" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -19,6 +17,8 @@
             <option value="$PROJECT_DIR$/core/theme" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/calendar-api" />
+            <option value="$PROJECT_DIR$/features/calendar-impl" />
             <option value="$PROJECT_DIR$/features/main-api" />
             <option value="$PROJECT_DIR$/features/main-impl" />
             <option value="$PROJECT_DIR$/features/photo-tests-api" />
@@ -29,6 +29,7 @@
             <option value="$PROJECT_DIR$/features/written-test-impl" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

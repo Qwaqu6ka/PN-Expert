@@ -16,12 +16,12 @@ import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.entities.testentities.InputQuestionValidator
 
 @Composable
-fun InputAnswer(
-    inputValue: String?,
+internal fun InputAnswer(
+    modifier: Modifier = Modifier,
+    inputValue: String = "",
     onInputChange: (String) -> Unit,
     @StringRes hintRes: Int?,
     validator: InputQuestionValidator?,
-    modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
         val textBoxContainerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor
@@ -29,11 +29,11 @@ fun InputAnswer(
         val textBoxMainColor = PnExpertTheme.colors.mainAppColors.AppBlueColor
 
         OutlinedTextField(
-            value = inputValue ?: "",
+            value = inputValue,
             onValueChange = onInputChange,
             label = { if (hintRes != null) Text(text = stringResource(id = hintRes)) },
             isError =
-            if (inputValue == null || inputValue == "") false
+            if (inputValue == "") false
             else if (validator != null) !validator(inputValue)
             else false,
             keyboardOptions = KeyboardOptions(

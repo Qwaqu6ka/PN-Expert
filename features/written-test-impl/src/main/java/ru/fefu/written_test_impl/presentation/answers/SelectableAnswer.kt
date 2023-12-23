@@ -92,14 +92,14 @@ private fun CardListPreview() {
                 chosenAnswerIndex = 5,
                 onAnswerClick = {},
                 answers = listOf(
-                    SelectableAnswer(R.string.PSQI_question5, 0),
-                    SelectableAnswer(R.string.PSQI_question5, 0),
-                    SelectableAnswer(R.string.PSQI_question5, 0),
-                    SelectableAnswer(R.string.PSQI_question5, 0),
-                    SelectableAnswer(R.string.PSQI_question5, 0),
-                    SelectableAnswer(R.string.PSQI_question5, 0),
-                    SelectableAnswer(R.string.PSQI_question5, 0),
-                    SelectableAnswer(R.string.PSQI_question5, 0),
+                    SelectableAnswer(R.string.PSQI_question5a, 0),
+                    SelectableAnswer(R.string.PSQI_question5b, 0),
+                    SelectableAnswer(R.string.PSQI_question5c, 0),
+                    SelectableAnswer(R.string.PSQI_question5d, 0),
+                    SelectableAnswer(R.string.PSQI_question5e, 0),
+                    SelectableAnswer(R.string.PSQI_question5f, 0),
+                    SelectableAnswer(R.string.PSQI_question5g, 0),
+                    SelectableAnswer(R.string.PSQI_question5h, 0),
                 )
             )
         }
@@ -110,7 +110,7 @@ private fun CardListPreview() {
 @Composable
 private fun CardPreview() {
     PnExpertTheme {
-        SelectableAnswerCard(answer = SelectableAnswer(R.string.PSQI_question5, 0), false) {}
+        SelectableAnswerCard(answer = SelectableAnswer(R.string.PSQI_question5a, 0), false) {}
     }
 }
 
@@ -118,6 +118,6 @@ private fun CardPreview() {
 @Composable
 private fun SelectedCardPreview() {
     PnExpertTheme {
-        SelectableAnswerCard(answer = SelectableAnswer(R.string.PSQI_question5, 0), true) {}
+        SelectableAnswerCard(answer = SelectableAnswer(R.string.PSQI_question5a, 0), true) {}
     }
 }
