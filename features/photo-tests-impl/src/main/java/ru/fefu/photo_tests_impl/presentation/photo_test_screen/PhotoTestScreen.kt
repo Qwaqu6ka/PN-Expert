@@ -33,9 +33,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import coil.annotation.ExperimentalCoilApi
-import coil.compose.ImagePainter
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
 import ru.fefu.photo_test_impl.R
 import ru.fefu.photo_tests_impl.domain.models.TestPhoto
 import ru.fefu.presentation.TextCardHolder
@@ -44,7 +43,7 @@ import ru.fefu.theme.PnExpertTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun PhotoTestScreen(
+fun PhotoTestScreen(    // todo fix photo test
     viewModel: PhotoTestScreenViewModel,
     modifier: Modifier,
     onNavigateToGuide: () -> Unit,
@@ -56,71 +55,82 @@ fun PhotoTestScreen(
         viewModel.photoPath.value != Uri.EMPTY
     }
     println(viewModel.testPage)
-   Scaffold(
-       topBar = { Toolbar(title = "Сделать фото", onBackPressed = {onNavigateToGuide()})},
-       containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
-       modifier = modifier,
-   ) {scaffoldTopPadding->
-       Column(
-           modifier = Modifier
-               .fillMaxSize()
-               .verticalScroll(rememberScrollState())
-               .padding(top = scaffoldTopPadding.calculateTopPadding())
-               .padding(horizontal = 16.dp),
-           horizontalAlignment = Alignment.CenterHorizontally
-       ) {
-           Spacer(modifier = Modifier.height(8.dp))
-           if (!testIsSuccess())
-               TextCardHolder(modifier = Modifier.fillMaxWidth(), text = viewModel.testData.value!!.testTask.taskName)
-           Spacer(modifier = Modifier.weight(1f))
-           Spacer(modifier = Modifier.height(16.dp))
-           PhotoResult(photoPath = viewModel.photoPath.value, guidePhoto = viewModel.testData.value!!.testGuidePhoto, modifier = Modifier.height(500.dp))
-           Spacer(modifier = Modifier.height(16.dp))
-           Spacer(modifier = Modifier.weight(1f))
-           Row (
-               modifier = Modifier.fillMaxWidth()
-           ){
-               PhotoButton(onNavigateToCamera)
-               Spacer(modifier = Modifier.width(16.dp))
-               DownloadButton(
-                   setUri = {uri: Uri -> viewModel.setPhotoPath(uri) }
-               )
-           }
-           Spacer(modifier = Modifier.height(16.dp))
-           NextButton(testIsSuccess(), onNavigateToNextPage,{viewModel.addAnswer()}, onNavigateToResult, viewModel.isLastTest.value!!)
-           Spacer(modifier = Modifier.height(8.dp))
-       }
-   }
+    Scaffold(
+        topBar = { Toolbar(title = "Сделать фото", onBackPressed = { onNavigateToGuide() }) },
+        containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
+        modifier = modifier,
+    ) { scaffoldTopPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(top = scaffoldTopPadding.calculateTopPadding())
+                .padding(horizontal = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(8.dp))
+            if (!testIsSuccess())
+                TextCardHolder(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = viewModel.testData.value!!.testTask.taskName
+                )
+            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.height(16.dp))
+            PhotoResult(
+                photoPath = viewModel.photoPath.value,
+                guidePhoto = viewModel.testData.value!!.testGuidePhoto,
+                modifier = Modifier.height(500.dp)
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.weight(1f))
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                PhotoButton(onNavigateToCamera)
+                Spacer(modifier = Modifier.width(16.dp))
+                DownloadButton(
+                    setUri = { uri: Uri -> viewModel.setPhotoPath(uri) }
+                )
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            NextButton(
+                testIsSuccess(),
+                onNavigateToNextPage,
+                { viewModel.addAnswer() },
+                onNavigateToResult,
+                viewModel.isLastTest.value!!
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+    }
 }
 
-@OptIn(ExperimentalCoilApi::class)
 @Composable
 private fun PhotoResult(
     photoPath: Uri,
     guidePhoto: TestPhoto,
     modifier: Modifier = Modifier
-){
-    val resultPhoto = rememberImagePainter(photoPath)
+) {
+    val resultPhoto = rememberAsyncImagePainter(photoPath)
 
-    if (resultPhoto.state is ImagePainter.State.Loading){
+    if (resultPhoto.state is AsyncImagePainter.State.Loading) {
         CircularProgressIndicator(
             modifier = Modifier.size(24.dp),
             color = PnExpertTheme.colors.mainAppColors.AppBlueColor,
             strokeWidth = 2.dp
         )
     }
-    if (resultPhoto.state is ImagePainter.State.Empty){
+    if (resultPhoto.state is AsyncImagePainter.State.Loading) {
         GuidePhoto(guidePhoto)
     }
-    if (resultPhoto.state is ImagePainter.State.Error){
+    if (resultPhoto.state is AsyncImagePainter.State.Loading) {
         GuidePhoto(guidePhoto)
-    }
-    else{
+    } else {
         Card(
             modifier = modifier,
             shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
             border = BorderStroke(1.dp, PnExpertTheme.colors.mainAppColors.AppBlueColor)
-        ){
+        ) {
             Image(
                 painter = resultPhoto,
                 contentDescription = null,
@@ -132,7 +142,7 @@ private fun PhotoResult(
 }
 
 @Composable
-private fun GuidePhoto(guidePhoto: TestPhoto){
+private fun GuidePhoto(guidePhoto: TestPhoto) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Card(
             modifier = Modifier
@@ -158,14 +168,14 @@ private fun GuidePhoto(guidePhoto: TestPhoto){
 }
 
 @Composable
-private fun DownloadButton(setUri: (Uri) -> Unit){
+private fun DownloadButton(setUri: (Uri) -> Unit) {
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
-            setUri(uri?: Uri.EMPTY)
+            setUri(uri ?: Uri.EMPTY)
         }
 
     TextButton(
-        onClick = {launcher.launch("image/*")},
+        onClick = { launcher.launch("image/*") },
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
@@ -193,9 +203,9 @@ private fun DownloadButton(setUri: (Uri) -> Unit){
 }
 
 @Composable
-private fun PhotoButton(onNavigateToCamera: ()->Unit){
+private fun PhotoButton(onNavigateToCamera: () -> Unit) {
     Button(
-        onClick = {onNavigateToCamera()},
+        onClick = { onNavigateToCamera() },
         modifier = Modifier
             .size(PnExpertTheme.sizes.buttonSize.buttonClassic55),
         colors = ButtonDefaults.buttonColors(
@@ -219,17 +229,17 @@ private fun NextButton(
     onNavigateToNextPage: () -> Unit,
     buttonMotion: () -> Unit,
     onNavigateToResult: () -> Unit,
-    isLastTest:Boolean
-){
+    isLastTest: Boolean
+) {
     TextButton(
         onClick = {
             buttonMotion()
-            if(isLastTest){
+            if (isLastTest) {
                 onNavigateToResult()
-            }else{
+            } else {
                 onNavigateToNextPage()
             }
-          },
+        },
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),

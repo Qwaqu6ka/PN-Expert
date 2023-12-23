@@ -5,7 +5,6 @@ import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -13,7 +12,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
@@ -21,9 +19,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonColors
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,9 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import coil.annotation.ExperimentalCoilApi
-import coil.compose.ImagePainter
-import coil.compose.rememberImagePainter
+import coil.compose.AsyncImagePainter
+import coil.compose.rememberAsyncImagePainter
 import ru.fefu.photo_test_impl.R
 import ru.fefu.presentation.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
@@ -43,14 +37,14 @@ import ru.fefu.theme.PnExpertTheme
 fun LastPhotoScreen(
     viewModel: LastPhotoScreenViewModel,
     modifier: Modifier = Modifier,
-    onNavigateToCamera: ()->Unit,
-    onNavigateToTest:(photoPath:String)->Unit,
+    onNavigateToCamera: () -> Unit,
+    onNavigateToTest: (photoPath: String) -> Unit,
 ) {
     Scaffold(
         modifier = modifier,
-        topBar = { Toolbar(title = "Результат", onBackPressed = { onNavigateToCamera() })},
+        topBar = { Toolbar(title = "Результат", onBackPressed = { onNavigateToCamera() }) },
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor
-    ) {scaffoldPadding->
+    ) { scaffoldPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -61,7 +55,9 @@ fun LastPhotoScreen(
             Spacer(modifier = Modifier.weight(1f))
             PhotoResult(
                 photoPath = viewModel.getPhotoPath(),
-                modifier = Modifier.fillMaxHeight(0.8f).padding(horizontal = 16.dp)
+                modifier = Modifier
+                    .fillMaxHeight(0.8f)
+                    .padding(horizontal = 16.dp)
             )
             Spacer(modifier = Modifier.weight(1f))
             Row(
@@ -70,32 +66,32 @@ fun LastPhotoScreen(
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 CancellationButton(onNavigateToCamera)
-                SuccessButton(viewModel.getPhotoPath(),onNavigateToTest)
+                SuccessButton(viewModel.getPhotoPath(), onNavigateToTest)
             }
             Spacer(modifier = Modifier.weight(1f))
         }
     }
 }
-@OptIn(ExperimentalCoilApi::class)
+
 @Composable
 private fun PhotoResult(
     photoPath: Uri,
     modifier: Modifier = Modifier
-){
-    val resultPhoto = rememberImagePainter(photoPath)
+) {
+    val resultPhoto = rememberAsyncImagePainter(photoPath)
 
-    if (resultPhoto.state is ImagePainter.State.Loading){
+    if (resultPhoto.state is AsyncImagePainter.State.Loading) {
         CircularProgressIndicator(
             modifier = Modifier.size(24.dp),
             color = PnExpertTheme.colors.mainAppColors.AppBlueColor,
             strokeWidth = 2.dp
         )
-    }else{
+    } else {
         Card(
             modifier = modifier,
             shape = PnExpertTheme.shapes.imageShapes.imageClassic15,
             border = BorderStroke(1.dp, PnExpertTheme.colors.mainAppColors.AppBlueColor)
-        ){
+        ) {
             Image(
                 painter = resultPhoto,
                 contentDescription = null,
@@ -110,7 +106,7 @@ private fun PhotoResult(
 private fun SuccessButton(
     photoPath: Uri,
     onNavigateToTest: (photoPath: String) -> Unit
-){
+) {
     Button(
         modifier = Modifier
             .size(PnExpertTheme.sizes.buttonSize.buttonClassic55),
@@ -133,7 +129,7 @@ private fun SuccessButton(
 @Composable
 private fun CancellationButton(
     onNavigateToCamera: () -> Unit
-){
+) {
     Button(
         modifier = Modifier
             .size(PnExpertTheme.sizes.buttonSize.buttonClassic55),
