@@ -12,7 +12,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-private const val DATASTORE_PREFERENCES = "datastore_preferences"
+private const val DATASTORE_PREFERENCES = "PnExpert_datastore_preferences"
 
 @Module
 @InstallIn(SingletonComponent::class)

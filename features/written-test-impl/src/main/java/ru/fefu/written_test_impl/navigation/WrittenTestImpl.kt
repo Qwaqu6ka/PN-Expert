@@ -10,28 +10,29 @@ import ru.fefu.written_test_impl.presentation.WrittenTest
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private const val TEST_PAGE_ROUTE = "written_test"
+private const val WRITTEN_TEST_GRAPH_ROUTE = "written_test"
+internal const val ARG_WRITTEN_TEST_TYPE = "writtenTestType"
 
 @Singleton
 class WrittenTestImpl @Inject constructor() : WrittenTestApi {
 
-    override val testUpdrs1Route = TEST_PAGE_ROUTE + "/" + TestType.UPDRS1.name
-    override val testUpdrs2Route = TEST_PAGE_ROUTE + "/" + TestType.UPDRS2.name
-    override val testUpdrs3Route = TEST_PAGE_ROUTE + "/" + TestType.UPDRS3.name
-    override val testUpdrs4Route = TEST_PAGE_ROUTE + "/" + TestType.UPDRS4.name
-    override val testPdq39Route = TEST_PAGE_ROUTE + "/" + TestType.PDQ39.name
-    override val testHadsRoute = TEST_PAGE_ROUTE + "/" + TestType.HADS.name
-    override val testSchwabEnglandRoute = TEST_PAGE_ROUTE + "/" + TestType.SchwabEngland.name
-    override val testHoehnYahrRoute = TEST_PAGE_ROUTE + "/" + TestType.HoehnYahr.name
-    override val testFabRoute = TEST_PAGE_ROUTE + "/" + TestType.FAB.name
-    override val testPsqiRoute = TEST_PAGE_ROUTE + "/" + TestType.PSQI.name
+    override val testUpdrs1Route = WRITTEN_TEST_GRAPH_ROUTE + "/" + TestType.UPDRS1.name
+    override val testUpdrs2Route = WRITTEN_TEST_GRAPH_ROUTE + "/" + TestType.UPDRS2.name
+    override val testUpdrs3Route = WRITTEN_TEST_GRAPH_ROUTE + "/" + TestType.UPDRS3.name
+    override val testUpdrs4Route = WRITTEN_TEST_GRAPH_ROUTE + "/" + TestType.UPDRS4.name
+    override val testPdq39Route = WRITTEN_TEST_GRAPH_ROUTE + "/" + TestType.PDQ39.name
+    override val testHadsRoute = WRITTEN_TEST_GRAPH_ROUTE + "/" + TestType.HADS.name
+    override val testSchwabEnglandRoute = WRITTEN_TEST_GRAPH_ROUTE + "/" + TestType.SchwabEngland.name
+    override val testHoehnYahrRoute = WRITTEN_TEST_GRAPH_ROUTE + "/" + TestType.HoehnYahr.name
+    override val testFabRoute = WRITTEN_TEST_GRAPH_ROUTE + "/" + TestType.FAB.name
+    override val testPsqiRoute = WRITTEN_TEST_GRAPH_ROUTE + "/" + TestType.PSQI.name
 
     override fun registerGraph(
         navGraphBuilder: NavGraphBuilder,
         navController: NavHostController,
         modifier: Modifier
     ) {
-        navGraphBuilder.composable("$TEST_PAGE_ROUTE/{testType}") {
+        navGraphBuilder.composable("$WRITTEN_TEST_GRAPH_ROUTE/{$ARG_WRITTEN_TEST_TYPE}") {
             WrittenTest(modifier = modifier)
         }
     }

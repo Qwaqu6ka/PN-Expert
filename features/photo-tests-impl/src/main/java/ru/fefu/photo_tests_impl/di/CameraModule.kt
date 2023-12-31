@@ -6,8 +6,6 @@ import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST
 import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCapture.FLASH_MODE_ON
-import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import com.google.mlkit.vision.barcode.BarcodeScanner
@@ -27,7 +25,7 @@ object CameraModule {
 
     @Provides
     @Singleton
-    fun provideCameraSelector():CameraSelector{
+    fun provideCameraSelector(): CameraSelector {
         //for camera selection front or back
         return CameraSelector.Builder()
             .requireLensFacing((CameraSelector.LENS_FACING_BACK))
@@ -37,21 +35,21 @@ object CameraModule {
     @Provides
     @Singleton
     fun provideCameraProvider(application: Application)
-    : ProcessCameraProvider {
+            : ProcessCameraProvider {
         //for providing camera instance
         return ProcessCameraProvider.getInstance(application).get()
     }
 
     @Provides
     @Singleton
-    fun provideCameraPreview():Preview{
+    fun provideCameraPreview(): Preview {
         //for previewing whatever behind the camera
         return Preview.Builder().build()
     }
 
     @Provides
     @Singleton
-    fun provideImageCapture(): ImageCapture{
+    fun provideImageCapture(): ImageCapture {
         //for capturing image you can select aspect ratio
         //either 16_9 or 4_3
         //you can set flash type if its a back camera some devices
@@ -63,7 +61,7 @@ object CameraModule {
 
     @Provides
     @Singleton
-    fun provideImageAnalysis():ImageAnalysis{
+    fun provideImageAnalysis(): ImageAnalysis {
         //this is for analyzing the image before capturing
         val cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -74,9 +72,9 @@ object CameraModule {
 
     @Provides
     @Singleton
-    fun provideBarcodeScanner():BarcodeScanner{
+    fun provideBarcodeScanner(): BarcodeScanner {
         val options = BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS)
+            .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
             .build()
 
         return BarcodeScanning.getClient(options)

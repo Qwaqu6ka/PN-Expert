@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import ru.fefu.presentation.components.SimpleTextButton
+import ru.fefu.components.SimpleTextButton
 import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.R
 

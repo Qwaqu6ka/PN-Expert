@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import ru.fefu.data.database.AppDatabase
 import javax.inject.Singleton
 
-private const val DATABASE_NAME = "app_database"
+private const val DATABASE_NAME = "PnExpert_database"
 
 @Module
 @InstallIn(SingletonComponent::class)

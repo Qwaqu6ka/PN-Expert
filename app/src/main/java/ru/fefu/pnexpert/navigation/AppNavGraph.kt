@@ -21,9 +21,8 @@ fun AppNavGraph(
 ) {
     NavHost(
         navController = navController,
-//        startDestination = BottomTabs.Main.route
+        startDestination = BottomTabs.Main.route
 //        startDestination = featureApiHolder.signUpApi.route
-        startDestination = featureApiHolder.photoTestsApi.route
     ) {
 
         register(
@@ -57,8 +56,19 @@ fun AppNavGraph(
             startDestination = "testProfile"
         ) {
             composable("testProfile") {
-                InDevPlug("History") {
-                    navController.navigate(featureApiHolder.photoTestsApi.route)
+                Column {
+                    InDevPlug(testStr = "ClockPhotoTest") {
+                        navController.navigate(featureApiHolder.photoTestsApi.clockPhotoTestRoute)
+                    }
+                    InDevPlug(testStr = "FacePhotoTest") {
+                        navController.navigate(featureApiHolder.photoTestsApi.facePhotoTestRoute)
+                    }
+                    InDevPlug(testStr = "FullLengthPhotoTest") {
+                        navController.navigate(featureApiHolder.photoTestsApi.fullLengthPhotoTestRoute)
+                    }
+                    InDevPlug(testStr = "HandwritingPhotoTest") {
+                        navController.navigate(featureApiHolder.photoTestsApi.handwritingPhotoTestRoute)
+                    }
                 }
             }
         }
@@ -70,34 +80,34 @@ fun AppNavGraph(
 
             composable("testHistory") {
                 Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                    InDevPlug("Updrs1") {
+                    InDevPlug(testStr = "Updrs1") {
                         navController.navigate(featureApiHolder.writtenTestApi.testUpdrs1Route)
                     }
-                    InDevPlug("Updrs2") {
+                    InDevPlug(testStr = "Updrs2") {
                         navController.navigate(featureApiHolder.writtenTestApi.testUpdrs2Route)
                     }
-                    InDevPlug("Updrs3") {
+                    InDevPlug(testStr = "Updrs3") {
                         navController.navigate(featureApiHolder.writtenTestApi.testUpdrs3Route)
                     }
-                    InDevPlug("Updrs4") {
+                    InDevPlug(testStr = "Updrs4") {
                         navController.navigate(featureApiHolder.writtenTestApi.testUpdrs4Route)
                     }
-                    InDevPlug("Psqi") {
+                    InDevPlug(testStr = "Psqi") {
                         navController.navigate(featureApiHolder.writtenTestApi.testPsqiRoute)
                     }
-                    InDevPlug("Hads") {
+                    InDevPlug(testStr = "Hads") {
                         navController.navigate(featureApiHolder.writtenTestApi.testHadsRoute)
                     }
-                    InDevPlug("Fab") {
+                    InDevPlug(testStr = "Fab") {
                         navController.navigate(featureApiHolder.writtenTestApi.testFabRoute)
                     }
-                    InDevPlug("HoehnYahr") {
+                    InDevPlug(testStr = "HoehnYahr") {
                         navController.navigate(featureApiHolder.writtenTestApi.testHoehnYahrRoute)
                     }
-                    InDevPlug("Pdq39") {
+                    InDevPlug(testStr = "Pdq39") {
                         navController.navigate(featureApiHolder.writtenTestApi.testPdq39Route)
                     }
-                    InDevPlug("SchwabEngland") {
+                    InDevPlug(testStr = "SchwabEngland") {
                         navController.navigate(featureApiHolder.writtenTestApi.testSchwabEnglandRoute)
                     }
                 }
@@ -123,7 +133,7 @@ fun AppNavGraph(
             startDestination = "testServices"
         ) {
             composable("testServices") {
-                InDevPlug("Services")
+                InDevPlug(testStr = "Services")
             }
         }
     }

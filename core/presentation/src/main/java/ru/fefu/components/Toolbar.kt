@@ -1,4 +1,4 @@
-package ru.fefu.presentation.components
+package ru.fefu.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

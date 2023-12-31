@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import ru.fefu.common.di.IoDispatcher
 import ru.fefu.data.database.AppDatabase
 import ru.fefu.data.written_tests.entities.WrittenAnswerData
 import javax.inject.Inject
@@ -17,7 +18,7 @@ import javax.inject.Singleton
 
 @Singleton
 class DatabaseWrittenTestDataSource @Inject constructor(
-    private val ioDispatcher: CoroutineDispatcher,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     private val db: AppDatabase,
     private val dataStore: DataStore<Preferences>
 ) : WrittenTestDataSource {

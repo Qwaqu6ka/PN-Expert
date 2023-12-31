@@ -53,22 +53,17 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
 
+    implementation(libs.accompanist.permissions)
     implementation(libs.camerax.core)
     implementation(libs.camerax.camera)
     implementation(libs.camerax.extensions)
     implementation(libs.camerax.lifecycle)
     implementation(libs.camerax.view)
-
-    implementation(libs.accompanist.permissions)
-
     implementation(libs.coil)
-
-    implementation(libs.baracode)
-
+    implementation(libs.mlkit.baracode)
     implementation(libs.zxing)
 
     implementation(project(":core:presentation"))
-    implementation(project(":core:theme"))
-
+    implementation(project(":core:common"))
     api(project(":features:photo-tests-api"))
 }

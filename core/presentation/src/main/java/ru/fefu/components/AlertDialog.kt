@@ -1,4 +1,4 @@
-package ru.fefu.presentation.components
+package ru.fefu.components
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text

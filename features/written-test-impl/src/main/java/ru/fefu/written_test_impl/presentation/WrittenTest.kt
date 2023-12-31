@@ -25,9 +25,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
-import ru.fefu.presentation.components.SimpleAlertDialog
-import ru.fefu.presentation.components.SimpleTextButton
-import ru.fefu.presentation.components.Toolbar
+import ru.fefu.components.SimpleAlertDialog
+import ru.fefu.components.SimpleTextButton
+import ru.fefu.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.R
 import ru.fefu.written_test_impl.entities.testentities.ChoiceQuestion

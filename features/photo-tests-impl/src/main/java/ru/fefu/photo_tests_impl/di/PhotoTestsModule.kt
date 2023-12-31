@@ -10,7 +10,6 @@ import ru.fefu.photo_tests_impl.navigation.PhotoTestsImpl
 @Module
 @InstallIn(SingletonComponent::class)
 interface PhotoTestsModule {
-
     @Binds
     fun bindPhotoTestsImpl(photoTestsImpl: PhotoTestsImpl): PhotoTestsApi
 }

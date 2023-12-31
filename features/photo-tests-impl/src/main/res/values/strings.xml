@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="exercise">Упражнение</string>
+    <string name="start">Начать</string>
+    <string name="instruction">Инструкция</string>
+    <string name="exercise_instruction">Инструкция к упражнению</string>
+    <string name="test_results">Результаты теста</string>
+    <string name="make_photo">Сделать фото</string>
+    <string name="continue_">Продолжить</string>
+    <string name="example_of_complete_task">Пример выполненного задания</string>
+    <string name="result">Результат</string>
+    <string name="camera_hint">Сфотографирйте ваш результат так, чтобы был виден QR код</string>
+    <string name="load_photo">Загрузить фото</string>
+    <string name="task_number">Задание %1$d</string>
+    <string name="cancel">Отменить</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="error_file_load_bad_qr">На загружаемом фото плохо виден QR код</string>
+    <string name="permission_required">Выдайте разрешение на чтение файлов в настройках</string>
+    <string name="complete_test">Отправить и завершить тест</string>
+
+    <!--____________________________________test resources______________________________________-->
+    <string name="clock_title">Нарисвать часы</string>
+    <string name="clock_guide">Нарисйте на бумаге часы, на которых будет указано время (необходимое время будет дано при начале теста), сфотографируйте и отправьте полученный результат</string>
+    <string name="clock_task_1">Нарисовать часы и сфотографируйте или загрузите результат</string>
+    <string name="clock_task_2">Нарисовать часы еще раз и сфотографируйте или загрузите результат</string>
+</resources>

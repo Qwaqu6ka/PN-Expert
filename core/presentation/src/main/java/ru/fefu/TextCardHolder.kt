@@ -1,4 +1,4 @@
-package ru.fefu.presentation
+package ru.fefu
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column

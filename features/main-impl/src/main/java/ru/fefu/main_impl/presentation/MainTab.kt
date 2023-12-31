@@ -34,7 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.fefu.main_impl.R
-import ru.fefu.presentation.components.Toolbar
+import ru.fefu.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 
 internal data class LongCardData(val image: Int, val title: String, val subtitle: String)

@@ -1,4 +1,4 @@
-package ru.fefu.presentation
+package ru.fefu
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -8,6 +8,20 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 
 open class BaseViewModel : ViewModel() {
+
+    protected fun <T1, T2, R> combineState(
+        flow: StateFlow<T1>,
+        flow2: StateFlow<T2>,
+        scope: CoroutineScope,
+        sharingStarted: SharingStarted = SharingStarted.Eagerly,
+        transform: (T1, T2) -> R
+    ): StateFlow<R> =
+        combine(flow, flow2, transform)
+            .stateIn(
+                scope,
+                sharingStarted,
+                transform.invoke(flow.value, flow2.value)
+            )
 
     protected fun <T1, T2, T3, R> combineState(
         flow: StateFlow<T1>,

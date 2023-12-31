@@ -9,12 +9,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import ru.fefu.presentation.BaseViewModel
+import ru.fefu.BaseViewModel
 import ru.fefu.written_test_impl.domain.WrittenTestRepository
 import ru.fefu.written_test_impl.entities.TestType
 import ru.fefu.written_test_impl.entities.testentities.InputQuestion
 import ru.fefu.written_test_impl.entities.testentities.WrittenAnswer
 import ru.fefu.written_test_impl.entities.testentities.WrittenTest
+import ru.fefu.written_test_impl.navigation.ARG_WRITTEN_TEST_TYPE
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,10 +25,9 @@ internal class WrittenTestViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private var uncompletedLeave: Boolean = true
-    private val testTitle: String = savedStateHandle["testType"]
-        ?: throw IllegalArgumentException("Test type can not be null")
-    private val test: WrittenTest
-        get() = TestType.valueOf(testTitle).test
+    private val testTitle: String =
+        checkNotNull(savedStateHandle[ARG_WRITTEN_TEST_TYPE]) { "Test type can not be null" }
+    private val test: WrittenTest = TestType.valueOf(testTitle).test
     private val currentQuestionIndex = MutableStateFlow(0)
     private val showOldTestDialog = MutableStateFlow(false)
     private var testResult: StateFlow<List<WrittenAnswer>> = MutableStateFlow(emptyList())

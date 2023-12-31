@@ -7,8 +7,9 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import ru.fefu.calendar_impl.domain.repositories.CalendarEventsRepository
-import ru.fefu.calendar_impl.domain.models.TaskModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import ru.fefu.calendar_impl.R
 import ru.fefu.calendar_impl.domain.models.AvailableTime
 import ru.fefu.calendar_impl.domain.models.BaseEvent
 import ru.fefu.calendar_impl.domain.models.BookingModel
@@ -17,28 +18,27 @@ import ru.fefu.calendar_impl.domain.models.BookingStatusEntity
 import ru.fefu.calendar_impl.domain.models.CalendarActions
 import ru.fefu.calendar_impl.domain.models.CalendarType
 import ru.fefu.calendar_impl.domain.models.CalendarUiModel
-import ru.fefu.calendar_impl.domain.models.TimeRange
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
-import ru.fefu.calendar_impl.R
 import ru.fefu.calendar_impl.domain.models.PillModel
+import ru.fefu.calendar_impl.domain.models.TaskModel
 import ru.fefu.calendar_impl.domain.models.TestModel
+import ru.fefu.calendar_impl.domain.models.TimeRange
+import ru.fefu.calendar_impl.domain.repositories.CalendarEventsRepository
 import ru.fefu.photo_tests_api.PhotoTestsApi
 import ru.fefu.written_test_api.WrittenTestApi
 import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
-class CalendarViewModel@Inject constructor(
+class CalendarViewModel @Inject constructor(
     private val calendarEventsRepository: CalendarEventsRepository,
     private val photoTestsApi: PhotoTestsApi,
     private val writtenTestApi: WrittenTestApi,
     @ApplicationContext application: Context,
-):ViewModel() {
+) : ViewModel() {
     private val calendarRepository = calendarEventsRepository
-    var indexOfActiveType  by mutableIntStateOf(0)
+    var indexOfActiveType by mutableIntStateOf(0)
     var openBottomSheetPills by mutableStateOf(false)
-    var openBottomSheetTimes  by mutableStateOf(false)
+    var openBottomSheetTimes by mutableStateOf(false)
     val typesCalendar = mutableStateListOf<CalendarType>(
         CalendarType(
             CalendarActions.ALL,
@@ -62,11 +62,11 @@ class CalendarViewModel@Inject constructor(
         )
     )
     var calendarState by mutableStateOf(
-            calendarEventsRepository.getData(
-                lastSelectedDate = LocalDate.now(),
-                typeCalendar = typesCalendar[indexOfActiveType].type
-            )
+        calendarEventsRepository.getData(
+            lastSelectedDate = LocalDate.now(),
+            typeCalendar = typesCalendar[indexOfActiveType].type
         )
+    )
 
     private var selectedDate by mutableStateOf(calendarState.selectedDate.date)
 
@@ -74,27 +74,28 @@ class CalendarViewModel@Inject constructor(
     var clickableTimesElementIndex by mutableStateOf<Int?>(null)
 
 
-    fun chooseTypeCalendar(index:Int) {
+    fun chooseTypeCalendar(index: Int) {
         typesCalendar[indexOfActiveType] = typesCalendar[indexOfActiveType].copy(isSelected = false)
         typesCalendar[index] = typesCalendar[index].copy(isSelected = true)
         indexOfActiveType = index
     }
 
-    fun getAvailableTime():List<AvailableTime>{
+    fun getAvailableTime(): List<AvailableTime> {
         val date = selectedDate
         val list = calendarRepository.getRecords()
-        return list.filter {it.date == date}
-    }
-    fun updateUiModelData(type: CalendarActions){
-        calendarState.endDate
-        calendarState = calendarEventsRepository.getData(
-                        startDate = calendarState.startDate.date,
-                        lastSelectedDate = calendarState.selectedDate.date,
-                        typeCalendar = type
-                    )
+        return list.filter { it.date == date }
     }
 
-    fun onNextMonthClickListener(date:LocalDate,type: CalendarActions){
+    fun updateUiModelData(type: CalendarActions) {
+        calendarState.endDate
+        calendarState = calendarEventsRepository.getData(
+            startDate = calendarState.startDate.date,
+            lastSelectedDate = calendarState.selectedDate.date,
+            typeCalendar = type
+        )
+    }
+
+    fun onNextMonthClickListener(date: LocalDate, type: CalendarActions) {
         calendarState = calendarEventsRepository.getData(
             startDate = date.plusMonths(1).withDayOfMonth(1),
             lastSelectedDate = calendarState.selectedDate.date,
@@ -102,14 +103,15 @@ class CalendarViewModel@Inject constructor(
         )
     }
 
-    fun onPrevMonthClickListener(date:LocalDate,type: CalendarActions){
+    fun onPrevMonthClickListener(date: LocalDate, type: CalendarActions) {
         calendarState = calendarEventsRepository.getData(
             startDate = date.minusMonths(1).withDayOfMonth(1),
             lastSelectedDate = calendarState.selectedDate.date,
             typeCalendar = type
         )
     }
-    fun onDateClickListener(date: CalendarUiModel.Date){
+
+    fun onDateClickListener(date: CalendarUiModel.Date) {
         calendarState = calendarState.copy(
             selectedDate = date,
             visibleDates = calendarState.visibleDates.map {
@@ -121,36 +123,38 @@ class CalendarViewModel@Inject constructor(
         selectedDate = date.date
     }
 
-    fun onClickPillsEvent(it:Int){
+    fun onClickPillsEvent(it: Int) {
         changeBottomSheetPillsState()
         clickableEventElementIndex = it
     }
 
-    fun onClickTimes(it:Int){
+    fun onClickTimes(it: Int) {
         changeBottomSheetTimesState()
         clickableTimesElementIndex = it
     }
 
-    fun setEventStateTrue(index:Int){
+    fun setEventStateTrue(index: Int) {
 
-        calendarState.selectedDate.listEvents.set(index,
-            if(calendarState.selectedDate.listEvents[index] is TaskModel){
-            (calendarState.selectedDate.listEvents[index] as TaskModel).copy(
-                isCompleted = true
-            )
-        }else{
-            (calendarState.selectedDate.listEvents[index] as PillModel).copy(
-                isCompleted = true
-            )
-        }
+        calendarState.selectedDate.listEvents.set(
+            index,
+            if (calendarState.selectedDate.listEvents[index] is TaskModel) {
+                (calendarState.selectedDate.listEvents[index] as TaskModel).copy(
+                    isCompleted = true
+                )
+            } else {
+                (calendarState.selectedDate.listEvents[index] as PillModel).copy(
+                    isCompleted = true
+                )
+            }
         )
     }
 
-    fun onApplyBottomSheetPills(){
+    fun onApplyBottomSheetPills() {
         changeBottomSheetPillsState()
         setEventStateTrue(clickableEventElementIndex!!)
     }
-    fun onApplyBottomSheetTimes(title:String,time: TimeRange){
+
+    fun onApplyBottomSheetTimes(title: String, time: TimeRange) {
         changeBottomSheetTimesState()
         addEvent(
             BookingModel(
@@ -165,59 +169,83 @@ class CalendarViewModel@Inject constructor(
         )
     }
 
-    private fun addEvent(item: BaseEvent){
+    private fun addEvent(item: BaseEvent) {
         calendarState.selectedDate.listEvents.add(item)
     }
 
-    fun changeBottomSheetPillsState(){
+    fun changeBottomSheetPillsState() {
         openBottomSheetPills = !openBottomSheetPills
     }
-    fun changeBottomSheetTimesState(){
+
+    fun changeBottomSheetTimesState() {
         openBottomSheetTimes = !openBottomSheetTimes
     }
 
     fun navigateTask(
         index: Int,
-        route:TestModel,
-        onTaskNavigate:(String)->Unit,
-    ){
+        route: TestModel,
+        onTaskNavigate: (String) -> Unit,
+    ) {
         setEventStateTrue(index)
         onTaskNavigate(testMapper(route))
 
     }
-    private fun testMapper(str:TestModel):String{
-        return when(str){
-            TestModel.PHOTOTEST->{
-                photoTestsApi.route
+
+    private fun testMapper(str: TestModel): String {
+        return when (str) {
+            TestModel.CLOCK_PHOTOTEST -> {
+                photoTestsApi.clockPhotoTestRoute
             }
-            TestModel.TESTUPDRS1ROUTE->{
+
+            TestModel.FACE_PHOTOTEST -> {
+                photoTestsApi.facePhotoTestRoute
+            }
+
+            TestModel.FULL_LENGTH_PHOTOTEST -> {
+                photoTestsApi.fullLengthPhotoTestRoute
+            }
+
+            TestModel.HANDWRITING_PHOTOTEST -> {
+                photoTestsApi.handwritingPhotoTestRoute
+            }
+
+            TestModel.TESTUPDRS1ROUTE -> {
                 writtenTestApi.testUpdrs1Route
             }
-            TestModel.TESTUPDRS2ROUTE->{
+
+            TestModel.TESTUPDRS2ROUTE -> {
                 writtenTestApi.testUpdrs2Route
             }
-            TestModel.TESTUPDRS3ROUTE->{
+
+            TestModel.TESTUPDRS3ROUTE -> {
                 writtenTestApi.testUpdrs3Route
             }
-            TestModel.TESTUPDRS4ROUTE->{
+
+            TestModel.TESTUPDRS4ROUTE -> {
                 writtenTestApi.testUpdrs4Route
             }
-            TestModel.TESTPDQ39ROUTE->{
+
+            TestModel.TESTPDQ39ROUTE -> {
                 writtenTestApi.testPdq39Route
             }
-            TestModel.TESTHADSROUTE->{
+
+            TestModel.TESTHADSROUTE -> {
                 writtenTestApi.testHadsRoute
             }
-            TestModel.TESTSCHAWABENGLANDROUTE->{
+
+            TestModel.TESTSCHAWABENGLANDROUTE -> {
                 writtenTestApi.testSchwabEnglandRoute
             }
-            TestModel.TESTHOENYAHRROUTE->{
+
+            TestModel.TESTHOENYAHRROUTE -> {
                 writtenTestApi.testHoehnYahrRoute
             }
-            TestModel.TESTFABROUTE->{
+
+            TestModel.TESTFABROUTE -> {
                 writtenTestApi.testFabRoute
             }
-            TestModel.TESTPSQIROUTE->{
+
+            TestModel.TESTPSQIROUTE -> {
                 writtenTestApi.testPsqiRoute
             }
         }

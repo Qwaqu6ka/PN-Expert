@@ -81,7 +81,7 @@ dependencies {
     implementation(libs.navigation.compose)
 
     implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.lifecycle.runtime)
     implementation(libs.activity.compose)
     implementation(platform(libs.kotlin.bom))
     implementation(platform(libs.compose.bom))
@@ -91,7 +91,6 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
 
-    implementation(project(":core:theme"))
     implementation(project(":core:presentation"))
     implementation(project(":data"))
     implementation(project(":features:main-impl"))

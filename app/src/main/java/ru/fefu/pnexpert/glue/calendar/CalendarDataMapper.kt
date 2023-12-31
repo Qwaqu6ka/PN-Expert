@@ -1,18 +1,17 @@
 package ru.fefu.pnexpert.glue.calendar
 
 import androidx.compose.runtime.toMutableStateList
-import ru.fefu.calendar_impl.domain.models.TaskModel
 import ru.fefu.calendar_impl.domain.models.AvailableTime
 import ru.fefu.calendar_impl.domain.models.BaseEvent
 import ru.fefu.calendar_impl.domain.models.BookingModel
 import ru.fefu.calendar_impl.domain.models.BookingStatus
 import ru.fefu.calendar_impl.domain.models.BookingStatusEntity
 import ru.fefu.calendar_impl.domain.models.CalendarActions
-import ru.fefu.calendar_impl.domain.models.CalendarData
 import ru.fefu.calendar_impl.domain.models.CalendarUiModel
 import ru.fefu.calendar_impl.domain.models.DateEvents
 import ru.fefu.calendar_impl.domain.models.EventType
 import ru.fefu.calendar_impl.domain.models.PillModel
+import ru.fefu.calendar_impl.domain.models.TaskModel
 import ru.fefu.calendar_impl.domain.models.TestModel
 import ru.fefu.calendar_impl.domain.models.TimeRange
 import ru.fefu.data.calendar.models.AvailableTimeData
@@ -21,7 +20,6 @@ import ru.fefu.data.calendar.models.BookingModelData
 import ru.fefu.data.calendar.models.BookingStatusData
 import ru.fefu.data.calendar.models.BookingStatusEntityData
 import ru.fefu.data.calendar.models.CalendarActionsData
-import ru.fefu.data.calendar.models.CalendarDataModel
 import ru.fefu.data.calendar.models.CalendarUiModelData
 import ru.fefu.data.calendar.models.DateEventsData
 import ru.fefu.data.calendar.models.EventTypeData
@@ -63,8 +61,7 @@ fun CalendarActionsData.toCalendarActions(): CalendarActions {
 }
 
 
-
-fun TaskModelData.toTaskModel():TaskModel {
+fun TaskModelData.toTaskModel(): TaskModel {
     return TaskModel(
         event = this.event.toEventType(),
         title = this.title,
@@ -74,9 +71,9 @@ fun TaskModelData.toTaskModel():TaskModel {
     )
 }
 
-fun testMapper(data:String):TestModel{
-    return when(data){
-        "photo_test" -> TestModel.PHOTOTEST
+fun testMapper(data: String): TestModel {
+    return when (data) {
+        "photo_test" -> TestModel.FACE_PHOTOTEST
         "testUpdrs1Route" -> TestModel.TESTUPDRS1ROUTE
         "testUpdrs2Route" -> TestModel.TESTUPDRS2ROUTE
         "testUpdrs3Route" -> TestModel.TESTUPDRS3ROUTE
@@ -87,9 +84,10 @@ fun testMapper(data:String):TestModel{
         "testHoehnYahrRoute" -> TestModel.TESTHOENYAHRROUTE
         "testFabRoute" -> TestModel.TESTFABROUTE
         "testPsqiRoute" -> TestModel.TESTPSQIROUTE
-        else-> TestModel.PHOTOTEST
+        else -> TestModel.HANDWRITING_PHOTOTEST
     }
 }
+
 fun PillModelData.toPillModel(): PillModel {
     return PillModel(
         event = this.event.toEventType(),
@@ -149,20 +147,20 @@ fun BookingModelData.toBookingModel(): BookingModel {
 
 
 fun List<BaseEventData>.toListBaseEvent(): List<BaseEvent> {
-     return  this.map {
-        if(it.type == CalendarActionsData.EVENT){
+    return this.map {
+        if (it.type == CalendarActionsData.EVENT) {
             try {
                 val item = it as TaskModelData
                 item.toTaskModel()
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 val item = it as PillModelData
                 item.toPillModel()
             }
-        } else{
+        } else {
             val item = it as BookingModelData
             item.toBookingModel()
         }
-     }
+    }
 }
 
 fun CalendarUiModelData.DateData.toDate(): CalendarUiModel.Date {

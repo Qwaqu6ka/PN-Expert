@@ -1,12 +1,10 @@
 package ru.fefu.photo_tests_impl.data
 
 import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.camera.core.CameraSelector
@@ -14,16 +12,19 @@ import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.compose.runtime.MutableState
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.withContext
+import ru.fefu.common.di.DefaultDispatcher
 import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsCameraRepository
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -32,13 +33,14 @@ import javax.inject.Inject
 
 class CustomCameraRepository @Inject constructor(
     private val cameraProvider: ProcessCameraProvider,
-    private val selector:CameraSelector,
+    private val selector: CameraSelector,
     private val preview: Preview,
     private val imageAnalysis: ImageAnalysis,
     private val imageCapture: ImageCapture,
-    private val barcodeScanner: BarcodeScanner
-) :PhotoTestsCameraRepository {
-    override suspend fun captureAndSaveImage(context: Context, photoPath:MutableState<Uri>){
+    private val barcodeScanner: BarcodeScanner,
+    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
+) : PhotoTestsCameraRepository {
+    override suspend fun captureAndSaveImage(context: Context, photoPath: MutableStateFlow<Uri>) {
         val name = SimpleDateFormat(
             "yyyy-MM-dd-HH-mm-ss-SSS",
             Locale.ENGLISH
@@ -47,7 +49,7 @@ class CustomCameraRepository @Inject constructor(
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, name)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            if (Build.VERSION.SDK_INT > 28){
+            if (Build.VERSION.SDK_INT > 28) {
                 put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/Photo-Tests-Pictures")
             }
         }
@@ -64,7 +66,7 @@ class CustomCameraRepository @Inject constructor(
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(context),
-            object : ImageCapture.OnImageSavedCallback{
+            object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     photoPath.value = outputFileResults.savedUri!!
                 }
@@ -81,11 +83,12 @@ class CustomCameraRepository @Inject constructor(
         )
     }
 
+    @OptIn(ExperimentalGetImage::class)
     override suspend fun showCameraPreview(
         previewView: PreviewView,
         lifecycleOwner: LifecycleOwner,
         onBarcodeScanner: Boolean,
-        barcodeScannerListener: (barcodeScanner: BarcodeScanner, imageProxy: ImageProxy) -> Unit
+        barcodeSuccessListener: (List<Barcode>) -> Unit,
     ) {
         val cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -93,7 +96,15 @@ class CustomCameraRepository @Inject constructor(
         imageAnalysis.setAnalyzer(
             cameraExecutor
         ) { imageProxy ->
-            barcodeScannerListener(barcodeScanner, imageProxy)
+
+            val inputImage =
+                InputImage.fromMediaImage(imageProxy.image!!, imageProxy.imageInfo.rotationDegrees)
+
+            barcodeScanner.process(inputImage)
+                .addOnSuccessListener(barcodeSuccessListener)
+                .addOnCompleteListener {
+                    imageProxy.close()
+                }
         }
 
         try {
@@ -105,9 +116,18 @@ class CustomCameraRepository @Inject constructor(
                 imageAnalysis,
                 imageCapture
             )
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
+    override suspend fun getImageBarcodes(image: InputImage): List<Barcode>? =
+        withContext(defaultDispatcher) {
+            val result = async {
+                val result = barcodeScanner.process(image)
+                while (!result.isComplete) { }
+                result.result
+            }
+            return@withContext result.await()
+        }
 }
