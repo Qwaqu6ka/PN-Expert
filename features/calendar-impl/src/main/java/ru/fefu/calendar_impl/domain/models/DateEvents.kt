@@ -4,5 +4,5 @@ import java.time.LocalDate
 
 data class DateEvents(
     val date: LocalDate,
-    val listEvents:List<BaseEvent>
+    val listEvents: List<BaseEvent>
 )

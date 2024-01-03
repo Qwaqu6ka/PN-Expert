@@ -1,4 +1,4 @@
-package ru.fefu.written_test_impl.presentation.answers
+package ru.fefu.written_test_impl.presentation.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.R
-import ru.fefu.written_test_impl.entities.testentities.SelectableAnswer
+import ru.fefu.written_test_impl.presentation.entities.SelectableAnswer
 
 @Composable
 internal fun SelectableAnswerList(

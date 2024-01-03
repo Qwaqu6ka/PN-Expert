@@ -1,4 +1,4 @@
-package ru.fefu.written_test_impl.entities.testentities
+package ru.fefu.written_test_impl.presentation.entities
 
 data class WrittenAnswer(
     val testTitle: String,

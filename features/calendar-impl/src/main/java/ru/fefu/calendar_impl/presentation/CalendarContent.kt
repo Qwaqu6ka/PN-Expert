@@ -63,7 +63,7 @@ fun Content(
     modifier: Modifier = Modifier,
 ) {
 
-    FlowRow() {
+    FlowRow {
         repeat(data.visibleDates.size - 1) {
             ContentItem(
                 data.visibleDates[it],
@@ -104,8 +104,8 @@ fun Content(
                     onClickPillsEvent(it)
 
                 },
-                onTaskNavigate = {index,route ->
-                    onTaskNavigate(index,route)
+                onTaskNavigate = { index, route ->
+                    onTaskNavigate(index, route)
                 },
             )
             if (type == CalendarActions.APPOINTMENT) {
@@ -127,7 +127,7 @@ fun Content(
 fun ContentItem(
     date: CalendarUiModel.Date,
     onClickListener: (CalendarUiModel.Date) -> Unit,
-    modifier:Modifier = Modifier
+    modifier: Modifier = Modifier
 
 ) {
     Card(
@@ -139,7 +139,8 @@ fun ContentItem(
             }
             .border(
                 0.5.dp,
-                PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor, RoundedCornerShape(25)
+                PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor,
+                RoundedCornerShape(25)
             ),
         colors = CardDefaults.cardColors(
             containerColor = if (date.isSelected) {
@@ -210,7 +211,7 @@ fun DisplayContentItems(
     data: CalendarUiModel,
     type: CalendarActions,
     onClickPillsEvent: (Int) -> Unit,
-    onTaskNavigate: (Int,TestModel) -> Unit
+    onTaskNavigate: (Int, TestModel) -> Unit
 ) {
     when (type) {
         CalendarActions.APPOINTMENT -> {
@@ -229,8 +230,8 @@ fun DisplayContentItems(
                     if (it.type == CalendarActions.EVENT) {
                         CalendarEvent(index = index, item = it, onClickPillsEvent = {
                             onClickPillsEvent(it)
-                        }, onClickTaskEvent = {indexTask,route->
-                            onTaskNavigate(indexTask,route)
+                        }, onClickTaskEvent = { indexTask, route ->
+                            onTaskNavigate(indexTask, route)
                         })
                     }
 
@@ -258,8 +259,8 @@ fun DisplayContentItems(
                     } else {
                         CalendarEvent(index = index, item = it, onClickPillsEvent = {
                             onClickPillsEvent(it)
-                        }, onClickTaskEvent = {indexTask,route->
-                            onTaskNavigate(indexTask,route)
+                        }, onClickTaskEvent = { indexTask, route ->
+                            onTaskNavigate(indexTask, route)
                         })
                     }
 
@@ -271,7 +272,13 @@ fun DisplayContentItems(
 }
 
 @Composable
-fun CalendarTimes(index: Int, time: TimeRange, title: String, onClick: (Int) -> Unit, modifier:Modifier = Modifier) {
+fun CalendarTimes(
+    index: Int,
+    time: TimeRange,
+    title: String,
+    onClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -283,7 +290,8 @@ fun CalendarTimes(index: Int, time: TimeRange, title: String, onClick: (Int) -> 
             .padding(3.dp)
             .border(
                 0.5.dp,
-                PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor, RoundedCornerShape(25)
+                PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor,
+                RoundedCornerShape(25)
             )
             .clickable {
                 onClick(index)
@@ -309,14 +317,14 @@ fun CalendarEvent(
     index: Int,
     item: Any,
     onClickPillsEvent: (Int) -> Unit,
-    onClickTaskEvent: (Int,TestModel) -> Unit,
+    onClickTaskEvent: (Int, TestModel) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    if(item is TaskModel){
-        TaskEvent(title = item.title, isCompleted = item.isCompleted , onClickTaskEvent = {
-            onClickTaskEvent(index,item.route)
+    if (item is TaskModel) {
+        TaskEvent(title = item.title, isCompleted = item.isCompleted, onClickTaskEvent = {
+            onClickTaskEvent(index, item.route)
         })
-    }else if(item is PillModel){
+    } else if (item is PillModel) {
         PillEvent(
             index = index,
             title = item.title,
@@ -336,7 +344,7 @@ fun TaskEvent(
     title: String,
     isCompleted: Boolean,
     onClickTaskEvent: () -> Unit,
-    modifier:Modifier = Modifier
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
@@ -350,7 +358,8 @@ fun TaskEvent(
             )
             .border(
                 0.5.dp,
-                PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor, RoundedCornerShape(25)
+                PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor,
+                RoundedCornerShape(25)
             )
             .padding(3.dp)
             .clickable {
@@ -371,7 +380,7 @@ fun PillEvent(
     dosage: String,
     isCompleted: Boolean,
     onClick: (Int) -> Unit,
-    modifier:Modifier = Modifier
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
@@ -384,7 +393,8 @@ fun PillEvent(
             )
             .border(
                 0.5.dp,
-                PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor, RoundedCornerShape(25)
+                PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor,
+                RoundedCornerShape(25)
             )
             .padding(3.dp)
             .clickable {

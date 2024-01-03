@@ -30,12 +30,12 @@ import ru.fefu.components.SimpleTextButton
 import ru.fefu.components.Toolbar
 import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.R
-import ru.fefu.written_test_impl.entities.testentities.ChoiceQuestion
-import ru.fefu.written_test_impl.entities.testentities.InputQuestion
-import ru.fefu.written_test_impl.entities.testentities.TimeQuestion
-import ru.fefu.written_test_impl.presentation.answers.InputAnswer
-import ru.fefu.written_test_impl.presentation.answers.SelectableAnswerList
-import ru.fefu.written_test_impl.presentation.answers.TimeAnswer
+import ru.fefu.written_test_impl.presentation.entities.ChoiceQuestion
+import ru.fefu.written_test_impl.presentation.entities.InputQuestion
+import ru.fefu.written_test_impl.presentation.entities.TimeQuestion
+import ru.fefu.written_test_impl.presentation.components.InputAnswer
+import ru.fefu.written_test_impl.presentation.components.SelectableAnswerList
+import ru.fefu.written_test_impl.presentation.components.TimeAnswer
 
 @Composable
 internal fun WrittenTest(

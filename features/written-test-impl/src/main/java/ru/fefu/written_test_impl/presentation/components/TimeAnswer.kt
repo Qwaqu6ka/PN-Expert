@@ -1,4 +1,4 @@
-package ru.fefu.written_test_impl.presentation.answers
+package ru.fefu.written_test_impl.presentation.components
 
 import android.app.TimePickerDialog
 import androidx.compose.foundation.layout.Column

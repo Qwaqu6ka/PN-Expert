@@ -1,7 +1,7 @@
 package ru.fefu.pnexpert.glue.written_tests
 
 import ru.fefu.data.written_tests.entities.WrittenAnswerData
-import ru.fefu.written_test_impl.entities.testentities.WrittenAnswer
+import ru.fefu.written_test_impl.presentation.entities.WrittenAnswer
 
 fun WrittenAnswer.toWrittenAnswerData(): WrittenAnswerData {
     return WrittenAnswerData(

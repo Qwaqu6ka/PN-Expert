@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import ru.fefu.BaseViewModel
 import ru.fefu.written_test_impl.domain.WrittenTestRepository
-import ru.fefu.written_test_impl.entities.TestType
-import ru.fefu.written_test_impl.entities.testentities.InputQuestion
-import ru.fefu.written_test_impl.entities.testentities.WrittenAnswer
-import ru.fefu.written_test_impl.entities.testentities.WrittenTest
+import ru.fefu.written_test_impl.domain.TestType
+import ru.fefu.written_test_impl.presentation.entities.InputQuestion
+import ru.fefu.written_test_impl.presentation.entities.WrittenAnswer
+import ru.fefu.written_test_impl.presentation.entities.WrittenTest
 import ru.fefu.written_test_impl.navigation.ARG_WRITTEN_TEST_TYPE
 import javax.inject.Inject
 

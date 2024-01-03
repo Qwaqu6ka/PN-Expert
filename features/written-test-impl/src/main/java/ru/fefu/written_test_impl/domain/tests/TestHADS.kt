@@ -1,9 +1,9 @@
-package ru.fefu.written_test_impl.entities.tests
+package ru.fefu.written_test_impl.domain.tests
 
 import ru.fefu.written_test_impl.R
-import ru.fefu.written_test_impl.entities.testentities.ChoiceQuestion
-import ru.fefu.written_test_impl.entities.testentities.SelectableAnswer
-import ru.fefu.written_test_impl.entities.testentities.WrittenTest
+import ru.fefu.written_test_impl.presentation.entities.ChoiceQuestion
+import ru.fefu.written_test_impl.presentation.entities.SelectableAnswer
+import ru.fefu.written_test_impl.presentation.entities.WrittenTest
 
 internal object TestHADS : WrittenTest {
     override val title = R.string.HADS_title

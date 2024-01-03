@@ -40,12 +40,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import ru.fefu.calendar_impl.domain.models.CalendarActions
-import ru.fefu.calendar_impl.domain.models.CalendarUiModel
 import ru.fefu.calendar_impl.R
 import ru.fefu.calendar_impl.domain.models.BookingStatus
 import ru.fefu.calendar_impl.domain.models.BookingStatusEntity
+import ru.fefu.calendar_impl.domain.models.CalendarActions
 import ru.fefu.calendar_impl.domain.models.CalendarType
+import ru.fefu.calendar_impl.domain.models.CalendarUiModel
 import ru.fefu.calendar_impl.domain.models.TimeRange
 import ru.fefu.theme.PnExpertTheme
 import java.time.LocalDate
@@ -63,7 +63,10 @@ fun Header(
     Row {
         Text(
             text = "${
-                data.startDate.date.month.getDisplayName(TextStyle.FULL, Locale(stringResource(R.string.ru_locale))).uppercase()
+                data.startDate.date.month.getDisplayName(
+                    TextStyle.FULL,
+                    Locale(stringResource(R.string.ru_locale))
+                ).uppercase()
             } ${data.startDate.date.year}  ",
             modifier = modifier
                 .weight(1f)
@@ -95,7 +98,7 @@ fun CalendarScreen(
     modifier: Modifier = Modifier,
     viewModel: CalendarViewModel = hiltViewModel(),
     onBackNavigate: () -> Unit,
-    onTaskNavigate: (String) -> Unit,
+    onTestNavigate: (String) -> Unit,
 ) {
     val type = viewModel.typesCalendar[viewModel.indexOfActiveType].type
     val skipPartiallyExpanded by remember { mutableStateOf(false) }
@@ -179,10 +182,10 @@ fun CalendarScreen(
         Header(
             data = viewModel.calendarState,
             onPrevClickListener = {
-                viewModel.onPrevMonthClickListener(it,type)
+                viewModel.onPrevMonthClickListener(it, type)
             },
             onNextClickListener = {
-                viewModel.onNextMonthClickListener(it,type)
+                viewModel.onNextMonthClickListener(it, type)
             }
         )
         Content(
@@ -199,8 +202,8 @@ fun CalendarScreen(
             getAvailableTime = {
                 viewModel.getAvailableTime()
             },
-            onTaskNavigate = {index,route->
-                viewModel.navigateTask(index,route, onTaskNavigate = onTaskNavigate)
+            onTaskNavigate = { index, route ->
+                viewModel.navigateTask(index, route, onTaskNavigate = onTestNavigate)
 
             }
         )
@@ -217,7 +220,7 @@ fun ModalComponent(
     onApplyClick: () -> Unit,
     onRejectClick: () -> Unit,
     onDismiss: () -> Unit,
-    modifier:Modifier = Modifier
+    modifier: Modifier = Modifier
 ) {
     ModalBottomSheet(
         modifier = modifier.fillMaxHeight(0.3f),
@@ -257,7 +260,12 @@ fun ModalComponent(
 }
 
 @Composable
-fun CalendarBooking(time: TimeRange, title: String, status: BookingStatus,modifier: Modifier = Modifier) {
+fun CalendarBooking(
+    time: TimeRange,
+    title: String,
+    status: BookingStatus,
+    modifier: Modifier = Modifier
+) {
     Column(modifier = modifier.fillMaxWidth()) {
         Row(
             modifier = modifier
@@ -270,7 +278,8 @@ fun CalendarBooking(time: TimeRange, title: String, status: BookingStatus,modifi
                 .padding(3.dp)
                 .border(
                     0.5.dp,
-                    PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor, RoundedCornerShape(25)
+                    PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor,
+                    RoundedCornerShape(25)
                 ),
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
@@ -320,10 +329,11 @@ fun TypeOfCalendar(
                 .width(120.dp)
                 .height(40.dp)
                 .clip(RoundedCornerShape(25))
-                .background(if (list[i].isSelected)  PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppBlueColor else Color.White)
+                .background(if (list[i].isSelected) PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppBlueColor else Color.White)
                 .border(
                     0.5.dp,
-                    PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor, RoundedCornerShape(25)
+                    PnExpertTheme.LocalPnExpertColors.current.mainAppColors.AppGreyDarkColor,
+                    RoundedCornerShape(25)
                 )
                 .clickable {
                     onClick(i, list[i].type)

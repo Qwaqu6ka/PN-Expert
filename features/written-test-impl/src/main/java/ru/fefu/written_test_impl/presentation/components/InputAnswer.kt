@@ -1,4 +1,4 @@
-package ru.fefu.written_test_impl.presentation.answers
+package ru.fefu.written_test_impl.presentation.components
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import ru.fefu.theme.PnExpertTheme
-import ru.fefu.written_test_impl.entities.testentities.InputQuestionValidator
+import ru.fefu.written_test_impl.presentation.entities.InputQuestionValidator
 
 @Composable
 internal fun InputAnswer(

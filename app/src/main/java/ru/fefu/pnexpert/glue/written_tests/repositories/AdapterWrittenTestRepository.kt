@@ -6,7 +6,7 @@ import ru.fefu.data.WrittenTestDataRepository
 import ru.fefu.pnexpert.glue.written_tests.toWrittenAnswerData
 import ru.fefu.pnexpert.glue.written_tests.toWrittenAnswerFeature
 import ru.fefu.written_test_impl.domain.WrittenTestRepository
-import ru.fefu.written_test_impl.entities.testentities.WrittenAnswer
+import ru.fefu.written_test_impl.presentation.entities.WrittenAnswer
 import javax.inject.Inject
 import javax.inject.Singleton
 

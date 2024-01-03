@@ -1,7 +1,7 @@
 package ru.fefu.written_test_impl.domain
 
 import kotlinx.coroutines.flow.Flow
-import ru.fefu.written_test_impl.entities.testentities.WrittenAnswer
+import ru.fefu.written_test_impl.presentation.entities.WrittenAnswer
 
 interface WrittenTestRepository {
 

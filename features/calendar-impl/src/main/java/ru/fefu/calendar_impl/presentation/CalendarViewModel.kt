@@ -33,32 +33,32 @@ class CalendarViewModel @Inject constructor(
     private val calendarEventsRepository: CalendarEventsRepository,
     private val photoTestsApi: PhotoTestsApi,
     private val writtenTestApi: WrittenTestApi,
-    @ApplicationContext application: Context,
+    @ApplicationContext application: Context,   // todo убарть
 ) : ViewModel() {
     private val calendarRepository = calendarEventsRepository
     var indexOfActiveType by mutableIntStateOf(0)
     var openBottomSheetPills by mutableStateOf(false)
     var openBottomSheetTimes by mutableStateOf(false)
-    val typesCalendar = mutableStateListOf<CalendarType>(
+    val typesCalendar = mutableStateListOf(
         CalendarType(
-            CalendarActions.ALL,
-            application.getString(R.string.user_calendar),
-            true
+            type = CalendarActions.ALL,
+            title = application.getString(R.string.user_calendar),
+            isSelected = true
         ),
         CalendarType(
-            CalendarActions.CONSULTATION,
-            application.getString(R.string.consultation_calendar),
-            false
+            type = CalendarActions.CONSULTATION,
+            title = application.getString(R.string.consultation_calendar),
+            isSelected = false
         ),
         CalendarType(
-            CalendarActions.APPOINTMENT,
-            application.getString(R.string.appointment_calendar),
-            false
+            type = CalendarActions.APPOINTMENT,
+            title = application.getString(R.string.appointment_calendar),
+            isSelected = false
         ),
         CalendarType(
-            CalendarActions.EVENT,
-            application.getString(R.string.event_calendar),
-            false
+            type = CalendarActions.EVENT,
+            title = application.getString(R.string.event_calendar),
+            isSelected = false
         )
     )
     var calendarState by mutableStateOf(
