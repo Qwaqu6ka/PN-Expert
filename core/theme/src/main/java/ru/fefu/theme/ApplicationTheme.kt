@@ -8,7 +8,7 @@ import ru.fefu.theme.PnExpertTheme.LocalPnExpertSizes
 import ru.fefu.theme.PnExpertTheme.LocalPnExpertTypography
 
 @Composable
-fun PnExpertTheme(
+fun ApplicationTheme(
     content: @Composable () -> Unit
 ){
     val colors = baseAppPalette

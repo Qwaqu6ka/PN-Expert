@@ -1,4 +1,4 @@
-package ru.fefu.video_tests_impl.entities
+package ru.fefu.video_tests_impl.domain
 
 import androidx.annotation.StringRes
 import ru.fefu.video_tests_impl.R

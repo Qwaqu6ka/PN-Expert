@@ -65,19 +65,10 @@ hilt {
 }
 
 dependencies {
+    // accompanist
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
-
-    implementation(libs.core.splashscreen)
-
-    // hilt
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation.compose)
-    kapt(libs.hilt.compiler)
-
-    // navigation
-    implementation(libs.navigation.compose)
 
     // compose
     implementation(platform(libs.compose.bom))
@@ -87,13 +78,24 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
 
-    // todo может тут подставить api?
+    // hilt
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
+
+    // navigation
+    implementation(libs.navigation.compose)
+
+    // splashscreen
+    implementation(libs.splashscreen)
+
+
     implementation(project(":core:presentation"))
     implementation(project(":data"))
+    implementation(project(":features:calendar-impl"))
     implementation(project(":features:main-impl"))
+    implementation(project(":features:photo-tests-impl"))
     implementation(project(":features:sign-up-impl"))
     implementation(project(":features:video-tests-impl"))
     implementation(project(":features:written-test-impl"))
-    implementation(project(":features:photo-tests-impl"))
-    implementation(project(":features:calendar-impl"))
 }

@@ -28,10 +28,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.fefu.TextCardHolder
-import ru.fefu.components.SimpleTextButton
-import ru.fefu.components.Toolbar
+import ru.fefu.components.PNExpertTextButton
+import ru.fefu.components.PNExpertToolbar
 import ru.fefu.photo_test_impl.R
 import ru.fefu.theme.PnExpertTheme
+import ru.fefu.theme.ApplicationTheme
 
 @Composable
 internal fun GuideScreen(
@@ -44,7 +45,7 @@ internal fun GuideScreen(
 
     Scaffold(
         topBar = {
-            Toolbar(
+            PNExpertToolbar(
                 title = stringResource(R.string.exercise),
                 onBackPressed = onBackPressed
             )
@@ -75,7 +76,7 @@ internal fun GuideScreen(
                 text = stringResource(test.testGuide)
             )
             Spacer(modifier = Modifier.weight(1f))
-            SimpleTextButton(
+            PNExpertTextButton(
                 onClick = onNavigateToTest,
                 text = stringResource(R.string.start),
                 modifier = Modifier.fillMaxWidth()
@@ -112,7 +113,7 @@ private fun TaskAndTimeHolder(
 @Preview
 @Composable
 private fun TestNameHolder() {
-    PnExpertTheme {
+    ApplicationTheme {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -159,7 +160,7 @@ private fun GuidePhoto(
     modifier: Modifier = Modifier,
     @DrawableRes photoID: Int
 ) {
-    PnExpertTheme {
+    ApplicationTheme {
         Card(
             modifier = modifier
                 .fillMaxWidth()
@@ -182,7 +183,7 @@ private fun GuidePhoto(
 @Preview(showSystemUi = true)
 @Composable
 private fun GuideScreenP() {
-    PnExpertTheme {
+    ApplicationTheme {
         GuideScreen(onNavigateToTest = {}, onBackPressed = {})
     }
 }

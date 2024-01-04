@@ -18,10 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import ru.fefu.presentation.components.GifImage
-import ru.fefu.presentation.components.SimpleTextButton
-import ru.fefu.presentation.components.TextCardHolderPink
-import ru.fefu.presentation.components.Toolbar
+import ru.fefu.TextCardHolder
+import ru.fefu.components.GifImage
+import ru.fefu.components.PNExpertTextButton
+import ru.fefu.components.PNExpertToolbar
 import ru.fefu.theme.PnExpertTheme
 import ru.fefu.video_tests_impl.R
 
@@ -33,11 +33,11 @@ internal fun GuideScreen(
 ) {
     Scaffold(
         topBar = {
-            Toolbar(title = stringResource(R.string.exercise),
+            PNExpertToolbar(title = stringResource(R.string.exercise),
                 onBackPressed = { })
         },
         bottomBar = {
-            SimpleTextButton(
+            PNExpertTextButton(
                 onClick = onNavigateToVideoScreen,
                 text = stringResource(id = R.string.start),
                 alternativeColor = true,
@@ -72,7 +72,7 @@ internal fun GuideScreen(
                         .padding(vertical = 10.dp)
                         .clip(RoundedCornerShape(15.dp))
                 )
-                TextCardHolderPink(
+                TextCardHolder(
                     titleText = stringResource(id = R.string.instruction),
                     text = stringResource(id = viewModel.test.instructionRes)
                 )

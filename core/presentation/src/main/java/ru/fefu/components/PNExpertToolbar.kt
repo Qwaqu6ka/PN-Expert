@@ -22,9 +22,10 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ru.fefu.presentation.R
 import ru.fefu.theme.PnExpertTheme
+import ru.fefu.theme.ApplicationTheme
 
 @Composable
-fun Toolbar(
+fun PNExpertToolbar(
     title: String,
     isInverseColor: Boolean = false,
     onBackPressed: (() -> Unit)? = null
@@ -73,9 +74,9 @@ fun Toolbar(
 @Preview
 @Composable
 fun ToolbarPreviewBack() {
-    PnExpertTheme {
+    ApplicationTheme {
         Surface(color = Color.White, modifier = Modifier.fillMaxWidth()) {
-            Toolbar(
+            PNExpertToolbar(
                 title = "Программtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
             ) {}
         }
@@ -85,9 +86,9 @@ fun ToolbarPreviewBack() {
 @Preview
 @Composable
 fun ToolbarPreview() {
-    PnExpertTheme {
+    ApplicationTheme {
         Surface(color = Color.White, modifier = Modifier.fillMaxWidth()) {
-            Toolbar(
+            PNExpertToolbar(
                 title = "Программtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
             )
         }
@@ -97,9 +98,9 @@ fun ToolbarPreview() {
 @Preview
 @Composable
 fun ToolbarDarkPreviewBack() {
-    PnExpertTheme {
+    ApplicationTheme {
         Surface(color = Color.Black, modifier = Modifier.fillMaxWidth()) {
-            Toolbar(title = "Мероприятия", isInverseColor = true) {}
+            PNExpertToolbar(title = "Мероприятия", isInverseColor = true) {}
         }
     }
 }
@@ -107,9 +108,9 @@ fun ToolbarDarkPreviewBack() {
 @Preview
 @Composable
 fun ToolbarDarkPreview() {
-    PnExpertTheme {
+    ApplicationTheme {
         Surface(color = Color.Black, modifier = Modifier.fillMaxWidth()) {
-            Toolbar(title = "Мероприятия", isInverseColor = true)
+            PNExpertToolbar(title = "Мероприятия", isInverseColor = true)
         }
     }
 }

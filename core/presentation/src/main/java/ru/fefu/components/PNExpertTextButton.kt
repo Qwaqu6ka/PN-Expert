@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import ru.fefu.theme.PnExpertTheme
 
 @Composable
-fun SimpleTextButton(
+fun PNExpertTextButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     text: String,

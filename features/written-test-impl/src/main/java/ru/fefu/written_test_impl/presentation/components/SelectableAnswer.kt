@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.fefu.theme.PnExpertTheme
+import ru.fefu.theme.ApplicationTheme
 import ru.fefu.written_test_impl.R
 import ru.fefu.written_test_impl.presentation.entities.SelectableAnswer
 
@@ -86,7 +87,7 @@ private fun SelectableAnswerCard(
 @Preview
 @Composable
 private fun CardListPreview() {
-    PnExpertTheme {
+    ApplicationTheme {
         Surface(Modifier.fillMaxSize(), color = Color.Gray) {
             SelectableAnswerList(
                 chosenAnswerIndex = 5,
@@ -109,7 +110,7 @@ private fun CardListPreview() {
 @Preview
 @Composable
 private fun CardPreview() {
-    PnExpertTheme {
+    ApplicationTheme {
         SelectableAnswerCard(answer = SelectableAnswer(R.string.PSQI_question5a, 0), false) {}
     }
 }
@@ -117,7 +118,7 @@ private fun CardPreview() {
 @Preview
 @Composable
 private fun SelectedCardPreview() {
-    PnExpertTheme {
+    ApplicationTheme {
         SelectableAnswerCard(answer = SelectableAnswer(R.string.PSQI_question5a, 0), true) {}
     }
 }

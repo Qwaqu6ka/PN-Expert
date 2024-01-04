@@ -34,7 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.fefu.main_impl.R
-import ru.fefu.components.Toolbar
+import ru.fefu.components.PNExpertToolbar
 import ru.fefu.theme.PnExpertTheme
 
 internal data class LongCardData(val image: Int, val title: String, val subtitle: String)
@@ -66,7 +66,7 @@ internal fun MainTab(modifier: Modifier) {
     )
 
     Scaffold(
-        topBar = { Toolbar(title = stringResource(id = R.string.main)) },
+        topBar = { PNExpertToolbar(title = stringResource(id = R.string.main)) },
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
         contentWindowInsets = WindowInsets(0.dp),
         modifier = modifier,

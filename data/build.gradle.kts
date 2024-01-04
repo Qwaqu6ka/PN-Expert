@@ -35,12 +35,16 @@ android {
 }
 
 dependencies {
+    implementation(libs.datastore.preferences)
+
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    implementation(libs.retrofit)
+    
+    implementation(libs.room)
     implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
     kapt(libs.room.compiler)
-    implementation(libs.datastore.preferences)
 
     implementation(project(":core:common"))
 }

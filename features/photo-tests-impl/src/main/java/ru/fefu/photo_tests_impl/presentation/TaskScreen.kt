@@ -40,8 +40,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import ru.fefu.TextCardHolder
-import ru.fefu.components.SimpleTextButton
-import ru.fefu.components.Toolbar
+import ru.fefu.components.PNExpertTextButton
+import ru.fefu.components.PNExpertToolbar
 import ru.fefu.observeWithLifecycle
 import ru.fefu.photo_test_impl.R
 import ru.fefu.photo_tests_impl.presentation.components.Photo
@@ -86,7 +86,7 @@ internal fun TaskScreen(
 
     Scaffold(
         topBar = {
-            Toolbar(
+            PNExpertToolbar(
                 title = stringResource(R.string.make_photo),
                 onBackPressed = viewModel::onBackPressedTaskScreen
             )
@@ -132,7 +132,7 @@ internal fun TaskScreen(
                     }
                 }
             }
-            SimpleTextButton(
+            PNExpertTextButton(
                 onClick = viewModel::onNextTaskClick,
                 text = stringResource(R.string.continue_),
                 enabled = state.isNextTaskButtonActive,

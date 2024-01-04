@@ -24,7 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import ru.fefu.components.Toolbar
+import ru.fefu.components.PNExpertToolbar
 import ru.fefu.observeWithLifecycle
 import ru.fefu.photo_test_impl.R
 import ru.fefu.photo_tests_impl.presentation.components.Photo
@@ -48,7 +48,7 @@ internal fun PhotoResultScreen(
     Scaffold(
         modifier = modifier,
         topBar = {
-            Toolbar(title = stringResource(R.string.result), onBackPressed = onBackPressed)
+            PNExpertToolbar(title = stringResource(R.string.result), onBackPressed = onBackPressed)
         },
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor
     ) { scaffoldPadding ->

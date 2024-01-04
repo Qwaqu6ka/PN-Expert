@@ -22,8 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.fefu.TextCardHolder
-import ru.fefu.components.SimpleTextButton
-import ru.fefu.components.Toolbar
+import ru.fefu.components.PNExpertTextButton
+import ru.fefu.components.PNExpertToolbar
 import ru.fefu.photo_test_impl.R
 import ru.fefu.photo_tests_impl.presentation.components.Photo
 
@@ -38,7 +38,7 @@ internal fun TestResultScreen(
     Scaffold(
         modifier = modifier,
         containerColor = Color.White,
-        topBar = { Toolbar(title = stringResource(R.string.test_results)) },
+        topBar = { PNExpertToolbar(title = stringResource(R.string.test_results)) },
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -57,7 +57,7 @@ internal fun TestResultScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
-            SimpleTextButton(
+            PNExpertTextButton(
                 onClick = viewModel::completeTest,
                 text = stringResource(R.string.complete_test),
                 modifier = Modifier.fillMaxWidth()

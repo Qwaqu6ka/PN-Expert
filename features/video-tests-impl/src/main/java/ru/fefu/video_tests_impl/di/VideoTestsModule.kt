@@ -10,7 +10,6 @@ import ru.fefu.video_tests_impl.navigation.VideoTestsImpl
 @Module
 @InstallIn(SingletonComponent::class)
 interface VideoTestsModule {
-
     @Binds
     fun bindVideoTests(impl: VideoTestsImpl): VideoTestApi
 }

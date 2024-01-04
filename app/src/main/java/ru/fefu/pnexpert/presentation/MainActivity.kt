@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import dagger.hilt.android.AndroidEntryPoint
-import ru.fefu.theme.PnExpertTheme
+import ru.fefu.theme.ApplicationTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
-            PnExpertTheme {
+            ApplicationTheme {
                 AppContent(viewModel)
             }
         }

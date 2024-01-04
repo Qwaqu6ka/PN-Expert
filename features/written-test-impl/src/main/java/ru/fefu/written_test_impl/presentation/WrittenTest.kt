@@ -25,9 +25,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
-import ru.fefu.components.SimpleAlertDialog
-import ru.fefu.components.SimpleTextButton
-import ru.fefu.components.Toolbar
+import ru.fefu.components.PNExpertAlertDialog
+import ru.fefu.components.PNExpertTextButton
+import ru.fefu.components.PNExpertToolbar
 import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.R
 import ru.fefu.written_test_impl.presentation.entities.ChoiceQuestion
@@ -45,7 +45,7 @@ internal fun WrittenTest(
     val uiState by testViewModel.testUiState.collectAsState()
 
     if (uiState.showOldTestDialog) {
-        SimpleAlertDialog(
+        PNExpertAlertDialog(
             onDismissRequest = testViewModel::onDismissOldTest,
             onConfirmation = testViewModel::onConfirmOldTest,
             dialogTitle = stringResource(id = R.string.old_test_dialog_title),
@@ -57,7 +57,7 @@ internal fun WrittenTest(
 
     Scaffold(
         topBar = {
-            Toolbar(
+            PNExpertToolbar(
                 title = stringResource(id = R.string.test)
             ) { testViewModel.onBackPressed() }
         },
@@ -167,7 +167,7 @@ private fun ManageButtons(
     modifier: Modifier
 ) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceEvenly) {
-        SimpleTextButton(
+        PNExpertTextButton(
             onClick = {
                 onPreviousQuestion()
                 scrollToStart()
@@ -175,7 +175,7 @@ private fun ManageButtons(
             text = stringResource(id = R.string.back),
             enabled = previousButtonIsActive
         )
-        SimpleTextButton(
+        PNExpertTextButton(
             onClick = {
                 onNextQuestion()
                 scrollToStart()

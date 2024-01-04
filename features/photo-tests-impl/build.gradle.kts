@@ -42,10 +42,14 @@ android {
 }
 
 dependencies {
-    implementation(libs.navigation.compose)
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation.compose)
-    kapt(libs.hilt.compiler)
+    implementation(libs.accompanist.permissions)
+
+    implementation(libs.camerax.camera)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.view)
+
+    implementation(libs.coil.compose)
+
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
     implementation(libs.compose.ui)
@@ -53,14 +57,14 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
 
-    implementation(libs.accompanist.permissions)
-    implementation(libs.camerax.core)
-    implementation(libs.camerax.camera)
-    implementation(libs.camerax.extensions)
-    implementation(libs.camerax.lifecycle)
-    implementation(libs.camerax.view)
-    implementation(libs.coil)
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
+
     implementation(libs.mlkit.baracode)
+
+    implementation(libs.navigation.compose)
+
     implementation(libs.zxing)
 
     implementation(project(":core:presentation"))

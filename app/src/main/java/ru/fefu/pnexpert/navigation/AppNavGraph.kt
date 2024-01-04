@@ -138,7 +138,9 @@ fun AppNavGraph(
             startDestination = "testServices"
         ) {
             composable("testServices") {
-                InDevPlug(testStr = "Services")
+                InDevPlug(testStr = "VIDEO TESTS") {
+                    navController.navigate(featureApiHolder.videoTestsApi.amplitudeOfRestingTremorTestRoute)
+                }
             }
         }
     }

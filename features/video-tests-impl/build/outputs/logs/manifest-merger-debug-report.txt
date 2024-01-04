@@ -1,9 +1,25 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:2:1-4:12
-INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:2:1-4:12
+ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:2:1-10:12
+INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:2:1-10:12
 	package
 		INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:2:11-69
+uses-feature#android.hardware.camera.any
+ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:4:5-64
+	android:name
+		ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:4:19-61
+uses-permission#android.permission.CAMERA
+ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:6:5-65
+	android:name
+		ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:6:22-62
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:7:5-9:38
+	android:maxSdkVersion
+		ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:9:9-35
+	android:name
+		ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml:8:9-65
 uses-sdk
 INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-impl\src\main\AndroidManifest.xml

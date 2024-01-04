@@ -1,68 +1,68 @@
 [versions]
 #plugins
-android-gradle = "8.2.0"
+android-gradle = "8.2.1"
+kotlin = "1.9.21"
 
 # production libraries
-activityComposeVersion = "1.8.2" #del
-accompanistVersion = "0.30.1"
-camerax = "1.3.1"
-cameraXMlkitVersion = "1.3.0-beta02"
-camerax-view = "1.3.1"
+accompanist = "0.30.1"
+camerax = "1.4.0-alpha03"
 coil = "2.4.0"
-composeBomVersion = "2023.10.01"
-coreKtxVersion = "1.12.0" #del
-coreSplashscreenVersion = "1.0.1"
-datastoreVersion = "1.0.0"
-hiltVersion = "2.48"
-hiltNavigationComposeVersion = "1.1.0"
-kotlin = "1.9.21" #del
-lifecycleKtxVersion = "2.6.2"
+composeBom = "2023.10.01"
+datastore = "1.0.0"
+guava = "33.0.0-android"
+hilt = "2.48"
+hiltNavigationCompose = "1.1.0"
+lifecycle = "2.6.2"
 mlkitBarcode = "17.2.0"
-navigationVersion = "2.7.6"
-retrofitVersion = "2.9.0"
-roomVersion = "2.6.1"
+mlkitPoseDetection = "18.0.0-beta3"
+navigation = "2.7.6"
+retrofit = "2.9.0"
+room = "2.6.1"
+splashscreen = "1.0.1"
 zxing = "3.5.2"
 
-
 [libraries]
-accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanistVersion" }
-accompanist-pager-indicators = { group = "com.google.accompanist", name = "accompanist-pager-indicators", version.ref = "accompanistVersion" }
-accompanist-permissions = {group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanistVersion"}
-accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanistVersion" }
+accompanist-pager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist" }
+accompanist-pager-indicators = { group = "com.google.accompanist", name = "accompanist-pager-indicators", version.ref = "accompanist" }
+accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
+accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }
 camerax-camera = { group = "androidx.camera", name = "camera-camera2", version.ref = "camerax" }
 camerax-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "camerax" }
-camera-mlkit = { group = "androidx.camera", name = "camera-mlkit-vision", version.ref = "cameraXMlkitVersion" }
-camera-video = { group = "androidx.camera", name = "camera-video", version.ref = "cameraXVersion" }
-camerax-view = { group = "androidx.camera", name = "camera-view", version.ref = "camerax-view" }
+camerax-mlkit = { group = "androidx.camera", name = "camera-mlkit-vision", version.ref = "camerax" }
+camerax-video = { group = "androidx.camera", name = "camera-video", version.ref = "camerax" }
+camerax-view = { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 coil-gif = { group = "io.coil-kt", name = "coil-gif", version.ref = "coil" }
-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBomVersion" }
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreenVersion" }
-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastoreVersion" }
-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltVersion" }
-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltVersion" }
-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationComposeVersion" }
-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version = "lifecycleKtxVersion" }
-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version = "lifecycleKtxVersion" }
-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleKtxVersion" }
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version = "lifecycle" }
+lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version = "lifecycle" }
+lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
 mlkit-baracode = { group = "com.google.mlkit", name = "barcode-scanning", version.ref = "mlkitBarcode" }
-mlkit-posedetection-accurate = { group = "com.google.mlkit", name = "pose-detection-accurate", version = "18.0.0-beta3" }
-navigation-common = { group = "androidx.navigation", name = "navigation-common", version.ref = "navigationVersion" }
-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationVersion" }
-navigation-runtime = { group = "androidx.navigation", name = "navigation-runtime", version.ref = "navigationVersion" }
-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
+mlkit-posedetection = { group = "com.google.mlkit", name = "pose-detection", version.ref = "mlkitPoseDetection" }
+mlkit-posedetection-common = { group = "com.google.mlkit", name = "pose-detection-common", version.ref = "mlkitPoseDetection" }
+navigation-common = { group = "androidx.navigation", name = "navigation-common", version.ref = "navigation" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
+navigation-runtime = { group = "androidx.navigation", name = "navigation-runtime", version.ref = "navigation" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+room = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 zxing = { group = "com.google.zxing", name = "core", version.ref = "zxing" }
+mlkit-posedetection-accurate = { group = "com.google.mlkit", name = "pose-detection-accurate", version.ref = "mlkitPoseDetection" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle" }
 android-library = { id = "com.android.library", version.ref = "android-gradle" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

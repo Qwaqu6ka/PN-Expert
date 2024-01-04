@@ -8,12 +8,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import ru.fefu.video_tests_impl.entities.TestType
-import ru.fefu.video_tests_impl.navigation.TEST_TYPE_KEY
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import ru.fefu.video_tests_impl.domain.TestType
+import ru.fefu.video_tests_impl.navigation.ARG_TEST_TYPE
 import java.util.concurrent.ExecutionException
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 internal class VideoTestViewModel @Inject constructor(
@@ -22,7 +24,10 @@ internal class VideoTestViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     val test: TestType =
-        TestType.valueOf(checkNotNull(savedStateHandle[TEST_TYPE_KEY]) { "Test type can not be null" })
+        TestType.valueOf(checkNotNull(savedStateHandle[ARG_TEST_TYPE]) { "Test type can not be null" })
+
+    private val _permissionKey = MutableStateFlow(Random.nextLong())
+    val permissionKey: StateFlow<Long> = _permissionKey
 
     private val TAG = "CameraXViewModel"
     private var cameraProviderLiveData: MutableLiveData<ProcessCameraProvider>? = null
@@ -53,4 +58,7 @@ internal class VideoTestViewModel @Inject constructor(
         return cameraProviderLiveData!!
     }
 
+    fun launchPermissionRequest() {
+        _permissionKey.value = Random.nextLong()
+    }
 }

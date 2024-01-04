@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import ru.fefu.components.SimpleTextButton
+import ru.fefu.components.PNExpertTextButton
 import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.R
 
@@ -33,7 +33,7 @@ internal fun TimeAnswer(time: String?, onTimeChange: (String) -> Unit, modifier:
         Spacer(modifier = Modifier.height(10.dp))
         Text(text = time ?: "?", style = PnExpertTheme.typography.text.medium_16)
         Spacer(modifier = Modifier.height(10.dp))
-        SimpleTextButton(
+        PNExpertTextButton(
             onClick = { timePickerDialog.show() },
             text = stringResource(id = R.string.pick_time)
         )
