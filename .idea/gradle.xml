@@ -25,6 +25,8 @@
             <option value="$PROJECT_DIR$/features/photo-tests-impl" />
             <option value="$PROJECT_DIR$/features/sign-up-api" />
             <option value="$PROJECT_DIR$/features/sign-up-impl" />
+            <option value="$PROJECT_DIR$/features/video-tests-api" />
+            <option value="$PROJECT_DIR$/features/video-tests-impl" />
             <option value="$PROJECT_DIR$/features/written-test-api" />
             <option value="$PROJECT_DIR$/features/written-test-impl" />
           </set>

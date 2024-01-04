@@ -58,8 +58,8 @@ internal fun WrittenTest(
     Scaffold(
         topBar = {
             Toolbar(
-                title = stringResource(id = R.string.test),
-                onBackPressed = { testViewModel.onBackPressed() })
+                title = stringResource(id = R.string.test)
+            ) { testViewModel.onBackPressed() }
         },
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
         contentWindowInsets = WindowInsets(0.dp),

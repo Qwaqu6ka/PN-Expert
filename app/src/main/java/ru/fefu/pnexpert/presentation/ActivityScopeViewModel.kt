@@ -12,6 +12,7 @@ import ru.fefu.main_api.MainPageApi
 import ru.fefu.photo_tests_api.PhotoTestsApi
 import ru.fefu.pnexpert.navigation.FeatureApiHolder
 import ru.fefu.sign_up_api.SignUpApi
+import ru.fefu.video_tests_api.VideoTestApi
 import ru.fefu.written_test_api.WrittenTestApi
 import javax.inject.Inject
 
@@ -21,7 +22,8 @@ class ActivityScopeViewModel @Inject constructor(
     override val mainPageApi: MainPageApi,
     override val writtenTestApi: WrittenTestApi,
     override val photoTestsApi: PhotoTestsApi,
-    override val calendarApi: CalendarApi
+    override val videoTestsApi: VideoTestApi,
+    override val calendarApi: CalendarApi,
 ) : ViewModel(), FeatureApiHolder {
 
     private val _isUiReady = MutableLiveData(false)

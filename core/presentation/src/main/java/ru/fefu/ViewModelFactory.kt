@@ -1,4 +1,4 @@
-package ru.fefu
+package ru.fefu.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel

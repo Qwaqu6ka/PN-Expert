@@ -9,7 +9,7 @@ import ru.fefu.sign_up_api.SignUpApi
 import ru.fefu.sign_up_impl.presentation.greeting.GreetingScreen
 import ru.fefu.sign_up_impl.presentation.registration.RegistrationScreens
 import ru.fefu.sign_up_impl.presentation.registration.RegistrationViewModel
-import ru.fefu.viewModelCreator
+import ru.fefu.presentation.viewModelCreator
 import javax.inject.Inject
 import javax.inject.Singleton
 

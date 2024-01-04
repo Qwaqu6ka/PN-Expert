@@ -71,19 +71,15 @@ dependencies {
 
     implementation(libs.core.splashscreen)
 
+    // hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
-    implementation(project(":features:calendar-api"))
     kapt(libs.hilt.compiler)
 
-    implementation(libs.retrofit)
-
+    // navigation
     implementation(libs.navigation.compose)
 
-    implementation(libs.core.ktx)
-    implementation(libs.lifecycle.runtime)
-    implementation(libs.activity.compose)
-    implementation(platform(libs.kotlin.bom))
+    // compose
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
     implementation(libs.compose.ui)
@@ -91,10 +87,12 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
 
+    // todo может тут подставить api?
     implementation(project(":core:presentation"))
     implementation(project(":data"))
     implementation(project(":features:main-impl"))
     implementation(project(":features:sign-up-impl"))
+    implementation(project(":features:video-tests-impl"))
     implementation(project(":features:written-test-impl"))
     implementation(project(":features:photo-tests-impl"))
     implementation(project(":features:calendar-impl"))

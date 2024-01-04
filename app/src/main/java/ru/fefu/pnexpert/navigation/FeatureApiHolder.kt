@@ -4,6 +4,7 @@ import ru.fefu.calendar_api.CalendarApi
 import ru.fefu.main_api.MainPageApi
 import ru.fefu.photo_tests_api.PhotoTestsApi
 import ru.fefu.sign_up_api.SignUpApi
+import ru.fefu.video_tests_api.VideoTestApi
 import ru.fefu.written_test_api.WrittenTestApi
 
 interface FeatureApiHolder {
@@ -15,6 +16,8 @@ interface FeatureApiHolder {
     val writtenTestApi: WrittenTestApi
 
     val photoTestsApi: PhotoTestsApi
+
+    val videoTestsApi: VideoTestApi
 
     val calendarApi: CalendarApi
 }
