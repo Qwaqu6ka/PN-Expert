@@ -10,7 +10,7 @@ import ru.fefu.written_test_impl.presentation.WrittenTest
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private const val WRITTEN_TEST_GRAPH_ROUTE = "written_test"
+private const val WRITTEN_TEST_GRAPH_ROUTE = "writtenTest"
 internal const val ARG_WRITTEN_TEST_TYPE = "writtenTestType"
 
 @Singleton
@@ -33,7 +33,7 @@ class WrittenTestImpl @Inject constructor() : WrittenTestApi {
         modifier: Modifier
     ) {
         navGraphBuilder.composable("$WRITTEN_TEST_GRAPH_ROUTE/{$ARG_WRITTEN_TEST_TYPE}") {
-            WrittenTest(modifier = modifier)
+            WrittenTest(onNavigateBack = navController::popBackStack, modifier = modifier)
         }
     }
 }

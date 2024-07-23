@@ -69,10 +69,9 @@ dependencies {
 
     // mlkit
     implementation(libs.mlkit.posedetection)
-    implementation(libs.mlkit.posedetection.accurate)
-    implementation(libs.mlkit.posedetection.common)
 
 
+    implementation(project(":core:camera"))
     implementation(project(":core:presentation"))
     api(project(":features:video-tests-api"))
 }

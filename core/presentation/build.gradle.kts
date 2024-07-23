@@ -40,6 +40,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.accompanist.systemuicontroller)
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.gif)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
@@ -48,14 +52,10 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
 
-    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.guava)
 
-    implementation(libs.lifecycle.viewmodel)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.lifecycle.runtime)
-
-    implementation(libs.coil.compose)
-    implementation(libs.coil.gif)
 
     api(project(":core:theme"))
 }

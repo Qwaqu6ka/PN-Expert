@@ -24,9 +24,9 @@ import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
 
-import ru.fefu.video_tests_impl.visionutils.FrameMetadata;
-import ru.fefu.video_tests_impl.visionutils.GraphicOverlay;
-import ru.fefu.video_tests_impl.visionutils.VisionImageProcessor;
+import ru.fefu.camera.FrameMetadata;
+import ru.fefu.camera.VisionImageProcessor;
+import ru.fefu.camera.presentation.GraphicOverlay;
 
 /**
  * Manages the camera and allows UI updates on top of it (e.g. overlaying extra Graphics or

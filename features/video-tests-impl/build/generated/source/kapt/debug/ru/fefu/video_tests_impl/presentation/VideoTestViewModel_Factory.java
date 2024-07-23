@@ -8,6 +8,7 @@ import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
 import javax.inject.Provider;
+import ru.fefu.video_tests_impl.domain.CameraXRepository;
 
 @ScopeMetadata
 @QualifierMetadata
@@ -27,24 +28,29 @@ public final class VideoTestViewModel_Factory implements Factory<VideoTestViewMo
 
   private final Provider<SavedStateHandle> savedStateHandleProvider;
 
+  private final Provider<CameraXRepository> cameraXRepositoryProvider;
+
   public VideoTestViewModel_Factory(Provider<Application> applicationProvider,
-      Provider<SavedStateHandle> savedStateHandleProvider) {
+      Provider<SavedStateHandle> savedStateHandleProvider,
+      Provider<CameraXRepository> cameraXRepositoryProvider) {
     this.applicationProvider = applicationProvider;
     this.savedStateHandleProvider = savedStateHandleProvider;
+    this.cameraXRepositoryProvider = cameraXRepositoryProvider;
   }
 
   @Override
   public VideoTestViewModel get() {
-    return newInstance(applicationProvider.get(), savedStateHandleProvider.get());
+    return newInstance(applicationProvider.get(), savedStateHandleProvider.get(), cameraXRepositoryProvider.get());
   }
 
   public static VideoTestViewModel_Factory create(Provider<Application> applicationProvider,
-      Provider<SavedStateHandle> savedStateHandleProvider) {
-    return new VideoTestViewModel_Factory(applicationProvider, savedStateHandleProvider);
+      Provider<SavedStateHandle> savedStateHandleProvider,
+      Provider<CameraXRepository> cameraXRepositoryProvider) {
+    return new VideoTestViewModel_Factory(applicationProvider, savedStateHandleProvider, cameraXRepositoryProvider);
   }
 
   public static VideoTestViewModel newInstance(Application application,
-      SavedStateHandle savedStateHandle) {
-    return new VideoTestViewModel(application, savedStateHandle);
+      SavedStateHandle savedStateHandle, CameraXRepository cameraXRepository) {
+    return new VideoTestViewModel(application, savedStateHandle, cameraXRepository);
   }
 }

@@ -28,26 +28,34 @@ import kotlinx.coroutines.launch
 import ru.fefu.components.PNExpertAlertDialog
 import ru.fefu.components.PNExpertTextButton
 import ru.fefu.components.PNExpertToolbar
+import ru.fefu.observeWithLifecycle
 import ru.fefu.theme.PnExpertTheme
 import ru.fefu.written_test_impl.R
-import ru.fefu.written_test_impl.presentation.entities.ChoiceQuestion
-import ru.fefu.written_test_impl.presentation.entities.InputQuestion
-import ru.fefu.written_test_impl.presentation.entities.TimeQuestion
 import ru.fefu.written_test_impl.presentation.components.InputAnswer
 import ru.fefu.written_test_impl.presentation.components.SelectableAnswerList
 import ru.fefu.written_test_impl.presentation.components.TimeAnswer
+import ru.fefu.written_test_impl.presentation.entities.ChoiceQuestion
+import ru.fefu.written_test_impl.presentation.entities.InputQuestion
+import ru.fefu.written_test_impl.presentation.entities.TimeQuestion
 
 @Composable
 internal fun WrittenTest(
+    onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    testViewModel: WrittenTestViewModel = hiltViewModel(),
+    viewModel: WrittenTestViewModel = hiltViewModel(),
 ) {
-    val uiState by testViewModel.testUiState.collectAsState()
+    viewModel.sideEffectFlow.observeWithLifecycle { sideEffect ->
+        when (sideEffect) {
+            is WrittenTestViewModel.WrittenTestSideEffect.NavigateBack -> onNavigateBack()
+        }
+    }
+
+    val uiState by viewModel.testUiState.collectAsState()
 
     if (uiState.showOldTestDialog) {
         PNExpertAlertDialog(
-            onDismissRequest = testViewModel::onDismissOldTest,
-            onConfirmation = testViewModel::onConfirmOldTest,
+            onDismissRequest = viewModel::onDismissOldTest,
+            onConfirmation = viewModel::onConfirmOldTest,
             dialogTitle = stringResource(id = R.string.old_test_dialog_title),
             dialogText = stringResource(id = R.string.old_test_dialog_text),
             confirmButtonText = stringResource(id = R.string.yes),
@@ -58,15 +66,16 @@ internal fun WrittenTest(
     Scaffold(
         topBar = {
             PNExpertToolbar(
-                title = stringResource(id = R.string.test)
-            ) { testViewModel.onBackPressed() }
+                title = stringResource(id = R.string.test),
+                onBackPressed = viewModel::onBackPressed
+            )
         },
         containerColor = PnExpertTheme.colors.mainAppColors.AppWhiteColor,
         contentWindowInsets = WindowInsets(0.dp),
         modifier = modifier
     ) { innerPadding ->
         TestContent(
-            testViewModel = testViewModel,
+            testViewModel = viewModel,
             modifier = Modifier.padding(innerPadding)
         )
     }

@@ -31,8 +31,13 @@ import ru.fefu.TextCardHolder
 import ru.fefu.components.PNExpertTextButton
 import ru.fefu.components.PNExpertToolbar
 import ru.fefu.photo_test_impl.R
-import ru.fefu.theme.PnExpertTheme
 import ru.fefu.theme.ApplicationTheme
+import ru.fefu.theme.PnExpertTheme
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 @Composable
 internal fun GuideScreen(
@@ -63,8 +68,10 @@ internal fun GuideScreen(
             TaskAndTimeHolder(
                 modifier = Modifier.fillMaxWidth(),
                 taskName = stringResource(test.testTitle),
-                date = "25 мая 2022",   // todo убрать хардкод
-                time = "14:50:04"
+                date = remember {
+                    LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
+                },
+                time = remember { LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) }
             )
             GuidePhotosHolder(
                 modifier = Modifier.fillMaxWidth(),

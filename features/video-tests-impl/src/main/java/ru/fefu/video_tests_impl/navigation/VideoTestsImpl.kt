@@ -15,11 +15,11 @@ import ru.fefu.video_tests_impl.presentation.VideoTestViewModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
-internal const val ARG_TEST_TYPE = "testType"
+internal const val ARG_TEST_TYPE = "videoTestType"
 private const val VIDEO_TESTS_ROOT_ROUTE = "videoTests"
 private const val GRAPH_ROUTE = "$VIDEO_TESTS_ROOT_ROUTE/{$ARG_TEST_TYPE}"
-private const val GUIDE_SCREEN_ROUTE = "guideScreen"
-private const val VIDEO_SCREEN_ROUTE = "cameraScreen"
+private const val GUIDE_SCREEN_ROUTE = "videoTests_guideScreen"
+private const val VIDEO_SCREEN_ROUTE = "videoTests_cameraScreen"
 
 @Singleton
 class VideoTestsImpl @Inject constructor() : VideoTestApi {
@@ -51,7 +51,7 @@ class VideoTestsImpl @Inject constructor() : VideoTestApi {
             startDestination = GUIDE_SCREEN_ROUTE,
             route = GRAPH_ROUTE
         ) {
-            composable(route = GUIDE_SCREEN_ROUTE) { backStackEntry ->  // todo check VM death
+            composable(route = GUIDE_SCREEN_ROUTE) { backStackEntry ->
                 val parentEntry = remember(backStackEntry) {
                     navController.getBackStackEntry(GRAPH_ROUTE)
                 }

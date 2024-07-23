@@ -1,5 +1,8 @@
 ru.fefu.video_tests_impl
 drawable exercise
+drawable ic_flip_camera
+drawable ic_record
+drawable ic_stop_record
 string amplitude_of_resting_tremor
 string amplitude_of_resting_tremor_instruction
 string brush_movements
@@ -11,6 +14,7 @@ string facial_expressiveness
 string facial_expressiveness_instruction
 string fingers_tapping
 string fingers_tapping_instruction
+string flip_camera
 string foot_tapping
 string foot_tapping_instruction
 string gait
@@ -52,3 +56,5 @@ string pref_title_pose_detector_rescale_z
 string pref_title_pose_detector_visualize_z
 string pref_title_rear_camera_preview_size
 string start
+string start_recording
+string stop_recording

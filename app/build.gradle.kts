@@ -70,6 +70,9 @@ dependencies {
     implementation(libs.accompanist.pager)
     implementation(libs.accompanist.pager.indicators)
 
+    // camerax
+    implementation(libs.camerax.view)
+
     // compose
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
@@ -77,6 +80,8 @@ dependencies {
     implementation(libs.compose.ui.graphics)
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
+
+    implementation(libs.guava)
 
     // hilt
     implementation(libs.hilt.android)
@@ -90,6 +95,7 @@ dependencies {
     implementation(libs.splashscreen)
 
 
+    implementation(project(":core:camera"))
     implementation(project(":core:presentation"))
     implementation(project(":data"))
     implementation(project(":features:calendar-impl"))

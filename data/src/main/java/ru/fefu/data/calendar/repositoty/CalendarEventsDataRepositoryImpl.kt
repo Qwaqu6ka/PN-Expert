@@ -30,7 +30,7 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
     override fun getRecords(): List<AvailableTimeData> {
         return listOf(
             AvailableTimeData(
-                date =LocalDate.of(2023, 11, 5),
+                date =LocalDate.of(2024, 6, 28),
                 timeRange = TimeRangeData(
                     LocalTime.of(12,0),
                     LocalTime.of(14,0),
@@ -38,7 +38,7 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
                 doctorsFullName = "Криспин Анатолий Алексеевич"
             ),
             AvailableTimeData(
-                date =LocalDate.of(2023, 11, 6),
+                date =LocalDate.of(2024, 6, 28),
                 timeRange = TimeRangeData(
                     LocalTime.of(16,0),
                     LocalTime.of(17,0),

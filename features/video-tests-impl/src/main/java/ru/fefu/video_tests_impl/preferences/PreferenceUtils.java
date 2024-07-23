@@ -13,7 +13,6 @@ import androidx.camera.core.CameraSelector;
 import com.google.android.gms.common.images.Size;
 import com.google.common.base.Preconditions;
 import com.google.mlkit.vision.pose.PoseDetectorOptionsBase;
-import com.google.mlkit.vision.pose.accurate.AccuratePoseDetectorOptions;
 import com.google.mlkit.vision.pose.defaults.PoseDetectorOptions;
 
 import ru.fefu.video_tests_impl.R;
@@ -73,7 +72,7 @@ public class PreferenceUtils {
     public static boolean isCameraLiveViewportEnabled(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String prefKey = context.getString(R.string.pref_key_camera_live_viewport);
-        return sharedPreferences.getBoolean(prefKey, false);
+        return sharedPreferences.getBoolean(prefKey, false);    // всегда false
     }
 
     @SuppressLint("RestrictedApi")
@@ -88,7 +87,7 @@ public class PreferenceUtils {
                         : context.getString(R.string.pref_key_camerax_front_camera_target_resolution);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         try {
-            return android.util.Size.parseSize(sharedPreferences.getString(prefKey, null));
+            return android.util.Size.parseSize(sharedPreferences.getString(prefKey, null)); // всегда null
         } catch (Exception e) {
             return null;
         }
@@ -101,22 +100,12 @@ public class PreferenceUtils {
                         R.string.pref_key_live_preview_pose_detection_performance_mode,
                         POSE_DETECTOR_PERFORMANCE_MODE_FAST);
         boolean preferGPU = preferGPUForPoseDetection(context);
-        if (performanceMode == POSE_DETECTOR_PERFORMANCE_MODE_FAST) {
-            PoseDetectorOptions.Builder builder =
-                    new PoseDetectorOptions.Builder().setDetectorMode(PoseDetectorOptions.STREAM_MODE);
-            if (preferGPU) {
-                builder.setPreferredHardwareConfigs(PoseDetectorOptions.CPU_GPU);
-            }
-            return builder.build();
-        } else {
-            AccuratePoseDetectorOptions.Builder builder =
-                    new AccuratePoseDetectorOptions.Builder()
-                            .setDetectorMode(AccuratePoseDetectorOptions.STREAM_MODE);
-            if (preferGPU) {
-                builder.setPreferredHardwareConfigs(AccuratePoseDetectorOptions.CPU_GPU);
-            }
-            return builder.build();
+        PoseDetectorOptions.Builder builder =
+                new PoseDetectorOptions.Builder().setDetectorMode(PoseDetectorOptions.STREAM_MODE);
+        if (preferGPU) {
+            builder.setPreferredHardwareConfigs(PoseDetectorOptions.CPU_GPU);
         }
+        return builder.build();
     }
 
     public static boolean shouldShowPoseDetectionInFrameLikelihoodLivePreview(Context context) {

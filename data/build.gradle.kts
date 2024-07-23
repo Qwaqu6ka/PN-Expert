@@ -35,10 +35,23 @@ android {
 }
 
 dependencies {
+    // camerax
+    implementation(libs.camerax.camera)
+    implementation(libs.camerax.lifecycle)
+    implementation(libs.camerax.mlkit)
+    implementation(libs.camerax.video)
+    implementation(libs.camerax.view)
+
     implementation(libs.datastore.preferences)
+
+    implementation(libs.guava)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    // mlkit
+    implementation(libs.mlkit.baracode)
+    implementation(libs.mlkit.common)
 
     implementation(libs.retrofit)
     
@@ -46,5 +59,7 @@ dependencies {
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)
 
+    implementation(project(":core:camera"))
     implementation(project(":core:common"))
+    implementation(project(":core:presentation"))
 }

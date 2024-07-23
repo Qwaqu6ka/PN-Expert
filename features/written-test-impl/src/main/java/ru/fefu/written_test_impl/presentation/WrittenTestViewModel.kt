@@ -1,21 +1,24 @@
 package ru.fefu.written_test_impl.presentation
 
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import ru.fefu.BaseViewModel
-import ru.fefu.written_test_impl.domain.WrittenTestRepository
 import ru.fefu.written_test_impl.domain.TestType
+import ru.fefu.written_test_impl.domain.WrittenTestRepository
+import ru.fefu.written_test_impl.navigation.ARG_WRITTEN_TEST_TYPE
 import ru.fefu.written_test_impl.presentation.entities.InputQuestion
 import ru.fefu.written_test_impl.presentation.entities.WrittenAnswer
 import ru.fefu.written_test_impl.presentation.entities.WrittenTest
-import ru.fefu.written_test_impl.navigation.ARG_WRITTEN_TEST_TYPE
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,6 +26,9 @@ internal class WrittenTestViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val repository: WrittenTestRepository
 ) : BaseViewModel() {
+
+    private val _sideEffectFlow = MutableSharedFlow<WrittenTestSideEffect>()
+    val sideEffectFlow: SharedFlow<WrittenTestSideEffect> = _sideEffectFlow
 
     private var uncompletedLeave: Boolean = true
     private val testTitle: String =
@@ -54,6 +60,7 @@ internal class WrittenTestViewModel @Inject constructor(
         )
 
     override fun onCleared() {
+        Log.d("rome4", "DEEEEEADDD")
         if (uncompletedLeave) {
             saveLocalAnswer()
         }
@@ -75,8 +82,8 @@ internal class WrittenTestViewModel @Inject constructor(
         showOldTestDialog.value = false
     }
 
-    fun onBackPressed() {
-        // todo
+    fun onBackPressed() = viewModelScope.launch {
+        _sideEffectFlow.emit(WrittenTestSideEffect.NavigateBack)
     }
 
     fun onNextQuestPressed() = viewModelScope.launch {
@@ -160,5 +167,9 @@ internal class WrittenTestViewModel @Inject constructor(
         val isPreviousQuestButtonActive = currentQuestionIndex > 0
         val amountOfQuestions = test.questions.size
         val currentQuestionNumber = currentQuestionIndex + 1
+    }
+
+    sealed interface WrittenTestSideEffect {
+        data object NavigateBack : WrittenTestSideEffect
     }
 }

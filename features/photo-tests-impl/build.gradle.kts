@@ -57,6 +57,8 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
 
+    implementation(libs.guava)
+    
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
@@ -64,8 +66,6 @@ dependencies {
     implementation(libs.mlkit.baracode)
 
     implementation(libs.navigation.compose)
-
-    implementation(libs.zxing)
 
     implementation(project(":core:presentation"))
     implementation(project(":core:common"))

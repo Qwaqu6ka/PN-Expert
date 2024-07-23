@@ -1,4 +1,7 @@
 int drawable exercise 0x0
+int drawable ic_flip_camera 0x0
+int drawable ic_record 0x0
+int drawable ic_stop_record 0x0
 int string amplitude_of_resting_tremor 0x0
 int string amplitude_of_resting_tremor_instruction 0x0
 int string brush_movements 0x0
@@ -10,6 +13,7 @@ int string facial_expressiveness 0x0
 int string facial_expressiveness_instruction 0x0
 int string fingers_tapping 0x0
 int string fingers_tapping_instruction 0x0
+int string flip_camera 0x0
 int string foot_tapping 0x0
 int string foot_tapping_instruction 0x0
 int string gait 0x0
@@ -51,3 +55,5 @@ int string pref_title_pose_detector_rescale_z 0x0
 int string pref_title_pose_detector_visualize_z 0x0
 int string pref_title_rear_camera_preview_size 0x0
 int string start 0x0
+int string start_recording 0x0
+int string stop_recording 0x0

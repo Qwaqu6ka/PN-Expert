@@ -21,11 +21,11 @@ import javax.inject.Singleton
 internal const val ARG_PHOTO_TEST_TYPE = "photoTestType"
 private const val GRAPH_ROOT_ROUTE = "photoTests"
 private const val GRAPH_ROUTE = "$GRAPH_ROOT_ROUTE/{$ARG_PHOTO_TEST_TYPE}"
-private const val GUIDE_SCREEN_ROUTE = "guideScreen"
-private const val TASK_SCREEN_ROUTE = "taskScreen"
-private const val CAMERA_SCREEN_ROUTE = "cameraScreen"
-private const val PHOTO_RESULT_SCREEN_ROUTE = "photoResultScreen"
-private const val TEST_RESULT_SCREEN_ROUTE = "testResultScreen"
+private const val GUIDE_SCREEN_ROUTE = "photoTests_guideScreen"
+private const val TASK_SCREEN_ROUTE = "photoTests_taskScreen"
+private const val CAMERA_SCREEN_ROUTE = "photoTests_cameraScreen"
+private const val PHOTO_RESULT_SCREEN_ROUTE = "photoTests_photoResultScreen"
+private const val TEST_RESULT_SCREEN_ROUTE = "photoTests_testResultScreen"
 
 @Singleton
 class PhotoTestsImpl @Inject constructor() : PhotoTestsApi {
@@ -45,9 +45,9 @@ class PhotoTestsImpl @Inject constructor() : PhotoTestsApi {
             startDestination = GUIDE_SCREEN_ROUTE
         ) {
 
-            composable(GUIDE_SCREEN_ROUTE) {
+            composable(GUIDE_SCREEN_ROUTE) { backStackEntry ->
                 val parentEntry =
-                    remember(it) { navController.getBackStackEntry(it.destination.parent?.route!!) }// todo убрать оператор !!
+                    remember(backStackEntry) { navController.getBackStackEntry(GRAPH_ROUTE) }
                 GuideScreen(
                     modifier = modifier,
                     onBackPressed = { navController.popBackStack() },
@@ -56,9 +56,9 @@ class PhotoTestsImpl @Inject constructor() : PhotoTestsApi {
                 )
             }
 
-            composable(TASK_SCREEN_ROUTE) {
+            composable(TASK_SCREEN_ROUTE) { backStackEntry ->
                 val parentEntry =
-                    remember(it) { navController.getBackStackEntry(it.destination.parent?.route!!) }
+                    remember(backStackEntry) { navController.getBackStackEntry(GRAPH_ROUTE) }
                 TaskScreen(
                     modifier = modifier,
                     onPopBackStack = { navController.popBackStack() },
@@ -68,9 +68,9 @@ class PhotoTestsImpl @Inject constructor() : PhotoTestsApi {
                 )
             }
 
-            composable(CAMERA_SCREEN_ROUTE) {
+            composable(CAMERA_SCREEN_ROUTE) { backStackEntry ->
                 val parentEntry =
-                    remember(it) { navController.getBackStackEntry(it.destination.parent?.route!!) }
+                    remember(backStackEntry) { navController.getBackStackEntry(GRAPH_ROUTE) }
                 CameraScreen(
                     modifier = modifier,
                     onNavigateToPhotoResult = { navController.navigate(PHOTO_RESULT_SCREEN_ROUTE) },
@@ -78,9 +78,9 @@ class PhotoTestsImpl @Inject constructor() : PhotoTestsApi {
                 )
             }
 
-            composable(PHOTO_RESULT_SCREEN_ROUTE) {
+            composable(PHOTO_RESULT_SCREEN_ROUTE) { backStackEntry ->
                 val parentEntry =
-                    remember(it) { navController.getBackStackEntry(it.destination.parent?.route!!) }
+                    remember(backStackEntry) { navController.getBackStackEntry(GRAPH_ROUTE) }
                 PhotoResultScreen(
                     modifier = modifier,
                     onBackPressed = { navController.popBackStack() },
@@ -93,9 +93,9 @@ class PhotoTestsImpl @Inject constructor() : PhotoTestsApi {
                 )
             }
 
-            composable(TEST_RESULT_SCREEN_ROUTE) {
+            composable(TEST_RESULT_SCREEN_ROUTE) { backStackEntry ->
                 val parentEntry =
-                    remember(it) { navController.getBackStackEntry(it.destination.parent?.route!!) }
+                    remember(backStackEntry) { navController.getBackStackEntry(GRAPH_ROUTE) }
                 TestResultScreen(
                     modifier = modifier,
                     viewModel = hiltViewModel<PhotoTestsViewModel>(parentEntry)
