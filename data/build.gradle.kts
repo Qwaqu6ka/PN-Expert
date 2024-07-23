@@ -1,8 +1,8 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
     kotlin("kapt")
 }
 
@@ -57,7 +57,7 @@ dependencies {
     
     implementation(libs.room)
     implementation(libs.room.runtime)
-    kapt(libs.room.compiler)
+    ksp(libs.room.compiler)
 
     implementation(project(":core:camera"))
     implementation(project(":core:common"))

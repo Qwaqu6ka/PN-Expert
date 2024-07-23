@@ -94,7 +94,6 @@ dependencies {
     // splashscreen
     implementation(libs.splashscreen)
 
-
     implementation(project(":core:camera"))
     implementation(project(":core:presentation"))
     implementation(project(":data"))
