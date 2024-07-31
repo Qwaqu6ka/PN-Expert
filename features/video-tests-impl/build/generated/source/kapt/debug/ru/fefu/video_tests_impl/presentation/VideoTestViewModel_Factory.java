@@ -21,7 +21,8 @@ import ru.fefu.video_tests_impl.domain.CameraXRepository;
     "unchecked",
     "rawtypes",
     "KotlinInternal",
-    "KotlinInternalInJava"
+    "KotlinInternalInJava",
+    "cast"
 })
 public final class VideoTestViewModel_Factory implements Factory<VideoTestViewModel> {
   private final Provider<Application> applicationProvider;

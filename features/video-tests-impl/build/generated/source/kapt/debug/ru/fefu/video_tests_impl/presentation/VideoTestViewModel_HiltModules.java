@@ -10,9 +10,7 @@ import dagger.hilt.android.components.ViewModelComponent;
 import dagger.hilt.android.internal.lifecycle.HiltViewModelMap;
 import dagger.hilt.codegen.OriginatingElement;
 import dagger.multibindings.IntoMap;
-import dagger.multibindings.IntoSet;
-import dagger.multibindings.StringKey;
-import java.lang.String;
+import dagger.multibindings.LazyClassKey;
 import javax.annotation.processing.Generated;
 
 @Generated("dagger.hilt.android.processor.internal.viewmodel.ViewModelProcessor")
@@ -31,7 +29,7 @@ public final class VideoTestViewModel_HiltModules {
 
     @Binds
     @IntoMap
-    @StringKey("ru.fefu.video_tests_impl.presentation.VideoTestViewModel")
+    @LazyClassKey(VideoTestViewModel.class)
     @HiltViewModelMap
     public abstract ViewModel binds(VideoTestViewModel vm);
   }
@@ -43,10 +41,11 @@ public final class VideoTestViewModel_HiltModules {
     }
 
     @Provides
-    @IntoSet
+    @IntoMap
+    @LazyClassKey(VideoTestViewModel.class)
     @HiltViewModelMap.KeySet
-    public static String provide() {
-      return "ru.fefu.video_tests_impl.presentation.VideoTestViewModel";
+    public static boolean provide() {
+      return true;
     }
   }
 }
