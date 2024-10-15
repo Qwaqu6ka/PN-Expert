@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
-    kotlin("kapt")
 }
 
 android {
@@ -48,11 +46,6 @@ dependencies {
     implementation(libs.compose.ui.graphics)
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
-
-    // hilt
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation.compose)
-    kapt(libs.hilt.compiler)
 
     implementation(project(":core:presentation"))
     api(project(":features:written-test-api"))

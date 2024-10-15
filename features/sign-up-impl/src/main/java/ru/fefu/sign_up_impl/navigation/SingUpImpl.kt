@@ -1,28 +1,25 @@
 package ru.fefu.sign_up_impl.navigation
 
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import org.koin.compose.koinInject
 import ru.fefu.sign_up_api.SignUpApi
 import ru.fefu.sign_up_impl.presentation.greeting.GreetingScreen
 import ru.fefu.sign_up_impl.presentation.registration.RegistrationScreens
 import ru.fefu.sign_up_impl.presentation.registration.RegistrationViewModel
-import ru.fefu.presentation.viewModelCreator
-import javax.inject.Inject
-import javax.inject.Singleton
+import ru.fefu.sign_up_impl.utils.singUpValidation.PasswordValidator
+import ru.fefu.sign_up_impl.utils.singUpValidation.PhoneNumberValidator
+import ru.fefu.sign_up_impl.utils.singUpValidation.RepeatPasswordValidator
 
 private const val GRAPH_ROUTE = "registerGraph"
 private const val GREETING_ROUTE = "greetingScreen"
 private const val REGISTER_ROUTE = "registrationScreen"
 
-@Singleton
-class SingUpImpl @Inject constructor(
-    private val signUpRouter: SignUpRouter
-) : SignUpApi {
-
-    @Inject lateinit var registerVMFactory: RegistrationViewModel.Factory
+class SingUpImpl(private val signUpRouter: SignUpRouter) : SignUpApi {
 
     override val route = GRAPH_ROUTE
 
@@ -41,12 +38,20 @@ class SingUpImpl @Inject constructor(
             composable(REGISTER_ROUTE) {
                 val mainTabRoute = signUpRouter.provideMainTabRoute()
                 val launchMainTab = {
-                    navController.navigate(mainTabRoute){
+                    navController.navigate(mainTabRoute) {
                         popUpTo(0)
                     }
                 }
-                val viewModel = viewModelCreator {
-                    registerVMFactory.create(launchMainTab)
+                val phoneNumberValidator: PhoneNumberValidator = koinInject()
+                val passwordValidator: PasswordValidator = koinInject()
+                val repeatPasswordValidator: RepeatPasswordValidator = koinInject()
+                val viewModel = viewModel {
+                    RegistrationViewModel(
+                        phoneNumberValidator = phoneNumberValidator,
+                        passwordValidator = passwordValidator,
+                        repeatPasswordValidator = repeatPasswordValidator,
+                        launchMainTab = launchMainTab
+                    )
                 }
                 RegistrationScreens(viewModel)
             }

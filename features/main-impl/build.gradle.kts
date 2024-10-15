@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
-    kotlin("kapt")
 }
 
 android {
@@ -46,9 +44,6 @@ dependencies {
     implementation(libs.accompanist.pager.indicators)
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.navigation.compose)
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation.compose)
-    kapt(libs.hilt.compiler)
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.material3)
     implementation(libs.compose.ui)

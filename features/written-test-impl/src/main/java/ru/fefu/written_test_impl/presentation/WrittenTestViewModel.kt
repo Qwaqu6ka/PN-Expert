@@ -3,7 +3,6 @@ package ru.fefu.written_test_impl.presentation
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -19,10 +18,8 @@ import ru.fefu.written_test_impl.navigation.ARG_WRITTEN_TEST_TYPE
 import ru.fefu.written_test_impl.presentation.entities.InputQuestion
 import ru.fefu.written_test_impl.presentation.entities.WrittenAnswer
 import ru.fefu.written_test_impl.presentation.entities.WrittenTest
-import javax.inject.Inject
 
-@HiltViewModel
-internal class WrittenTestViewModel @Inject constructor(
+internal class WrittenTestViewModel(
     savedStateHandle: SavedStateHandle,
     private val repository: WrittenTestRepository
 ) : BaseViewModel() {

@@ -39,7 +39,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import org.koin.androidx.compose.koinViewModel
 import ru.fefu.calendar_impl.R
 import ru.fefu.calendar_impl.domain.models.BookingStatus
 import ru.fefu.calendar_impl.domain.models.BookingStatusEntity
@@ -96,7 +96,7 @@ fun Header(
 @Composable
 fun CalendarScreen(
     modifier: Modifier = Modifier,
-    viewModel: CalendarViewModel = hiltViewModel(),
+    viewModel: CalendarViewModel = koinViewModel(),
     onBackNavigate: () -> Unit,
     onTestNavigate: (String) -> Unit,
 ) {

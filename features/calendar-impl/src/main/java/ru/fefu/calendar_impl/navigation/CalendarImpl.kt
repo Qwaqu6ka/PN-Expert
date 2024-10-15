@@ -6,13 +6,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import ru.fefu.calendar_api.CalendarApi
 import ru.fefu.calendar_impl.presentation.CalendarScreen
-import javax.inject.Inject
-import javax.inject.Singleton
 
 private const val CALENDAR_PAGE_ROUTE = "calendarPage"
 
-@Singleton
-class CalendarImpl @Inject constructor() : CalendarApi {
+class CalendarImpl : CalendarApi {
 
     override val route: String = CALENDAR_PAGE_ROUTE
 

@@ -36,7 +36,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import ru.fefu.TextCardHolder
@@ -53,7 +52,7 @@ private const val FILE_FORMAT_IMAGE = "image/*"
 @Composable
 internal fun TaskScreen(
     modifier: Modifier = Modifier,
-    viewModel: PhotoTestsViewModel = hiltViewModel(),
+    viewModel: PhotoTestsViewModel,
     onPopBackStack: () -> Unit,
     onNavigateToCamera: () -> Unit,
     onNavigateToTestResult: () -> Unit

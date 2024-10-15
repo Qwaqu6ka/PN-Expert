@@ -1,15 +1,13 @@
 package ru.fefu.calendar_impl.di
 
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModelOf
+import org.koin.dsl.module
 import ru.fefu.calendar_api.CalendarApi
 import ru.fefu.calendar_impl.navigation.CalendarImpl
+import ru.fefu.calendar_impl.presentation.CalendarViewModel
 
-@Module
-@InstallIn(SingletonComponent::class)
-interface CalendarModule {
-    @Binds
-    fun bindCalendar(calendarImpl: CalendarImpl): CalendarApi
+val calendarModule = module {
+    singleOf<CalendarApi>(::CalendarImpl)
+    viewModelOf(::CalendarViewModel)
 }

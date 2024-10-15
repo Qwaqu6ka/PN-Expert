@@ -32,7 +32,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import kotlinx.coroutines.launch
@@ -45,7 +44,7 @@ import ru.fefu.theme.PnExpertTheme
 internal fun CameraScreen(
     onNavigateToPhotoResult: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: PhotoTestsViewModel = hiltViewModel()
+    viewModel: PhotoTestsViewModel
 ) {
     val state by viewModel.cameraScreenState.collectAsState()
 

@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import ru.fefu.TextCardHolder
 import ru.fefu.components.PNExpertTextButton
 import ru.fefu.components.PNExpertToolbar
@@ -31,7 +30,7 @@ import ru.fefu.photo_tests_impl.presentation.components.Photo
 @Composable
 internal fun TestResultScreen(
     modifier: Modifier = Modifier,
-    viewModel: PhotoTestsViewModel = hiltViewModel()
+    viewModel: PhotoTestsViewModel
 ) {
     val state by viewModel.testResultScreenState.collectAsState()
 

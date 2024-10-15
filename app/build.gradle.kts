@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
-    kotlin("kapt")
 }
 
 android {
@@ -55,15 +53,6 @@ android {
     }
 }
 
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
-}
-
-hilt {
-    enableAggregatingTask = true
-}
-
 dependencies {
     // accompanist
     implementation(libs.accompanist.systemuicontroller)
@@ -83,11 +72,6 @@ dependencies {
 
     implementation(libs.guava)
 
-    // hilt
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation.compose)
-    kapt(libs.hilt.compiler)
-
     // navigation
     implementation(libs.navigation.compose)
 
@@ -95,6 +79,7 @@ dependencies {
     implementation(libs.splashscreen)
 
     implementation(project(":core:camera"))
+    implementation(project(":core:common"))
     implementation(project(":core:presentation"))
     implementation(project(":data"))
     implementation(project(":features:calendar-impl"))

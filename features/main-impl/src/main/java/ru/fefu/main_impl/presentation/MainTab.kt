@@ -18,12 +18,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -33,9 +33,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import ru.fefu.main_impl.R
 import ru.fefu.components.PNExpertToolbar
+import ru.fefu.main_impl.R
 import ru.fefu.theme.PnExpertTheme
 
 internal data class LongCardData(val image: Int, val title: String, val subtitle: String)
@@ -109,7 +108,7 @@ internal fun BoxCardMonitoring(data: BoxCardData) {
             .shadow(1.dp, PnExpertTheme.shapes.imageShapes.imageClassic15)
             .clickable(
                 interactionSource = interactionSource,
-                indication = rememberRipple(radius = 400.dp),
+                indication = ripple(radius = 400.dp),
                 onClick = {
 
                 },
@@ -150,7 +149,7 @@ internal fun BoxCardDiagnostic(data: BoxCardData) {
             .shadow(1.dp, PnExpertTheme.shapes.imageShapes.imageClassic15)
             .clickable(
                 interactionSource = interactionSource,
-                indication = rememberRipple(radius = 400.dp),
+                indication = ripple(radius = 400.dp),
                 onClick = {
 
                 },
@@ -193,7 +192,7 @@ private fun LongActionCard(data: LongCardData) {
             .shadow(6.dp, PnExpertTheme.shapes.imageShapes.imageClassic15)
             .clickable(
                 interactionSource = interactionSource,
-                indication = rememberRipple(radius = 400.dp),
+                indication = ripple(radius = 400.dp),
                 onClick = {
 
                 },

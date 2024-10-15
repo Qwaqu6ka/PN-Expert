@@ -23,8 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 import ru.fefu.components.PNExpertAlertDialog
 import ru.fefu.components.PNExpertTextButton
 import ru.fefu.components.PNExpertToolbar
@@ -42,7 +42,7 @@ import ru.fefu.written_test_impl.presentation.entities.TimeQuestion
 internal fun WrittenTest(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: WrittenTestViewModel = hiltViewModel(),
+    viewModel: WrittenTestViewModel = koinViewModel(),
 ) {
     viewModel.sideEffectFlow.observeWithLifecycle { sideEffect ->
         when (sideEffect) {

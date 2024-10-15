@@ -18,17 +18,11 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
-import dagger.hilt.android.qualifiers.ApplicationContext
 import ru.fefu.camera.VisionImageProcessor
 import ru.fefu.camera.presentation.GraphicOverlay
 import java.util.concurrent.Executors
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class CameraXDataRepository @Inject constructor(
-    @ApplicationContext private val context: Context,
-) {
+class CameraXDataRepository(private val context: Context) {
     private val cameraProvider: ProcessCameraProvider =
         ProcessCameraProvider.getInstance(context).get()
 

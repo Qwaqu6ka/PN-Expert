@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.fefu.calendar_api.CalendarApi
@@ -14,10 +13,8 @@ import ru.fefu.pnexpert.navigation.FeatureApiHolder
 import ru.fefu.sign_up_api.SignUpApi
 import ru.fefu.video_tests_api.VideoTestApi
 import ru.fefu.written_test_api.WrittenTestApi
-import javax.inject.Inject
 
-@HiltViewModel
-class ActivityScopeViewModel @Inject constructor(
+class ActivityScopeViewModel(
     override val signUpApi: SignUpApi,
     override val mainPageApi: MainPageApi,
     override val writtenTestApi: WrittenTestApi,

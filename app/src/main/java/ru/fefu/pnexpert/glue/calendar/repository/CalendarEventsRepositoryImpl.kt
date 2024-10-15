@@ -9,11 +9,8 @@ import ru.fefu.pnexpert.glue.calendar.toAvailableTime
 import ru.fefu.pnexpert.glue.calendar.toCalendarActionsData
 import ru.fefu.pnexpert.glue.calendar.toCalendarUiModel
 import java.time.LocalDate
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class CalendarEventsRepositoryImpl @Inject constructor(
+class CalendarEventsRepositoryImpl(
     private val calendarEventsRepository: CalendarEventsDataRepository
 ) : CalendarEventsRepository {
     override fun getRecords(): List<AvailableTime> {

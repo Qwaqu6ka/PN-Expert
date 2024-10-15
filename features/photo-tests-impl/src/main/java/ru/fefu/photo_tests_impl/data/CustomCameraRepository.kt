@@ -24,22 +24,20 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.withContext
-import ru.fefu.common.di.DefaultDispatcher
-import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsCameraRepository
+import ru.fefu.photo_tests_impl.domain.repositories.CameraRepository
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.Executors
-import javax.inject.Inject
 
-class CustomCameraRepository @Inject constructor(
+class CustomCameraRepository(
     private val cameraProvider: ProcessCameraProvider,
     private val selector: CameraSelector,
     private val preview: Preview,
     private val imageAnalysis: ImageAnalysis,
     private val imageCapture: ImageCapture,
     private val barcodeScanner: BarcodeScanner,
-    @DefaultDispatcher private val defaultDispatcher: CoroutineDispatcher
-) : PhotoTestsCameraRepository {
+    private val defaultDispatcher: CoroutineDispatcher
+) : CameraRepository {
     override suspend fun captureAndSaveImage(context: Context, photoPath: MutableStateFlow<Uri>) {
         val name = SimpleDateFormat(
             "yyyy-MM-dd-HH-mm-ss-SSS",
@@ -125,7 +123,8 @@ class CustomCameraRepository @Inject constructor(
         withContext(defaultDispatcher) {
             val result = async {
                 val result = barcodeScanner.process(image)
-                while (!result.isComplete) { }
+                while (!result.isComplete) {
+                }
                 result.result
             }
             return@withContext result.await()

@@ -6,9 +6,8 @@ import ru.fefu.camera.VisionImageProcessor
 import ru.fefu.camera.presentation.GraphicOverlay
 import ru.fefu.data.CameraXDataRepository
 import ru.fefu.video_tests_impl.domain.CameraXRepository
-import javax.inject.Inject
 
-class AdapterCameraXRepository @Inject constructor(
+class AdapterCameraXRepository(
     private val cameraXDataRepository: CameraXDataRepository
 ) : CameraXRepository {
     override fun bindPreview(previewView: PreviewView, lifecycleOwner: LifecycleOwner) =

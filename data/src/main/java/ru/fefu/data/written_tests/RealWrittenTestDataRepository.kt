@@ -5,11 +5,8 @@ import kotlinx.coroutines.flow.Flow
 import ru.fefu.data.WrittenTestDataRepository
 import ru.fefu.data.written_tests.entities.WrittenAnswerData
 import ru.fefu.data.written_tests.sources.WrittenTestDataSource
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class RealWrittenTestDataRepository @Inject constructor(
+class RealWrittenTestDataRepository(
     private val writtenTestDataSource: WrittenTestDataSource
 ) : WrittenTestDataRepository {
 

@@ -1,34 +1,14 @@
 package ru.fefu.common.di
 
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import javax.inject.Qualifier
-import javax.inject.Singleton
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 
+const val KOIN_DEFAULT_DISPATCHER = "default_dispatcher"
+const val KOIN_IO_DISPATCHER = "io_dispatcher"
 
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class IoDispatcher
-
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class DefaultDispatcher
-
-@Module
-@InstallIn(SingletonComponent::class)
-object CoroutinesModule {
-
-    @IoDispatcher
-    @Provides
-    @Singleton
-    fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
-
-    @DefaultDispatcher
-    @Provides
-    @Singleton
-    fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
+val coroutinesModule = module {
+    single<CoroutineDispatcher>(named(KOIN_DEFAULT_DISPATCHER)) { Dispatchers.Default }
+    single<CoroutineDispatcher>(named(KOIN_IO_DISPATCHER)) { Dispatchers.IO }
 }

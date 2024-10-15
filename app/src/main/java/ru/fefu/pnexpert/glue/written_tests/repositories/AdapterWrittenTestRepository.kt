@@ -7,11 +7,8 @@ import ru.fefu.pnexpert.glue.written_tests.toWrittenAnswerData
 import ru.fefu.pnexpert.glue.written_tests.toWrittenAnswerFeature
 import ru.fefu.written_test_impl.domain.WrittenTestRepository
 import ru.fefu.written_test_impl.presentation.entities.WrittenAnswer
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class AdapterWrittenTestRepository @Inject constructor(
+class AdapterWrittenTestRepository(
     private val writtenTestDataRepository: WrittenTestDataRepository
 ) : WrittenTestRepository {
 

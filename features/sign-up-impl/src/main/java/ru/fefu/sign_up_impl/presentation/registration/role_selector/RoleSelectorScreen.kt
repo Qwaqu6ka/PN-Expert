@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -27,6 +26,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -49,7 +49,7 @@ import ru.fefu.theme.PnExpertTheme
 private val CURRENT_PAGE = RegistrationNavigationRoute.SelectRoleScreen
 
 data class Role(
-    val roleName:String,
+    val roleName: String,
     val roleDescriptor: String,
 )
 
@@ -87,9 +87,9 @@ private fun NextButton(
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
         onClick = {
-              if (selectedRole.value.isNotEmpty()){
-                       viewModel.pagesNavController!!.navigate(RegistrationNavigationRoute.UsersAgreementScreen.route)
-              }
+            if (selectedRole.value.isNotEmpty()) {
+                viewModel.pagesNavController!!.navigate(RegistrationNavigationRoute.UsersAgreementScreen.route)
+            }
         },
         enabled = selectedRole.value.isNotEmpty(),
         shape = PnExpertTheme.shapes.buttonShapes.buttonClassic10,
@@ -126,7 +126,7 @@ private fun RoleCard(
             }
             .clickable(
                 interactionSource = interactionSource,
-                indication = rememberRipple(radius = 400.dp),
+                indication = ripple(radius = 400.dp),
                 onClick = {
                     isClicked = !isClicked
                 },
@@ -209,10 +209,22 @@ private fun RoleSelectors(
 ) {
 
     val roles = listOf(
-        Role("Пациент", "Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут"),
-        Role("Родственник / Опекун", "Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут"),
-        Role("Специалист", "Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут"),
-        Role("Администратор / Менеджер", "Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут")
+        Role(
+            "Пациент",
+            "Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут"
+        ),
+        Role(
+            "Родственник / Опекун",
+            "Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут"
+        ),
+        Role(
+            "Специалист",
+            "Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут"
+        ),
+        Role(
+            "Администратор / Менеджер",
+            "Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут Введите номер телефона и пин код чтобы войти в аккаут код чтобы войти в аккаут"
+        )
     )
 
     Column(

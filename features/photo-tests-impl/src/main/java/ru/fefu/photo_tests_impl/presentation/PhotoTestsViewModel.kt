@@ -10,7 +10,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.google.mlkit.vision.common.InputImage
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -24,17 +23,15 @@ import ru.fefu.photo_test_impl.R
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestModel
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestTask
 import ru.fefu.photo_tests_impl.domain.models.PhotoTestType
-import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsCameraRepository
+import ru.fefu.photo_tests_impl.domain.repositories.CameraRepository
 import ru.fefu.photo_tests_impl.domain.repositories.PhotoTestsRepository
 import ru.fefu.photo_tests_impl.navigation.ARG_PHOTO_TEST_TYPE
-import javax.inject.Inject
 
 private const val SUCCESS_BARCODE_VALUE = "testValue"
 
-@HiltViewModel
-internal class PhotoTestsViewModel @Inject constructor(
+internal class PhotoTestsViewModel(
     private val photoTestsRepository: PhotoTestsRepository,
-    private val cameraRepository: PhotoTestsCameraRepository,
+    private val cameraRepository: CameraRepository,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 

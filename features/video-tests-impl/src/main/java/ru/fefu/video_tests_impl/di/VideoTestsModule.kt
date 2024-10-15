@@ -1,15 +1,13 @@
 package ru.fefu.video_tests_impl.di
 
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModelOf
+import org.koin.dsl.module
 import ru.fefu.video_tests_api.VideoTestApi
 import ru.fefu.video_tests_impl.navigation.VideoTestsImpl
+import ru.fefu.video_tests_impl.presentation.VideoTestViewModel
 
-@Module
-@InstallIn(SingletonComponent::class)
-interface VideoTestsModule {
-    @Binds
-    fun bindVideoTests(impl: VideoTestsImpl): VideoTestApi
+val videoTestsModule = module {
+    singleOf<VideoTestApi>(::VideoTestsImpl)
+    viewModelOf(::VideoTestViewModel)
 }

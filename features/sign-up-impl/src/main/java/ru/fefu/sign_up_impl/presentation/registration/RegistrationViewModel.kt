@@ -7,25 +7,21 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import ru.fefu.sign_up_impl.presentation.registration.navigation.RegistrationNavigationRoute
 import ru.fefu.sign_up_impl.presentation.registration.sing_up.SingUpFormEvent
 import ru.fefu.sign_up_impl.utils.models.SingUpFormState
-import ru.fefu.sign_up_impl.utils.singUpValidation.ValidatePassword
-import ru.fefu.sign_up_impl.utils.singUpValidation.ValidatePhoneNumber
-import ru.fefu.sign_up_impl.utils.singUpValidation.ValidateRepeatPassword
+import ru.fefu.sign_up_impl.utils.singUpValidation.PasswordValidator
+import ru.fefu.sign_up_impl.utils.singUpValidation.PhoneNumberValidator
+import ru.fefu.sign_up_impl.utils.singUpValidation.RepeatPasswordValidator
 
-
-class RegistrationViewModel @AssistedInject constructor(
-    private val validatePhoneNumber: ValidatePhoneNumber,
-    private val validatePassword: ValidatePassword,
-    private val validateRepeatPassword: ValidateRepeatPassword,
-    @Assisted private val launchMainTab: () -> Unit
+class RegistrationViewModel(
+    private val phoneNumberValidator: PhoneNumberValidator,
+    private val passwordValidator: PasswordValidator,
+    private val repeatPasswordValidator: RepeatPasswordValidator,
+    private val launchMainTab: () -> Unit
 ) : ViewModel() {
     //registration pages variables
     private var _pagesNavController: NavController? = null
@@ -77,9 +73,9 @@ class RegistrationViewModel @AssistedInject constructor(
     }
 
     private fun submitInputData() {
-        val phoneNumberResult = validatePhoneNumber(inputDataState.phoneNumber)
-        val passwordResult = validatePassword(inputDataState.password)
-        val repeatPasswordResult = validateRepeatPassword(
+        val phoneNumberResult = phoneNumberValidator(inputDataState.phoneNumber)
+        val passwordResult = passwordValidator(inputDataState.password)
+        val repeatPasswordResult = repeatPasswordValidator(
             inputDataState.password,
             inputDataState.repeatPassword,
         )
@@ -117,10 +113,5 @@ class RegistrationViewModel @AssistedInject constructor(
     sealed class ValidationEvent {
         object Success : ValidationEvent()
         object Error : ValidationEvent()
-    }
-
-    @AssistedFactory
-    interface Factory {
-        fun create(launchMainTab: () -> Unit): RegistrationViewModel
     }
 }

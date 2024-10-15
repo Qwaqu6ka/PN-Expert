@@ -18,11 +18,10 @@ import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 import java.util.stream.Collectors
 import java.util.stream.Stream
-import javax.inject.Inject
 
-class CalendarEventsDataRepositoryImpl@Inject constructor(
+class CalendarEventsDataRepositoryImpl(
 //    private val dataSource: CalendarDataSourceI
-): CalendarEventsDataRepository {
+) : CalendarEventsDataRepository {
 //    override fun getEvents(date:LocalDate,type: CalendarActions): List<BaseEvent> {
 //        return dataSource.getEvents(date,type)
 //    }
@@ -30,18 +29,18 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
     override fun getRecords(): List<AvailableTimeData> {
         return listOf(
             AvailableTimeData(
-                date =LocalDate.of(2024, 6, 28),
+                date = LocalDate.of(2024, 6, 28),
                 timeRange = TimeRangeData(
-                    LocalTime.of(12,0),
-                    LocalTime.of(14,0),
+                    LocalTime.of(12, 0),
+                    LocalTime.of(14, 0),
                 ),
                 doctorsFullName = "Криспин Анатолий Алексеевич"
             ),
             AvailableTimeData(
-                date =LocalDate.of(2024, 6, 28),
+                date = LocalDate.of(2024, 6, 28),
                 timeRange = TimeRangeData(
-                    LocalTime.of(16,0),
-                    LocalTime.of(17,0),
+                    LocalTime.of(16, 0),
+                    LocalTime.of(17, 0),
                 ),
                 doctorsFullName = "Криспин Анатолий Алексеевич"
             )
@@ -56,7 +55,7 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
         val firstDayOfMonth = startDate.withMonth(startDate.month.value).withDayOfMonth(1)
         val endDayOfMonth = firstDayOfMonth.plusDays((firstDayOfMonth.lengthOfMonth()).toLong())
         val visibleDates = getDatesBetween(firstDayOfMonth, endDayOfMonth.plusDays(1))
-        return toUiModel(visibleDates, lastSelectedDate,typeCalendar)
+        return toUiModel(visibleDates, lastSelectedDate, typeCalendar)
     }
 
     override fun getDatesBetween(startDate: LocalDate, endDate: LocalDate): List<LocalDate> {
@@ -74,9 +73,9 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
         type: CalendarActionsData
     ): CalendarUiModelData {
         return CalendarUiModelData(
-            selectedDate = toItemUiModel(lastSelectedDate, true,getEvents(lastSelectedDate,type)),
+            selectedDate = toItemUiModel(lastSelectedDate, true, getEvents(lastSelectedDate, type)),
             visibleDates = dateList.map {
-                toItemUiModel(it, it.isEqual(lastSelectedDate),getEvents(it,type))
+                toItemUiModel(it, it.isEqual(lastSelectedDate), getEvents(it, type))
             },
         )
     }
@@ -95,15 +94,15 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
                                     comment = null
                                 ),
                                 title = "Давыдов Антон Игоревич",
-                                time = TimeRangeData(LocalTime.of(12,0), LocalTime.of(13,0)),
+                                time = TimeRangeData(LocalTime.of(12, 0), LocalTime.of(13, 0)),
                                 type = CalendarActionsData.APPOINTMENT
                             )
                         )
                     )
                 )
-                return if(item.data.date== date){
+                return if (item.data.date == date) {
                     item.data.listEvents.toList()
-                }else{
+                } else {
                     listOf<BaseEventData>()
                 }
             }
@@ -120,15 +119,15 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
                                     comment = null
                                 ),
                                 title = "Швецова Софья Максимовна ",
-                                time = TimeRangeData(LocalTime.of(15,0), LocalTime.of(16,0)),
+                                time = TimeRangeData(LocalTime.of(15, 0), LocalTime.of(16, 0)),
                                 type = CalendarActionsData.CONSULTATION
                             )
                         )
                     )
                 )
-                return if(item.data.date== date){
+                return if (item.data.date == date) {
                     item.data.listEvents.toList()
-                }else{
+                } else {
                     listOf<BaseEventData>()
                 }
             }
@@ -164,9 +163,9 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
                         )
                     )
                 )
-                return if(item.data.date== date){
+                return if (item.data.date == date) {
                     item.data.listEvents.toList()
-                }else{
+                } else {
                     listOf<BaseEventData>()
                 }
             }
@@ -183,7 +182,7 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
                                     comment = "Предлагаю 15:00 - 16:00"
                                 ),
                                 title = "Давыдов Антон Игоревич",
-                                time = TimeRangeData(LocalTime.of(12,0), LocalTime.of(13,0)),
+                                time = TimeRangeData(LocalTime.of(12, 0), LocalTime.of(13, 0)),
                                 type = CalendarActionsData.APPOINTMENT
                             ),
                             BookingModelData(
@@ -192,7 +191,7 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
                                     comment = null
                                 ),
                                 title = "Швецова Софья Максимовна ",
-                                time = TimeRangeData(LocalTime.of(15,0), LocalTime.of(16,0)),
+                                time = TimeRangeData(LocalTime.of(15, 0), LocalTime.of(16, 0)),
                                 type = CalendarActionsData.CONSULTATION
                             ),
                             TaskModelData(
@@ -223,7 +222,7 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
                                     comment = null
                                 ),
                                 title = "Давыдов Антон Игоревич",
-                                time = TimeRangeData(LocalTime.of(12,0), LocalTime.of(13,0)),
+                                time = TimeRangeData(LocalTime.of(12, 0), LocalTime.of(13, 0)),
                                 type = CalendarActionsData.APPOINTMENT
                             ),
                             BookingModelData(
@@ -232,7 +231,7 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
                                     comment = null
                                 ),
                                 title = "Швецова Софья Максимовна ",
-                                time = TimeRangeData(LocalTime.of(15,0), LocalTime.of(16,0)),
+                                time = TimeRangeData(LocalTime.of(15, 0), LocalTime.of(16, 0)),
                                 type = CalendarActionsData.CONSULTATION
                             ),
                             TaskModelData(
@@ -260,9 +259,9 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
                         )
                     )
                 )
-                return if(item.data.date== date){
+                return if (item.data.date == date) {
                     item.data.listEvents.toList()
-                }else{
+                } else {
                     listOf<BaseEventData>()
                 }
             }
@@ -273,7 +272,7 @@ class CalendarEventsDataRepositoryImpl@Inject constructor(
         date: LocalDate,
         isSelectedDate: Boolean,
         listEvents: List<BaseEventData>
-    )= CalendarUiModelData.DateData(
+    ) = CalendarUiModelData.DateData(
         isSelected = isSelectedDate,
         isToday = date.isEqual(LocalDate.now()),
         date = date,

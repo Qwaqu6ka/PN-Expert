@@ -56,5 +56,12 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.lifecycle.runtime)
 
+    // navigation
+    api(libs.navigation.compose)
+
+    // koin
+    api(libs.koin.android)
+    api(libs.koin.androidx.compose)
+
     api(project(":core:theme"))
 }

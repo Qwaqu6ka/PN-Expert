@@ -6,7 +6,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.SavedStateHandle
 import com.google.mlkit.vision.pose.defaults.PoseDetectorOptions
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import ru.fefu.camera.presentation.GraphicOverlay
@@ -14,11 +13,9 @@ import ru.fefu.video_tests_impl.domain.CameraXRepository
 import ru.fefu.video_tests_impl.domain.TestType
 import ru.fefu.video_tests_impl.navigation.ARG_TEST_TYPE
 import ru.fefu.video_tests_impl.utils.PoseDetectorProcessor
-import javax.inject.Inject
 import kotlin.random.Random
 
-@HiltViewModel
-internal class VideoTestViewModel @Inject constructor(
+internal class VideoTestViewModel(
     private val application: Application,
     savedStateHandle: SavedStateHandle,
     private val cameraXRepository: CameraXRepository

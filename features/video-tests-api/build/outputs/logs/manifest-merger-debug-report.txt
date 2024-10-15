@@ -1,14 +1,16 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\src\main\AndroidManifest.xml:2:1-4:12
-INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\src\main\AndroidManifest.xml:2:1-4:12
+ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest5674695181258816533.xml:2:13-83
+INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest5674695181258816533.xml:2:13-83
 	package
-		INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest5674695181258816533.xml
+	xmlns:android
+		ADDED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest5674695181258816533.xml:2:23-81
 uses-sdk
-INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\src\main\AndroidManifest.xml
-INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest5674695181258816533.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest5674695181258816533.xml
+INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest5674695181258816533.xml
 	android:targetSdkVersion
-		INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest5674695181258816533.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Rome4\AndroidStudioProjects\PN-Expert\features\video-tests-api\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest5674695181258816533.xml

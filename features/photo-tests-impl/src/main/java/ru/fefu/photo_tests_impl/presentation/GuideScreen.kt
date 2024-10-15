@@ -26,7 +26,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import ru.fefu.TextCardHolder
 import ru.fefu.components.PNExpertTextButton
 import ru.fefu.components.PNExpertToolbar
@@ -34,7 +33,6 @@ import ru.fefu.photo_test_impl.R
 import ru.fefu.theme.ApplicationTheme
 import ru.fefu.theme.PnExpertTheme
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -44,7 +42,7 @@ internal fun GuideScreen(
     onNavigateToTest: () -> Unit,
     onBackPressed: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: PhotoTestsViewModel = hiltViewModel(),
+    viewModel: PhotoTestsViewModel
 ) {
     val test = remember { viewModel.test }
 
@@ -184,13 +182,5 @@ private fun GuidePhoto(
                 contentDescription = null
             )
         }
-    }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-private fun GuideScreenP() {
-    ApplicationTheme {
-        GuideScreen(onNavigateToTest = {}, onBackPressed = {})
     }
 }

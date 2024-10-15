@@ -17,9 +17,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
@@ -65,7 +65,7 @@ fun ConformNumberPage(viewModel: RegistrationViewModel) {
         Spacer(modifier = Modifier.height(80.dp))
         TextRepeatCode(timerValue)
         Spacer(modifier = Modifier.weight(1f))
-        ConformButton(viewModel,fieldsIsFool)
+        ConformButton(viewModel, fieldsIsFool)
         Spacer(modifier = Modifier.height(16.dp))
     }
 }
@@ -74,13 +74,13 @@ fun ConformNumberPage(viewModel: RegistrationViewModel) {
 fun ConformButton(
     viewModel: RegistrationViewModel,
     fieldsIsFool: MutableState<Boolean>,
-){
+) {
     TextButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(PnExpertTheme.sizes.buttonSize.buttonClassic55),
         onClick = {
-            if (fieldsIsFool.value){
+            if (fieldsIsFool.value) {
                 viewModel.pagesNavController!!.navigate(RegistrationNavigationRoute.SelectRoleScreen.route)
             }
         },
@@ -130,10 +130,10 @@ fun TextRepeatCode(totalTime: MutableState<Long>) {
                 text = "Отправить код повторно",
                 textAlign = TextAlign.Center,
                 style = PnExpertTheme.typography.text.regular_16,
-                color = if(enabledButton)
-                            PnExpertTheme.colors.textColors.FontBlueColor
-                        else
-                            PnExpertTheme.colors.textColors.FontGreyColor
+                color = if (enabledButton)
+                    PnExpertTheme.colors.textColors.FontBlueColor
+                else
+                    PnExpertTheme.colors.textColors.FontGreyColor
 
             )
         }
@@ -146,7 +146,7 @@ private fun MessageTimer(
 ) {
 
     LaunchedEffect(key1 = totalTime.value) {
-        if(totalTime.value > 0) {
+        if (totalTime.value > 0) {
             delay(100L)
             totalTime.value -= 100L
         }
@@ -154,9 +154,9 @@ private fun MessageTimer(
     Text(
         modifier = Modifier.fillMaxWidth(),
         text = if ((totalTime.value / 1000L) >= 10)
-                    "00:${totalTime.value / 1000L}"
-               else
-                    "00:0${totalTime.value / 1000L}",
+            "00:${totalTime.value / 1000L}"
+        else
+            "00:0${totalTime.value / 1000L}",
         textAlign = TextAlign.Center,
         style = PnExpertTheme.typography.title.medium_32,
         color = PnExpertTheme.colors.mainAppColors.AppPinkDarkColor
@@ -173,7 +173,7 @@ private fun InputCodeFields(
 
     val fieldsCount = 4
     val fieldsValue = List(fieldsCount) { remember { mutableStateOf("") } }
-    val fieldsFocus = List(fieldsCount){remember { mutableStateOf(FocusRequester()) }}
+    val fieldsFocus = List(fieldsCount) { remember { mutableStateOf(FocusRequester()) } }
 
     fieldsIsFool.value = fieldsValue.all {
         it.value.isNotEmpty()
@@ -184,7 +184,7 @@ private fun InputCodeFields(
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        for (i in 0..3){
+        for (i in 0..3) {
             OutlinedTextField(
                 modifier = Modifier
                     .size(64.dp, 90.dp)
@@ -199,10 +199,10 @@ private fun InputCodeFields(
                 onValueChange = {
                     if (fieldsValue[i].value.isEmpty()) {
                         fieldsValue[i].value = it
-                        if (i != fieldsFocus.size-1)
-                            fieldsFocus[i+1].value.requestFocus()
+                        if (i != fieldsFocus.size - 1)
+                            fieldsFocus[i + 1].value.requestFocus()
                     }
-                    if(it.isEmpty()){
+                    if (it.isEmpty()) {
                         fieldsValue[i].value = it
                     }
                 },
@@ -215,8 +215,9 @@ private fun InputCodeFields(
                     fontSize = 40.sp,
                     textAlign = TextAlign.Center
                 ),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    containerColor = fieldBackground,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = fieldBackground,
+                    unfocusedContainerColor = fieldBackground,
                     focusedBorderColor = PnExpertTheme.colors.mainAppColors.AppBlueColor,
                     unfocusedBorderColor = Color.Transparent,
                 ),

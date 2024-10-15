@@ -11,8 +11,7 @@ import java.lang.Math.min
 import java.util.Locale
 
 /** Draw the detected pose in preview. */
-class PoseGraphic
-internal constructor(
+class PoseGraphic internal constructor(
     overlay: GraphicOverlay,
     private val pose: Pose,
     private val showInFrameLikelihood: Boolean,

@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
-    kotlin("kapt")
 }
 
 android {
@@ -57,10 +55,6 @@ dependencies {
     debugImplementation(libs.compose.ui.tooling)
 
     implementation(libs.guava)
-    
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation.compose)
-    kapt(libs.hilt.compiler)
 
     implementation(libs.mlkit.baracode)
 

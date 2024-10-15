@@ -23,7 +23,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import ru.fefu.components.PNExpertToolbar
 import ru.fefu.observeWithLifecycle
 import ru.fefu.photo_test_impl.R
@@ -33,7 +32,7 @@ import ru.fefu.theme.PnExpertTheme
 @Composable
 internal fun PhotoResultScreen(
     modifier: Modifier = Modifier,
-    viewModel: PhotoTestsViewModel = hiltViewModel(),
+    viewModel: PhotoTestsViewModel,
     onBackPressed: () -> Unit,
     onNavigateToTaskScreen: () -> Unit,
 ) {

@@ -1,9 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
-    kotlin("kapt")
 }
 
 android {
@@ -46,14 +44,9 @@ dependencies {
 
     implementation(libs.guava)
 
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
     // mlkit
     implementation(libs.mlkit.baracode)
     implementation(libs.mlkit.common)
-
-    implementation(libs.retrofit)
     
     implementation(libs.room)
     implementation(libs.room.runtime)

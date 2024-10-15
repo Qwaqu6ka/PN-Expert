@@ -7,8 +7,6 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import ru.fefu.calendar_impl.R
 import ru.fefu.calendar_impl.domain.models.AvailableTime
 import ru.fefu.calendar_impl.domain.models.BaseEvent
@@ -26,14 +24,12 @@ import ru.fefu.calendar_impl.domain.repositories.CalendarEventsRepository
 import ru.fefu.photo_tests_api.PhotoTestsApi
 import ru.fefu.written_test_api.WrittenTestApi
 import java.time.LocalDate
-import javax.inject.Inject
 
-@HiltViewModel
-class CalendarViewModel @Inject constructor(
+class CalendarViewModel(
     private val calendarEventsRepository: CalendarEventsRepository,
     private val photoTestsApi: PhotoTestsApi,
     private val writtenTestApi: WrittenTestApi,
-    @ApplicationContext application: Context,   // todo убарть
+    application: Context,   // todo убарть
 ) : ViewModel() {
     private val calendarRepository = calendarEventsRepository
     var indexOfActiveType by mutableIntStateOf(0)

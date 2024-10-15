@@ -7,14 +7,11 @@ import androidx.navigation.compose.composable
 import ru.fefu.written_test_api.WrittenTestApi
 import ru.fefu.written_test_impl.domain.TestType
 import ru.fefu.written_test_impl.presentation.WrittenTest
-import javax.inject.Inject
-import javax.inject.Singleton
 
 private const val WRITTEN_TEST_GRAPH_ROUTE = "writtenTest"
 internal const val ARG_WRITTEN_TEST_TYPE = "writtenTestType"
 
-@Singleton
-class WrittenTestImpl @Inject constructor() : WrittenTestApi {
+class WrittenTestImpl : WrittenTestApi {
 
     override val testUpdrs1Route = "$WRITTEN_TEST_GRAPH_ROUTE/${TestType.UPDRS1.name}"
     override val testUpdrs2Route = "$WRITTEN_TEST_GRAPH_ROUTE/${TestType.UPDRS2.name}"
